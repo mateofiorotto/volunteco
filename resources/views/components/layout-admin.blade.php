@@ -69,8 +69,6 @@
                                         class="btn text-sm">Logout</button>
                             </form>
                         </li>
-                    @endguest
-
                 </ul>
             </div>
         </div>
