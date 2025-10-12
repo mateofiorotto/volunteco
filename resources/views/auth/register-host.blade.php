@@ -1,4 +1,4 @@
-<x-guest-layout>
+
     <form method="POST"
           action="{{ route('register-host.store') }}"
           enctype="multipart/form-data">
@@ -97,4 +97,3 @@
                autocomplete="address-level2" />
 
         <button type="submit">Enviar</button>
-</x-guest-layout>

@@ -1,4 +1,4 @@
-<x-guest-layout>
+
     <form method="POST" action="{{ route('register-volunteer.store') }}" enctype="multipart/form-data">
         @csrf
         <label for="email">Email<span class="ml-3 text-xl text-orange-500">*</span></label>
@@ -130,4 +130,3 @@
                 />
 
                 <button type="submit">Enviar</button>
-</x-guest-layout>

@@ -73,6 +73,7 @@ class RegisterHostController extends Controller
 
             return redirect(route('home', absolute: false));
         } catch (\Illuminate\Validation\ValidationException $e) {
+            dd($e->errors());
             //lanzar error con alertas y redirect despues
         }
     }

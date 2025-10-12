@@ -7,20 +7,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class IsAdmin
+class CheckEnabled
 {
     /**
-     * Chequear si el usuario es admin
+     * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-        //chequear si es admin
-        //cambiar email por alertas mas adelante
-        if (!Auth::check() || Auth::user()->user_type != 'Admin') {
-            return redirect()->route('login')
-                ->withErrors(['email' => 'No tienes permiso para acceder a esta página. Por favor, inicia sesión como administrador']);
+         if (Auth::check()) {
+            $user = Auth::user();
+            // Si el usuario no está habilitado
+            if (!$user->enabled) {
+                Auth::logout(); // desloguear
+                return redirect('/login')->with('error', 'Tu cuenta no está habilitada.');
+            }
         }
 
         return $next($request);
