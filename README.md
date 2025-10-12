@@ -26,6 +26,14 @@ HOY: Manejo de perfiles de anfitriones. Simplificar breeze (quitado recuperar co
 
 Mas adelante: modificar perfil. logica de guardado de imgs. posible logica de envio de mails al aceptar o denegar perfil. Estilos formularios. Validar que nombres no tenga numeros o caracteres raros, lo mismo con dni, cuit y demas campos.
 
+RAMAS: 
+- autenticacion (registro, login y edicion de perfiles. Verificacion de perfiles) 
+- layout
+- administracion (en caso de hacer dashboard con estadisticas o blog de noticias)
+- sistema_voluntariado (aplicacion, creacion, edicion, etc de proyectos)
+- sistema_gamificacion (despues de sist de voluntariado)
+- internalizacion (i18n --> para traduccion de alertas y errores)
+- paginacion
 
 ejemplo estructura
 resources/js/
