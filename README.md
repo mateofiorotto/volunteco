@@ -23,6 +23,14 @@ Volunteco es una web acerca de voluntariados de carácter ecológico donde parti
 
 MAÑANA LOGIN: Relaciones, Campos y modelos para de host, volunteer, user. Vistas (sin estilos). Validaciones.
 
+RAMAS: 
+- autenticacion (registro, login y edicion de perfiles. Verificacion de perfiles) 
+- layout
+- administracion (en caso de hacer dashboard con estadisticas o blog de noticias)
+- sistema_voluntariado (aplicacion, creacion, edicion, etc de proyectos)
+- sistema_gamificacion (despues de sist de voluntariado)
+- internalizacion (i18n --> para traduccion de alertas y errores)
+- paginacion
 
 ejemplo estructura
 resources/js/
