@@ -1,4 +1,4 @@
-
+<x-layout>
     <form method="POST"
           action="{{ route('register-host.store') }}"
           enctype="multipart/form-data">
@@ -19,7 +19,8 @@
                required
                autocomplete="new-password" />
 
-        <label for="password_confirmation">Confirmar contraseña<span class="ml-3 text-xl text-orange-500">*</span></label>
+        <label for="password_confirmation">Confirmar contraseña<span
+                  class="ml-3 text-xl text-orange-500">*</span></label>
         <input type="password"
                id="password_confirmation"
                name="password_confirmation"
@@ -49,8 +50,8 @@
                id="cuit"
                name="cuit"
                placeholder="Ej: 20123456789"
-               inputmode="numeric" 
-               required/>
+               inputmode="numeric"
+               required />
 
         <label for="linkedin">LinkedIn<span class="ml-3 text-xl text-orange-500">*</span></label>
         <input type="url"
@@ -97,3 +98,5 @@
                autocomplete="address-level2" />
 
         <button type="submit">Enviar</button>
+    </form>
+</x-layout>
