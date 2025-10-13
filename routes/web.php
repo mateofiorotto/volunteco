@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\Frontend\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Auth\RegisterHostController;
 use App\Http\Controllers\Auth\RegisterVolunteerController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;

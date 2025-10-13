@@ -20,10 +20,6 @@ Volunteco es una web acerca de voluntariados de carácter ecológico donde parti
 3. Crear DB "volunteco" y ejecutar php artisan migrate
 4. Ejecutar en dos consolas distintas "npm run dev" y "php artisan serve" y entrar en localhost:puerto
 
-Commit: Agregando manejo de perfiles de anfitriones. Agregando seeder al ejecutar migraciones para agregar un usuario admin. Simplificación en laravel breeze. Agregando middleware para chequear si esta logueado y si el perfil esta o no activado.
-
-HOY: Manejo de perfiles de anfitriones. Simplificar breeze (quitado recuperar contraseña y verificacion de mail). Usuario rechazado no debe ser borrado, si no, quedara en stand by para modificar sus datos
-
 Mas adelante: modificar perfil. logica de guardado de imgs. posible logica de envio de mails al aceptar o denegar perfil. Estilos formularios. Validar que nombres no tenga numeros o caracteres raros, lo mismo con dni, cuit y demas campos.
 
 RAMAS: 
