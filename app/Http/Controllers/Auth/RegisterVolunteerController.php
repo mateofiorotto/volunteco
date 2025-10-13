@@ -30,6 +30,7 @@ class RegisterVolunteerController extends Controller
      */
     public function store(Request $request)
     {
+        try {
         $request->validate([
             'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
@@ -75,5 +76,9 @@ class RegisterVolunteerController extends Controller
         Auth::login($user);
 
         return redirect(route('home', absolute: false));
+    } catch (\Illuminate\Validation\ValidationException $e) {
+            dd($e->errors());
+            //lanzar error con alertas y redirect despues
+        }
     }
 };
