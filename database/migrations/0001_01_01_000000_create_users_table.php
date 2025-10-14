@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('email')->unique();
             $table->string('password');
-            $table->boolean('enabled');
+            $table->enum('status', ['Activo', 'Pendiente', 'Inactivo']);
             //solo puede ser admin, voluntario o anfitrion.
             $table->enum('user_type', ['Admin', 'Anfitrión', 'Voluntario']);
             $table->rememberToken();
@@ -24,6 +24,12 @@ return new class extends Migration
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
+            $table->string('email')->primary();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
+        });
+
+         Schema::create('profile_change_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();

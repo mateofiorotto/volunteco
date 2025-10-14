@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('phone');
             $table->string('location')->nullable();
             $table->unsignedBigInteger('user_id');
+            $table->boolean('notified')->default(false);
+            $table->timestamp('notified_at')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

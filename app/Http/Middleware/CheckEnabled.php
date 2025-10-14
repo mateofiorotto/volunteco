@@ -19,7 +19,7 @@ class CheckEnabled
          if (Auth::check()) {
             $user = Auth::user();
             // Si el usuario no está habilitado
-            if (!$user->enabled) {
+            if ($user->status != 'Activo') {
                 Auth::logout(); // desloguear
                 return redirect('/login')->with('error', 'Tu cuenta no está habilitada.');
             }

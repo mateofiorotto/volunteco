@@ -23,6 +23,8 @@ class Host extends Model
         'description',
         'phone',
         'location',
+        'notified',
+        'notified_at',
         'user_id'
     ];
 

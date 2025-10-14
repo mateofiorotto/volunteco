@@ -29,13 +29,13 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
 
-        //implementar que si el user type es anfitrion y enabled == 0 no se loguee
+        //implementar que si el user type es anfitrion y status distinto de activo no se loguee
         $request->authenticate();
 
         //obtener usuario
         $user = Auth::user();
 
-        if ($user->enabled == 0) {
+        if ($user->status != 'Activo') {
             Auth::logout();
 
             return redirect()->route('login')->withErrors([

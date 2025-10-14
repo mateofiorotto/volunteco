@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => Hash::make('admin123'),
             'user_type' => 'Admin',
-            'enabled' => true,
+            'status' => 'Activo',
             'created_at' => Carbon::now()->subDays(rand(1, 365)),
             'updated_at' => Carbon::now()
         ]);

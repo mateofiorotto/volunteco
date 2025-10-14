@@ -20,8 +20,7 @@ Volunteco es una web acerca de voluntariados de carácter ecológico donde parti
 3. Crear DB "volunteco" y ejecutar php artisan migrate
 4. Ejecutar en dos consolas distintas "npm run dev" y "php artisan serve" y entrar en localhost:puerto
 
-Mas adelante: modificar perfil. logica de guardado de imgs. posible logica de envio de mails al aceptar o denegar perfil. Estilos formularios. Validar que nombres no tenga numeros o caracteres raros, lo mismo con dni, cuit y demas campos.
-
+Mas adelante: 
 RAMAS: 
 - autenticacion (registro, login y edicion de perfiles. Verificacion de perfiles) 
 - layout

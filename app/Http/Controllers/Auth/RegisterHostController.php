@@ -50,7 +50,7 @@ class RegisterHostController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'user_type' => 'Anfitrión',
-                'enabled' => false,
+                'status' => 'Pendiente'
             ]);
 
             Host::create([
