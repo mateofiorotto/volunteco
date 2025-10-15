@@ -58,7 +58,7 @@
                             <x-nav-link :route="'home'">Volver</x-nav-link>
                         </li>
                         <li>
-                            <x-nav-link :route="'lista-verificacion-anfitriones'"
+                            <x-nav-link :route="'list-verify-hosts'"
                                         class="hover:text-light">Lista anfitriones</x-nav-link>
                         </li>
                         <li>

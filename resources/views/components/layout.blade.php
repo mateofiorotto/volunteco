@@ -72,7 +72,7 @@
                             </li>
                             @if (Auth::user()->user_type == 'Admin')
                                 <li>
-                                    <x-nav-link :route="'lista-verificacion-anfitriones'"
+                                    <x-nav-link :route="'list-verify-hosts'"
                                                 class="hover:text-light">Administracion</x-nav-link>
                                 </li>
                             @endif
