@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->softDeletes();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('person_full_name');
             $table->string('cuit')->unique();
             $table->string('linkedin');

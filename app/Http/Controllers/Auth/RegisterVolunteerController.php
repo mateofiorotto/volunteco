@@ -32,10 +32,10 @@ class RegisterVolunteerController extends Controller
     {
         try {
         $request->validate([
-            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
+            'email' => 'required|string|email|max:255|unique:users,email',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'full_name' => 'required|string|max:255|min:3',
-            'dni' => ['required', 'string', 'size:8', 'regex:/^\d+$/'],
+            'dni' => ['required', 'string', 'size:8', 'regex:/^\d+$/', 'unique:volunteers,dni'],
             'phone' => ['required', 'string', 'min:6', 'max:15', 'regex:/^\d+$/'],
             'linkedin' => 'nullable|string|max:255',
             'facebook' => 'nullable|string|max:255',

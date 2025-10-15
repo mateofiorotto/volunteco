@@ -56,11 +56,11 @@ class AdminHostsController extends Controller
         $host = User::where('id', $id)->first();
 
         $host->status = "Activo";
+        $host->save();
+
         $host->host->disabled_at = null;
         $host->host->rejection_reason = null;
         $host->host->save();
-
-        $host->update();
 
         Mail::to($host->email)->send(new ProfileAcceptedMail($host->host->person_full_name));
 
@@ -75,11 +75,11 @@ class AdminHostsController extends Controller
         $host = User::where('id', $id)->first();
 
         $host->status = "Activo";
+        $host->save();
+
         $host->host->disabled_at = null;
         $host->host->rejection_reason = null;
         $host->host->save();
-
-        $host->update();
 
         return redirect()->route('list-verify-hosts');
     }
@@ -92,11 +92,11 @@ class AdminHostsController extends Controller
         $host = User::where('id', $id)->first();
 
         $host->status = "Inactivo";
+        $host->save();
+
         $host->host->disabled_at = now();
         $host->host->rejection_reason = null;
         $host->host->save();
-
-        $host->update();
 
         return redirect()->route('list-verify-hosts');
     }
@@ -131,11 +131,11 @@ class AdminHostsController extends Controller
         Mail::to($host->email)->send(new HostEditRejectedProfileMail($link, $fieldsToChange['description'], $host->host->person_full_name));
 
         $host->status = "Inactivo";
+        $host->save();
+
         $host->host->disabled_at = now();
         $host->host->rejection_reason = $fieldsToChange['description'];
         $host->host->save();
-
-        $host->update();
 
         return redirect()->route('list-verify-hosts');
     }
@@ -166,11 +166,11 @@ class AdminHostsController extends Controller
         $host = User::where('id', $id)->first();
 
         $host->status = "Pendiente";
+        $host->save();
+
         $host->host->disabled_at = null;
         $host->host->rejection_reason = null;
         $host->host->save();
-
-        $host->update();
 
         return redirect()->route('list-verify-hosts');
     }

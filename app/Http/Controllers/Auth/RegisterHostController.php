@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rule;
 use App\Models\Host;
 use Illuminate\Support\Facades\DB;
 
@@ -32,11 +33,11 @@ class RegisterHostController extends Controller
     {
         try {
             $request->validate([
-                'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
+                'email' => 'required|string|lowercase|email|max:255|unique:users,email',
                 'password' => ['required', 'confirmed', Rules\Password::defaults()], //8 caracts
-                'name' => 'required|string|max:255|min:3',
+                'name' => 'required|string|max:255|min:3|unique:hosts,name',
                 'person_full_name' => 'required|string|max:255|min:3',
-                'cuit' => ['required', 'string', 'size:11', 'regex:/^\d+$/'],
+                'cuit' => ['required', 'string', 'size:11', 'regex:/^\d+$/', 'unique:hosts,cuit'],
                 'phone' => ['required', 'string', 'min:6', 'max:15', 'regex:/^\d+$/'],
                 'linkedin' => 'required|string|max:255|min:10',
                 'facebook' => 'required|string|max:255|min:10',
@@ -105,39 +106,58 @@ class RegisterHostController extends Controller
      */
     public function update(Request $request, $token, $email)
     {
+        try {
+            $user = User::where('email', $email)->with('host')->first();
 
-        //validando solo campos de host, los de user no se pueden cambiar
-        $validated = $request->validate([
-            'name' => 'required|string|max:255|min:3',
-            'person_full_name' => 'required|string|max:255|min:3',
-            'cuit' => ['required', 'string', 'size:11', 'regex:/^\d+$/'],
-            'phone' => ['required', 'string', 'min:6', 'max:15', 'regex:/^\d+$/'],
-            'linkedin' => 'nullable|string|max:255|min:3',
-            'facebook' => 'nullable|string|max:255|min:3',
-            'instagram' => 'nullable|string|max:255|min:3',
-            'avatar' => 'nullable|image|max:2048',
-            'description' => 'required|string|max:500|min:50',
-            'location' => 'nullable|string|max:255|min:3',
-        ]);
+            if (!$user || !$user->host) {
+                return back()->withErrors(['error' => 'No se encontró el anfitrión']);
+            }
+            //validando solo campos de host, los de user no se pueden cambiar
+            $validated = $request->validate([
+                'name' => [
+                    'required',
+                    'string',
+                    'max:255',
+                    'min:3',
+                    Rule::unique('hosts', 'name')->ignore($user->host->id), //valida que si es el mismo nombre no tire error
+                ],
+                'person_full_name' => 'required|string|max:255|min:3',
+                'cuit' => [
+                    'required',
+                    'string',
+                    'size:11',
+                    'regex:/^\d+$/',
+                    Rule::unique('hosts', 'cuit')->ignore($user->host->id), //valida que si es el mismo cuit no tire error
+                ],
+                'phone' => ['required', 'string', 'min:6', 'max:15', 'regex:/^\d+$/'],
+                'linkedin' => 'required|string|max:255|min:3',
+                'facebook' => 'required|string|max:255|min:3',
+                'instagram' => 'required|string|max:255|min:3',
+                'avatar' => 'nullable|image|max:2048',
+                'description' => 'required|string|max:500|min:50',
+                'location' => 'nullable|string|max:255|min:3',
+            ]);
 
-        //actualizar host
-        $user = User::where('email', $email)->with('host')->first();
+            //actualizar host
+            $user = User::where('email', $email)->with('host')->first();
 
-        if (!$user || !$user->host) {
-            return back()->withErrors(['error' => 'No se encontró el anfitrión']);
+            if (!$user || !$user->host) {
+                return back()->withErrors(['error' => 'No se encontró el anfitrión']);
+            }
+
+            $user->status = 'Pendiente';
+            $user->save();
+
+            $user->host->disabled_at = null;
+            $user->host->rejection_reason = null;
+            $user->host->update($validated); //updatear la lista de campos validados
+
+            //borrar token
+            DB::table('profile_change_tokens')->where('email', $email)->delete();
+
+            return redirect()->route('home')->with('success', 'Tu perfil fue actualizado y está pendiente de revisión.');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            dd($e->errors());
         }
-
-        $user->status = 'Pendiente';
-        $user->host->disabled_at = null;
-        $user->host->rejection_reason = null;
-
-        $user->host->save();
-
-        $user->update();
-
-        //borrar token
-        DB::table('profile_change_tokens')->where('email', $email)->delete();
-
-        return redirect()->route('home')->with('success', 'Tu perfil fue actualizado y está pendiente de revisión.');
     }
 }
