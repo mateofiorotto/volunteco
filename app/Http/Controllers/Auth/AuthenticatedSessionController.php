@@ -12,7 +12,7 @@ use Illuminate\View\View;
 class AuthenticatedSessionController extends Controller
 {
     /**
-     * Display the login view.
+     * Vista de login
      */
     public function create(): View
     {
@@ -24,12 +24,11 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * Handle an incoming authentication request.
+     * Toma una request de login y autentica al usuario.
      */
     public function store(LoginRequest $request): RedirectResponse
     {
 
-        //implementar que si el user type es anfitrion y status distinto de activo no se loguee
         $request->authenticate();
 
         //obtener usuario
@@ -49,7 +48,7 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * Destroy an authenticated session.
+     * Desloguea a un usuario
      */
     public function destroy(Request $request): RedirectResponse
     {

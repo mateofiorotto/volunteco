@@ -74,7 +74,7 @@
                     <button type="submit">Desactivar</button>
                 </form>
             @endif
-            <a href="{{ route('lista-verificacion-anfitriones') }}">Volver</a>
+            <a href="{{ route('list-verify-hosts') }}">Volver</a>
         </div>
     </section>
 </x-layout-admin>

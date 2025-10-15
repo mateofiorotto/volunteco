@@ -16,7 +16,7 @@ use App\Models\Volunteer;
 class RegisterVolunteerController extends Controller
 {
     /**
-     * Display the registration view.
+     * Vista de registro de voluntarios
      */
     public function create()
     {
@@ -34,17 +34,17 @@ class RegisterVolunteerController extends Controller
         $request->validate([
             'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'full_name' => 'required|string|max:255|min:10',
+            'full_name' => 'required|string|max:255|min:3',
             'dni' => ['required', 'string', 'size:8', 'regex:/^\d+$/'],
             'phone' => ['required', 'string', 'min:6', 'max:15', 'regex:/^\d+$/'],
             'linkedin' => 'nullable|string|max:255',
             'facebook' => 'nullable|string|max:255',
             'instagram' => 'nullable|string|max:255',
             'avatar' => 'required|image|max:2048',
-            'biography' => 'required|string|max:500|min:100',
+            'biography' => 'required|string|max:500|min:50',
             'educational_level' => 'required|string',
-            'profession' => 'nullable|string|max:255|min:10',
-            'location' => 'required|string|max:255|min:10',
+            'profession' => 'nullable|string|max:255|min:3',
+            'location' => 'required|string|max:255|min:3',
             'birthdate' => 'required|date',
         ]);
 

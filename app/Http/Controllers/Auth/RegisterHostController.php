@@ -15,7 +15,7 @@ use App\Models\Host;
 class RegisterHostController extends Controller
 {
     /**
-     * Display the registration view.
+     * Vista de registro de anfitrion
      */
     public function create()
     {
@@ -33,16 +33,16 @@ class RegisterHostController extends Controller
             $request->validate([
                 'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
                 'password' => ['required', 'confirmed', Rules\Password::defaults()], //8 caracts
-                'name' => 'required|string|max:255|min:5',
-                'person_full_name' => 'required|string|max:255|min:10',
+                'name' => 'required|string|max:255|min:3',
+                'person_full_name' => 'required|string|max:255|min:3',
                 'cuit' => ['required', 'string', 'size:11', 'regex:/^\d+$/'],
                 'phone' => ['required', 'string', 'min:6', 'max:15', 'regex:/^\d+$/'],
                 'linkedin' => 'required|string|max:255|min:10',
                 'facebook' => 'required|string|max:255|min:10',
                 'instagram' => 'required|string|max:255|min:10',
                 'avatar' => 'required|image|max:2048',
-                'description' => 'required|string|max:500|min:100',
-                'location' => 'nullable|string|max:255|min:10',
+                'description' => 'required|string|max:500|min:50',
+                'location' => 'nullable|string|max:255|min:3',
             ]);
 
 

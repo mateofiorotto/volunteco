@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class EditRejectedProfileController extends Controller
 {
     /**
-     * vista de form de edicion
+     * Vista de form de edicion
      */
     public function edit($token, $email)
     {
@@ -32,7 +32,7 @@ class EditRejectedProfileController extends Controller
     }
 
     /**
-     * metodo de actualizacion
+     * Metodo de actualizacion
      */
     public function update(Request $request, $token, $email)
     {
