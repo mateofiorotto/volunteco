@@ -8,8 +8,10 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Mail\HostEditRejectedProfileMail;
+use App\Mail\HostDeleteProfileMail;
 use App\Mail\ProfileAcceptedMail;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\HostRejectedReminder;
 
 class AdminHostsController extends Controller
 {
@@ -47,22 +49,39 @@ class AdminHostsController extends Controller
     }
 
     /**
-     * Reactivar un perfil de anfitrion
+     * Aceptar un perfil de anfitrion
      */
     public function enableHostProfile($id)
     {
         $host = User::where('id', $id)->first();
 
         $host->status = "Activo";
-        $host->host->notified = false;
-        $host->host->notified_at = null;
+        $host->host->disabled_at = null;
+        $host->host->rejection_reason = null;
         $host->host->save();
 
         $host->update();
 
         Mail::to($host->email)->send(new ProfileAcceptedMail($host->host->person_full_name));
 
-        return redirect()->route('lista-verificacion-anfitriones');
+        return redirect()->route('list-verify-hosts');
+    }
+
+    /**
+     * Reactivar un perfil de anfitrion (no avisa por mail)
+     */
+    public function reenableHostProfile($id)
+    {
+        $host = User::where('id', $id)->first();
+
+        $host->status = "Activo";
+        $host->host->disabled_at = null;
+        $host->host->rejection_reason = null;
+        $host->host->save();
+
+        $host->update();
+
+        return redirect()->route('list-verify-hosts');
     }
 
     /*
@@ -73,21 +92,21 @@ class AdminHostsController extends Controller
         $host = User::where('id', $id)->first();
 
         $host->status = "Inactivo";
-        $host->host->notified = false;
-        $host->host->notified_at = null;
+        $host->host->disabled_at = now();
+        $host->host->rejection_reason = null;
         $host->host->save();
 
         $host->update();
 
-        return redirect()->route('lista-verificacion-anfitriones');
+        return redirect()->route('list-verify-hosts');
     }
 
     /**
      * Enviar mail a un anfitrion rechazado para que pueda cambiar los datos solicitados
      */
-    public function sendMailRejectedProfile(Request $request, $hostId)
+    public function sendMailDisabledProfile(Request $request, $id)
     {
-        $host = User::with('host')->findOrFail($hostId);
+        $host = User::with('host')->findOrFail($id);
 
         $fieldsToChange = $request->validate([
             'description' => 'required|string|max:500|min:10',
@@ -111,23 +130,32 @@ class AdminHostsController extends Controller
         // Enviar mail
         Mail::to($host->email)->send(new HostEditRejectedProfileMail($link, $fieldsToChange['description'], $host->host->person_full_name));
 
-        $host->host->notified = true;
-        $host->host->notified_at = now();
+        $host->status = "Inactivo";
+        $host->host->disabled_at = now();
+        $host->host->rejection_reason = $fieldsToChange['description'];
         $host->host->save();
 
-        return redirect()->route('lista-verificacion-anfitriones');
+        $host->update();
+
+        return redirect()->route('list-verify-hosts');
     }
 
     /**
-     * Eliminar un perfil de anfitrion
+     * Eliminar un perfil de anfitrion y enviar mail notificando la eliminacion
      */
-    public function deleteHostProfile($id)
+    public function deleteHostProfile(Request $request, $id)
     {
         $host = User::where('id', $id)->first();
 
+        $reasons = $request->validate([
+            'delete_reasons' => 'required|string|max:500|min:10',
+        ]);
+
         $host->delete();
 
-        return redirect()->route('lista-verificacion-anfitriones');
+        Mail::to($host->email)->send(new HostDeleteProfileMail($reasons['delete_reasons'], $host->host->person_full_name));
+
+        return redirect()->route('list-verify-hosts');
     }
 
     /**
@@ -138,13 +166,24 @@ class AdminHostsController extends Controller
         $host = User::where('id', $id)->first();
 
         $host->status = "Pendiente";
-        $host->host->notified = false;
-        $host->host->notified_at = null;
-
+        $host->host->disabled_at = null;
+        $host->host->rejection_reason = null;
         $host->host->save();
 
         $host->update();
 
-        return redirect()->route('lista-verificacion-anfitriones');
+        return redirect()->route('list-verify-hosts');
+    }
+
+    /**
+     * Recordatorio de perfil rechazado/deshabilitado
+     */
+    public function sendHostRejectedReminder($id)
+    {
+        $host = User::with('host')->findOrFail($id);
+
+        Mail::to($host->email)->send(new HostRejectedReminder($host->host->rejection_reason, $host->host->person_full_name, $host->host->disabled_at));
+
+        return redirect()->route('list-verify-hosts');
     }
 }

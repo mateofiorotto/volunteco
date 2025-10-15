@@ -34,9 +34,9 @@ Route::middleware('checkEnabled')->group(function () {
         ->name('password.store');
 
     //editar datos de un perfil rechazado
-    Route::get('perfil/editar-datos/{token}/{email}', [EditRejectedProfileController::class, 'edit'])
+    Route::get('perfil/editar-datos/{token}/{email}', [RegisterHostController::class, 'edit'])
         ->name('edit-rejected-profile');
-    Route::put('perfil/editar-datos/{token}/{email}', [EditRejectedProfileController::class, 'update'])
+    Route::put('perfil/editar-datos/{token}/{email}', [RegisterHostController::class, 'update'])
         ->name('edit-rejected-profile.update');
 
 

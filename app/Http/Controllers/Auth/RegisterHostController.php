@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use App\Models\Host;
+use Illuminate\Support\Facades\DB;
 
 class RegisterHostController extends Controller
 {
@@ -71,10 +72,72 @@ class RegisterHostController extends Controller
 
             Auth::login($user);
 
-            return redirect(route('home', absolute: false));
+            return redirect()->route('home');
         } catch (\Illuminate\Validation\ValidationException $e) {
             dd($e->errors());
             //lanzar error con alertas y redirect despues
         }
+    }
+
+    /**
+     * Vista de form de edicion
+     */
+    public function edit($token, $email)
+    {
+        Auth::logout();
+
+        $tokenData = DB::table('profile_change_tokens')
+            ->where('email', $email)
+            ->where('token', $token)
+            ->first();
+
+        if (!$tokenData || $tokenData->created_at < now()->subHours(48)) {
+            abort(403, 'El enlace ha expirado o es inválido.');
+        }
+
+        $host = User::with('host')->where('email', $email)->firstOrFail();
+
+        return view('auth.edit-rejected-profile', ['host' => $host, 'token' => $token, 'email' => $email]);
+    }
+
+    /**
+     * Metodo de actualizacion
+     */
+    public function update(Request $request, $token, $email)
+    {
+
+        //validando solo campos de host, los de user no se pueden cambiar
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|min:3',
+            'person_full_name' => 'required|string|max:255|min:3',
+            'cuit' => ['required', 'string', 'size:11', 'regex:/^\d+$/'],
+            'phone' => ['required', 'string', 'min:6', 'max:15', 'regex:/^\d+$/'],
+            'linkedin' => 'nullable|string|max:255|min:3',
+            'facebook' => 'nullable|string|max:255|min:3',
+            'instagram' => 'nullable|string|max:255|min:3',
+            'avatar' => 'nullable|image|max:2048',
+            'description' => 'required|string|max:500|min:50',
+            'location' => 'nullable|string|max:255|min:3',
+        ]);
+
+        //actualizar host
+        $user = User::where('email', $email)->with('host')->first();
+
+        if (!$user || !$user->host) {
+            return back()->withErrors(['error' => 'No se encontró el anfitrión']);
+        }
+
+        $user->status = 'Pendiente';
+        $user->host->disabled_at = null;
+        $user->host->rejection_reason = null;
+
+        $user->host->save();
+
+        $user->update();
+
+        //borrar token
+        DB::table('profile_change_tokens')->where('email', $email)->delete();
+
+        return redirect()->route('home')->with('success', 'Tu perfil fue actualizado y está pendiente de revisión.');
     }
 }

@@ -17,7 +17,7 @@ class AuthCheck
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::check()) { // si no hay usuario logueado
-            return redirect('/login')->withErrors(['email' => 'Debes iniciar sesión para acceder a esta página']);
+            return redirect()->route('login')->withErrors(['email' => 'Debes iniciar sesión para acceder a esta página']);
         }
 
         $user = Auth::user();

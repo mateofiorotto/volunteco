@@ -75,7 +75,7 @@ class RegisterVolunteerController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('home', absolute: false));
+        return redirect()->route('home');
     } catch (\Illuminate\Validation\ValidationException $e) {
             dd($e->errors());
             //lanzar error con alertas y redirect despues
