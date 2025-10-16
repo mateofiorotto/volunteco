@@ -1,4 +1,6 @@
-<x-layout>
+@extends('layouts.app')
+
+@section('content')
     <form method="POST"
           action="{{ route('password.store') }}">
         @csrf
@@ -55,4 +57,4 @@
             </button>
         </div>
     </form>
-</x-layout>
+@endsection

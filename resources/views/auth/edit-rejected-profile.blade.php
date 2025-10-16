@@ -1,4 +1,6 @@
-<x-layout>
+@extends('layouts.app')
+
+@section('content')
     <h2>Modifica tu perfil</h2>
     <form method="POST"
           action="{{ route('edit-rejected-profile.update', ['token' => $token, 'email' => $email]) }}"
@@ -32,28 +34,28 @@
                name="cuit"
                placeholder="Ej: 20123456789"
                inputmode="numeric"
-               required 
+               required
                value="{{ old('cuit', $host->host->cuit ?? '') }}"/>
 
         <label for="linkedin">LinkedIn<span class="ml-3 text-xl text-orange-500">*</span></label>
         <input type="url"
                id="linkedin"
                name="linkedin"
-               placeholder="https://linkedin.com/in/usuario" 
+               placeholder="https://linkedin.com/in/usuario"
                value="{{ old('linkedin', $host->host->linkedin ?? '') }}"/>
 
         <label for="facebook">Facebook<span class="ml-3 text-xl text-orange-500">*</span></label>
         <input type="url"
                id="facebook"
                name="facebook"
-               placeholder="https://facebook.com/usuario" 
+               placeholder="https://facebook.com/usuario"
                value="{{ old('facebook', $host->host->facebook ?? '') }}"/>
 
         <label for="instagram">Instagram<span class="ml-3 text-xl text-orange-500">*</span></label>
         <input type="url"
                id="instagram"
                name="instagram"
-               placeholder="https://instagram.com/usuario" 
+               placeholder="https://instagram.com/usuario"
                value="{{ old('instagram', $host->host->instagram ?? '') }}"/>
 
         <label for="avatar">Foto de perfil<span class="ml-3 text-xl text-orange-500">*</span></label>
@@ -68,14 +70,14 @@
                   name="description"
                   placeholder="Descripción acerca de la organización/anfitrión"
                   rows="4">{{ old('description', $host->host->description ?? '') }}</textarea>
-                  
+
 
         <label for="phone">Teléfono<span class="ml-3 text-xl text-orange-500">*</span></label>
         <input type="tel"
                id="phone"
                name="phone"
                placeholder="5491112345678"
-               autocomplete="tel" 
+               autocomplete="tel"
                value="{{ old('phone', $host->host->phone ?? '') }}"/>
 
         <label for="location">Ubicación</label>
@@ -83,9 +85,9 @@
                id="location"
                name="location"
                placeholder="Ciudad o provincia"
-               autocomplete="address-level2" 
+               autocomplete="address-level2"
                value="{{ old('location', $host->host->location ?? '') }}"/>
 
         <button type="submit">Enviar</button>
     </form>
-</x-layout>
+@endsection
