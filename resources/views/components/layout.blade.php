@@ -8,187 +8,127 @@
 
     <title>{{ config('app.name', 'Volunteco') }}</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
-    <header class="bg-white py-3 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center">
-                <!-- Logo -->
-                <a href="{{ route('home') }}"
-                   class="flex items-center gap-2">
-                    <h1 class="sr-only">Volunteco</h1>
-                    <img src="{{ asset('images/logo.svg') }}"
-                         alt="Logo Volunteco"
-                         class="h-8">
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container">
+                <a class="navbar-brand" href="{{ route('home') }}">
+                    <img src="{{ asset('images/logo.svg') }}" alt="Logo Volunteco" class="navbar-brand" width="150" height="auto">
                 </a>
-
-                <!-- Botón hamburguesa -->
-                <button id="menu-btn"
-                        class="p-2 rounded-lg md:hidden text-gray-700 focus:outline-none"
-                        aria-label="Abrir menú de navegación">
-                    <svg class="w-6 h-6"
-                         xmlns="http://www.w3.org/2000/svg"
-                         fill="none"
-                         viewBox="0 0 17 14">
-                        <path stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M1 1h15M1 7h15M1 13h15" />
-                    </svg>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                   <span class="navbar-toggler-icon"></span>
                 </button>
-
-                <!-- Menú -->
-                <div id="navbar-default"
-                     class="hidden md:block absolute md:relative top-14 md:top-auto right-0 md:right-auto bg-white md:bg-transparent w-full md:w-auto shadow-md md:shadow-none border-t md:border-0 z-50">
-                    <ul class="flex flex-col md:flex-row gap-4 md:items-center items-end p-4 md:p-0 text-gray-800">
+                <div class="collapse navbar-collapse" id="navbarMenu">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
                         @guest
                             <!-- Usuario NO autenticado -->
-                            <li>
+                            <li class="nav-item">
                                 <x-nav-link :route="'login'">Iniciar sesión</x-nav-link>
                             </li>
-                            <li>
+                            <li class="nav-item">
                                 <x-nav-link :route="'register-host.store'">Registrarse como anfitrión</x-nav-link>
                             </li>
-                            <li>
+                            <li class="nav-item">
                                 <x-nav-link :route="'register-volunteer.store'">Registrarse como voluntario</x-nav-link>
                             </li>
                         @else
                             <!-- Usuario autenticado -->
-                            <li>
+                            <li class="nav-item">
                                 <x-nav-link :route="'home'">Inicio</x-nav-link>
                             </li>
                             @if (Auth::user()->hasRole('admin'))
-                                <li>
-                                    <x-nav-link :route="'list-verify-hosts'" class="hover:text-light">Administracion</x-nav-link>
+                                <li class="nav-item">
+                                    <x-nav-link :route="'list-verify-hosts'">Administracion</x-nav-link>
                                 </li>
                             @endif
-                            <li>
-                                <form method="POST"
-                                      action="{{ route('logout') }}">
+                            <li class="nav-item">
+                                <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button type="submit"
-                                            class="btn text-sm">Logout</button>
+                                    <button type="submit" class="btn text-sm">Logout</button>
                                 </form>
                             </li>
                         @endguest
-
                     </ul>
                 </div>
             </div>
-        </div>
+        </nav>
     </header>
 
     <main>
         {{ $slot }}
     </main>
-    <footer class="bg-[#66800A] text-white py-6 border-t border-white">
-        <div class="max-w-7xl mx-auto px-4">
+    <footer class="bg-primary text-white py-3 border-top border-white">
+        <div class="container mx-auto">
             <!-- Sección superior: logo y links -->
-            <div class="flex flex-col md:flex-row gap-6 items-center justify-between">
+            <div class="d-flex flex-col flex-nd-row gap-5 align-items-center justify-content-between mb-4">
                 <!-- Logo -->
                 <a href="{{ route('home') }}">
-                    <img src="{{ asset('images/logo-white.svg') }}"
-                         alt="Logo Volunteco"
-                         class="h-12 w-auto">
+                    <img src="{{ asset('images/logo-white.svg') }}" alt="Logo Volunteco" width="140" height="29">
                 </a>
 
                 <!-- Enlaces -->
-                <ul class="flex flex-col md:flex-row items-center justify-center gap-5">
+                <ul class="d-flex flex-col flex-md-row align-items-center justify-content-center gap-5 list-unstyled mb-0">
                     @auth
                         <li>
-                            <x-nav-link :route="'home'"
-                                        class="hover:text-light">Inicio</x-nav-link>
+                            <x-nav-link :route="'home'">Inicio</x-nav-link>
                         </li>
                         <li>
-                            <form method="POST"
-                                  action="{{ route('logout') }}">
+                            <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit"
-                                        class="btn text-sm hover:text-light">Logout</button>
+                                <button type="submit" class="btn text-sm hover:text-light">Logout</button>
                             </form>
                         </li>
                     @else
                         <li>
-                            <x-nav-link :route="'login'"
-                                        class="hover:text-light">Iniciar sesión</x-nav-link>
+                            <x-nav-link :route="'login'">Iniciar sesión</x-nav-link>
                         </li>
                         <li>
-                            <x-nav-link :route="'register-host.store'"
-                                        class="hover:text-light">Registrarse como anfitrión</x-nav-link>
+                            <x-nav-link :route="'register-host.store'">Registrarse como anfitrión</x-nav-link>
                         </li>
                         <li>
-                            <x-nav-link :route="'register-volunteer.store'"
-                                        class="hover:text-light">Registrarse como voluntario</x-nav-link>
+                            <x-nav-link :route="'register-volunteer.store'">Registrarse como voluntario</x-nav-link>
                         </li>
                     @endauth
                 </ul>
             </div>
 
-            <!-- Línea divisoria -->
-            <div class="border-t border-white mt-5 pt-5"></div>
-
             <!-- Sección inferior -->
-            <div
-                 class="flex flex-col md:flex-row gap-3 text-center md:text-left justify-center md:justify-between items-center">
-                <p>
-                    Cuidemos al medioambiente.<br>
-                    Herminia Bento y Mateo Fiorotto.
-                </p>
+            <div class="d-flex flex-col flex-md-row gap-3 text-center text-md-left justify-content-center justify-content-md-between align-items-center">
+                <p class="mb-0">Cuidemos al medioambiente.</p>
 
-                <ul class="flex flex-row justify-center gap-7 text-3xl">
+                <ul class="d-flex flex-row justify-content-center gap-5 list-unstyled mb-0">
                     <li>
-                        <a href="https://www.instagram.com/volunteco"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="hover:text-light">
-                            <i class="fa-brands fa-instagram">
-                                <span class="sr-only">Instagram</span>
-                            </i>
+                        <a href="https://www.instagram.com/volunteco" target="_blank"><i class="bi bi-instagram"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/volunteco" target="_blank">
+                            <i class="bi bi-facebook"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.facebook.com/volunteco"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="hover:text-light">
-                            <i class="fa-brands fa-facebook">
-                                <span class="sr-only">Facebook</span>
-                            </i>
+                        <a href="https://twitter.com/volunteco">
+                            <i class="bi bi-twitter-x"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="https://twitter.com/volunteco"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="hover:text-light">
-                            <i class="fa-brands fa-x-twitter">
-                                <span class="sr-only">Twitter</span>
-                            </i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/mateofiorotto/volunteco-social"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="hover:text-light">
-                            <i class="fa-brands fa-github">
-                                <span class="sr-only">GitHub</span>
-                            </i>
+                        <a href="https://github.com/mateofiorotto/volunteco-social" target="_blank">
+                            <i class="bi bi-github"></i>
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
 </body>
-
 </html>
