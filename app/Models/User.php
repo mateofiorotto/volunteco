@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Models\Role;
 use App\Models\Host;
 use App\Models\Volunteer;
 
@@ -24,7 +25,7 @@ class User extends Authenticatable
     protected $fillable = [
         'email',
         'password',
-        'user_type',
+        'role_id',
         'status'
     ];
 
@@ -48,7 +49,22 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    protected $with = ['role'];
+
     //agregar relaciones
+    /**
+     * obtener los roles de usuario
+     *
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function hasRole($roleType): bool
+    {
+        return $this->role && $this->role->type === $roleType;
+    }
     /**
      * obtener el perfil de anfitrion de un usuario
      *
@@ -68,4 +84,5 @@ class User extends Authenticatable
     {
         return $this->hasOne(Volunteer::class);
     }
+
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -47,11 +48,16 @@ class RegisterHostController extends Controller
                 'location' => 'nullable|string|max:255|min:3',
             ]);
 
+            $hostRole = Role::where('type', 'host')->first();
+
+            if (!$hostRole) {
+                return back()->withErrors(['role' => 'No se encontró el rol "host".']);
+            }
 
             $user = User::create([
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'user_type' => 'Anfitrión',
+                'role_id' => $hostRole->id,
                 'status' => 'Pendiente'
             ]);
 

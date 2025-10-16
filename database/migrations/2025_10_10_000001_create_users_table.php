@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->enum('status', ['Activo', 'Pendiente', 'Inactivo']);
-            //solo puede ser admin, voluntario o anfitrion.
-            $table->enum('user_type', ['Admin', 'Anfitrión', 'Voluntario']);
+            $table->foreignId('role_id')->nullable()->constrained('roles')->nullOnDelete();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
@@ -50,8 +49,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('profile_change_tokens');
+        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('users');
     }
 };

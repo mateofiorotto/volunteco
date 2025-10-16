@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Host extends Model
 {
     use SoftDeletes;
-    
+
     protected $fillable = [
-        'name', //nombre del proyecto del anfitrion (en caso de ser uno solo o nombre de ONG)
+        'name', //nombre del anfitrion (en caso de ser uno solo o nombre de ONG)
         'person_full_name', //nombre y apellido de persona de contacto
         'cuit',
         'linkedin',

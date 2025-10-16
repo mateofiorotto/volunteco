@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -20,17 +21,24 @@ class AdminHostsController extends Controller
      */
     public function verifyHostsList()
     {
-        $hostsDisabled = User::where('user_type', 'Anfitrión')
+        // Consulta el rol host
+        $hostRole = Role::where('type', 'host')->first();
+        if (!$hostRole) {
+            abort(500, 'No se encontró el rol "host".');
+        }
+        $roleId = $hostRole->id;
+
+        $hostsDisabled = User::where('role_id', $roleId)
             ->where('status', 'Inactivo')
             ->with('host')
             ->get();
 
-        $hostsNotVerified = User::where('user_type', 'Anfitrión')
+        $hostsNotVerified = User::where('role_id', $roleId)
             ->where('status', 'Pendiente')
             ->with('host')
             ->get();
 
-        $hostsVerified = User::where('user_type', 'Anfitrión')
+        $hostsVerified = User::where('role_id', $roleId)
             ->where('status', 'Activo')
             ->with('host')
             ->get();

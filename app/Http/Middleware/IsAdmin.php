@@ -16,9 +16,10 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
+
         //chequear si es admin
         //cambiar email por alertas mas adelante
-        if (!Auth::check() || Auth::user()->user_type != 'Admin') {
+        if (!Auth::check() || !Auth::user()->hasRole('admin')) {
             return redirect()->route('login')
                 ->withErrors(['email' => 'No tienes permiso para acceder a esta página. Por favor, inicia sesión como administrador']);
         }

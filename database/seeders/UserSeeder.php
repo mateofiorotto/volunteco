@@ -19,8 +19,8 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'email' => 'admin@gmail.com',
             'password' => Hash::make('admin123'),
-            'user_type' => 'Admin',
             'status' => 'Activo',
+            'role_id' => 1,
             'created_at' => Carbon::now()->subDays(rand(1, 365)),
             'updated_at' => Carbon::now()
         ]);
