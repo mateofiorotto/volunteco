@@ -1,4 +1,6 @@
-<x-layout>
+@extends('layouts.app')
+
+@section('content')
     <form method="POST"
           action="{{ route('register-volunteer.store') }}"
           enctype="multipart/form-data">
@@ -115,4 +117,4 @@
 
         <button type="submit">Enviar</button>
     </form>
-</x-layout>
+@endsection

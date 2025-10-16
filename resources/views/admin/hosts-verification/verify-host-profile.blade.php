@@ -1,4 +1,6 @@
-<x-layout-admin>
+@extends('layouts.admin')
+
+@section('content')
     <section>
         <h2>Verificar perfil de anfitrión</h2>
         <div>
@@ -103,4 +105,4 @@
             <a href="{{ route('list-verify-hosts') }}">Volver</a>
         </div>
     </section>
-</x-layout-admin>
+@endsection
