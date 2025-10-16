@@ -11,11 +11,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use App\Services\ImageService;
 
 use App\Models\Volunteer;
 
 class RegisterVolunteerController extends Controller
 {
+    protected $imageService;
+
+    //inyectar el servicio de imgs
+    public function __construct(ImageService $imageService)
+    {
+        $this->imageService = $imageService;
+    }
+
     /**
      * Vista de registro de voluntarios
      */
@@ -59,6 +68,10 @@ class RegisterVolunteerController extends Controller
                 return back()->withErrors(['role' => 'No se encontró el rol "volunteer".']);
             }
 
+             if ($request->hasFile('avatar')) {
+                $avatarPath = $this->imageService->storeImage($request->file('avatar'), 'volunteers');
+            }
+
             $user = User::create([
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
@@ -74,7 +87,7 @@ class RegisterVolunteerController extends Controller
                 'linkedin' => $request->linkedin,
                 'facebook' => $request->facebook,
                 'instagram' => $request->instagram,
-                'avatar' => $request->avatar,
+                'avatar' => $avatarPath,
                 'biography' => $request->biography,
                 'educational_level' => $request->educational_level,
                 'profession' => $request->profession,

@@ -13,9 +13,17 @@ use App\Mail\HostDeleteProfileMail;
 use App\Mail\ProfileAcceptedMail;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\HostRejectedReminder;
+use App\Services\ImageService;
 
 class AdminHostsController extends Controller
 {
+    protected $imageService;
+
+    //inyectar el servicio de imgs
+    public function __construct(ImageService $imageService)
+    {
+        $this->imageService = $imageService;
+    }
     /**
      * Retornar la lista de verificacion de anfitriones
      */
@@ -155,9 +163,17 @@ class AdminHostsController extends Controller
     {
         $host = User::where('id', $id)->first();
 
+        if (!$host || !$host->host) {
+            return back()->withErrors(['error' => 'No se encontró el anfitrión']);
+        }
+
         $reasons = $request->validate([
             'delete_reasons' => 'required|string|max:500|min:10',
         ]);
+
+        if ($host->host->avatar) {
+            $this->imageService->deleteImage($host->host->avatar);
+        }
 
         $host->delete();
 

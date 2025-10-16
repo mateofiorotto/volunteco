@@ -16,6 +16,7 @@
                 <li><span class="font-bold">Descripción: </span>{{ $host->host->description }}</li>
                 <li><span class="font-bold">Teléfono: </span>{{ $host->host->phone }}</li>
                 <li><span class="font-bold">Ubicación: </span>{{ $host->host->location ?? 'Sin ubicación' }}</li>
+                <li><span class="font-bold">Foto de perfil: </span><img src="{{ asset('storage/' . $host->host->avatar) }}" alt="Foto de perfil"></li>
                 @if($host->host->disabled_at != null)
                     <li><span class="font-bold">Fecha de desactivación: </span>{{ $host->host->disabled_at }}</li>
                 @endif
