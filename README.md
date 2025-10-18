@@ -18,7 +18,7 @@ Volunteco es una web acerca de voluntariados de carácter ecológico donde parti
 1. Instalar NPM, PHP y Composer
 2. Entrar al proyecto con "cd volunteco" y ejecutar "npm install && npm run build" y "composer install"
 3. Crear DB "volunteco" y ejecutar php artisan migrate
-4. Ejecutar en dos consolas distintas "npm run dev" y "php artisan serve" y entrar en localhost:puerto
+4. Ejecutar en dos consolas distintas "php artisan storage:link" y "php artisan serve" y entrar en localhost:puerto
 
 Mas adelante: 
 RAMAS: 

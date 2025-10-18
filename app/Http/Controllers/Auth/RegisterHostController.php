@@ -13,10 +13,19 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\Rule;
 use App\Models\Host;
+use App\Services\ImageService;
 use Illuminate\Support\Facades\DB;
 
 class RegisterHostController extends Controller
 {
+    protected $imageService;
+
+    //inyectar el servicio de imgs
+    public function __construct(ImageService $imageService)
+    {
+        $this->imageService = $imageService;
+    }
+    
     /**
      * Vista de registro de anfitrion
      */
@@ -54,6 +63,10 @@ class RegisterHostController extends Controller
                 return back()->withErrors(['role' => 'No se encontró el rol "host".']);
             }
 
+            if ($request->hasFile('avatar')) {
+                $avatarPath = $this->imageService->storeImage($request->file('avatar'), 'hosts');
+            }
+
             $user = User::create([
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
@@ -69,7 +82,7 @@ class RegisterHostController extends Controller
                 'linkedin' => $request->linkedin,
                 'facebook' => $request->facebook,
                 'instagram' => $request->instagram,
-                'avatar' => $request->avatar,
+                'avatar' => $avatarPath,
                 'description' => $request->description,
                 'phone' => $request->phone,
                 'location' => $request->location
@@ -149,6 +162,15 @@ class RegisterHostController extends Controller
 
             if (!$user || !$user->host) {
                 return back()->withErrors(['error' => 'No se encontró el anfitrión']);
+            }
+
+            //nueva imagen = actualizar y borrar la anterior
+             if ($request->hasFile('avatar')) {
+                $validated['avatar'] = $this->imageService->updateImage(
+                    $request->file('avatar'), //pasando nueva img
+                    $user->host->avatar, //img anterior a borrar
+                    'hosts' //directorio nueva img
+                );
             }
 
             $user->status = 'Pendiente';
