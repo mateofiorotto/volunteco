@@ -1,5 +1,5 @@
-<a
-    class="nav-link {{ request()->routeIs($route) ? 'active' : '' }}"
-    {!! request()->routeIs($route) ? 'aria-current="page"' : '' !!}
-    href="{{ route($route) }}">{{ $slot }}
+<a {{ $attributes->merge([
+        'class' => 'nav-link ' . (request()->routeIs($route) ? 'active' : '')
+    ]) }} href="{{ route($route) }}">
+    {{ $slot }}
 </a>
