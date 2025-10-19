@@ -117,3 +117,7 @@
     --bs-dropdown-link-disabled-color: var(--bs-tertiary-color);
     --bs-dropdown-header-color: #6c757d;
 }
+
+textarea {
+    resize: none !important;
+}

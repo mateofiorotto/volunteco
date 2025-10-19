@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->boolean('enabled')->default(true);
             $table->string('title')->unique();
-            $table->string('description');
+            $table->text('description');
             $table->string('image');
             $table->date('start_date');
             $table->date('end_date');
