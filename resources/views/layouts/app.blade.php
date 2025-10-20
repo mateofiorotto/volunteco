@@ -47,7 +47,7 @@
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <!-- Usuario autenticado -->
                             <li class="nav-item">
-                                <x-nav-link :route="'home'">Inicio</x-nav-link>
+                                <x-nav-link :route="'home'">Home</x-nav-link>
                             </li>
                             @if (Auth::user()->hasRole('admin'))
                                 <li class="nav-item">
@@ -83,49 +83,37 @@
 
                     <!-- Enlaces -->
                     <div class="col-md-4">
-                        <ul class="d-flex flex-col flex-md-row align-items-center justify-content-center gap-5 list-unstyled mb-0">
-                            @auth
-                                <li>
-                                    <x-nav-link :route="'home'">Inicio</x-nav-link>
-                                </li>
-                                <li>
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <button type="submit" class="btn text-sm hover:text-light">Logout</button>
-                                    </form>
-                                </li>
-                            @else
-                                <li>
-                                    <x-nav-link :route="'register-host.store'">¿Querés ser anfitrión?</x-nav-link>
-                                </li>
-                                <li>
-                                    <x-nav-link :route="'register-volunteer.store'">¿Querés ser voluntario?</x-nav-link>
-                                </li>
-                            @endauth
+                        <ul class="d-flex flex-row align-items-center justify-content-center gap-5 list-unstyled mb-0">
+                            <li>
+                                <x-nav-link :route="'register-host.store'">¿Querés ser anfitrión?</x-nav-link>
+                            </li>
+                            <li>
+                                <x-nav-link :route="'register-volunteer.store'">¿Querés ser voluntario?</x-nav-link>
+                            </li>
                         </ul>
                     </div>
 
                     <div class="col-md-4">
-                    <ul class="d-flex flex-row justify-content-end gap-4 list-unstyled mb-0">
-                        <li>
-                            <a href="https://www.instagram.com/volunteco" target="_blank" class="text-white"><i class="bi bi-instagram"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://www.facebook.com/volunteco" target="_blank" class="text-white">
-                                <i class="bi bi-facebook"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://twitter.com/volunteco" target="_blank" class="text-white">
-                                <i class="bi bi-twitter-x"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/mateofiorotto/volunteco-social" target="_blank" class="text-white">
-                                <i class="bi bi-github"></i>
-                            </a>
-                        </li>
-                    </ul>
+                        <ul class="d-flex flex-row justify-content-end gap-4 list-unstyled mb-0">
+                            <li>
+                                <a href="https://www.instagram.com/volunteco" target="_blank" class="text-white fs-5"><i class="bi bi-instagram"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/volunteco" target="_blank" class="text-white fs-5">
+                                    <i class="bi bi-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/volunteco" target="_blank" class="text-white fs-5">
+                                    <i class="bi bi-twitter-x"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/mateofiorotto/volunteco-social" target="_blank" class="text-white fs-5">
+                                    <i class="bi bi-github"></i>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

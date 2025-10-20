@@ -17,7 +17,7 @@
 </head>
 <body class="d-flex h-100">
     <div class="d-flex w-100 h-100 mx-auto flex-column">
-        <header class="mb-auto">
+        <header>
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container">
                     <a class="navbar-brand" href="{{ route('home') }}">
@@ -46,7 +46,7 @@
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-3">
                             <!-- Usuario autenticado -->
                             <li class="nav-item">
-                                <x-nav-link :route="'home'">Inicio</x-nav-link>
+                                <x-nav-link :route="'home'">Home</x-nav-link>
                             </li>
                             @if (Auth::user()->hasRole('admin'))
                                 <li class="nav-item">

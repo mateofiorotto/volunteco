@@ -36,6 +36,10 @@ class Host extends Model
         'created_at',
     ];
 
+    protected $casts = [
+        'disabled_at' => 'datetime',
+    ];
+
     /**
      * FK a User
      */
