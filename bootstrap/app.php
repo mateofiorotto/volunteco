@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'authCheck' => \App\Http\Middleware\AuthCheck::class,
             'checkEnabled' => \App\Http\Middleware\CheckEnabled::class,
             'isHost' => \App\Http\Middleware\IsHost::class,
+            'isVolunteer' => \App\Http\Middleware\IsVolunteer::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
