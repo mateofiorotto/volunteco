@@ -8,6 +8,7 @@ class ProjectType extends Model
 {
 
     protected $fillable = [
+        'key', // construccion_de_granjas
         'name', // "Construccion de granjas", "Reforestacion", etc..
         'enabled'
     ];
@@ -21,5 +22,5 @@ class ProjectType extends Model
     {
         return $this->hasMany(Project::class);
     }
-    
+
 }

@@ -1,17 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h2>Crear Proyecto</h2>
+    <div class="container py-5">
+        <div class="row mb-5">
+            <div class="col-md-7">
+                <h1 class="title-h1 h3 mb-0">Crear <span>Proyecto</span></h1>
+            </div>
+        </div>
 
         @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul class="mb-0">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+        <div class="row mb-5">
+            <div class="col-md-7 mx-auto">
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
+        </div>
         @endif
 
         <form method="POST" action="{{ route('my-projects.store') }}" enctype="multipart/form-data">
@@ -22,7 +30,7 @@
                 <div class="col-md-6">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h3 class="card-title h4">Información del Proyecto</h3>
+                            <h2 class="card-title h4">Información del Proyecto</h3>
 
                             <div class="mb-3">
                                 <label for="title" class="form-label">Título del proyecto *</label>
@@ -200,10 +208,10 @@
 
             <!-- Botones -->
             <div class="d-flex gap-3 justify-content-center mt-4 mb-5">
-                <a href="{{ route('my-projects.index') }}" class="btn btn-outline-primary btn-lg px-5">
+                <a href="{{ url()->previous() }}" class="btn btn-outline-primary btn-lg px-5">
                     Cancelar
                 </a>
-                <button type="submit" class="btn btn-primary btn-lg px-5">
+                <button type="submit" class="btn btn-primary btn-lg px-5 text-capitalize">
                     Crear Proyecto
                 </button>
             </div>

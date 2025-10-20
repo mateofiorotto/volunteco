@@ -1,40 +1,45 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="container text-break">
-        <h2 class="mt-4 mb-4">Mis Proyectos</h2>
-        <!--Crear proyecto-->
-        <form method="GET"
-              action="{{ route('my-projects.create') }}">
-            @csrf
-            <button class="btn btn-success mb-4"
-                    type="submit">Crear Proyecto</button>
-        </form>
+    <section class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <h1 class="title-h1 h3 mb-5">Mis <span>Proyectos</span></h1>
+            <!--Crear proyecto-->
+            <form method="GET"
+                action="{{ route('my-projects.create') }}">
+                @csrf
+                <button class="btn btn-primary mb-4" type="submit">Crear Proyecto</button>
+            </form>
+        </div>
 
         <div class="projects-list">
             @if ($projects->isEmpty())
                 <p>No tienes proyectos creados aún.</p>
             @endif
 
-            <div class="row justify-content-center gap-5 align-items-center">
+            <div class="row">
             @foreach ($projects as $project)
-                <div style="width: 20rem;"
-                     class="card col-lg-4 col-md-6 col-12 project-item pt-4 pb-4">
-                        <img style="width: 200px; height: 200px;"
-                             src="{{ asset('storage/' . $project->image) }}"
-                             alt="Imagen del proyecto"
-                             class="card-img-top d-block m-auto">
-                        <h3 class="mt-4">{{ $project->title }}</h3>
-                        <p>ℹ️ {{ $project->projectType->name }}</p>
-                        <p>{{ $project->host->name }}</p>
-                        @if ($project->conditions->isNotEmpty())
-                            <ul>
-                                @foreach ($project->conditions as $condition)
-                                    <li>{{ $condition->description }}</li>
-                                @endforeach
-                            </ul>
-                        @endif
-                            <!--Btnes de editar y delete-->
+                <div class="col-md-3 col-12">
+                    <div class="card project-item">
+                        <img src="{{ asset('storage/' . $project->image) }}" width="330" height="200" alt="{{ $project->title }}"
+                            class="card-img-top d-block m-auto object-fit-cover w-100 h-auto">
+                        <div class="card-body">
+                            <h2 class="h4 text-primary">{{ $project->title }}</h2>
+                            <p class="mb-0"><span class="small text-muted">Tipo: </span>{{ $project->projectType->name }}</p>
+                            <p><span class="small text-muted">Anfitrión: </span>{{ $project->host->name }}</p>
+                            @if ($project->conditions->isNotEmpty())
+                                <p class="mb-0">Condiciones</p>
+                                <ul>
+                                    @foreach ($project->conditions as $condition)
+                                        <li>{{ $condition->name }}</li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                            <p class="mb-0">Descripción:</p>
+                            <p class="mb-0">{{ $project->host->description }}</p>
+                        </div>
+                        <!--Btnes de editar y delete-->
+                    </div>
                 </div>
             @endforeach
             </div>

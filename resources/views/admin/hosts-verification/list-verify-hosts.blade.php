@@ -3,13 +3,13 @@
 @section('content')
     <section>
         <div class="container py-5">
-            <h1 class="title-h1 h3 mb-5">Listado de <span>anfitriones</span></h1>
+            <h1 class="title-h1 h3 mb-5">Listado de <span>Anfitriones</span></h1>
 
             <div class="row">
                 <div class="col-12 col-md-6">
                     <div class="card mb-5 border-warning">
                         <div class="card-header text-bg-warning">
-                            <h2 class="h5 mb-0">Anfitriones <span class="fw-light">pendientes de verificación</span></h2>
+                            <h2 class="h5 mb-0">Anfitriones <span class="fw-light">Pendientes de Verificación</span></h2>
                         </div>
                         @if ($hostsNotVerified->isEmpty())
                         <div class="card-body">
@@ -24,7 +24,7 @@
                 <div class="col-12 col-md-6">
                     <div class="card border-primary">
                         <div class="card-header text-bg-primary">
-                            <h2 class="h5 mb-0">Anfitriones <span class="fw-light">activos</span></h2>
+                            <h2 class="h5 mb-0">Anfitriones <span class="fw-light">Activos</span></h2>
                         </div>
                         @if ($hostsVerified->isEmpty())
                         <div class="card-body">
@@ -39,7 +39,7 @@
                 <div class="col-12 col-md-6">
                     <div class="card border-danger">
                         <div class="card-header text-bg-danger">
-                            <h2 class="h5 mb-0">Anfitriones <span class="fw-light">deshabilitados</span></h2>
+                            <h2 class="h5 mb-0">Anfitriones <span class="fw-light">Deshabilitados</span></h2>
                         </div>
                         @if ($hostsDisabled->isEmpty())
                         <div class="card-body">

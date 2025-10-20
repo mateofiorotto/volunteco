@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('project_types', function (Blueprint $table) {
             $table->id();
+            $table->string('key')->unique(); // construccion_de_granjas, separados_por_guiones
             $table->string('name')->unique(); // "Construccion de granjas", "Reforestacion", etc..
             $table->boolean('enabled')->default(true);
             $table->timestamps();

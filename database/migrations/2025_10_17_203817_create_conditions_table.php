@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('conditions', function (Blueprint $table) {
             $table->id();
+            $table->string('key')->unique(); // dormitorio, comida, separados_por_guiones
             $table->string('name')->unique(); // "Dormitorio", "Comida", etc..
             $table->boolean('enabled')->default(true);
             $table->timestamps();

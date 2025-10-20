@@ -18,12 +18,14 @@ class ProjectTypeSeeder extends Seeder
         //crear un usuario. ID 1
         DB::table('project_types')->insert([
             [
+                'key' => 'reforestacion', // separado_con_guion
                 'name' => 'Reforestación',
                 'enabled' => true,
                 'created_at' => Carbon::now()->subDays(rand(1, 365)),
                 'updated_at' => Carbon::now()
             ],
             [
+                'key' => 'construccion_de_invernadero',
                 'name' => 'Construcción de Invernadero',
                 'enabled' => true,
                 'created_at' => Carbon::now()->subDays(rand(1, 365)),

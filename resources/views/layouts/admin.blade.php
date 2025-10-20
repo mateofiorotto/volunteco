@@ -50,14 +50,19 @@
                             </li>
                             @if (Auth::user()->hasRole('admin'))
                                 <li class="nav-item">
-                                    <x-nav-link :route="'list-verify-hosts'">Lista anfitriones</x-nav-link>
+                                    <x-nav-link :route="'list-verify-hosts'">Anfitriones</x-nav-link>
+                                </li>
+                            @endif
+                            @if (Auth::user()->hasRole('anfitrion'))
+                                <li class="nav-item">
+                                    <x-nav-link :route="'list-verify-hosts'">Mis Proyectos</x-nav-link>
                                 </li>
                             @endif
                         </ul>
                         <div class="d-flex gap-3">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="btn btn-outline-primary">Logout</button>
+                                <button type="submit" class="btn btn-outline-primary">Salir</button>
                             </form>
                         </div>
                         @endguest
