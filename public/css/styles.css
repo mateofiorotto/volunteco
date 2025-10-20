@@ -104,10 +104,20 @@ a {
     --bs-btn-disabled-bg: var(--bs-secondary);
     --bs-btn-disabled-border-color: var(--bs-secondary);
 }
+.btn-outline-secondary {
+    --bs-btn-color:var(--bs-secondary);
+    --bs-btn-border-color:var(--bs-secondary);
+    --bs-btn-active-bg:var(--bs-secondary);
+    --bs-btn-active-border-color:var(--bs-secondary);
+    --bs-btn-disabled-color:var(--bs-secondary);
+    --bs-btn-disabled-border-color:var(--bs-secondary);
+}
 .btn-azul {
     --bs-btn-color: #fff;
     --bs-btn-bg: var(--bs-azul-color);
     --bs-btn-border-color: var(--bs-azul-color);
+    --bs-btn-active-bg: var(--bs-body-color);
+    --bs-btn-border-color: var(--bs-body-color);
     --bs-btn-active-color: #fff;
     --bs-btn-disabled-color: #fff;
 }
@@ -124,6 +134,10 @@ a {
 }
 .text-bg-secondary {
     color: var(--bs-body-color)!important;
+}
+.text-azul {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-azul-color-rgb), var(--bs-text-opacity)) !important;
 }
 .text-bg-azul {
     color: #fff !important;
@@ -147,6 +161,9 @@ a {
     --bs-dropdown-link-disabled-color: var(--bs-tertiary-color);
     --bs-dropdown-header-color: #6c757d;
 }
+.card {
+    --bs-card-cap-bg: rgba(var(--bs-primary-rgb), 0.1);
+}
 
 /*customs*/
 .title-h1 {
@@ -160,4 +177,10 @@ a {
 
 .ff-nunito {
     font-family: 'Nunito', sans-serif;
+}
+.small, small {
+    letter-spacing: 0.01em;
+}
+.xs-small {
+    font-size: 0.75em;
 }

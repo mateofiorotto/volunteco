@@ -9,7 +9,7 @@
                 <div class="col-12 col-md-6">
                     <div class="card mb-5 border-azul">
                         <div class="card-header text-bg-azul">
-                            <h2 class="h5 mb-0">Anfitriones <span class="fw-light">no verificados</span></h2>
+                            <h2 class="h5 mb-0">Anfitriones <span class="fw-light">pendientes de verificación</span></h2>
                         </div>
                         @if ($hostsNotVerified->isEmpty())
                         <div class="card-body">
