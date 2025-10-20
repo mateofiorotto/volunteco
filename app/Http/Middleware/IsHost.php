@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
+
+class IsHost
+{
+    /**
+     * Chequear si el usuario es admin
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     */
+    public function handle(Request $request, Closure $next): Response
+    {
+
+        if (!Auth::check() || Auth::user()->role_id != 2) {
+            return redirect()->route('login')
+                ->withErrors(['email' => 'No tienes permiso para acceder a esta página. Por favor, inicia sesión como anfitrión']);
+        }
+
+        return $next($request);
+    }
+}

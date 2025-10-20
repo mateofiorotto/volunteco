@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('person_full_name');
             $table->string('cuit')->unique();
-            $table->string('linkedin');
-            $table->string('facebook');
-            $table->string('instagram');
+            $table->string('linkedin')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
             $table->string('avatar');
             $table->text('description');
             $table->string('phone');

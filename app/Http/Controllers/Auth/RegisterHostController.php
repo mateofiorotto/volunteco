@@ -14,6 +14,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\Validation\Rule;
 use App\Models\Host;
 use App\Services\ImageService;
+use Dotenv\Exception\ValidationException;
 use Illuminate\Support\Facades\DB;
 
 class RegisterHostController extends Controller
@@ -49,13 +50,22 @@ class RegisterHostController extends Controller
                 'person_full_name' => 'required|string|max:255|min:3',
                 'cuit' => ['required', 'string', 'size:11', 'regex:/^\d+$/', 'unique:hosts,cuit'],
                 'phone' => ['required', 'string', 'min:6', 'max:15', 'regex:/^\d+$/'],
-                'linkedin' => 'required|string|max:255|min:10',
-                'facebook' => 'required|string|max:255|min:10',
-                'instagram' => 'required|string|max:255|min:10',
+                'linkedin' => 'nullable|string|max:255|min:10',
+                'facebook' => 'nullable|string|max:255|min:10',
+                'instagram' => 'nullable|string|max:255|min:10',
                 'avatar' => 'required|image|max:2048',
                 'description' => 'required|string|max:500|min:50',
                 'location' => 'nullable|string|max:255|min:3',
             ]);
+
+            //al menos una RRSS
+            if (empty($request->linkedin) && empty($request->facebook) && empty($request->instagram)) {
+                dd("Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).");
+
+                return back()->withErrors([
+                    'social_media' => 'Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).'
+                ])->withInput();
+            }
 
             $hostRole = Role::where('type', 'host')->first();
 
@@ -149,13 +159,22 @@ class RegisterHostController extends Controller
                     Rule::unique('hosts', 'cuit')->ignore($user->host->id), //valida que si es el mismo cuit no tire error
                 ],
                 'phone' => ['required', 'string', 'min:6', 'max:15', 'regex:/^\d+$/'],
-                'linkedin' => 'required|string|max:255|min:3',
-                'facebook' => 'required|string|max:255|min:3',
-                'instagram' => 'required|string|max:255|min:3',
+                'linkedin' => 'nullable|string|max:255|min:3',
+                'facebook' => 'nullable|string|max:255|min:3',
+                'instagram' => 'nullable|string|max:255|min:3',
                 'avatar' => 'nullable|image|max:2048',
                 'description' => 'required|string|max:500|min:50',
                 'location' => 'nullable|string|max:255|min:3',
             ]);
+
+            //al menos una red social
+            if (empty($request->linkedin) && empty($request->facebook) && empty($request->instagram)) {
+                 dd("Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).");
+
+                 return back()->withErrors([
+                    'social_media' => 'Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).'
+                ])->withInput();
+            }
 
             //actualizar host
             $user = User::where('email', $email)->with('host')->first();
@@ -165,7 +184,7 @@ class RegisterHostController extends Controller
             }
 
             //nueva imagen = actualizar y borrar la anterior
-             if ($request->hasFile('avatar')) {
+            if ($request->hasFile('avatar')) {
                 $validated['avatar'] = $this->imageService->updateImage(
                     $request->file('avatar'), //pasando nueva img
                     $user->host->avatar, //img anterior a borrar
