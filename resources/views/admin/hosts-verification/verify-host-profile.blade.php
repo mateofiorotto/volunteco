@@ -4,8 +4,8 @@
     <section>
         <div class="container py-5">
             <div class="d-flex justify-content-between align-items-center mb-5">
-                <h1 class="title-h1 h3 mb-0">Verificar <span>anfitrión</span></h1>
-                <a href="{{ route('list-verify-hosts') }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
+                <h1 class="title-h1 h3 mb-0">Verificar <span>Anfitrión</span></h1>
+                <a href="{{ url()->previous() }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
             </div>
             <div class="row mb-5">
                 <div class="col-md-8">
@@ -21,9 +21,15 @@
                                         @endif
                                         <div class="col">
                                             <div class="card-body">
-                                                <div class="d-flex justify-content-between">
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
                                                     <div class="small text-muted">Anfitrión</div>
-                                                    <div class="text-uppercase fw-semibold">{{ $host->status }}</div>
+                                                    @if ($host->status === 'pendiente')
+                                                    <span class="text-uppercase fw-semibold badge text-bg-warning">{{ $host->status }}</span>
+                                                    @elseif ($host->status === 'inactivo')
+                                                    <span class="text-uppercase fw-semibold badge text-bg-danger">{{ $host->status }}</span>
+                                                    @else
+                                                    <span class="text-uppercase fw-semibold badge text-bg-primary">{{ $host->status }}</span>
+                                                    @endif
                                                 </div>
                                                 <h2 class="card-title h3">{{ $host->host->name }}</h2>
                                                 <ul class="list-unstyled mb-0">
@@ -46,7 +52,7 @@
                             </div>
                             <div class="col-md-5">
                                 <div class="card mb-3" >
-                                    <div class="card-header">Redes sociales</div>
+                                    <div class="card-header">Redes Sociales</div>
                                     <div class="card-body">
                                         <ul class="list-unstyled mb-0">
                                             <li>
@@ -86,7 +92,7 @@
                         <div class="card-body">
 
                             {{-- Si el perfil esta pendiente --}}
-                            @if ($host->status == 'Pendiente')
+                            @if ($host->status == 'pendiente')
                                 <div>
                                     <form method="POST"
                                         class="d-flex flex-column mb-3"
@@ -98,7 +104,7 @@
                                             <textarea id="description" name="description" class="form-control" rows="3"></textarea>
                                             <div class="form-text">Indicá los motivos que debe corregir o completar para que podamos aceptar su perfil.</div>
                                         </div>
-                                        <button class="btn btn-outline-primary ms-auto"  type="submit">Dejar pendiente y enviar email</button>
+                                        <button class="btn btn-outline-primary ms-auto"  type="submit">Dejar Pendiente y Enviar Email</button>
                                     </form>
                                 </div>
 
@@ -118,13 +124,13 @@
                                 </div>
 
                             {{-- Si el perfil esta inactivo --}}
-                            @elseif ($host->status == 'Inactivo')
+                            @elseif ($host->status == 'inactivo')
                                 <p class="alert-danger alert">Este anfitrión está desactivado</p>
                                 <div class="d-flex flex-column mb-3">
                                 @if($host->host->disabled_at || $host->host->rejection_reason)
                                     <ul class="list-unstyled">
                                         @if($host->host->disabled_at)
-                                            <li><span class="text-muted small"> Fecha de desactivación:</span> {{ $host->host->disabled_at->format('d/m/Y') }}</li>
+                                            <li><span class="text-muted small">Fecha de desactivación:</span> {{ $host->host->disabled_at->format('d/m/Y') }}</li>
                                         @endif
                                         @if($host->host->rejection_reason)
                                             <li><span class="text-muted small">Razón de rechazo:</span> <p class="mb-0">{{ $host->host->rejection_reason }}</p></li>
@@ -137,7 +143,7 @@
                                     action="{{ route('send-host-rejected-reminder', $host->id) }}">
                                     @csrf
                                     @method('POST')
-                                    <button class="btn btn-outline-primary" type="submit">Enviar recordatorio</button>
+                                    <button class="btn btn-outline-primary" type="submit">Enviar Recordatorio</button>
                                 </form>
                                 @endif
                                 </div>
@@ -147,14 +153,14 @@
                                         action="{{ route('pending-host-profile', $host->id) }}">
                                         @csrf
                                         @method('PUT')
-                                        <button class="btn btn-outline-secondary" type="submit">Poner en pendiente</button>
+                                        <button class="btn btn-outline-secondary" type="submit">Enviar a Pendiente</button>
                                     </form>
 
                                     <form method="POST"
                                         action="{{ route('reenable-host-profile', $host->id) }}">
                                         @csrf
                                         @method('PUT')
-                                        <button class="btn btn-primary" type="submit">Reactivar</button>
+                                        <button class="btn btn-primary" type="submit">Activar</button>
                                     </form>
                                 </div>
                                 {{-- eliminar perfil definitivamente --}}
@@ -169,7 +175,7 @@
                                             <textarea id="delete_reasons" name="delete_reasons" class="form-control"></textarea>
                                             <div class="form-text">Indicá los motivos por los que eliminamos su perfil.</div>
                                         </div>
-                                        <button class="btn btn-danger ms-auto" type="submit">Eliminar definitivamente</button>
+                                        <button class="btn btn-danger ms-auto" type="submit">Eliminar Definitivamente</button>
                                     </form>
                                 </div>
                             {{-- Si el perfil esta activo --}}
@@ -185,7 +191,7 @@
                                         <textarea name="description" id="description" class="form-control" rows="3"></textarea>
                                         <div class="form-text">Indicá los motivos por los que no podemos aceptar su perfil.</div>
                                     </div>
-                                    <button class="btn btn-outline-primary ms-auto" type="submit">Rechazar y enviar mail</button>
+                                    <button class="btn btn-outline-primary ms-auto" type="submit">Rechazar y Enviar Email</button>
                                 </form>
                             </div>
                             <div class="border-top pt-3 d-flex justify-content-between">
@@ -199,7 +205,7 @@
                                     action="{{ route('pending-host-profile', $host->id) }}">
                                     @csrf
                                     @method('PUT')
-                                    <button class="btn btn-danger" type="submit">Poner en pendiente</button>
+                                    <button class="btn btn-danger" type="submit">Enviar a Pendiente</button>
                                 </form>
                             </div>
                             @endif

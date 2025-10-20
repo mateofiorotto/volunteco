@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Volunteer extends Model
 {
     use SoftDeletes;
-    
+
     protected $fillable = [
         'full_name',
         'dni',
@@ -43,5 +43,11 @@ class Volunteer extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'project_volunteer')
+            ->withPivot('status', 'applied_at', 'accepted_at')
+            ->withTimestamps();
+    }
 }

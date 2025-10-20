@@ -51,14 +51,20 @@
                             </li>
                             @if (Auth::user()->hasRole('admin'))
                                 <li class="nav-item">
-                                    <x-nav-link :route="'list-verify-hosts'">Lista anfitriones</x-nav-link>
+                                    <x-nav-link :route="'list-verify-hosts'">Lista Anfitriones</x-nav-link>
                                 </li>
                             @endif
+                            @if (Auth::user()->hasRole('host'))
+                                <li class="nav-item">
+                                    <x-nav-link :route="'my-projects.index'">Mis Proyectos</x-nav-link>
+                                </li>
+                            @endif
+
                         </ul>
                         <div class="d-flex gap-3">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="btn btn-outline-primary">Logout</button>
+                                <button type="submit" class="btn btn-outline-primary">Salir</button>
                             </form>
                         </div>
                         @endguest
@@ -85,10 +91,10 @@
                     <div class="col-md-4">
                         <ul class="d-flex flex-row align-items-center justify-content-center gap-5 list-unstyled mb-0">
                             <li>
-                                <x-nav-link :route="'register-host.store'">¿Querés ser anfitrión?</x-nav-link>
+                                <x-nav-link :route="'register-host.store'">¿Querés ser Anfitrión?</x-nav-link>
                             </li>
                             <li>
-                                <x-nav-link :route="'register-volunteer.store'">¿Querés ser voluntario?</x-nav-link>
+                                <x-nav-link :route="'register-volunteer.store'">¿Querés ser Voluntario?</x-nav-link>
                             </li>
                         </ul>
                     </div>

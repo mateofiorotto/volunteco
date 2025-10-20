@@ -47,4 +47,10 @@ class Host extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    //un anfitrion puede tener muchos proyectos
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'host_id');
+    }
 }

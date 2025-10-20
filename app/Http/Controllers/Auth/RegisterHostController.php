@@ -81,7 +81,7 @@ class RegisterHostController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role_id' => $hostRole->id,
-                'status' => 'Pendiente'
+                'status' => 'pendiente'
             ]);
 
             Host::create([
@@ -192,7 +192,7 @@ class RegisterHostController extends Controller
                 );
             }
 
-            $user->status = 'Pendiente';
+            $user->status = 'pendiente';
             $user->save();
 
             $user->host->disabled_at = null;
