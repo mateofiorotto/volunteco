@@ -17,7 +17,9 @@ class IsHost
     public function handle(Request $request, Closure $next): Response
     {
 
-        if (!Auth::check() || Auth::user()->role_id != 2) {
+       $user = Auth::user();
+
+        if (!$user || !$user->hasRole('host')) {
             return redirect()->route('login')
                 ->withErrors(['email' => 'No tienes permiso para acceder a esta página. Por favor, inicia sesión como anfitrión']);
         }

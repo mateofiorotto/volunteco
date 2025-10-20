@@ -17,7 +17,7 @@ class IsVolunteer
     public function handle(Request $request, Closure $next): Response
     {
 
-        if (!Auth::check() || Auth::user()->role_id != 3) {
+        if (!Auth::check() || Auth::user()->role->name !== 'volunteer') {
             return redirect()->route('login')
                 ->withErrors(['email' => 'No tienes permiso para acceder a esta página. Por favor, inicia sesión como voluntario']);
         }
