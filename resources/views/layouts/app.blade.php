@@ -51,7 +51,7 @@
                             </li>
                             @if (Auth::user()->hasRole('admin'))
                                 <li class="nav-item">
-                                    <x-nav-link :route="'list-verify-hosts'">Lista Anfitriones</x-nav-link>
+                                    <x-nav-link :route="'list-verify-hosts'">Anfitriones</x-nav-link>
                                 </li>
                             @endif
                             @if (Auth::user()->hasRole('host'))
