@@ -37,17 +37,17 @@ class AdminHostsController extends Controller
         $roleId = $hostRole->id;
 
         $hostsDisabled = User::where('role_id', $roleId)
-            ->where('status', 'Inactivo')
+            ->where('status', 'inactivo')
             ->with('host')
             ->get();
 
         $hostsNotVerified = User::where('role_id', $roleId)
-            ->where('status', 'Pendiente')
+            ->where('status', 'pendiente')
             ->with('host')
             ->get();
 
         $hostsVerified = User::where('role_id', $roleId)
-            ->where('status', 'Activo')
+            ->where('status', 'activo')
             ->with('host')
             ->get();
 
@@ -71,7 +71,7 @@ class AdminHostsController extends Controller
     {
         $host = User::where('id', $id)->first();
 
-        $host->status = "Activo";
+        $host->status = "activo";
         $host->save();
 
         $host->host->disabled_at = null;
@@ -90,7 +90,7 @@ class AdminHostsController extends Controller
     {
         $host = User::where('id', $id)->first();
 
-        $host->status = "Activo";
+        $host->status = "activo";
         $host->save();
 
         $host->host->disabled_at = null;
@@ -107,7 +107,7 @@ class AdminHostsController extends Controller
     {
         $host = User::where('id', $id)->first();
 
-        $host->status = "Inactivo";
+        $host->status = "inactivo";
         $host->save();
 
         $host->host->disabled_at = now();
@@ -146,7 +146,7 @@ class AdminHostsController extends Controller
         // Enviar mail
         Mail::to($host->email)->send(new HostEditRejectedProfileMail($link, $fieldsToChange['description'], $host->host->person_full_name));
 
-        $host->status = "Inactivo";
+        $host->status = "inactivo";
         $host->save();
 
         $host->host->disabled_at = now();
@@ -189,7 +189,7 @@ class AdminHostsController extends Controller
     {
         $host = User::where('id', $id)->first();
 
-        $host->status = "Pendiente";
+        $host->status = "pendiente";
         $host->save();
 
         $host->host->disabled_at = null;

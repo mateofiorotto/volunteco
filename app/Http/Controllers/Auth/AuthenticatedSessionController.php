@@ -34,7 +34,7 @@ class AuthenticatedSessionController extends Controller
         //obtener usuario
         $user = Auth::user();
 
-        if ($user->status != 'Activo') {
+        if ($user->status != 'activo') {
             Auth::logout();
 
             return redirect()->route('login')->withErrors([

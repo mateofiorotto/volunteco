@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('status', ['Activo', 'Pendiente', 'Inactivo']);
+            $table->enum('status', ['activo', 'pendiente', 'inactivo']);
             $table->foreignId('role_id')->nullable()->constrained('roles')->nullOnDelete();
             $table->rememberToken();
             $table->timestamps();

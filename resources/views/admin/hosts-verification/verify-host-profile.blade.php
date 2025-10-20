@@ -21,9 +21,15 @@
                                         @endif
                                         <div class="col">
                                             <div class="card-body">
-                                                <div class="d-flex justify-content-between">
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
                                                     <div class="small text-muted">Anfitrión</div>
-                                                    <div class="text-uppercase fw-semibold">{{ $host->status }}</div>
+                                                    @if ($host->status === 'pendiente')
+                                                    <span class="text-uppercase fw-semibold badge text-bg-warning">{{ $host->status }}</span>
+                                                    @elseif ($host->status === 'inactivo')
+                                                    <span class="text-uppercase fw-semibold badge text-bg-danger">{{ $host->status }}</span>
+                                                    @else
+                                                    <span class="text-uppercase fw-semibold badge text-bg-primary">{{ $host->status }}</span>
+                                                    @endif
                                                 </div>
                                                 <h2 class="card-title h3">{{ $host->host->name }}</h2>
                                                 <ul class="list-unstyled mb-0">
@@ -86,7 +92,7 @@
                         <div class="card-body">
 
                             {{-- Si el perfil esta pendiente --}}
-                            @if ($host->status == 'Pendiente')
+                            @if ($host->status == 'pendiente')
                                 <div>
                                     <form method="POST"
                                         class="d-flex flex-column mb-3"
@@ -118,13 +124,13 @@
                                 </div>
 
                             {{-- Si el perfil esta inactivo --}}
-                            @elseif ($host->status == 'Inactivo')
+                            @elseif ($host->status == 'inactivo')
                                 <p class="alert-danger alert">Este anfitrión está desactivado</p>
                                 <div class="d-flex flex-column mb-3">
                                 @if($host->host->disabled_at || $host->host->rejection_reason)
                                     <ul class="list-unstyled">
                                         @if($host->host->disabled_at)
-                                            <li><span class="text-muted small"> Fecha de desactivación:</span> {{ $host->host->disabled_at->format('d/m/Y') }}</li>
+                                            <li><span class="text-muted small">Fecha de desactivación:</span> {{ $host->host->disabled_at->format('d/m/Y') }}</li>
                                         @endif
                                         @if($host->host->rejection_reason)
                                             <li><span class="text-muted small">Razón de rechazo:</span> <p class="mb-0">{{ $host->host->rejection_reason }}</p></li>
@@ -147,14 +153,14 @@
                                         action="{{ route('pending-host-profile', $host->id) }}">
                                         @csrf
                                         @method('PUT')
-                                        <button class="btn btn-outline-secondary" type="submit">Poner en pendiente</button>
+                                        <button class="btn btn-outline-secondary" type="submit">Enviar a pendiente</button>
                                     </form>
 
                                     <form method="POST"
                                         action="{{ route('reenable-host-profile', $host->id) }}">
                                         @csrf
                                         @method('PUT')
-                                        <button class="btn btn-primary" type="submit">Reactivar</button>
+                                        <button class="btn btn-primary" type="submit">Activar</button>
                                     </form>
                                 </div>
                                 {{-- eliminar perfil definitivamente --}}
@@ -199,7 +205,7 @@
                                     action="{{ route('pending-host-profile', $host->id) }}">
                                     @csrf
                                     @method('PUT')
-                                    <button class="btn btn-danger" type="submit">Poner en pendiente</button>
+                                    <button class="btn btn-danger" type="submit">Enviar a pendiente</button>
                                 </form>
                             </div>
                             @endif
