@@ -104,7 +104,7 @@
                         <p>Completa con tus datos.</p>
                         <div class="mb-3">
 
-                        <label for="educational_level" class="form-label">Nivel educativo</label>
+                        <label for="educational_level" class="form-label">Nivel Educativo</label>
                         <select name="educational_level"
                                 id="educational_level"
                                 required
@@ -134,7 +134,7 @@
             <div class="col-md-6">
                 <div class="card mb-5">
                     <div class="card-body">
-                        <h2 class="card-title h3">Datos de contacto</h2>
+                        <h2 class="card-title h3">Datos de Contacto</h2>
                         <p>Completa con tus datos.</p>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Teléfono</label>
