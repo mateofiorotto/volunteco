@@ -51,28 +51,28 @@
 
                         <div class="row mt-4">
                             <div class="col-md-6">
-                                <h5>📍 Ubicación</h5>
+                                <h5>Ubicación</h5>
                                 <p>{{ $project->location }}</p>
                             </div>
                             <div class="col-md-6">
-                                <h5>⏰ Horas por día</h5>
+                                <h5>Horas por día</h5>
                                 <p>{{ $project->work_hours_per_day }}</p>
                             </div>
                         </div>
 
                         <div class="row mt-3">
                             <div class="col-md-6">
-                                <h5>📅 Fecha de inicio</h5>
+                                <h5>Fecha de inicio</h5>
                                 <p>{{ \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') }}</p>
                             </div>
                             <div class="col-md-6">
-                                <h5>📅 Fecha de finalización</h5>
+                                <h5>Fecha de finalización</h5>
                                 <p>{{ \Carbon\Carbon::parse($project->end_date)->format('d/m/Y') }}</p>
                             </div>
                         </div>
 
                         @if ($project->conditions->isNotEmpty())
-                            <h5 class="mt-4">📋 Condiciones y Requisitos</h5>
+                            <h5 class="mt-4">Condiciones y Requisitos</h5>
                             <ul class="list-group list-group-flush">
                                 @foreach ($project->conditions as $condition)
                                     <li class="list-group-item">{{ $condition->name }}</li>
@@ -101,24 +101,24 @@
                                     $status = $application ? $application->pivot->status : null;
                                 @endphp
 
-                                @if ($status === 'Pendiente')
+                                @if ($status === 'pendiente')
                                     <div class="alert alert-info mb-3">
-                                        <strong>⏳ Solicitud Pendiente</strong><br>
+                                        <strong>Solicitud Pendiente</strong><br>
                                         Tu solicitud está siendo revisada por el anfitrión.
                                     </div>
-                                @elseif($status === 'Aceptado')
+                                @elseif($status === 'aceptado')
                                     <div class="alert alert-success mb-3">
-                                        <strong>✅ Solicitud Aceptada</strong><br>
+                                        <strong>Solicitud Aceptada</strong><br>
                                         ¡Felicitaciones! Has sido aceptado en este proyecto.
                                     </div>
-                                @elseif($status === 'Rechazado')
+                                @elseif($status === 'rechazado')
                                     <div class="alert alert-danger mb-3">
-                                        <strong>❌ Solicitud Rechazada</strong><br>
+                                        <strong>Solicitud Rechazada</strong><br>
                                         Lamentablemente tu solicitud no fue aceptada para este proyecto.
                                     </div>
                                 @endif
 
-                                @if ($status !== 'Rechazado')
+                                @if ($status !== 'rechazado')
                                     <form method="POST"
                                           action="{{ route('withdraw-project', $project->id) }}"
                                           onsubmit="return confirm('¿Estás seguro de que deseas desistir de este proyecto?');">
@@ -207,7 +207,7 @@
         <div class="mt-4">
             <a href="{{ url()->previous() }}"
                class="btn btn-outline-secondary">
-                ← Volver
+                Volver
             </a>
         </div>
     </section>

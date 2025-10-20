@@ -24,7 +24,7 @@
 
         {{-- Proyectos Aceptados --}}
         @php
-            $acceptedProjects = $appliedProjects->filter(fn($p) => $p->pivot->status === 'Aceptado');
+            $acceptedProjects = $appliedProjects->filter(fn($p) => $p->pivot->status === 'aceptado');
         @endphp
         @if ($acceptedProjects->isNotEmpty())
             <h3>Proyectos en los que participo</h3>
@@ -37,7 +37,7 @@
 
         {{-- Proyectos Pendientes --}}
         @php
-            $pendingProjects = $appliedProjects->filter(fn($p) => $p->pivot->status === 'Pendiente');
+            $pendingProjects = $appliedProjects->filter(fn($p) => $p->pivot->status === 'pendiente');
         @endphp
         @if ($pendingProjects->isNotEmpty())
             <h3>Proyectos a los que apliqué</h3>
@@ -50,7 +50,7 @@
 
         {{-- Proyectos Rechazados --}}
         @php
-            $rejectedProjects = $appliedProjects->filter(fn($p) => $p->pivot->status === 'Rechazado');
+            $rejectedProjects = $appliedProjects->filter(fn($p) => $p->pivot->status === 'rechazado');
         @endphp
         @if ($rejectedProjects->isNotEmpty())
             <h3>Proyectos en los que me rechazaron</h3>

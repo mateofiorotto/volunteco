@@ -12,12 +12,12 @@
                 <span class="badge bg-primary">{{ $project->projectType->name }}</span>
 
                 <!--Si la ruta es /voluntarios/mis-proyectos-aplicados-->
-                @if (isset($project->pivot) && $project->pivot?->status === 'Aceptado')
-                    <span class="badge bg-success">✅ Aceptado</span>
-                @elseif(isset($project->pivot) && $project->pivot?->status === 'Pendiente')
-                    <span class="badge bg-warning text-dark">⏳ Pendiente</span>
-                @elseif(isset($project->pivot) && $project->pivot?->status === 'Rechazado')
-                    <span class="badge bg-danger">❌ Rechazado</span>
+                @if (isset($project->pivot) && $project->pivot?->status === 'aceptado')
+                    <span class="badge bg-success">Aceptado</span>
+                @elseif(isset($project->pivot) && $project->pivot?->status === 'pendiente')
+                    <span class="badge bg-warning text-dark">Pendiente</span>
+                @elseif(isset($project->pivot) && $project->pivot?->status === 'rechazado')
+                    <span class="badge bg-danger">Rechazado</span>
                 @endif
             </div>
 
@@ -101,7 +101,7 @@
                     Ver Detalles
                 </a>
 
-                @if (isset($project->pivot) && $project->pivot?->status !== 'Rechazado')
+                @if (isset($project->pivot) && $project->pivot?->status !== 'rechazado')
                     <form method="POST"
                           action="{{ route('withdraw-project', $project->id) }}"
                           onsubmit="return confirm('¿Estás seguro de que deseas desistir de este proyecto?');">

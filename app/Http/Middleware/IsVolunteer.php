@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 class IsVolunteer
 {
     /**
-     * Chequear si el usuario es admin
+     * Chequear si el usuario es volunteer
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */

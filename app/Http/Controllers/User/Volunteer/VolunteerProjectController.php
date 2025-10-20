@@ -46,7 +46,7 @@ class VolunteerProjectController extends Controller
         }
 
         $volunteer->projects()->attach($project->id, [
-            'status' => 'Pendiente',
+            'status' => 'pendiente',
             'applied_at' => now(),
         ]);
 
