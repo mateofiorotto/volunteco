@@ -8,7 +8,7 @@
                 <p>No hay proyectos publicados actualmente.</p>
             @endif
 
-            <div class="row justify-content-center align-items-center gap-5">
+            <div class="row justify-content-center">
                 @foreach ($projects as $project)
                     @include('components.project-card', ['project' => $project])
                 @endforeach
