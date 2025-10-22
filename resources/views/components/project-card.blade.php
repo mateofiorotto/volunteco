@@ -117,10 +117,18 @@
             </ul>
 
             <div class="d-flex gap-2">
-                <a href="{{ route('project', $project->id) }}"
+                <!-- Si la ruta es el admin de anfitriones -->
+                @if (request()->is('anfitriones/mis-proyectos*'))
+                <a href="{{ route('my-projects.show', $project->id) }}"
                    class="btn btn-sm btn-outline-primary flex-grow-1">
+                    Administrar Proyecto
+                </a>
+                @else
+                <a href="{{ route('project', $project->id) }}"
+                     class="btn btn-sm btn-outline-primary flex-grow-1">
                     Ver Detalles
                 </a>
+                @endif
 
                 @if (isset($project->pivot) && $project->pivot?->status !== 'rechazado')
                     <form method="POST"

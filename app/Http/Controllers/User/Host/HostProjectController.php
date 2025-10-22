@@ -14,7 +14,7 @@ class HostProjectController extends Controller
 {
 
     //inyectar el servicio de manejo de imagenes
-   protected $imageService;
+    protected $imageService;
 
     //inyectar el servicio de imgs
     public function __construct(ImageService $imageService)
@@ -35,6 +35,31 @@ class HostProjectController extends Controller
             ->paginate(10);
 
         return view('user.host.projects-list', compact('projects'));
+    }
+
+    /**
+     * Mostrar detalles de un proyecto PROPIO por id
+     */
+    public function show($id)
+    {
+        $host = Auth::user()->host;
+
+        $project = Project::with(['projectType', 'conditions', 'host'])
+            ->where('id', $id)
+            ->where('host_id', $host->id)
+            ->first();
+
+        if (!$project) {
+            abort(403, 'Acceso denegado o proyecto inexistente.');
+        }
+
+        $registeredVolunteers = $project->volunteers()
+            ->with('user')
+            ->wherePivotIn('status', ['pendiente', 'aceptado', 'rechazado'])
+            ->orderByPivot('applied_at', 'desc')
+            ->get();
+
+        return view('user.host.admin-project', compact('project', 'registeredVolunteers'));
     }
 
     /**

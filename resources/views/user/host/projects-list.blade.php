@@ -3,7 +3,7 @@
 @section('content')
     <section class="container py-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
-            <h1 class="title-h1 h3 mb-5">Mis <span>Proyectos</span></h1>
+            <h2 class="title-h1 h3 mb-5">Mis <span>Proyectos</span></h2>
             <!--Crear proyecto-->
             <form method="GET"
                   action="{{ route('my-projects.create') }}">

@@ -57,6 +57,7 @@ a {
     text-decoration: none;
 }
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 { font-family: 'Nunito', sans-serif;}
+.form-control { color: var(--bs-secondary-color)}
 .btn {
     --bs-btn-hover-bg: var(--bs-body-color);
     --bs-btn-hover-border-color: var(--bs-body-color);

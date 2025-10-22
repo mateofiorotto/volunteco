@@ -24,44 +24,43 @@ class AdminHostsController extends Controller
     {
         $this->imageService = $imageService;
     }
-    /**
-     * Retornar la lista de verificacion de anfitriones
-     */
-    public function verifyHostsList()
+
+    public function getHostsByStatus(string $roleType, string $status)
     {
-        // Consulta el rol host
-        $hostRole = Role::where('type', 'host')->first();
-        if (!$hostRole) {
-            abort(500, 'No se encontró el rol "host".');
-        }
-        $roleId = $hostRole->id;
-
-        $hostsDisabled = User::where('role_id', $roleId)
-            ->where('status', 'inactivo')
-            ->with('host')
-            ->get();
-
-        $hostsNotVerified = User::where('role_id', $roleId)
-            ->where('status', 'pendiente')
-            ->with('host')
-            ->get();
-
-        $hostsVerified = User::where('role_id', $roleId)
-            ->where('status', 'activo')
-            ->with('host')
-            ->get();
-
-        return view('admin/hosts-verification/list-verify-hosts', ['hostsNotVerified' => $hostsNotVerified, 'hostsVerified' => $hostsVerified, 'hostsDisabled' => $hostsDisabled]);
+        return User::whereHas('role', function ($query) use ($roleType) {
+                    $query->where('type', $roleType);
+                })
+                ->where('status', $status)
+                ->with(['host'])
+                ->get();
     }
 
     /**
-     * Verificar un perfil especifico de anfitrion
+     * Retornar la lista de anfitriones por estado
      */
-    public function verifyHostProfileById($id)
+    public function statusHostsList()
+    {
+        if (!Role::where('type', 'host')->exists()) {
+            abort(500, 'El tipo de rol "host" no existe.');
+        }
+
+        $hostsDisabled = $this->getHostsByStatus('host', 'inactivo');
+        $hostsNotVerified = $this->getHostsByStatus('host', 'pendiente');
+        $hostsVerified = $this->getHostsByStatus('host', 'activo');
+
+        return view('admin.hosts.host-list-status', compact(
+            'hostsDisabled', 'hostsNotVerified', 'hostsVerified'
+        ));
+    }
+
+    /**
+     * Obtener un perfil de anfitrion por id
+     */
+    public function getHostProfileById($id)
     {
         $host = User::where('id', $id)->with('host')->first();
 
-        return view('admin/hosts-verification/verify-host-profile', ['host' => $host]);
+        return view('admin/hosts/host-profile', ['host' => $host]);
     }
 
     /**
@@ -80,7 +79,7 @@ class AdminHostsController extends Controller
 
         Mail::to($host->email)->send(new ProfileAcceptedMail($host->host->person_full_name));
 
-        return redirect()->route('list-verify-hosts');
+        return redirect()->route('hosts-list');
     }
 
     /**
@@ -97,7 +96,7 @@ class AdminHostsController extends Controller
         $host->host->rejection_reason = null;
         $host->host->save();
 
-        return redirect()->route('list-verify-hosts');
+        return redirect()->route('hosts-list');
     }
 
     /*
@@ -111,10 +110,10 @@ class AdminHostsController extends Controller
         $host->save();
 
         $host->host->disabled_at = now();
-        $host->host->rejection_reason = null;
+        //$host->host->rejection_reason = null;
         $host->host->save();
 
-        return redirect()->route('list-verify-hosts');
+        return redirect()->route('hosts-list');
     }
 
     /**
@@ -153,7 +152,43 @@ class AdminHostsController extends Controller
         $host->host->rejection_reason = $fieldsToChange['description'];
         $host->host->save();
 
-        return redirect()->route('list-verify-hosts');
+        return redirect()->route('hosts-list');
+    }
+
+    public function sendMailUncompleteProfile(Request $request, $id)
+    {
+        $host = User::with('host')->findOrFail($id);
+
+        $fieldsToChange = $request->validate([
+            'description' => 'required|string|max:500|min:10',
+        ]);
+
+        //generar token para que pueda cambiar sus datos de forma segura
+        $token = Str::random(64);
+
+        // Guardar en tabla profile_change_tokens (reemplaza si ya existe)
+        DB::table('profile_change_tokens')->updateOrInsert(
+            ['email' => $host->email],
+            [
+                'token' => $token,
+                'created_at' => now(),
+            ]
+        );
+
+        // Crear link
+        $link = url("/perfil/editar-datos/$token/" . urlencode($host->email));
+
+        // Enviar mail
+        Mail::to($host->email)->send(new HostEditRejectedProfileMail($link, $fieldsToChange['description'], $host->host->person_full_name));
+
+        $host->status = "pendiente";
+        $host->save();
+
+        $host->host->disabled_at = now();
+        $host->host->rejection_reason = $fieldsToChange['description'];
+        $host->host->save();
+
+        return redirect()->route('hosts-list');
     }
 
     /**
@@ -179,7 +214,7 @@ class AdminHostsController extends Controller
 
         Mail::to($host->email)->send(new HostDeleteProfileMail($reasons['delete_reasons'], $host->host->person_full_name));
 
-        return redirect()->route('list-verify-hosts');
+        return redirect()->route('hosts-list');
     }
 
     /**
@@ -192,11 +227,11 @@ class AdminHostsController extends Controller
         $host->status = "pendiente";
         $host->save();
 
-        $host->host->disabled_at = null;
-        $host->host->rejection_reason = null;
+        // $host->host->disabled_at = null;
+        // $host->host->rejection_reason = null;
         $host->host->save();
 
-        return redirect()->route('list-verify-hosts');
+        return redirect()->route('hosts-list');
     }
 
     /**
@@ -208,6 +243,6 @@ class AdminHostsController extends Controller
 
         Mail::to($host->email)->send(new HostRejectedReminder($host->host->rejection_reason, $host->host->person_full_name, $host->host->disabled_at));
 
-        return redirect()->route('list-verify-hosts');
+        return redirect()->route('hosts-list');
     }
 }

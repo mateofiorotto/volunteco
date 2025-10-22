@@ -12,18 +12,21 @@ Route::middleware(['authCheck', 'isHost', 'checkEnabled'])->prefix('anfitriones'
          */
 
         Route::get('/mis-proyectos', [HostProjectController::class, 'index'])->name('my-projects.index');
-        //Route::get('/proyectos/{project}', [HostProjectController::class, 'show'])->name('projects.show');
+        
+        //administrar proyecto (ver lista de anfitriones, botones de edicion y eliminar)
+        Route::get('/proyectos/{id}/administrar', [HostProjectController::class, 'show'])->name('my-projects.show'); 
 
         Route::get('/mis-proyectos/crear', [HostProjectController::class, 'create'])->name('my-projects.create');
         Route::post('/mis-proyectos', [HostProjectController::class, 'store'])->name('my-projects.store');
         
-        Route::get('/mis-proyectos/{project}/editar', [HostProjectController::class, 'edit'])->name('my-projects.edit');
-        Route::put('/mis-proyectos/{project}', [HostProjectController::class, 'update'])->name('my-projects.update');
+        Route::get('/mis-proyectos/{id}/editar', [HostProjectController::class, 'edit'])->name('my-projects.edit');
+        Route::put('/mis-proyectos/{id}', [HostProjectController::class, 'update'])->name('my-projects.update');
 
-        Route::delete('/mis-proyectos/{project}', [HostProjectController::class, 'destroy'])->name('my-projects.destroy');
+        Route::get('/mis-proyectos/{id}/eliminar', [HostProjectController::class, 'delete'])->name('my-projects.delete');
+        Route::delete('/mis-proyectos/{id}/eliminar', [HostProjectController::class, 'destroy'])->name('my-projects.destroy');
 
-        Route::get('/mis-proyectos-inscritos', [HostProjectController::class, 'registeredHosts'])->name('my-projects.registeredHosts');
+        //manejar anfitriones inscritos (aceptar o rechazar)
+        Route::put('/mis-proyectos/{projectId}/anfitriones/{volunteerId}/aceptar', [HostProjectController::class, 'acceptVolunteer'])->name('my-projects.accept-volunteer');
+        Route::put('/mis-proyectos/{projectId}/anfitriones/{volunteerId}/rechazar', [HostProjectController::class, 'rejectVolunteer'])->name('my-projects.reject-volunteer');
 
-        Route::put('/mis-proyectos-inscritos/{host}/aceptar', [HostProjectController::class, 'acceptHost'])->name('my-projects.acceptHost');
-        Route::put('/mis-proyectos-inscritos/{host}/rechazar', [HostProjectController::class, 'rejectHost'])->name('my-projects.rejectHost');
 });

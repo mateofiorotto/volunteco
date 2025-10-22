@@ -28,7 +28,6 @@ class FrontendController extends Controller
         //obtener el voluntario asociado al usuario autenticado
         $volunteer = Volunteer::where('user_id', auth()->id())->first();
 
-
         $hasApplied = false;
 
         if ($volunteer) {
