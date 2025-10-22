@@ -189,7 +189,7 @@
                                 @csrf
                                 <button class="btn btn-outline-primary w-100 mb-3"
                                         type="submit">
-                                    Editar
+                                    Eliminar
                                 </button>
                             </form>
                             <a href="#volunteers-list">

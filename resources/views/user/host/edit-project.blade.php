@@ -4,7 +4,7 @@
     <div class="container py-5">
         <div class="row mb-5">
             <div class="col-md-7">
-                <h2 class="title-h1 h3 mb-0">Crear <span>Proyecto</span></h2>
+                <h1 class="title-h1 h3 mb-0">Editar <span>Proyecto</span></h1>
             </div>
         </div>
 
@@ -22,9 +22,9 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('my-projects.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('my-projects.update', $project) }}" enctype="multipart/form-data">
             @csrf
-
+            @method('PUT')
             <div class="row">
                 <!-- Información básica del proyecto -->
                 <div class="col-md-6">
@@ -37,7 +37,7 @@
                                 <input type="text"
                                        id="title"
                                        name="title"
-                                       value="{{ old('title') }}"
+                                       value="{{ old('title', $project->title) }}"
                                        placeholder="Ej: Reforestación en la Reserva Natural"
                                        required
                                        class="form-control @error('title') is-invalid @enderror" />
@@ -53,7 +53,7 @@
                                           placeholder="Describe el proyecto, objetivos y actividades a realizar"
                                           rows="5"
                                           required
-                                          class="form-control  @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
+                                          class="form-control  @error('description') is-invalid @enderror">{{ old('description', $project->description) }}</textarea>
                                 @error('description')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -67,7 +67,7 @@
                                         class="form-select @error('project_type_id') is-invalid @enderror">
                                     <option value="">Selecciona un tipo</option>
                                     @foreach($projectTypes as $type)
-                                        <option value="{{ $type->id }}" {{ old('project_type_id') == $type->id ? 'selected' : '' }}>
+                                        <option value="{{ $type->id }}" {{ old('project_type_id', $project->project_type_id) == $type->id ? 'selected' : '' }}>
                                             {{ $type->name }}
                                         </option>
                                     @endforeach
@@ -82,7 +82,7 @@
                                 <input type="text"
                                        id="location"
                                        name="location"
-                                       value="{{ old('location') }}"
+                                       value="{{ old('location', $project->location) }}"
                                        placeholder="Ciudad, Provincia"
                                        required
                                        class="form-control @error('location') is-invalid @enderror" />
@@ -93,12 +93,23 @@
 
                             <div class="mb-3">
                                 <label for="image" class="form-label">Imagen del proyecto</label>
+                                
+                                @if($project->image)
+                                    <div class="mb-2">
+                                        <img src="{{ asset('storage/' . $project->image) }}" 
+                                             alt="Imagen actual" 
+                                             class="img-thumbnail" 
+                                             style="max-width: 200px">
+                                        <p class="text-muted small mt-1">Imagen actual</p>
+                                    </div>
+                                @endif
+                                
                                 <input type="file"
                                        id="image"
                                        name="image"
                                        accept="image/*"
                                        class="form-control @error('image') is-invalid @enderror" />
-                                <small class="text-muted">Formatos: JPG, PNG, GIF. Máximo 2MB</small>
+                                <small class="text-muted">Formatos: JPG, PNG, GIF. Máximo 2MB. {{ $project->image ? 'Deja vacío para mantener la imagen actual.' : '' }}</small>
                                 @error('image')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -118,7 +129,7 @@
                                 <input type="date"
                                        id="start_date"
                                        name="start_date"
-                                       value="{{ old('start_date') }}"
+                                       value="{{ old('start_date', $project->start_date) }}"
                                        min="{{ date('Y-m-d') }}"
                                        required
                                        class="form-control @error('start_date') is-invalid @enderror" />
@@ -132,7 +143,7 @@
                                 <input type="date"
                                        id="end_date"
                                        name="end_date"
-                                       value="{{ old('end_date') }}"
+                                       value="{{ old('end_date', $project->end_date) }}"
                                        min="{{ date('Y-m-d') }}"
                                        required
                                        class="form-control @error('end_date') is-invalid @enderror" />
@@ -148,10 +159,10 @@
                                         required
                                         class="form-select @error('work_hours_per_day') is-invalid @enderror">
                                     <option value="">Selecciona las horas</option>
-                                    <option value="2 Horas" {{ old('work_hours_per_day') == '2 Horas' ? 'selected' : '' }}>2 Horas</option>
-                                    <option value="4 Horas" {{ old('work_hours_per_day') == '4 Horas' ? 'selected' : '' }}>4 Horas</option>
-                                    <option value="6 Horas" {{ old('work_hours_per_day') == '6 Horas' ? 'selected' : '' }}>6 Horas</option>
-                                    <option value="8 Horas" {{ old('work_hours_per_day') == '8 Horas' ? 'selected' : '' }}>8 Horas</option>
+                                    <option value="2 Horas" {{ old('work_hours_per_day', $project->work_hours_per_day) == '2 Horas' ? 'selected' : '' }}>2 Horas</option>
+                                    <option value="4 Horas" {{ old('work_hours_per_day', $project->work_hours_per_day) == '4 Horas' ? 'selected' : '' }}>4 Horas</option>
+                                    <option value="6 Horas" {{ old('work_hours_per_day', $project->work_hours_per_day) == '6 Horas' ? 'selected' : '' }}>6 Horas</option>
+                                    <option value="8 Horas" {{ old('work_hours_per_day', $project->work_hours_per_day) == '8 Horas' ? 'selected' : '' }}>8 Horas</option>
                                 </select>
                                 @error('work_hours_per_day')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -173,7 +184,7 @@
                                            name="conditions[]"
                                            value="{{ $condition->id }}"
                                            id="condition_{{ $condition->id }}"
-                                           {{ is_array(old('conditions')) && in_array($condition->id, old('conditions')) ? 'checked' : '' }}>
+                                           {{ (is_array(old('conditions')) ? in_array($condition->id, old('conditions')) : $project->conditions->contains($condition->id)) ? 'checked' : '' }}>
                                     <label class="form-check-label" for="condition_{{ $condition->id }}">
                                         {{ $condition->name }}
                                     </label>
@@ -196,7 +207,7 @@
                                        name="enabled"
                                        id="enabled"
                                        value="1"
-                                       {{ old('enabled', true) ? 'checked' : '' }}>
+                                       {{ old('enabled', $project->enabled) ? 'checked' : '' }}>
                                 <label class="form-check-label" for="enabled">
                                     Proyecto habilitado (visible para voluntarios)
                                 </label>
@@ -208,11 +219,11 @@
 
             <!-- Botones -->
             <div class="d-flex gap-3 justify-content-center mt-4 mb-5">
-                <a href="{{ url()->previous() }}" class="btn btn-outline-primary btn-lg px-5">
+                <a href="{{ route('my-projects.index') }}" class="btn btn-outline-primary btn-lg px-5">
                     Cancelar
                 </a>
                 <button type="submit" class="btn btn-primary btn-lg px-5 text-capitalize">
-                    Crear Proyecto
+                    Actualizar Proyecto
                 </button>
             </div>
         </form>

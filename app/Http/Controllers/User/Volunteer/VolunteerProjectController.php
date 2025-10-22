@@ -24,6 +24,7 @@ class VolunteerProjectController extends Controller
         $appliedProjects = $volunteer->projects()
             ->withPivot('status', 'applied_at', 'accepted_at')
             ->with(['host', 'projectType', 'conditions'])
+            ->where('projects.enabled', true) //solo mostrar si esta habilitado
             ->orderByPivot('applied_at', 'desc')
             ->paginate(10);
 

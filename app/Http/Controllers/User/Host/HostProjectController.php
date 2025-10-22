@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\ProjectType;
 use App\Models\Condition;
 use App\Services\ImageService;
+use Illuminate\Validation\Rule;
 
 class HostProjectController extends Controller
 {
@@ -118,104 +119,135 @@ class HostProjectController extends Controller
             ->with('success', 'Proyecto creado exitosamente');
     }
 
-    // /**
-    //  * Mostrar formulario de edición de proyecto
-    //  */
-    // public function edit(Project $project)
-    // {
-    //     $host = Auth::user()->host;
+    /**
+     * Mostrar formulario de edición de proyecto PROPIO
+     */
+    public function edit($id)
+    {
+        $host = Auth::user()->host;
 
-    //     // Verificar que el proyecto pertenece al anfitrión autenticado
-    //     if (!$host || $project->host_id !== $host->id) {
-    //         abort(403, 'No tienes permiso para editar este proyecto');
-    //     }
+        $project = Project::where('id', $id)
+            ->where('host_id', $host->id)
+            ->first();
 
-    //     $projectTypes = ProjectType::all();
-    //     $conditions = Condition::all();
+        if (!$project) {
+            abort(403, 'Acceso denegado o proyecto inexistente.');
+        }
 
-    //     return view('host.projects.edit', compact('project', 'projectTypes', 'conditions'));
-    // }
+        $projectTypes = ProjectType::all();
+        $conditions = Condition::all();
 
-    // /**
-    //  * Actualizar proyecto
-    //  */
-    // public function update(Request $request, Project $project)
-    // {
-    //     $host = Auth::user()->host;
+        return view('user.host.edit-project', compact('project', 'projectTypes', 'conditions'));
+    }
 
-    //     // Verificar que el proyecto pertenece al anfitrión autenticado
-    //     if (!$host || $project->host_id !== $host->id) {
-    //         abort(403, 'No tienes permiso para actualizar este proyecto');
-    //     }
+    /**
+     * Actualizar proyecto PROPIO
+     */
+    public function update(Request $request, $id)
+    {
+        $host = Auth::user()->host;
 
-    //     $validated = $request->validate([
-    //         'title' => 'required|string|max:255',
-    //         'description' => 'required|string',
-    //         'project_type_id' => 'required|exists:project_types,id',
-    //         'location' => 'required|string|max:255',
-    //         'start_date' => 'required|date',
-    //         'end_date' => 'required|date|after:start_date',
-    //         'work_hours_per_day' => 'required|integer|min:1|max:24',
-    //         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-    //         'conditions' => 'nullable|array',
-    //         'conditions.*' => 'exists:conditions,id',
-    //         'enabled' => 'boolean',
-    //     ]);
+        $project = Project::where('id', $id)
+            ->where('host_id', $host->id)
+            ->first();
 
-    //     $validated['enabled'] = $request->has('enabled') ? true : false;
+        if (!$project) {
+            abort(403, 'Acceso denegado o proyecto inexistente.');
+        }
 
-    //     // Manejo de la imagen
-    //     if ($request->hasFile('image')) {
-    //         // Eliminar la imagen anterior si existe
-    //         if ($project->image) {
-    //             Storage::disk('public')->delete($project->image);
-    //         }
-    //         $validated['image'] = $request->file('image')->store('projects', 'public');
-    //     }
+        $validated = $request->validate([
+            'title' => [
+                'required',
+                'string',
+                'min:5',
+                'max:255',
+                Rule::unique('projects', 'title')->ignore($project->id)
+            ],
+            'description' => 'required|string|min:50|max:2000',
+            'project_type_id' => 'required|exists:project_types,id',
+            'location' => 'required|string|min:3|max:255',
+            'start_date' => 'required|date|after_or_equal:today',
+            'end_date' => 'required|date|after:start_date',
+            'work_hours_per_day' => 'required|in:2 Horas,4 Horas,6 Horas,8 Horas',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'conditions' => 'nullable|array',
+            'conditions.*' => 'exists:conditions,id'
+        ]);
 
-    //     $project->update($validated);
+        $validated['enabled'] = $request->has('enabled');
 
-    //     // Sincronizar condiciones
-    //     if ($request->has('conditions')) {
-    //         $project->conditions()->sync($request->conditions);
-    //     } else {
-    //         $project->conditions()->detach();
-    //     }
+        //manejo de la imagen
+        if ($request->hasFile('image')) {
+            if ($project->image == 'logo-horizontal.svg') {
+                $this->imageService->storeImage($request->file('image'), 'projects');
+            } else {
+                $validated['image'] = $this->imageService->updateImage(
+                    $request->file('image'), //pasando nueva img
+                    $project->image, //img anterior a borrar
+                    'projects' //directorio nueva img
+                );
+            }
+        }
 
-    //     return redirect()
-    //         ->route('my-projects.index')
-    //         ->with('success', 'Proyecto actualizado exitosamente');
-    // }
+        $project->update($validated);
 
-    // /**
-    //  * Eliminar proyecto
-    //  */
-    // public function destroy(Project $project)
-    // {
-    //     $host = Auth::user()->host;
+        // Sincronizar condiciones
+        if ($request->has('conditions')) {
+            $project->conditions()->sync($request->conditions);
+        } else {
+            $project->conditions()->detach();
+        }
 
-    //     // Verificar que el proyecto pertenece al anfitrión autenticado
-    //     if (!$host || $project->host_id !== $host->id) {
-    //         abort(403, 'No tienes permiso para eliminar este proyecto');
-    //     }
+        return redirect()
+            ->route('my-projects.index')
+            ->with('success', 'Proyecto actualizado exitosamente');
+    }
 
-    //     // Eliminar imagen asociada si existe
-    //     if ($project->image) {
-    //         Storage::disk('public')->delete($project->image);
-    //     }
+    /**
+     * Mostrar vista de confirmación de eliminación de proyecto PROPIO
+     */
+    public function delete($id)
+    {
+        $host = Auth::user()->host;
 
-    //     // Desasociar condiciones
-    //     $project->conditions()->detach();
+        $project = Project::where('id', $id)
+            ->where('host_id', $host->id)
+            ->first();
 
-    //     // Desasociar voluntarios
-    //     $project->volunteers()->detach();
+        if (!$project) {
+            abort(403, 'Acceso denegado o proyecto inexistente.');
+        }
 
-    //     $project->delete();
+        return view('user.host.delete-project', compact('project'));
+    }
 
-    //     return redirect()
-    //         ->route('my-projects.index')
-    //         ->with('success', 'Proyecto eliminado exitosamente');
-    // }
+    /**
+     * Eliminar proyecto PROPIO
+     */
+    public function destroy($id)
+    {
+        $host = Auth::user()->host;
+
+        $project = Project::where('id', $id)
+            ->where('host_id', $host->id)
+            ->first();
+
+        if (!$project) {
+            abort(403, 'Acceso denegado o proyecto inexistente.');
+        }
+
+        // Eliminar imagen asociada si no es la predeterminada
+        if ($project->image && $project->image !== 'logo-horizontal.svg') {
+            $this->imageService->deleteImage($project->image);
+        }
+
+        $project->delete();
+
+        return redirect()
+            ->route('my-projects.index')
+            ->with('success', 'Proyecto eliminado exitosamente');
+    }
+
 
     public function acceptVolunteer($projectId, $volunteerId)
     {

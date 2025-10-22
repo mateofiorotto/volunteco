@@ -171,9 +171,9 @@ class RegisterHostController extends Controller
 
             //al menos una red social
             if (empty($request->linkedin) && empty($request->facebook) && empty($request->instagram)) {
-                 dd("Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).");
+                dd("Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).");
 
-                 return back()->withErrors([
+                return back()->withErrors([
                     'social_media' => 'Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).'
                 ])->withInput();
             }
@@ -187,11 +187,17 @@ class RegisterHostController extends Controller
 
             //nueva imagen = actualizar y borrar la anterior
             if ($request->hasFile('avatar')) {
-                $validated['avatar'] = $this->imageService->updateImage(
-                    $request->file('avatar'), //pasando nueva img
-                    $user->host->avatar, //img anterior a borrar
-                    'hosts' //directorio nueva img
-                );
+
+                if ($user->host->avatar == 'logo.svg') {
+                    $this->imageService->storeImage($request->file('avatar'), 'hosts');
+                } else {
+
+                    $validated['avatar'] = $this->imageService->updateImage(
+                        $request->file('avatar'), //pasando nueva img
+                        $user->host->avatar, //img anterior a borrar
+                        'hosts' //directorio nueva img
+                    );
+                }
             }
 
             $user->status = 'pendiente';
