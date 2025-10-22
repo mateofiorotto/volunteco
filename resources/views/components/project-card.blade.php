@@ -10,15 +10,22 @@
             <h3 class="card-title h5">{{ $project->title }}</h3>
             <div class="mb-2">
                 <span class="badge bg-primary">{{ $project->projectType->name }}</span>
-
-                <!--Si la ruta es /voluntarios/mis-proyectos-aplicados-->
-                @if (isset($project->pivot) && $project->pivot?->status === 'aceptado')
-                    <span class="badge bg-success">Aceptado</span>
-                @elseif(isset($project->pivot) && $project->pivot?->status === 'pendiente')
-                    <span class="badge bg-warning text-dark">Pendiente</span>
-                @elseif(isset($project->pivot) && $project->pivot?->status === 'rechazado')
-                    <span class="badge bg-danger">Rechazado</span>
+                <!-- si la ruta es /anfitriones/mis-proyectos -->
+                @if (request()->is('anfitriones/mis-proyectos*'))
+                    @if ($project->enabled == true)
+                        <span class="badge bg-success">Publicado</span>
+                    @else
+                        <span class="badge bg-danger">No Publicado</span>
+                    @endif
                 @endif
+                    <!--Si la ruta es /voluntarios/mis-proyectos-aplicados-->
+                    @if (isset($project->pivot) && $project->pivot?->status === 'aceptado')
+                        <span class="badge bg-success">Aceptado</span>
+                    @elseif(isset($project->pivot) && $project->pivot?->status === 'pendiente')
+                        <span class="badge bg-warning text-dark">Pendiente</span>
+                    @elseif(isset($project->pivot) && $project->pivot?->status === 'rechazado')
+                        <span class="badge bg-danger">Rechazado</span>
+                    @endif
             </div>
 
             <p class="card-text mb-3 small">
@@ -40,7 +47,7 @@
                     </svg>
                     <span>{{ $project->host->name }}</span>
                 </li>
-                
+
                 <li class="d-flex gap-2 align-items-start mb-2">
                     <svg xmlns="http://www.w3.org/2000/svg"
                          fill="none"
@@ -77,7 +84,7 @@
                         {{ \Carbon\Carbon::parse($project->end_date)->format('d/m/Y') }}
                     </span>
                 </li>
-                
+
                 <li class="d-flex gap-2 align-items-start mb-2">
                     <svg xmlns="http://www.w3.org/2000/svg"
                          fill="none"
@@ -92,7 +99,7 @@
                     </svg>
                     <span>{{ $project->work_hours_per_day }} por día</span>
                 </li>
-                
+
                 <li class="d-flex gap-2 align-items-start mb-2">
                     <svg xmlns="http://www.w3.org/2000/svg"
                          fill="none"

@@ -39,7 +39,7 @@
                 <div class="col-12 col-md-6">
                     <div class="card border-danger">
                         <div class="card-header text-bg-danger">
-                            <h2 class="h5 mb-0">Anfitriones <span class="fw-light">Deshabilitados</span></h2>
+                            <h2 class="h5 mb-0">Anfitriones <span class="fw-light">Deshabilitados/Rechazados</span></h2>
                         </div>
                         @if ($hostsDisabled->isEmpty())
                         <div class="card-body">

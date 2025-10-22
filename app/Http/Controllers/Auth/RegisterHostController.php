@@ -53,7 +53,7 @@ class RegisterHostController extends Controller
                 'linkedin' => 'nullable|string|max:255|min:10',
                 'facebook' => 'nullable|string|max:255|min:10',
                 'instagram' => 'nullable|string|max:255|min:10',
-                'avatar' => 'required|image|max:2048',
+                'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'description' => 'required|string|max:500|min:50',
                 'location' => 'nullable|string|max:255|min:3',
             ]);
@@ -75,6 +75,8 @@ class RegisterHostController extends Controller
 
             if ($request->hasFile('avatar')) {
                 $avatarPath = $this->imageService->storeImage($request->file('avatar'), 'hosts');
+            } else {
+                $avatarPath = 'logo.svg';
             }
 
             $user = User::create([
@@ -162,7 +164,7 @@ class RegisterHostController extends Controller
                 'linkedin' => 'nullable|string|max:255|min:3',
                 'facebook' => 'nullable|string|max:255|min:3',
                 'instagram' => 'nullable|string|max:255|min:3',
-                'avatar' => 'nullable|image|max:2048',
+                'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'description' => 'required|string|max:500|min:50',
                 'location' => 'nullable|string|max:255|min:3',
             ]);

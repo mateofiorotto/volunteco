@@ -50,7 +50,7 @@ class RegisterVolunteerController extends Controller
                 'linkedin' => 'nullable|string|max:255',
                 'facebook' => 'nullable|string|max:255',
                 'instagram' => 'nullable|string|max:255',
-                'avatar' => 'required|image|max:2048',
+                'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'biography' => 'required|string|max:500|min:50',
                 'educational_level' => 'required|string',
                 'profession' => 'nullable|string|max:255|min:3',
@@ -70,6 +70,8 @@ class RegisterVolunteerController extends Controller
 
              if ($request->hasFile('avatar')) {
                 $avatarPath = $this->imageService->storeImage($request->file('avatar'), 'volunteers');
+            } else {
+                $avatarPath = 'logo.svg';
             }
 
             $user = User::create([

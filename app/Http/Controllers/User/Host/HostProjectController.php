@@ -63,7 +63,7 @@ class HostProjectController extends Controller
             'start_date' => 'required|date|after_or_equal:today',
             'end_date' => 'required|date|after:start_date',
             'work_hours_per_day' => 'required|in:2 Horas,4 Horas,6 Horas,8 Horas',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'conditions' => 'nullable|array',
             'conditions.*' => 'exists:conditions,id'
         ]);
@@ -75,6 +75,8 @@ class HostProjectController extends Controller
         //manejo de la imagen
         if ($request->hasFile('image')) {
             $imagePath = $this->imageService->storeImage($request->file('image'), 'projects');
+        } else {
+            $imagePath = 'logo-horizontal.svg';
         }
 
         $validated['image'] = $imagePath;

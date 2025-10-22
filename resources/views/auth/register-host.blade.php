@@ -46,6 +46,7 @@
                                     <input type="text"
                                         id="person_full_name"
                                         name="person_full_name"
+                                        required
                                         placeholder="Nombre de persona física para contacto"
                                         autocomplete="name"
                                         class="form-control"/>
@@ -58,6 +59,7 @@
                                         name="phone"
                                         placeholder="5491112345678"
                                         autocomplete="tel"
+                                        required
                                         class="form-control"/>
                                 </div>
 
@@ -156,7 +158,7 @@
                             <div class="card-body">
                                 <h2 class="card-title h3">Info Extra</h2>
                                 <div class="mb-3">
-                                    <label for="avatar" class="form-label">Logo *</label>
+                                    <label for="avatar" class="form-label">Logo</label>
                                     <input type="file"
                                         id="avatar"
                                         name="avatar"
@@ -170,6 +172,7 @@
                                             name="description"
                                             placeholder="Descripción acerca de la organización/anfitrión"
                                             rows="6"
+                                            required
                                             class="form-control"></textarea>
                                 </div>
 

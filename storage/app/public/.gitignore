@@ -1,2 +1,4 @@
-*
+volunteers/
+hosts/
+projects/
 !.gitignore

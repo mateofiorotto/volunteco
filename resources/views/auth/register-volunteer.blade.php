@@ -24,7 +24,7 @@
                         <p>Completa con tus datos.</p>
 
                         <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre</label>
+                        <label for="nombre" class="form-label">Nombre Completo *</label>
                         <input type="text"
                             id="full_name"
                             name="full_name"
@@ -35,7 +35,7 @@
                         </div>
 
                         <div class="mb-3">
-                        <label for="dni" class="form-label">DNI</label>
+                        <label for="dni" class="form-label">DNI *</label>
                         <input type="text"
                             id="dni"
                             name="dni"
@@ -45,7 +45,7 @@
                             class="form-control"/>
                         </div>
                         <div class="mb-3">
-                        <label for="birthdate" class="form-label">Fecha de nacimiento</label>
+                        <label for="birthdate" class="form-label">Fecha de nacimiento *</label>
                         <input type="date"
                             id="birthdate"
                             name="birthdate"
@@ -62,7 +62,7 @@
                         <h2 class="card-title h3">Datos de Acceso</h2>
                         <p>Completa con los datos que te serviran para acceder al sistema.</p>
                         <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="email" class="form-label">Email *</label>
                         <input type="email"
                             id="email"
                             name="email"
@@ -73,7 +73,7 @@
                         </div>
 
                         <div class="mb-3">
-                        <label for="password" class="form-label">Contraseña</label>
+                        <label for="password" class="form-label">Contraseña *</label>
                         <input type="password"
                             id="password"
                             name="password"
@@ -84,7 +84,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="password_confirmation" class="form-label">Confirmar contraseña</label>
+                            <label for="password_confirmation" class="form-label">Confirmar contraseña *</label>
                             <input type="password"
                                 id="password_confirmation"
                                 name="password_confirmation"
@@ -104,7 +104,7 @@
                         <p>Completa con tus datos.</p>
                         <div class="mb-3">
 
-                        <label for="educational_level" class="form-label">Nivel Educativo</label>
+                        <label for="educational_level" class="form-label">Nivel Educativo *</label>
                         <select name="educational_level"
                                 id="educational_level"
                                 required
@@ -137,20 +137,22 @@
                         <h2 class="card-title h3">Datos de Contacto</h2>
                         <p>Completa con tus datos.</p>
                         <div class="mb-3">
-                            <label for="phone" class="form-label">Teléfono</label>
+                            <label for="phone" class="form-label">Teléfono *</label>
                             <input type="tel"
                                 id="phone"
                                 name="phone"
                                 placeholder="5491112345678"
                                 autocomplete="tel"
+                                required
                                 class="form-control"/>
                         </div>
 
                         <div class="mb-3">
-                            <label for="location" class="form-label">Residencia</label>
+                            <label for="location" class="form-label">Residencia *</label>
                             <input type="text"
                                 id="location"
                                 name="location"
+                                required
                                 placeholder="Ciudad o provincia"
                                 autocomplete="address-level2"
                                 class="form-control"/>
@@ -208,9 +210,10 @@
                         </div>
                         <div class="mb-3">
 
-                        <label for="description" class="form-label">Biografía</label>
+                        <label for="description" class="form-label">Biografía *</label>
                         <textarea id="biography"
                                 name="biography"
+                                required
                                 placeholder="Contanos sobre vos..."
                                 rows="4" class="form-control"></textarea>
                         </div>
