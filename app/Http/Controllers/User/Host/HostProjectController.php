@@ -217,104 +217,42 @@ class HostProjectController extends Controller
     //         ->with('success', 'Proyecto eliminado exitosamente');
     // }
 
-    // /**
-    //  * Mostrar voluntarios inscritos en los proyectos del anfitrión
-    //  */
-    // public function registeredHosts()
-    // {
-    //     $host = Auth::user()->host;
+    public function acceptVolunteer($projectId, $volunteerId)
+    {
+        $host = Auth::user()->host;
 
-    //     if (!$host) {
-    //         return redirect()->back()->with('error', 'No tienes un perfil de anfitrión');
-    //     }
+        $project = Project::where('id', $projectId)
+            ->where('host_id', $host->id)
+            ->first();
 
-    //     $projects = $host->projects()
-    //         ->with(['volunteers' => function ($query) {
-    //             $query->with('user')
-    //                 ->wherePivotIn('status', ['pending', 'accepted', 'rejected'])
-    //                 ->orderByPivot('applied_at', 'desc');
-    //         }])
-    //         ->get();
+        if (!$project) {
+            abort(403, 'Acceso denegado o proyecto inexistente.');
+        }
 
-    //     return view('host.projects.registered-volunteers', compact('projects'));
-    // }
+        $project->volunteers()->updateExistingPivot($volunteerId, [
+            'status' => 'aceptado',
+            'accepted_at' => now(),
+        ]);
 
-    // /**
-    //  * Aceptar un voluntario inscrito
-    //  */
-    // public function acceptHost(Request $request, Volunteer $host)
-    // {
-    //     $hostAuth = Auth::user()->host;
+        return redirect()->back()->with('success', 'Voluntario aceptado exitosamente.');
+    }
 
-    //     if (!$hostAuth) {
-    //         return back()->with('error', 'No tienes un perfil de anfitrión');
-    //     }
+    public function rejectVolunteer($projectId, $volunteerId)
+    {
+        $host = Auth::user()->host;
 
-    //     $request->validate([
-    //         'project_id' => 'required|exists:projects,id'
-    //     ]);
+        $project = Project::where('id', $projectId)
+            ->where('host_id', $host->id)
+            ->first();
 
-    //     $projectId = $request->input('project_id');
-    //     $project = Project::findOrFail($projectId);
+        if (!$project) {
+            abort(403, 'Acceso denegado o proyecto inexistente.');
+        }
 
-    //     // Verificar que el proyecto pertenece al anfitrión autenticado
-    //     if ($project->host_id !== $hostAuth->id) {
-    //         abort(403, 'No tienes permiso para gestionar este proyecto');
-    //     }
+        $project->volunteers()->updateExistingPivot($volunteerId, [
+            'status' => 'rechazado',
+        ]);
 
-    //     // Verificar que el voluntario está inscrito en el proyecto
-    //     if (!$project->volunteers()->where('volunteer_id', $host->id)->exists()) {
-    //         return back()->with('error', 'El voluntario no está inscrito en este proyecto');
-    //     }
-
-    //     // Actualizar el estado del voluntario
-    //     $project->volunteers()->updateExistingPivot($host->id, [
-    //         'status' => 'accepted',
-    //         'accepted_at' => now()
-    //     ]);
-
-    //     // Opcional: Enviar notificación al voluntario
-    //     // $host->user->notify(new VolunteerAccepted($project));
-
-    //     return back()->with('success', 'Voluntario aceptado exitosamente');
-    // }
-
-    // /**
-    //  * Rechazar un voluntario inscrito
-    //  */
-    // public function rejectHost(Request $request, Volunteer $host)
-    // {
-    //     $hostAuth = Auth::user()->host;
-
-    //     if (!$hostAuth) {
-    //         return back()->with('error', 'No tienes un perfil de anfitrión');
-    //     }
-
-    //     $request->validate([
-    //         'project_id' => 'required|exists:projects,id'
-    //     ]);
-
-    //     $projectId = $request->input('project_id');
-    //     $project = Project::findOrFail($projectId);
-
-    //     // Verificar que el proyecto pertenece al anfitrión autenticado
-    //     if ($project->host_id !== $hostAuth->id) {
-    //         abort(403, 'No tienes permiso para gestionar este proyecto');
-    //     }
-
-    //     // Verificar que el voluntario está inscrito en el proyecto
-    //     if (!$project->volunteers()->where('volunteer_id', $host->id)->exists()) {
-    //         return back()->with('error', 'El voluntario no está inscrito en este proyecto');
-    //     }
-
-    //     // Actualizar el estado del voluntario
-    //     $project->volunteers()->updateExistingPivot($host->id, [
-    //         'status' => 'rejected'
-    //     ]);
-
-    //     // Opcional: Enviar notificación al voluntario
-    //     // $host->user->notify(new VolunteerRejected($project));
-
-    //     return back()->with('success', 'Voluntario rechazado');
-    // }
+        return redirect()->back()->with('success', 'Voluntario rechazado exitosamente.');
+    }
 }
