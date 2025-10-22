@@ -2,7 +2,12 @@
     @foreach ($hosts as $host)
         <li class="list-group-item">
             <div class="row align-items-center">
-                <div class="col-12 col-md-5">{{ $host->host->name ?? 'Sin nombre' }}</div>
+                <div class="col-12 col-md-5">
+                    {{ $host->host->name ?? 'Sin nombre' }}
+                    @if (!$host->host->disabled_at && $host->status === 'pendiente' )
+                        <span class="badge text-bg-primary">nuevo</span>
+                    @endif
+                </div>
                 <div class="col-12 col-md-5">
                     {!! $host->email ? '<a href="mailto:' . $host->email . '" target="_blank">' . $host->email . '</a>' : 'Sin email' !!}
                 </div>

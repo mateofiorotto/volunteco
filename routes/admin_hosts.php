@@ -28,6 +28,9 @@ Route::middleware(['checkEnabled', 'authCheck', 'isAdmin'])->prefix('admin')->gr
         Route::post('/anfitrion/{id}/enviar-mail', [AdminHostsController::class, 'sendMailDisabledProfile'])
             ->name('send-mail-disabled-profile');
 
+        Route::post('/anfitrion/{id}/enviar-mail-perfil', [AdminHostsController::class, 'sendMailUncompleteProfile'])
+            ->name('send-mail-uncomplete-profile');
+
         Route::post('/verificar-perfil-anfitrion/{id}/recordatorio', [AdminHostsController::class, 'sendHostRejectedReminder'])
             ->name('send-host-rejected-reminder');
 });
