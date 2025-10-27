@@ -62,19 +62,13 @@
                                 <a href="https://www.instagram.com/volunteco" target="_blank" class="text-white fs-5"><i class="bi bi-instagram"></i></a>
                             </li>
                             <li>
-                                <a href="https://www.facebook.com/volunteco" target="_blank" class="text-white fs-5">
-                                    <i class="bi bi-facebook"></i>
-                                </a>
+                                <a href="https://www.youtube.com/@volunteco" target="_blank" class="text-white fs-5"><i class="bi bi-youtube"></i></a>
                             </li>
                             <li>
-                                <a href="https://twitter.com/volunteco" target="_blank" class="text-white fs-5">
-                                    <i class="bi bi-twitter-x"></i>
-                                </a>
+                                <a href="https://www.linkedin.com/in/volunteco" target="_blank" class="text-white fs-5"><i class="bi bi-linkedin"></i></a>
                             </li>
                             <li>
-                                <a href="https://github.com/mateofiorotto/volunteco-social" target="_blank" class="text-white fs-5">
-                                    <i class="bi bi-github"></i>
-                                </a>
+                                <a href="https://github.com/mateofiorotto/volunteco-social" target="_blank" class="text-white fs-5"><i class="bi bi-github"></i></a>
                             </li>
                         </ul>
                     </div>

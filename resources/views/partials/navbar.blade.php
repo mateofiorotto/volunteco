@@ -26,11 +26,14 @@
     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-4">
         <!-- Usuario autenticado -->
         <li class="nav-item">
-            <x-nav-link :route="'home'">Home</x-nav-link>
+            <x-nav-link :route="'home'">Dashboard</x-nav-link>
         </li>
         @if (Auth::user()->hasRole('admin'))
             <li class="nav-item">
                 <x-nav-link :route="'hosts-list'">Anfitriones</x-nav-link>
+            </li>
+            <li class="nav-item">
+                <x-nav-link :route="null">Voluntarios</x-nav-link>
             </li>
         @endif
         @if (Auth::user()->hasRole('host'))
@@ -40,7 +43,10 @@
         @endif
         @if (Auth::user()->hasRole('volunteer'))
             <li class="nav-item">
-                <x-nav-link :route="'volunteer.applied-projects'">Postulaciones</x-nav-link>
+                <x-nav-link :route="'projects'">Proyectos</x-nav-link>
+            </li>
+            <li class="nav-item">
+                <x-nav-link :route="'volunteer.applied-projects'">Mis Postulaciones</x-nav-link>
             </li>
         @endif
     </ul>

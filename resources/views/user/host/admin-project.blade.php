@@ -4,7 +4,7 @@
     <section class="container text-break pt-5 pb-5">
         <div class="row">
 
-            <h2>Administrar proyecto</h2>
+            <h2>Proyecto</h2>
 
             <!-- Alerta de exito temporal -->
             @if (session('success'))
@@ -176,28 +176,36 @@
                     <div class="card">
                         <div class="card-body">
                             <h3 class="card-title">Acciones</h3>
-                            <form method="GET"
-                                  action="{{ route('my-projects.edit', $project->id) }}">
-                                @csrf
-                                <button class="btn btn-primary w-100 mb-3"
-                                        type="submit">
-                                    Editar
-                                </button>
-                            </form>
-                            <form method="GET"
-                                  action="{{ route('my-projects.delete', $project->id) }}">
-                                @csrf
-                                <button class="btn btn-outline-primary w-100 mb-3"
-                                        type="submit">
-                                    Eliminar
-                                </button>
-                            </form>
-                            <a href="#volunteers-list">
-                                <button class="btn btn-secondary text-light w-100 mb-3"
-                                        type="submit">
-                                    Ver Voluntarios que aplicaron
-                                </button>
-                            </a>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <form method="GET"
+                                        action="{{ route('my-projects.edit', $project->id) }}">
+                                        @csrf
+                                        <button class="btn btn-primary w-100 mb-3"
+                                                type="submit">
+                                            Editar
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="col-md-6">
+                                    <form method="GET"
+                                        action="{{ route('my-projects.delete', $project->id) }}">
+                                        @csrf
+                                        <button class="btn btn-outline-primary w-100 mb-3"
+                                                type="submit">
+                                            Eliminar
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="col-md-12">
+                                    <a href="#volunteers-list">
+                                        <button class="btn btn-secondary text-light w-100 mb-3"
+                                                type="submit">
+                                            Ver Voluntarios que aplicaron
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

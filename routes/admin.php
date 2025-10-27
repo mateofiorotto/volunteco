@@ -33,5 +33,7 @@ Route::middleware(['checkEnabled', 'authCheck', 'isAdmin'])->prefix('admin')->gr
 
         Route::post('/verificar-perfil-anfitrion/{id}/recordatorio', [AdminHostsController::class, 'sendHostRejectedReminder'])
             ->name('send-host-rejected-reminder');
+
+        // TODO agregar rutas para ver voluntarios
 });
 ?>

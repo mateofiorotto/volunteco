@@ -37,6 +37,8 @@
                     <svg xmlns="http://www.w3.org/2000/svg"
                          fill="none"
                          viewBox="0 0 24 24"
+                         width="24"
+                         height="24"
                          stroke-width="1.5"
                          stroke="currentColor"
                          class="icon-svg flex-shrink-0"
@@ -52,6 +54,8 @@
                     <svg xmlns="http://www.w3.org/2000/svg"
                          fill="none"
                          viewBox="0 0 24 24"
+                         width="24"
+                         height="24"
                          stroke-width="1.5"
                          stroke="currentColor"
                          class="icon-svg flex-shrink-0"
@@ -70,6 +74,8 @@
                     <svg xmlns="http://www.w3.org/2000/svg"
                          fill="none"
                          viewBox="0 0 24 24"
+                         width="24"
+                         height="24"
                          stroke-width="1.5"
                          stroke="currentColor"
                          class="icon-svg flex-shrink-0"
@@ -89,6 +95,8 @@
                     <svg xmlns="http://www.w3.org/2000/svg"
                          fill="none"
                          viewBox="0 0 24 24"
+                         width="24"
+                         height="24"
                          stroke-width="1.5"
                          stroke="currentColor"
                          class="icon-svg flex-shrink-0"
@@ -104,6 +112,8 @@
                     <svg xmlns="http://www.w3.org/2000/svg"
                          fill="none"
                          viewBox="0 0 24 24"
+                         width="24"
+                         height="24"
                          stroke-width="1.5"
                          stroke="currentColor"
                          class="icon-svg flex-shrink-0"
@@ -121,7 +131,7 @@
                 @if (request()->is('anfitriones/mis-proyectos*'))
                 <a href="{{ route('my-projects.show', $project->id) }}"
                    class="btn btn-sm btn-outline-primary flex-grow-1">
-                    Administrar Proyecto
+                    Ver Proyecto
                 </a>
                 @else
                 <a href="{{ route('project', $project->id) }}"

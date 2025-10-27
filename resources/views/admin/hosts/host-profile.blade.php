@@ -235,11 +235,32 @@
                 </div>
             </div>
 
-            <div class="d-none">
+            <div>
+                {{-- Agregar el listado de todos los proyectos con un link de ver cada proyecto tal cual el host --}}
                 <div class="card">
-                    Listado de proyectos
-                </div>
+                    <div class="card-header">Proyectos del anfitrión</div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="row align-items-center">
+                                <div class="col-12 col-md-4">Nombre del proyecto
+                                        <span class="badge text-bg-primary">nuevo</span>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    fechas
+                                </div>
+                                <div class="col-12 col-md-2">
+                                    voluntarios activos
+                                </div>
+                                <div class="col-12 col-md-2 text-center">
+                                    <a href="{{ route('host-profile', $host->id) }}" class="btn btn-sm btn-azul" title="ver">
+                                        Ver
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
 
+                    </ul>
+                </div>
             </div>
         </div>
     </section>

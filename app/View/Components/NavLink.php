@@ -13,10 +13,10 @@ class NavLink extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct($route)
+    public function __construct($route = null)
     {
         //
-        $this->route = $route;
+        $this->route = $route ?: null;
     }
 
     /**
