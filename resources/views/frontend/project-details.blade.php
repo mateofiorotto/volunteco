@@ -27,75 +27,77 @@
             <div class="row mb-5">
 
                 <!-- Detalles del proyecto -->
-                <div class="col-md-8 col-12 card mb-4">
-                    @if ($project->image)
-                        <img src="{{ asset('storage/' . $project->image) }}" class="card-img-top object-fit-cover" alt="{{ $project->title }}" width="400" height="400">
-                    @endif
-
-                    <div class="card-body">
-                        <h2 class="card-title fw-bold">{{ $project->title }}</h2>
-                        <p class="card-text">{{ $project->description }}</p>
-                        <div class="row mt-4">
-                            <div class="col-md-6 mb-3">
-                                <div class="d-flex gap-2 align-items-start">
-                                    <i class="bi bi-geo-alt fs-5 text-primary"></i>
-                                    <div>
-                                        <h4 class="h6 fw-semibold mb-1">Ubicación</h4>
-                                        <p class="mb-0">{{ $project->location }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="d-flex gap-2 align-items-start">
-                                    <i class="bi bi-clock fs-5 text-primary"></i>
-                                    <div>
-                                        <h4 class="h6 fw-semibold mb-1">Horas por día</h4>
-                                        <p class="mb-0">{{ $project->work_hours_per_day }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-md-6 mb-3">
-                                <div class="d-flex gap-2 align-items-start">
-                                    <i class="bi bi-calendar4 fs-5 text-primary"></i>
-                                    <div>
-                                        <h4 class="h6 fw-semibold mb-1">Fecha de inicio</h4>
-                                        <p class="mb-0">{{ \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="d-flex gap-2 align-items-start">
-                                    <i class="bi bi-calendar4 fs-5 text-primary"></i>
-                                    <div>
-                                        <h4 class="h6 fw-semibold mb-1">Fecha de finalización</h4>
-                                        <p class="mb-0">{{ \Carbon\Carbon::parse($project->end_date)->format('d/m/Y') }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        @if ($project->conditions->isNotEmpty())
-                            <div class="mt-4">
-                                <div class="d-flex gap-2 align-items-start mb-3">
-                                    <i class="bi bi-clipboard2-check fs-5 text-primary"></i>
-                                    <h4 class="h6 fw-semibold mb-0">Condiciones y Requisitos</h4>
-                                </div>
-                                <ul class="list-unstyled ms-4">
-                                    @foreach ($project->conditions as $condition)
-                                        <li class="mb-2 d-flex gap-2 align-items-start">
-                                            <i class="bi bi-check2 fs-5 text-primary"></i>
-                                            <span>{{ $condition->name }}</span>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                <div class="col-md-8 col-12 mb-4">
+                    <div class="card">
+                        @if ($project->image)
+                            <img src="{{ asset('storage/' . $project->image) }}" class="card-img-top object-fit-contain" alt="{{ $project->title }}" width="400" height="400">
                         @endif
 
+                        <div class="card-body">
+                            <h2 class="card-title fw-bold">{{ $project->title }}</h2>
+                            <p class="card-text">{{ $project->description }}</p>
+                            <div class="row mt-4">
+                                <div class="col-md-6 mb-3">
+                                    <div class="d-flex gap-2 align-items-start">
+                                        <i class="bi bi-geo-alt fs-5 text-primary"></i>
+                                        <div>
+                                            <h4 class="h6 fw-semibold mb-1">Ubicación</h4>
+                                            <p class="mb-0">{{ $project->location }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="d-flex gap-2 align-items-start">
+                                        <i class="bi bi-clock fs-5 text-primary"></i>
+                                        <div>
+                                            <h4 class="h6 fw-semibold mb-1">Horas por día</h4>
+                                            <p class="mb-0">{{ $project->work_hours_per_day }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-6 mb-3">
+                                    <div class="d-flex gap-2 align-items-start">
+                                        <i class="bi bi-calendar4 fs-5 text-primary"></i>
+                                        <div>
+                                            <h4 class="h6 fw-semibold mb-1">Fecha de inicio</h4>
+                                            <p class="mb-0">{{ \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="d-flex gap-2 align-items-start">
+                                        <i class="bi bi-calendar4 fs-5 text-primary"></i>
+                                        <div>
+                                            <h4 class="h6 fw-semibold mb-1">Fecha de finalización</h4>
+                                            <p class="mb-0">{{ \Carbon\Carbon::parse($project->end_date)->format('d/m/Y') }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @if ($project->conditions->isNotEmpty())
+                                <div class="mt-4">
+                                    <div class="d-flex gap-2 align-items-start mb-3">
+                                        <i class="bi bi-clipboard2-check fs-5 text-primary"></i>
+                                        <h4 class="h6 fw-semibold mb-0">Condiciones y Requisitos</h4>
+                                    </div>
+                                    <ul class="list-unstyled ms-4">
+                                        @foreach ($project->conditions as $condition)
+                                            <li class="mb-2 d-flex gap-2 align-items-start">
+                                                <i class="bi bi-check2 fs-5 text-primary"></i>
+                                                <span>{{ $condition->name }}</span>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
+                        </div>
                     </div>
                 </div>
 
