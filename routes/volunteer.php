@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\User\Volunteer\DashboardController;
+use App\Http\Controllers\User\Volunteer\ProfileController;
 use App\Http\Controllers\User\Volunteer\VolunteerProjectController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,16 @@ Route::middleware(['authCheck', 'isVolunteer', 'checkEnabled'])->prefix('volunta
 
     Route::get('/mis-proyectos-aplicados', [VolunteerProjectController::class, 'volunteerAppliedProjects'])->name('projects.applied');
 
-    Route::post('aplicar-proyecto/{project}', [VolunteerProjectController::class, 'applyProject'])->name('apply-project');
-    Route::delete('desistir-proyecto/{project}', [VolunteerProjectController::class, 'withdrawFromProject'])->name('withdraw-project');
+    Route::post('/aplicar-proyecto/{project}', [VolunteerProjectController::class, 'applyProject'])->name('apply-project');
+    Route::delete('/desistir-proyecto/{project}', [VolunteerProjectController::class, 'withdrawFromProject'])->name('withdraw-project');
+
+    //perfil
+    
+    //editar perfil propio
+    Route::get('/mi-perfil/editar', [ProfileController::class, 'editMyProfile'])->name('edit-my-profile');
+    Route::put('/mi-perfil/editar', [ProfileController::class, 'updateMyProfile'])->name('update-my-profile');
+});
+
+Route::middleware(['checkEnabled'])->prefix('voluntarios')->name('voluntarios.')->group(function () {
+    Route::get('/perfil/{id}', [ProfileController::class, 'getProfile'])->name('volunteer-profile');
 });

@@ -185,3 +185,18 @@ a {
 .xs-small {
     font-size: 0.75em;
 }
+
+.avatar-lg {
+    width: 200px;
+    height: 200px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+}
