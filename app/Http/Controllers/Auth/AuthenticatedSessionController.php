@@ -44,6 +44,19 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if ($user->role && $user->role->type === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
+
+        if ($user->role && $user->role->type === 'host') {
+            return redirect()->route('anfitriones.dashboard');
+        }
+
+        if ($user->role && $user->role->type === 'volunteer') {
+            return redirect()->route('voluntarios.dashboard');
+        }
+
+        // Por defecto (si no tiene rol)
         return redirect()->route('home');
     }
 

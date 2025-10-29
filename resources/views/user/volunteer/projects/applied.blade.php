@@ -27,9 +27,7 @@
         @if ($acceptedProjects->isNotEmpty())
             <h2>Proyectos en los que participo</h2>
             <div class="row mb-4">
-                @foreach ($acceptedProjects as $project)
-                    @include('components.project-card', ['project' => $project])
-                @endforeach
+                <x-project-card :projects="$acceptedProjects" />
             </div>
         @endif
 
@@ -40,9 +38,7 @@
         @if ($pendingProjects->isNotEmpty())
             <h2>Proyectos a los que apliqué</h2>
             <div class="row mb-4">
-                @foreach ($pendingProjects as $project)
-                    @include('components.project-card', ['project' => $project])
-                @endforeach
+                <x-project-card :projects="$pendingProjects" />
             </div>
         @endif
 
@@ -53,9 +49,7 @@
         @if ($rejectedProjects->isNotEmpty())
             <h2>Proyectos en los que me rechazaron</h2>
             <div class="row mb-4">
-                @foreach ($rejectedProjects as $project)
-                    @include('components.project-card', ['project' => $project])
-                @endforeach
+                <x-project-card :projects="$rejectedProjects" />
             </div>
         @endif
 

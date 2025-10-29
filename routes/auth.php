@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\RegisterHostController;
-use App\Http\Controllers\Auth\RegisterVolunteerController;
+use App\Http\Controllers\Auth\RegisteredHostController;
+use App\Http\Controllers\Auth\RegisteredVolunteerController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
@@ -11,11 +11,11 @@ use App\Http\Controllers\Auth\EditRejectedProfileController;
 
 Route::middleware('checkEnabled')->group(function () {
     //Registros
-    Route::get('registrar-anfitrion', [RegisterHostController::class, 'create'])->name('register-host.create');
-    Route::post('registrar-anfitrion', [RegisterHostController::class, 'store'])->name('register-host.store');
+    Route::get('registrar-anfitrion', [RegisteredHostController::class, 'create'])->name('register-host.create');
+    Route::post('registrar-anfitrion', [RegisteredHostController::class, 'store'])->name('register-host.store');
 
-    Route::get('registrar-voluntario', [RegisterVolunteerController::class, 'create'])->name('register-volunteer.create');
-    Route::post('registrar-voluntario', [RegisterVolunteerController::class, 'store'])->name('register-volunteer.store');
+    Route::get('registrar-voluntario', [RegisteredVolunteerController::class, 'create'])->name('register-volunteer.create');
+    Route::post('registrar-voluntario', [RegisteredVolunteerController::class, 'store'])->name('register-volunteer.store');
 
     //Login
     Route::get('iniciar-sesion', [AuthenticatedSessionController::class, 'create'])->name('login');
@@ -33,10 +33,10 @@ Route::middleware('checkEnabled')->group(function () {
     Route::post('cambiar-clave', [NewPasswordController::class, 'store'])
         ->name('password.store');
 
-    //editar datos de un perfil rechazado
-    Route::get('perfil/editar-datos/{token}/{email}', [RegisterHostController::class, 'edit'])
+    //editar datos de un perfil host rechazado
+    Route::get('perfil/editar-datos/{token}/{email}', [RegisteredHostController::class, 'edit'])
         ->name('edit-rejected-profile');
-    Route::put('perfil/editar-datos/{token}/{email}', [RegisterHostController::class, 'update'])
+    Route::put('perfil/editar-datos/{token}/{email}', [RegisteredHostController::class, 'update'])
         ->name('edit-rejected-profile.update');
 
 

@@ -15,7 +15,7 @@ use App\Services\ImageService;
 
 use App\Models\Volunteer;
 
-class RegisterVolunteerController extends Controller
+class RegisteredVolunteerController extends Controller
 {
     protected $imageService;
 

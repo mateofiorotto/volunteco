@@ -35,7 +35,7 @@ class HostProjectController extends Controller
             ->latest()
             ->paginate(10);
 
-        return view('user.host.projects-list', compact('projects'));
+        return view('user.host.projects.index', compact('projects'));
     }
 
     /**
@@ -60,7 +60,7 @@ class HostProjectController extends Controller
             ->orderByPivot('applied_at', 'desc')
             ->get();
 
-        return view('user.host.admin-project', compact('project', 'registeredVolunteers'));
+        return view('user.host.projects.show', compact('project', 'registeredVolunteers'));
     }
 
     /**
@@ -68,10 +68,11 @@ class HostProjectController extends Controller
      */
     public function create()
     {
+
         $projectTypes = ProjectType::all();
         $conditions = Condition::all();
 
-        return view('user.host.create-project', compact('projectTypes', 'conditions'));
+        return view('user.host.projects.create', compact('projectTypes', 'conditions'));
     }
 
     /**
@@ -115,7 +116,7 @@ class HostProjectController extends Controller
         }
 
         return redirect()
-            ->route('my-projects.index')
+            ->route('anfitriones.my-projects.index')
             ->with('success', 'Proyecto creado exitosamente');
     }
 
@@ -137,7 +138,7 @@ class HostProjectController extends Controller
         $projectTypes = ProjectType::all();
         $conditions = Condition::all();
 
-        return view('user.host.edit-project', compact('project', 'projectTypes', 'conditions'));
+        return view('user.host.projects.edit', compact('project', 'projectTypes', 'conditions'));
     }
 
     /**
@@ -199,7 +200,7 @@ class HostProjectController extends Controller
         }
 
         return redirect()
-            ->route('my-projects.index')
+            ->route('anfitriones.my-projects.index')
             ->with('success', 'Proyecto actualizado exitosamente');
     }
 
@@ -218,7 +219,7 @@ class HostProjectController extends Controller
             abort(403, 'Acceso denegado o proyecto inexistente.');
         }
 
-        return view('user.host.delete-project', compact('project'));
+        return view('user.host.projects.delete', compact('project'));
     }
 
     /**
@@ -244,7 +245,7 @@ class HostProjectController extends Controller
         $project->delete();
 
         return redirect()
-            ->route('my-projects.index')
+            ->route('anfitriones.my-projects.index')
             ->with('success', 'Proyecto eliminado exitosamente');
     }
 

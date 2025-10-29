@@ -22,7 +22,7 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('my-projects.update', $project) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('anfitriones.my-projects.update', $project) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row">
@@ -93,17 +93,17 @@
 
                             <div class="mb-3">
                                 <label for="image" class="form-label">Imagen del proyecto</label>
-                                
+
                                 @if($project->image)
                                     <div class="mb-2">
-                                        <img src="{{ asset('storage/' . $project->image) }}" 
-                                             alt="Imagen actual" 
-                                             class="img-thumbnail" 
+                                        <img src="{{ asset('storage/' . $project->image) }}"
+                                             alt="Imagen actual"
+                                             class="img-thumbnail"
                                              style="max-width: 200px">
                                         <p class="text-muted small mt-1">Imagen actual</p>
                                     </div>
                                 @endif
-                                
+
                                 <input type="file"
                                        id="image"
                                        name="image"
@@ -219,7 +219,7 @@
 
             <!-- Botones -->
             <div class="d-flex gap-3 justify-content-center mt-4 mb-5">
-                <a href="{{ route('my-projects.index') }}" class="btn btn-outline-primary btn-lg px-5">
+                <a href="{{ route('anfitriones.my-projects.index') }}" class="btn btn-outline-primary btn-lg px-5">
                     Cancelar
                 </a>
                 <button type="submit" class="btn btn-primary btn-lg px-5 text-capitalize">

@@ -1,39 +1,25 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\AdminHostsController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\HostsController;
+use App\Http\Controllers\Admin\VolunteersController;
 
-Route::middleware(['checkEnabled', 'authCheck', 'isAdmin'])->prefix('admin')->group(function () {
-        Route::get('/anfitriones', [AdminHostsController::class, 'statusHostsList'])
-            ->name('hosts-list');
+Route::middleware(['checkEnabled', 'authCheck', 'isAdmin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-        Route::get('/anfitrion/{id}', [AdminHostsController::class, 'getHostProfileById'])
-            ->name('host-profile');
+    Route::get('/anfitriones', [HostsController::class, 'index'])->name('hosts.index');
+    Route::get('/anfitriones/{id}', [HostsController::class, 'getHostProfileById'])->name('host.profile');
+    Route::put('/anfitriones/{id}/aceptar', [HostsController::class, 'enableHostProfile'])->name('enable-host-profile');
+    Route::put('/anfitriones/{id}/reactivar', [HostsController::class, 'reenableHostProfile'])->name('reenable-host-profile');
+    Route::put('/anfitriones/{id}/desactivar', [HostsController::class, 'disableHostProfile'])->name('disable-host-profile');
+    Route::delete('/anfitriones/{id}/eliminar', [HostsController::class, 'deleteHostProfile'])->name('delete-host-profile');
+    Route::put('/anfitriones/{id}/pendiente', [HostsController::class, 'setHostProfilePending'])->name('pending-host-profile');
+    Route::post('/anfitriones/{id}/enviar-mail', [HostsController::class, 'sendMailDisabledProfile'])->name('send-mail-disabled-profile');
+    Route::post('/anfitriones/{id}/enviar-mail-perfil', [HostsController::class, 'sendMailUncompleteProfile'])->name('send-mail-uncomplete-profile');
+    Route::post('/verificar-perfil-anfitrion/{id}/recordatorio', [HostsController::class, 'sendHostRejectedReminder'])->name('send-host-rejected-reminder');
 
-        Route::put('/anfitrion/{id}/aceptar', [AdminHostsController::class, 'enableHostProfile'])
-            ->name('enable-host-profile');
-
-             Route::put('/anfitrion/{id}/reactivar', [AdminHostsController::class, 'reenableHostProfile'])
-            ->name('reenable-host-profile');
-
-        Route::put('/anfitrion/{id}/desactivar', [AdminHostsController::class, 'disableHostProfile'])
-            ->name('disable-host-profile');
-
-        Route::delete('/anfitrion/{id}/eliminar', [AdminHostsController::class, 'deleteHostProfile'])
-            ->name('delete-host-profile');
-
-        Route::put('/anfitrion/{id}/pendiente', [AdminHostsController::class, 'setHostProfilePending'])
-            ->name('pending-host-profile');
-
-        Route::post('/anfitrion/{id}/enviar-mail', [AdminHostsController::class, 'sendMailDisabledProfile'])
-            ->name('send-mail-disabled-profile');
-
-        Route::post('/anfitrion/{id}/enviar-mail-perfil', [AdminHostsController::class, 'sendMailUncompleteProfile'])
-            ->name('send-mail-uncomplete-profile');
-
-        Route::post('/verificar-perfil-anfitrion/{id}/recordatorio', [AdminHostsController::class, 'sendHostRejectedReminder'])
-            ->name('send-host-rejected-reminder');
-
-        // TODO agregar rutas para ver voluntarios
+    // TODO agregar rutas para ver voluntarios
+    Route::get('/voluntarios', [VolunteersController::class, 'index'])->name('volunteers.index');
 });
 ?>

@@ -1,10 +1,8 @@
+@foreach ($projects as $project)
 <div class="col-md-6 col-lg-4 mb-4">
     <div class="card h-100">
         @if ($project->image)
-            <img src="{{ asset('storage/' . $project->image) }}"
-                 class="card-img-top"
-                 alt="{{ $project->title }}"
-                 style="height: 200px; object-fit: cover;">
+            <img src="{{ asset('storage/' . $project->image) }}" class="card-img-top object-fit-cover" alt="{{ $project->title }}" width="200" height="200">
         @endif
         <div class="card-body d-flex flex-column">
             <h3 class="card-title h5">{{ $project->title }}</h3>
@@ -15,7 +13,7 @@
                     @if ($project->enabled == true)
                         <span class="badge bg-success">Publicado</span>
                     @else
-                        <span class="badge bg-danger">No Publicado</span>
+                        <span class="badge bg-danger">En borrador</span>
                     @endif
                 @endif
                     <!--Si la ruta es /voluntarios/mis-proyectos-aplicados-->
@@ -129,7 +127,7 @@
             <div class="d-flex gap-2">
                 <!-- Si la ruta es el admin de anfitriones -->
                 @if (request()->is('anfitriones/mis-proyectos*'))
-                <a href="{{ route('my-projects.show', $project->id) }}"
+                <a href="{{ route('anfitriones.my-projects.show', $project->id) }}"
                    class="btn btn-sm btn-outline-primary flex-grow-1">
                     Ver Proyecto
                 </a>
@@ -142,7 +140,7 @@
 
                 @if (isset($project->pivot) && $project->pivot?->status !== 'rechazado')
                     <form method="POST"
-                          action="{{ route('withdraw-project', $project->id) }}"
+                          action="{{ route('voluntarios.withdraw-project', $project->id) }}"
                           onsubmit="return confirm('¿Estás seguro de que deseas desistir de este proyecto?');">
                         @csrf
                         @method('DELETE')
@@ -156,3 +154,4 @@
         </div>
     </div>
 </div>
+@endforeach

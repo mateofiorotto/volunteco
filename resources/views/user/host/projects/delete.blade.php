@@ -9,12 +9,12 @@
         </div>
 
         <div class="d-flex justify-content-center">
-            <form method="POST" action="{{ route('my-projects.destroy', $project->id) }}">
+            <form method="POST" action="{{ route('anfitriones.my-projects.destroy', $project->id) }}">
                 @csrf
                 @method('DELETE')
                 <div class="d-flex gap-3 justify-content-center">
                     <button type="submit" class="btn btn-danger">Eliminar Proyecto</button>
-                    <a href="{{ route('my-projects.index') }}" class="text-light btn btn-secondary">Cancelar</a>
+                    <a href="{{ route('anfitriones.my-projects.index') }}" class="text-light btn btn-secondary">Cancelar</a>
                 </div>
             </form>
         </div>

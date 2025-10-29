@@ -110,7 +110,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <form method="GET"
-                                    action="{{ route('my-projects.edit', $project->id) }}">
+                                    action="{{ route('anfitriones.my-projects.edit', $project->id) }}">
                                     @csrf
                                     <button class="btn btn-primary w-100 mb-3"
                                             type="submit">
@@ -120,7 +120,7 @@
                             </div>
                             <div class="col-md-6">
                                 <form method="GET"
-                                    action="{{ route('my-projects.delete', $project->id) }}">
+                                    action="{{ route('anfitriones.my-projects.delete', $project->id) }}">
                                     @csrf
                                     <button class="btn btn-outline-primary w-100 mb-3"
                                             type="submit">
@@ -173,13 +173,13 @@
 
                             <div class="d-flex gap-2">
                                 <a href="#" class="btn btn-secondary text-light">Ver Perfil</a> <!-- Cuando esten implementados los perfiles por id -->
-                                <form method="POST" action="{{ route('my-projects.reject-volunteer', [$project->id, $volunteer->id]) }}">
+                                <form method="POST" action="{{ route('anfitriones.my-projects.reject-volunteer', [$project->id, $volunteer->id]) }}">
                                     @csrf
                                     @method('PUT')
                                     <button type="submit" class="btn btn-outline-primary">Rechazar</button>
                                 </form>
 
-                                <form method="POST" action="{{ route('my-projects.accept-volunteer', [$project->id, $volunteer->id]) }}">
+                                <form method="POST" action="{{ route('anfitriones.my-projects.accept-volunteer', [$project->id, $volunteer->id]) }}">
                                     @csrf
                                     @method('PUT')
                                     <button type="submit" class="btn btn-primary">Aceptar</button>

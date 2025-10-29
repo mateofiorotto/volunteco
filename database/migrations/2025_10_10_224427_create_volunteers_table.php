@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('full_name');
             $table->string('dni')->unique();
             $table->date('birthdate');
-            $table->enum('educational_level', ['Secundario', 'Universitario', 'Postgrado', 'Terciario']);
+            $table->enum('educational_level', ['secundario', 'universitario', 'postgrado', 'terciario']);
             $table->string('profession')->nullable();
             $table->string('linkedin')->nullable();
             $table->string('facebook')->nullable();

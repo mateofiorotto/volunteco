@@ -28,7 +28,7 @@ class VolunteerProjectController extends Controller
             ->orderByPivot('applied_at', 'desc')
             ->paginate(10);
 
-        return view('user.volunteer.applied-projects', compact('appliedProjects'));
+        return view('user.volunteer.projects.applied', compact('appliedProjects'));
     }
 
     /**

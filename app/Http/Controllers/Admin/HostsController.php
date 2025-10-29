@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\HostRejectedReminder;
 use App\Services\ImageService;
 
-class AdminHostsController extends Controller
+class HostsController extends Controller
 {
     protected $imageService;
 
@@ -25,42 +25,43 @@ class AdminHostsController extends Controller
         $this->imageService = $imageService;
     }
 
-    public function getHostsByStatus(string $roleType, string $status)
+    /**
+     * Retornar la lista de anfitriones por estado
+     */
+    public function index()
     {
-        return User::whereHas('role', function ($query) use ($roleType) {
-                    $query->where('type', $roleType);
+        $hostsDisabled = $this->getHostsByStatus('inactivo');
+        $hostsNotVerified = $this->getHostsByStatus('pendiente');
+        $hostsVerified = $this->getHostsByStatus('activo');
+
+        return view('admin.hosts.index', compact(
+            'hostsDisabled', 'hostsNotVerified', 'hostsVerified'
+        ));
+    }
+
+    /**
+     * Obtener anfitriones por status
+     */
+    public function getHostsByStatus(string $status)
+    {
+        return User::whereHas('role', function ($query) {
+                    $query->where('type', 'host');
                 })
                 ->where('status', $status)
                 ->with(['host'])
                 ->get();
     }
 
-    /**
-     * Retornar la lista de anfitriones por estado
-     */
-    public function statusHostsList()
-    {
-        if (!Role::where('type', 'host')->exists()) {
-            abort(500, 'El tipo de rol "host" no existe.');
-        }
-
-        $hostsDisabled = $this->getHostsByStatus('host', 'inactivo');
-        $hostsNotVerified = $this->getHostsByStatus('host', 'pendiente');
-        $hostsVerified = $this->getHostsByStatus('host', 'activo');
-
-        return view('admin.hosts.host-list-status', compact(
-            'hostsDisabled', 'hostsNotVerified', 'hostsVerified'
-        ));
-    }
 
     /**
      * Obtener un perfil de anfitrion por id
      */
     public function getHostProfileById($id)
     {
-        $host = User::where('id', $id)->with('host')->first();
+        //$host = User::where('id', $id)->with('host')->first();
+        $host = User::where('id', $id)->with('host.projects')->firstOrFail();
 
-        return view('admin/hosts/host-profile', ['host' => $host]);
+        return view('admin.hosts.profile', ['host' => $host]);
     }
 
     /**
@@ -79,7 +80,7 @@ class AdminHostsController extends Controller
 
         Mail::to($host->email)->send(new ProfileAcceptedMail($host->host->person_full_name));
 
-        return redirect()->route('hosts-list');
+        return redirect()->route('admin.hosts.index');
     }
 
     /**
@@ -96,7 +97,7 @@ class AdminHostsController extends Controller
         $host->host->rejection_reason = null;
         $host->host->save();
 
-        return redirect()->route('hosts-list');
+        return redirect()->route('admin.hosts.index');
     }
 
     /*
@@ -113,7 +114,7 @@ class AdminHostsController extends Controller
         //$host->host->rejection_reason = null;
         $host->host->save();
 
-        return redirect()->route('hosts-list');
+        return redirect()->route('admin.hosts.index');
     }
 
     /**
@@ -152,7 +153,7 @@ class AdminHostsController extends Controller
         $host->host->rejection_reason = $fieldsToChange['description'];
         $host->host->save();
 
-        return redirect()->route('hosts-list');
+        return redirect()->route('admin.hosts.index');
     }
 
     public function sendMailUncompleteProfile(Request $request, $id)
@@ -188,7 +189,7 @@ class AdminHostsController extends Controller
         $host->host->rejection_reason = $fieldsToChange['description'];
         $host->host->save();
 
-        return redirect()->route('hosts-list');
+        return redirect()->route('admin.hosts.index');
     }
 
     /**
@@ -214,7 +215,7 @@ class AdminHostsController extends Controller
 
         Mail::to($host->email)->send(new HostDeleteProfileMail($reasons['delete_reasons'], $host->host->person_full_name));
 
-        return redirect()->route('hosts-list');
+        return redirect()->route('admin.hosts.index');
     }
 
     /**
@@ -231,7 +232,7 @@ class AdminHostsController extends Controller
         // $host->host->rejection_reason = null;
         $host->host->save();
 
-        return redirect()->route('hosts-list');
+        return redirect()->route('admin.hosts.index');
     }
 
     /**
@@ -243,6 +244,6 @@ class AdminHostsController extends Controller
 
         Mail::to($host->email)->send(new HostRejectedReminder($host->host->rejection_reason, $host->host->person_full_name, $host->host->disabled_at));
 
-        return redirect()->route('hosts-list');
+        return redirect()->route('admin.hosts.index');
     }
 }

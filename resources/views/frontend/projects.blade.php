@@ -10,9 +10,7 @@
                 @endif
 
                 <div class="row justify-content-center">
-                    @foreach ($projects as $project)
-                        @include('components.project-card', ['project' => $project])
-                    @endforeach
+                    <x-project-card :projects="$projects" />
                 </div>
             </div>
         </div>

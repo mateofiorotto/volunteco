@@ -5,7 +5,7 @@
         <div class="container py-5">
             <div class="d-flex justify-content-between align-items-center mb-5">
                 <h1 class="title-h1 h3 mb-0">Perfil <span>Anfitrión</span></h1>
-                <a href="{{ route('hosts-list') }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
+                <a href="{{ route('admin.hosts.index') }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
             </div>
             <div class="row mb-5">
                 <div class="col-md-8">
@@ -117,7 +117,7 @@
                                     @if ($host->host->rejection_reason != null)
                                     <div class="mb-3 text-end">
                                         <form method="POST"
-                                            action="{{ route('send-host-rejected-reminder', $host->id) }}">
+                                            action="{{ route('admin.send-host-rejected-reminder', $host->id) }}">
                                             @csrf
                                             @method('POST')
                                             <button class="btn btn-outline-primary"
@@ -127,7 +127,7 @@
                                     @else
                                     <form method="POST"
                                           class="d-flex flex-column mb-3"
-                                          action="{{ route('send-mail-uncomplete-profile', $host->id) }}">
+                                          action="{{ route('admin.send-mail-uncomplete-profile', $host->id) }}">
                                         @csrf
 
                                         <div class="mb-3">
@@ -144,13 +144,13 @@
 
                                 <div class="border-top pt-3 d-flex justify-content-between">
                                     <form method="POST"
-                                        action="{{ route('disable-host-profile', $host->id) }}">
+                                        action="{{ route('admin.disable-host-profile', $host->id) }}">
                                         @csrf
                                         @method('PUT')
                                         <button class="btn btn-outline-danger" type="submit">Desactivar</button>
                                     </form>
                                     <form method="POST"
-                                        action="{{ route('enable-host-profile', $host->id) }}">
+                                        action="{{ route('admin.enable-host-profile', $host->id) }}">
                                         @csrf
                                         @method('PUT')
                                         <button type="submit" class="btn btn-primary">Activar</button>
@@ -178,14 +178,14 @@
 
                                 <div class="d-flex mb-3 justify-content-between pt-3 border-top">
                                     <form method="POST"
-                                        action="{{ route('pending-host-profile', $host->id) }}">
+                                        action="{{ route('admin.pending-host-profile', $host->id) }}">
                                         @csrf
                                         @method('PUT')
                                         <button class="btn btn-outline-secondary" type="submit">Enviar a Pendiente</button>
                                     </form>
 
                                     <form method="POST"
-                                        action="{{ route('reenable-host-profile', $host->id) }}">
+                                        action="{{ route('admin.reenable-host-profile', $host->id) }}">
                                         @csrf
                                         @method('PUT')
                                         <button class="btn btn-primary" type="submit">Activar</button>
@@ -195,7 +195,7 @@
                                 <div class="pt-3 border-top">
                                     <form method="POST"
                                         class="d-flex flex-column"
-                                        action="{{ route('delete-host-profile', $host->id) }}">
+                                        action="{{ route('admin.delete-host-profile', $host->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <div class="mb-3">
@@ -211,7 +211,7 @@
                                 <div>
                                     <form method="POST"
                                           class="d-flex flex-column mb-3"
-                                          action="{{ route('send-mail-disabled-profile', $host->id) }}">
+                                          action="{{ route('admin.send-mail-disabled-profile', $host->id) }}">
                                         @csrf
                                         <div class="mb-3">
                                             {{-- enviar mail manualmente con los datos a cambiar y link para reactivar --}}
@@ -235,28 +235,32 @@
             </div>
 
             <div>
+
                 {{-- Agregar el listado de todos los proyectos con un link de ver cada proyecto tal cual el host --}}
                 <div class="card">
                     <div class="card-header">Proyectos del anfitrión</div>
                     <ul class="list-group list-group-flush">
+                    @if (!empty($host->host->projects))
+                        @foreach ($host->host->projects as $project)
                         <li class="list-group-item">
                             <div class="row align-items-center">
-                                <div class="col-12 col-md-4">Nombre del proyecto
-                                        <span class="badge text-bg-primary">nuevo</span>
-                                </div>
+                                <div class="col-12 col-md-4">{{$project->title}}</div>
                                 <div class="col-12 col-md-4">
-                                    fechas
+                                    Inicia: {{$project->start_date}}
                                 </div>
                                 <div class="col-12 col-md-2">
-                                    voluntarios activos
+                                    X voluntarios postulados
+                                    X voluntarios activos
                                 </div>
                                 <div class="col-12 col-md-2 text-center">
-                                    <a href="{{ route('host-profile', $host->id) }}" class="btn btn-sm btn-azul" title="ver">
+                                    <a href="" class="btn btn-sm btn-azul" title="ver">
                                         Ver
                                     </a>
                                 </div>
                             </div>
                         </li>
+                        @endforeach
+                    @endif
 
                     </ul>
                 </div>

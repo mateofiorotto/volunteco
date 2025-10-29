@@ -17,7 +17,7 @@ use App\Services\ImageService;
 use Dotenv\Exception\ValidationException;
 use Illuminate\Support\Facades\DB;
 
-class RegisterHostController extends Controller
+class RegisteredHostController extends Controller
 {
     protected $imageService;
 
