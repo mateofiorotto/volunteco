@@ -191,6 +191,11 @@ a {
     height: 200px;
 }
 
+.avatar-md {
+    width: 100px;
+    height: 100px;
+}
+
 .social-icon {
     width: 40px;
     height: 40px;

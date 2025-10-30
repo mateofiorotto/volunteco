@@ -57,7 +57,7 @@
                                     <a href="{{ $volunteer->instagram }}"
                                        target="_blank"
                                        rel="noopener noreferrer"
-                                        class="btn btn-sm btn-outline-primary rounded-circle d-flex align-items-center justify-content-center social-icon p-2"
+                                       class="btn btn-sm btn-outline-primary rounded-circle d-flex align-items-center justify-content-center social-icon p-2"
                                        aria-label="Perfil de Instagram">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                              width="24"
@@ -84,7 +84,7 @@
                                 <div class="col-lg-6 col-md-12 mb-3 mb-lg-0">
                                     <div class="d-flex justify-content-between align-items-center">
                                         @if (Auth::id() == $volunteer->user_id)
-                                            <a href="{{ route('voluntarios.update-my-profile') }}"
+                                            <a href="{{ route('volunteers.update-my-profile') }}"
                                                class="btn btn-outline-primary">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      fill="none"
@@ -169,7 +169,7 @@
                                     </div>
                                     <div>
                                         <dt class="text-muted small mb-1">Nivel educativo</dt>
-                                        <dd class="mb-0 fw-medium">{{ $volunteer->educational_level }}</dd>
+                                        <dd class="mb-0 fw-medium">{{ ucfirst($volunteer->educational_level) }}</dd>
                                     </div>
                                 </div>
                             </div>
@@ -222,7 +222,8 @@
                                       d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
                             </svg>
                         </div>
-                        <p class="h5 fw-bold mb-1">{{ $volunteer->created_at->diffForHumans() }}</p> <!-- convertir la fecha a "hace x tiempo" -->
+                        <p class="h5 fw-bold mb-1">{{ $volunteer->created_at->diffForHumans() }}</p>
+                        <!-- convertir la fecha a "hace x tiempo" -->
                         <p class="text-muted small mb-0">Miembro desde</p>
                     </div>
                 </article>
@@ -246,7 +247,7 @@
                                       d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
                             </svg>
                         </div>
-                        <p class="h5 fw-bold mb-1">{{ $volunteer->projects_count ?? 0 }}</p>
+                        <p class="h5 fw-bold mb-1">x</p>
                         <p class="text-muted small mb-0">Proyectos completados</p>
                     </div>
                 </article>
@@ -264,14 +265,15 @@
                                  stroke="currentColor"
                                  width="30"
                                  height="30"
-                                 class="text-warning">
+                                 class="text-success">
                                 <path stroke-linecap="round"
                                       stroke-linejoin="round"
-                                      d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                      d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                             </svg>
+
                         </div>
-                        <p class="h5 fw-bold mb-1">{{ $volunteer->hours_volunteered ?? 0 }}</p>
-                        <p class="text-muted small mb-0">Horas de voluntariado</p>
+                        <p class="h5 fw-bold mb-1">x</p>
+                        <p class="text-muted small mb-0">Nivel</p>
                     </div>
                 </article>
             </div>

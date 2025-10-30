@@ -176,7 +176,7 @@
 
                                     @if ($status !== 'rechazado')
                                         <form method="POST"
-                                            action="{{ route('voluntarios.withdraw-project', $project->id) }}"
+                                            action="{{ route('volunteers.withdraw-project', $project->id) }}"
                                             onsubmit="return confirm('¿Estás seguro de que deseas desistir de este proyecto?');">
                                             @csrf
                                             @method('DELETE')
@@ -186,7 +186,7 @@
                                 @else
                                     <p class="mb-3">¿Te interesa participar en este proyecto?</p>
                                     <form method="POST"
-                                        action="{{ route('voluntarios.apply-project', $project->id) }}">
+                                        action="{{ route('volunteers.apply-project', $project->id) }}">
                                         @csrf
                                         <button class="btn btn-primary" type="submit">Aplicar al proyecto</button>
                                     </form>

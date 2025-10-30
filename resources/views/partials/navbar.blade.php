@@ -52,13 +52,19 @@
         @endif
         @if (Auth::user()->hasRole('volunteer'))
             <li class="nav-item">
-                <x-nav-link :route="'voluntarios.dashboard'">Dashboard</x-nav-link>
+                <x-nav-link :route="'volunteers.dashboard'">Dashboard</x-nav-link>
             </li>
             <li class="nav-item">
                 <x-nav-link :route="'projects'">Proyectos</x-nav-link>
             </li>
             <li class="nav-item">
-                <x-nav-link :route="'voluntarios.projects.applied'">Mis Postulaciones</x-nav-link>
+                <!-- mio perfil -->
+               <x-nav-link :href="route('volunteers.volunteer-profile', ['id' => Auth::user()->volunteer->id])">
+    Mi Perfil
+               </x-nav-link>
+            </li>
+            <li class="nav-item">
+                <x-nav-link :route="'volunteers.projects.applied'">Mis Postulaciones</x-nav-link>
             </li>
         @endif
     </ul>
