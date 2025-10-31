@@ -22,7 +22,7 @@
                             <th scope="row">{{$volunteer->id}}</th>
                             <td>{{$volunteer->volunteer->full_name}}</td>
                             <td>{{$volunteer->email}}</td>
-                            <td>{{$volunteer->status}}</td>
+                            <td>{{ucfirst($volunteer->status)}}</td>
                             <td>
                                 <a href="{{ route('admin.volunteer.profile', $volunteer->id) }}" class="btn btn-primary">Ver Perfil</a>
                             </td>

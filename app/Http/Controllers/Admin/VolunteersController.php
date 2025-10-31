@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
+use App\Mail\VolunteerDeleteProfileMail;
+use App\Mail\VolunteerDisableProfileMail;
+use Illuminate\Support\Facades\Mail;
 
 class VolunteersController extends Controller
 {
@@ -70,6 +73,8 @@ class VolunteersController extends Controller
 
         $volunteer->volunteer->disabled_at = now();
         $volunteer->volunteer->save();
+        
+        Mail::to($volunteer->email)->send(new VolunteerDisableProfileMail($volunteer->volunteer->full_name));
 
         return redirect()->route('admin.volunteers.index');
     }
@@ -87,7 +92,7 @@ class VolunteersController extends Controller
 
         $volunteer->delete();
 
-        //Mail::to($volunteer->email)->send(new volunteerDeleteProfileMail($reasons['delete_reasons'], $volunteer->volunteer->person_full_name));
+        Mail::to($volunteer->email)->send(new VolunteerDeleteProfileMail($volunteer->volunteer->full_name));
 
         return redirect()->route('admin.volunteers.index');
     }
