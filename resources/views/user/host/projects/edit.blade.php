@@ -130,7 +130,6 @@
                                        id="start_date"
                                        name="start_date"
                                        value="{{ old('start_date', $project->start_date) }}"
-                                       min="{{ date('Y-m-d') }}"
                                        required
                                        class="form-control @error('start_date') is-invalid @enderror" />
                                 @error('start_date')

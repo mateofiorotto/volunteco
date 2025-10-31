@@ -87,7 +87,7 @@ class HostProjectController extends Controller
             'description' => 'required|string|min:50|max:2000',
             'project_type_id' => 'required|exists:project_types,id',
             'location' => 'required|string|min:3|max:255',
-            'start_date' => 'required|date|after_or_equal:today',
+            'start_date' => 'required|date|before_or_equal:end_date|after_or_equal:today',
             'end_date' => 'required|date|after:start_date',
             'work_hours_per_day' => 'required|in:2 Horas,4 Horas,6 Horas,8 Horas',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -167,7 +167,7 @@ class HostProjectController extends Controller
             'description' => 'required|string|min:50|max:2000',
             'project_type_id' => 'required|exists:project_types,id',
             'location' => 'required|string|min:3|max:255',
-            'start_date' => 'required|date|after_or_equal:today',
+            'start_date' => 'required|date|before_or_equal:end_date',
             'end_date' => 'required|date|after:start_date',
             'work_hours_per_day' => 'required|in:2 Horas,4 Horas,6 Horas,8 Horas',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -180,7 +180,7 @@ class HostProjectController extends Controller
         //manejo de la imagen
         if ($request->hasFile('image')) {
             if ($project->image == 'logo-horizontal.svg') {
-                $this->imageService->storeImage($request->file('image'), 'projects');
+                $validated['image'] = $this->imageService->storeImage($request->file('image'), 'projects');
             } else {
                 $validated['image'] = $this->imageService->updateImage(
                     $request->file('image'), //pasando nueva img
