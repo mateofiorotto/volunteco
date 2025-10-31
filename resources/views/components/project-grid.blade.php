@@ -1,9 +1,11 @@
 <div class="row justify-content-center">
     @foreach ($projects as $project)
-    <div class="col-md-6 col-lg-4 mb-4">
+    <div class="col-md-6 col-lg-3 mb-4">
         <div class="card">
             @if ($project->image)
-                <img src="{{ asset('storage/' . $project->image) }}" class="card-img-top object-fit-cover" alt="{{ $project->title }}" width="200" height="200">
+            <div class="ratio ratio-4x3">
+                <img src="{{ asset('storage/' . $project->image) }}" class="card-img-top object-fit-cover" alt="{{ $project->title }}" width="304" height="228">
+            </div>
             @endif
             <div class="card-body d-flex flex-column">
                 <h3 class="card-title h5">{{ $project->title }}</h3>
