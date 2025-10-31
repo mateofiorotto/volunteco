@@ -165,7 +165,6 @@
                 <div class="card mb-5">
                     <div class="card-body">
                         <h2 class="card-title h3">Redes Sociales</h2>
-                        <p>Completa al menos uno de los campos.</p>
                         <div class="mb-3">
                             <label for="linkedin" class="form-label">LinkedIn</label>
                             <input type="url"

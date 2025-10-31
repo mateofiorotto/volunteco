@@ -5,7 +5,7 @@
         <div class="d-flex justify-content-between align-items-center mb-5">
             <h2 class="title-h1 h3 mb-5">Mis <span>Proyectos</span></h2>
             <!--Crear proyecto-->
-            <a href="{{ route('anfitriones.my-projects.create') }}" class="btn btn-primary mb-4">Crear Proyecto</a>
+            <a href="{{ route('hosts.my-projects.create') }}" class="btn btn-primary mb-4">Crear Proyecto</a>
         </div>
 
         <div class="projects-list">

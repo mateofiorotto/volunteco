@@ -22,7 +22,7 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('anfitriones.my-projects.update', $project) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('hosts.my-projects.update', $project) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row">
@@ -219,7 +219,7 @@
 
             <!-- Botones -->
             <div class="d-flex gap-3 justify-content-center mt-4 mb-5">
-                <a href="{{ route('anfitriones.my-projects.index') }}" class="btn btn-outline-primary btn-lg px-5">
+                <a href="{{ route('hosts.my-projects.index') }}" class="btn btn-outline-primary btn-lg px-5">
                     Cancelar
                 </a>
                 <button type="submit" class="btn btn-primary btn-lg px-5 text-capitalize">

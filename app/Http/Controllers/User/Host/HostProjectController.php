@@ -116,7 +116,7 @@ class HostProjectController extends Controller
         }
 
         return redirect()
-            ->route('anfitriones.my-projects.index')
+            ->route('hosts.my-projects.index')
             ->with('success', 'Proyecto creado exitosamente');
     }
 
@@ -200,7 +200,7 @@ class HostProjectController extends Controller
         }
 
         return redirect()
-            ->route('anfitriones.my-projects.index')
+            ->route('hosts.my-projects.index')
             ->with('success', 'Proyecto actualizado exitosamente');
     }
 
@@ -245,7 +245,7 @@ class HostProjectController extends Controller
         $project->delete();
 
         return redirect()
-            ->route('anfitriones.my-projects.index')
+            ->route('hosts.my-projects.index')
             ->with('success', 'Proyecto eliminado exitosamente');
     }
 

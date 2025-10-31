@@ -4,7 +4,7 @@ use App\Http\Controllers\User\Host\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\Host\HostProjectController;
 
-Route::middleware(['authCheck', 'isHost', 'checkEnabled'])->prefix('anfitriones')->name('anfitriones.')->group(function () {
+Route::middleware(['authCheck', 'isHost', 'checkEnabled'])->prefix('anfitriones')->name('hosts.')->group(function () {
 
     //rutas de perfil + frontend y metodos de HostController (logica de creacion de proyectos, edicion, eliminacion, etc) y HostProfileController (Edicion de perfil)
     /**

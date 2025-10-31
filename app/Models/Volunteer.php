@@ -25,7 +25,8 @@ class Volunteer extends Model
         'biography',
         'phone',
         'location',
-        'user_id'
+        'user_id',
+        'disabled_at',
     ];
 
     /**

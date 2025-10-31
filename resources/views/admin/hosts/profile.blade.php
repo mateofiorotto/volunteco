@@ -4,7 +4,7 @@
     <section>
         <div class="container py-5">
             <div class="d-flex justify-content-between align-items-center mb-5">
-                <h1 class="title-h1 h3 mb-0">Perfil <span>Anfitrión</span></h1>
+                <h1 class="title-h1 h3 mb-0">Perfil de <span>Anfitrión</span></h1>
                 <a href="{{ route('admin.hosts.index') }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
             </div>
             <div class="row mb-5">
@@ -19,7 +19,6 @@
                                                 <img src="{{ asset('storage/' . $host->host->avatar) }}"
                                                      alt="Foto de perfil"
                                                      class="img-fluid rounded-start object-fit-contain h-100 w-100">
-                                                <!-- cambiar con css despues -->
                                             </div>
                                         @endif
                                         <div class="col">
@@ -35,6 +34,7 @@
                                                 <h2 class="card-title h3">{{ $host->host->name }}</h2>
                                                 <ul class="list-unstyled mb-0">
                                                     <li><a href="mailto:{{ $host->email }}" target="_blank">{{ $host->email }}</a></li>
+                                                    <li>{{$host->host->cuit}}</li>
                                                     <li>{{ $host->host->phone }}</li>
                                                     <li>{{ $host->host->location ?? 'Sin ubicación' }}</li>
                                                     <li><span class="text-muted small">Contacto:</span> {{ $host->host->person_full_name }}</li>

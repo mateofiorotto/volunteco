@@ -44,10 +44,10 @@
         @endif
         @if (Auth::user()->hasRole('host'))
             <li class="nav-item">
-                <x-nav-link :route="'anfitriones.dashboard'">Dashboard</x-nav-link>
+                <x-nav-link :route="'hosts.dashboard'">Dashboard</x-nav-link>
             </li>
             <li class="nav-item">
-                <x-nav-link :route="'anfitriones.my-projects.index'">Mis Proyectos</x-nav-link>
+                <x-nav-link :route="'hosts.my-projects.index'">Mis Proyectos</x-nav-link>
             </li>
         @endif
         @if (Auth::user()->hasRole('volunteer'))
@@ -60,7 +60,7 @@
             <li class="nav-item">
                 <!-- mio perfil -->
                <x-nav-link :href="route('volunteers.volunteer-profile', ['id' => Auth::user()->volunteer->id])">
-    Mi Perfil
+                    Mi Perfil
                </x-nav-link>
             </li>
             <li class="nav-item">

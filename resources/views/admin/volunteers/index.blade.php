@@ -13,6 +13,7 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Email</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -22,6 +23,9 @@
                             <td>{{$volunteer->volunteer->full_name}}</td>
                             <td>{{$volunteer->email}}</td>
                             <td>{{$volunteer->status}}</td>
+                            <td>
+                                <a href="{{ route('admin.volunteer.profile', $volunteer->id) }}" class="btn btn-primary">Ver Perfil</a>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

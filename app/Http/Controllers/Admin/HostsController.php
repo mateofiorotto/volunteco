@@ -52,7 +52,6 @@ class HostsController extends Controller
                 ->get();
     }
 
-
     /**
      * Obtener un perfil de anfitrion por id
      */
@@ -197,11 +196,7 @@ class HostsController extends Controller
      */
     public function deleteHostProfile(Request $request, $id)
     {
-        $host = User::where('id', $id)->first();
-
-        if (!$host || !$host->host) {
-            return back()->withErrors(['error' => 'No se encontró el anfitrión']);
-        }
+        $host = User::where('id', $id)->firstOrFail();
 
         $reasons = $request->validate([
             'delete_reasons' => 'required|string|max:500|min:10',

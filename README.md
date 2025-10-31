@@ -1,7 +1,7 @@
 # Volunteco
 
 Web para el proyecto final de la carrera de Diseño y Programación web en Escuela Da Vinci.
-Volunteco es una web acerca de voluntariados de carácter ecológico donde participan voluntarios y anfitriones.
+Volunteco es una web acerca de voluntariados de carácter ecológico donde participan voluntarios y hosts.
 
 ## Estudiantes
 - Fiorotto Mateo

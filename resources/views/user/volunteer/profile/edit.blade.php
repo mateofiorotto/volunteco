@@ -25,7 +25,7 @@
                                 <p class="mb-3">Completa con tus datos.</p>
 
                                 <div class="mb-3">
-                                    <label for="nombre"
+                                    <label for="full_name"
                                            class="form-label">Nombre Completo *</label>
                                     <input type="text"
                                            id="full_name"
@@ -166,7 +166,6 @@
                         <div class="card mb-5">
                             <div class="card-body">
                                 <h2 class="card-title h3">Redes Sociales</h2>
-                                <p class="mb-3">Completa al menos uno de los campos.</p>
                                 <div class="mb-3">
                                     <label for="linkedin"
                                            class="form-label">LinkedIn</label>
@@ -221,7 +220,7 @@
                                          class="mt-3 mb-3 rounded-circle img-fluid object-fit-cover avatar-md">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="description"
+                                    <label for="biography"
                                            class="form-label">Biografía *</label>
                                     <textarea id="biography"
                                               name="biography"

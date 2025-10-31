@@ -4,7 +4,7 @@
     <section class="container py-5">
 
         <!-- Perfil -->
-        <article class="card shadow-sm border-0 mb-4">
+        <div class="card shadow-sm border-0 mb-4">
             <div class="card-body p-4 p-md-5">
                 <div class="row">
                     <!-- Foto de perfil -->
@@ -125,7 +125,7 @@
                         </div>
 
                         <!-- Info Grid -->
-                        <dl class="row g-4 mb-4">
+                        <div class="row g-4 mb-4">
                             <div class="col-sm-6">
                                 <div class="d-flex align-items-start">
                                     <div class="bg-primary bg-opacity-10 rounded p-2 me-3"
@@ -143,10 +143,10 @@
                                                   d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
                                         </svg>
                                     </div>
-                                    <div>
+                                    <dl>
                                         <dt class="text-muted small mb-1">Ubicación</dt>
                                         <dd class="mb-0 fw-medium">{{ $volunteer->location }}</dd>
-                                    </div>
+                                    </dl>
                                 </div>
                             </div>
 
@@ -167,13 +167,13 @@
                                                   d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
                                         </svg>
                                     </div>
-                                    <div>
+                                    <dl>
                                         <dt class="text-muted small mb-1">Nivel educativo</dt>
                                         <dd class="mb-0 fw-medium">{{ ucfirst($volunteer->educational_level) }}</dd>
-                                    </div>
+                                    </dl>
                                 </div>
                             </div>
-                        </dl>
+                        </div>
 
                         <!-- Biografia -->
                         <div class="mt-4">
@@ -200,12 +200,12 @@
                     </div>
                 </div>
             </div>
-        </article>
+        </div>
 
         <!-- estadisticas -->
         <div class="row g-4">
             <div class="col-md-4">
-                <article class="card shadow-sm border-0 h-100">
+                <div class="card shadow-sm border-0 h-100">
                     <div class="card-body text-center p-4">
                         <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3 stat-icon"
                              aria-hidden="true">
@@ -226,11 +226,11 @@
                         <!-- convertir la fecha a "hace x tiempo" -->
                         <p class="text-muted small mb-0">Miembro desde</p>
                     </div>
-                </article>
+                </div>
             </div>
 
             <div class="col-md-4">
-                <article class="card shadow-sm border-0 h-100">
+                <div class="card shadow-sm border-0 h-100">
                     <div class="card-body text-center p-4">
                         <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3 stat-icon"
                              aria-hidden="true">
@@ -250,11 +250,11 @@
                         <p class="h5 fw-bold mb-1">x</p>
                         <p class="text-muted small mb-0">Proyectos completados</p>
                     </div>
-                </article>
+                </div>
             </div>
 
             <div class="col-md-4">
-                <article class="card shadow-sm border-0 h-100">
+                <div class="card shadow-sm border-0 h-100">
                     <div class="card-body text-center p-4">
                         <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3 stat-icon"
                              aria-hidden="true">
@@ -275,7 +275,7 @@
                         <p class="h5 fw-bold mb-1">x</p>
                         <p class="text-muted small mb-0">Nivel</p>
                     </div>
-                </article>
+                </div>
             </div>
         </div>
     </section>

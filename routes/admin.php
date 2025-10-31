@@ -21,5 +21,9 @@ Route::middleware(['checkEnabled', 'authCheck', 'isAdmin'])->prefix('admin')->na
 
     // TODO agregar rutas para ver voluntarios
     Route::get('/voluntarios', [VolunteersController::class, 'index'])->name('volunteers.index');
+    Route::get('/voluntarios/{id}', [VolunteersController::class, 'getVolunteerProfileById'])->name('volunteer.profile');
+    Route::put('/voluntarios/{id}/reactivar', [VolunteersController::class, 'reenableVolunteerProfile'])->name('reenable-volunteer-profile');
+    Route::put('/voluntarios/{id}/desactivar', [VolunteersController::class, 'disableVolunteerProfile'])->name('disable-volunteer-profile');
+    Route::delete('/voluntarios/{id}/eliminar', [VolunteersController::class, 'deleteVolunteerProfile'])->name('delete-volunteer-profile');
 });
 ?>
