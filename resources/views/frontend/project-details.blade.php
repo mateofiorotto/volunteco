@@ -5,22 +5,29 @@
         <div class="container pt-5 pb-5">
             <div class="d-flex justify-content-between align-items-center mb-5">
                 <h1 class="title-h1 h3 mb-0">Proyecto</h1>
-                <a href="{{ url()->previous() }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
+                <a href="{{ url()->previous() }}"
+                   class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
             </div>
 
             <!-- Alerta de exito temporal -->
             @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <div class="alert alert-success alert-dismissible fade show"
+                     role="alert">
                     {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"></button>
                 </div>
             @endif
 
             <!-- Alerta de error temporal mas adelante cambiar por swal2 o algo mas lindo -->
             @if (session('error'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div class="alert alert-danger alert-dismissible fade show"
+                     role="alert">
                     {{ session('error') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"></button>
                 </div>
             @endif
 
@@ -30,7 +37,11 @@
                 <div class="col-md-8 col-12 mb-4">
                     <div class="card">
                         @if ($project->image)
-                            <img src="{{ asset('storage/' . $project->image) }}" class="card-img-top object-fit-contain" alt="{{ $project->title }}" width="400" height="400">
+                            <img src="{{ asset('storage/' . $project->image) }}"
+                                 class="card-img-top object-fit-contain"
+                                 alt="{{ $project->title }}"
+                                 width="400"
+                                 height="400">
                         @endif
 
                         <div class="card-body">
@@ -63,7 +74,8 @@
                                         <i class="bi bi-calendar4 fs-5 text-primary"></i>
                                         <div>
                                             <h4 class="h6 fw-semibold mb-1">Fecha de inicio</h4>
-                                            <p class="mb-0">{{ \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') }}
+                                            <p class="mb-0">
+                                                {{ \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') }}
                                             </p>
                                         </div>
                                     </div>
@@ -73,7 +85,8 @@
                                         <i class="bi bi-calendar4 fs-5 text-primary"></i>
                                         <div>
                                             <h4 class="h6 fw-semibold mb-1">Fecha de finalización</h4>
-                                            <p class="mb-0">{{ \Carbon\Carbon::parse($project->end_date)->format('d/m/Y') }}
+                                            <p class="mb-0">
+                                                {{ \Carbon\Carbon::parse($project->end_date)->format('d/m/Y') }}
                                             </p>
                                         </div>
                                     </div>
@@ -107,19 +120,20 @@
                         <div class="card-body">
                             <h2 class="card-title">Anfitrión</h2>
 
-                            <div class="d-flex align-items-center gap-3 mb-3">
-                                @if ($project->host->avatar)
-                                    <div class="flex-shrink-0">
-                                        <img src="{{ asset('storage/' . $project->host->avatar) }}"
-                                            class="img-fluid rounded-start object-fit-cover"
-                                            alt="Foto de {{ $project->host->name }}"
-                                            width="150" height="50"
-                                            >
+                            <div class="mb-3">
+                                <a href="{{ route('hosts.host-profile', $project->host) }}"
+                                   class="d-flex align-items-center gap-3">
+                                    @if ($project->host->avatar)
+                                        <div class="flex-shrink-0">
+                                            <img src="{{ asset('storage/' . $project->host->avatar) }}"
+                                                 class="img-fluid rounded-start object-fit-cover avatar-md"
+                                                 alt="Foto de {{ $project->host->name }}">
+                                        </div>
+                                    @endif
+                                    <div class="flex-grow-1">
+                                        <p class="text-dark fw-semibold">{{ $project->host->name }}</p>
                                     </div>
-                                @endif
-                                <div class="flex-grow-1">
-                                    <p class="text-dark fw-semibold">{{ $project->host->name }}</p>
-                                </div>
+                                </a>
                             </div>
 
                             @if ($project->host->location)
@@ -131,15 +145,21 @@
 
                             <div class="d-flex gap-2">
                                 @if ($project->host->linkedin)
-                                    <a href="{{ $project->host->linkedin }}" target="_blank" class="btn btn-link"><i class="bi bi-linkedin"></i></a>
+                                    <a href="{{ $project->host->linkedin }}"
+                                       target="_blank"
+                                       class="btn btn-link"><i class="bi bi-linkedin"></i></a>
                                 @endif
 
                                 @if ($project->host->instagram)
-                                    <a href="{{ $project->host->instagram }}" target="_blank" class="btn btn-link"><i class="bi bi-instagram"></i></a>
+                                    <a href="{{ $project->host->instagram }}"
+                                       target="_blank"
+                                       class="btn btn-link"><i class="bi bi-instagram"></i></a>
                                 @endif
 
                                 @if ($project->host->facebook)
-                                    <a href="{{ $project->host->facebook }}" target="_blank" class="btn btn-link"><i class="bi bi-facebook"></i></a>
+                                    <a href="{{ $project->host->facebook }}"
+                                       target="_blank"
+                                       class="btn btn-link"><i class="bi bi-facebook"></i></a>
                                 @endif
                             </div>
                         </div>
@@ -176,19 +196,21 @@
 
                                     @if ($status !== 'rechazado')
                                         <form method="POST"
-                                            action="{{ route('volunteers.withdraw-project', $project->id) }}"
-                                            onsubmit="return confirm('¿Estás seguro de que deseas desistir de este proyecto?');">
+                                              action="{{ route('volunteers.withdraw-project', $project->id) }}"
+                                              onsubmit="return confirm('¿Estás seguro de que deseas desistir de este proyecto?');">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-danger" type="submit"> Desistir del proyecto</button>
+                                            <button class="btn btn-danger"
+                                                    type="submit"> Desistir del proyecto</button>
                                         </form>
                                     @endif
                                 @else
                                     <p class="mb-3">¿Te interesa participar en este proyecto?</p>
                                     <form method="POST"
-                                        action="{{ route('volunteers.apply-project', $project->id) }}">
+                                          action="{{ route('volunteers.apply-project', $project->id) }}">
                                         @csrf
-                                        <button class="btn btn-primary" type="submit">Aplicar al proyecto</button>
+                                        <button class="btn btn-primary"
+                                                type="submit">Aplicar al proyecto</button>
                                     </form>
                                 @endif
                             </div>
