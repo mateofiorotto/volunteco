@@ -26,9 +26,7 @@
         @endphp
         @if ($acceptedProjects->isNotEmpty())
             <h2>Proyectos en los que participo</h2>
-            <div class="row mb-4">
-                <x-project-card :projects="$acceptedProjects" />
-            </div>
+            <x-project-grid :projects="$acceptedProjects" />
         @endif
 
         {{-- Proyectos Pendientes --}}
@@ -37,9 +35,7 @@
         @endphp
         @if ($pendingProjects->isNotEmpty())
             <h2>Proyectos a los que apliqué</h2>
-            <div class="row mb-4">
-                <x-project-card :projects="$pendingProjects" />
-            </div>
+            <x-project-grid :projects="$pendingProjects" />
         @endif
 
         {{-- Proyectos Rechazados --}}
@@ -48,9 +44,7 @@
         @endphp
         @if ($rejectedProjects->isNotEmpty())
             <h2>Proyectos en los que me rechazaron</h2>
-            <div class="row mb-4">
-                <x-project-card :projects="$rejectedProjects" />
-            </div>
+            <x-project-grid :projects="$rejectedProjects" />
         @endif
 
         {{-- Si no hay proyectos --}}

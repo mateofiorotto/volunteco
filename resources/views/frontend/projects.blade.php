@@ -9,9 +9,7 @@
                     <p>No hay proyectos publicados actualmente.</p>
                 @endif
 
-                <div class="row justify-content-center">
-                    <x-project-card :projects="$projects" />
-                </div>
+                <x-project-grid :projects="$projects" />
             </div>
         </div>
     </section>
