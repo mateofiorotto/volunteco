@@ -49,6 +49,9 @@
             <li class="nav-item">
                 <x-nav-link :route="'hosts.my-projects.index'">Mis Proyectos</x-nav-link>
             </li>
+            <x-nav-link :href="route('hosts.host-profile', ['id' => Auth::user()->host->id])">
+                    Mi Perfil
+               </x-nav-link>
         @endif
         @if (Auth::user()->hasRole('volunteer'))
             <li class="nav-item">

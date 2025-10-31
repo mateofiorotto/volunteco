@@ -3,6 +3,7 @@
 use App\Http\Controllers\User\Host\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\Host\HostProjectController;
+use App\Http\Controllers\User\Host\ProfileController;
 
 Route::middleware(['authCheck', 'isHost', 'checkEnabled'])->prefix('anfitriones')->name('hosts.')->group(function () {
 
@@ -25,8 +26,16 @@ Route::middleware(['authCheck', 'isHost', 'checkEnabled'])->prefix('anfitriones'
     Route::get('/mis-proyectos/{id}/eliminar', [HostProjectController::class, 'delete'])->name('my-projects.delete');
     Route::delete('/mis-proyectos/{id}/eliminar', [HostProjectController::class, 'destroy'])->name('my-projects.destroy');
 
-    //manejar anfitriones inscritos (aceptar o rechazar)
+    //manejar anfitriones inscriptos (aceptar o rechazar)
     Route::put('/mis-proyectos/{projectId}/anfitriones/{volunteerId}/aceptar', [HostProjectController::class, 'acceptVolunteer'])->name('my-projects.accept-volunteer');
     Route::put('/mis-proyectos/{projectId}/anfitriones/{volunteerId}/rechazar', [HostProjectController::class, 'rejectVolunteer'])->name('my-projects.reject-volunteer');
 
+    //edicion de perfil
+     Route::get('/mi-perfil/editar', [ProfileController::class, 'editMyProfile'])->name('edit-my-profile');
+     Route::put('/mi-perfil/editar', [ProfileController::class, 'updateMyProfile'])->name('update-my-profile');
+});
+
+//perfil publico
+Route::middleware(['checkEnabled'])->prefix('anfitriones')->name('hosts.')->group(function () {
+    Route::get('/perfil/{id}', [ProfileController::class, 'getProfile'])->name('host-profile');
 });

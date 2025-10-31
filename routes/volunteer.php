@@ -18,9 +18,6 @@ Route::middleware(['authCheck', 'isVolunteer', 'checkEnabled'])->prefix('volunta
     Route::post('/aplicar-proyecto/{project}', [VolunteerProjectController::class, 'applyProject'])->name('apply-project');
     Route::delete('/desistir-proyecto/{project}', [VolunteerProjectController::class, 'withdrawFromProject'])->name('withdraw-project');
 
-    //perfil
-    
-    //editar perfil propio
     Route::get('/mi-perfil/editar', [ProfileController::class, 'editMyProfile'])->name('edit-my-profile');
     Route::put('/mi-perfil/editar', [ProfileController::class, 'updateMyProfile'])->name('update-my-profile');
 });
