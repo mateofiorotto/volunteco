@@ -16,7 +16,6 @@ Route::middleware(['checkEnabled', 'authCheck', 'isAdmin'])->prefix('admin')->na
     Route::delete('/anfitriones/{id}/eliminar', [HostsController::class, 'deleteHostProfile'])->name('delete-host-profile');
     Route::put('/anfitriones/{id}/pendiente', [HostsController::class, 'setHostProfilePending'])->name('pending-host-profile');
     Route::post('/anfitriones/{id}/enviar-mail', [HostsController::class, 'sendMailDisabledProfile'])->name('send-mail-disabled-profile');
-    Route::post('/anfitriones/{id}/enviar-mail-perfil', [HostsController::class, 'sendMailUncompleteProfile'])->name('send-mail-uncomplete-profile');
     Route::post('/verificar-perfil-anfitrion/{id}/recordatorio', [HostsController::class, 'sendHostRejectedReminder'])->name('send-host-rejected-reminder');
 
     // TODO agregar rutas para ver voluntarios

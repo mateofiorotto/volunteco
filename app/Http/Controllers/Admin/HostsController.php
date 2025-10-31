@@ -155,42 +155,6 @@ class HostsController extends Controller
         return redirect()->route('admin.hosts.index');
     }
 
-    public function sendMailUncompleteProfile(Request $request, $id)
-    {
-        $host = User::with('host')->findOrFail($id);
-
-        $fieldsToChange = $request->validate([
-            'description' => 'required|string|max:500|min:10',
-        ]);
-
-        //generar token para que pueda cambiar sus datos de forma segura
-        $token = Str::random(64);
-
-        // Guardar en tabla profile_change_tokens (reemplaza si ya existe)
-        DB::table('profile_change_tokens')->updateOrInsert(
-            ['email' => $host->email],
-            [
-                'token' => $token,
-                'created_at' => now(),
-            ]
-        );
-
-        // Crear link
-        $link = url("/perfil/editar-datos/$token/" . urlencode($host->email));
-
-        // Enviar mail
-        Mail::to($host->email)->send(new HostEditRejectedProfileMail($link, $fieldsToChange['description'], $host->host->person_full_name));
-
-        $host->status = "pendiente";
-        $host->save();
-
-        $host->host->disabled_at = now();
-        $host->host->rejection_reason = $fieldsToChange['description'];
-        $host->host->save();
-
-        return redirect()->route('admin.hosts.index');
-    }
-
     /**
      * Eliminar un perfil de anfitrion y enviar mail notificando la eliminacion
      */

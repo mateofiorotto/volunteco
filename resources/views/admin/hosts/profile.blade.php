@@ -127,7 +127,7 @@
                                     @else
                                     <form method="POST"
                                           class="d-flex flex-column mb-3"
-                                          action="{{ route('admin.send-mail-uncomplete-profile', $host->id) }}">
+                                          action="{{ route('admin.send-mail-disabled-profile', $host->id) }}">
                                         @csrf
 
                                         <div class="mb-3">
@@ -137,7 +137,7 @@
                                             <div class="form-text">Indicá los motivos que debe corregir o completar para que podamos aceptar su perfil.</div>
                                         </div>
                                         <button class="btn btn-outline-primary ms-auto"
-                                                type="submit">Enviar Email y Dejar Pendiente</button>
+                                                type="submit">Enviar Email y Desactivar</button>
                                     </form>
                                     @endif
                                 </div>
