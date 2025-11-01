@@ -22,7 +22,7 @@ class ProjectSeeder extends Seeder
         $project1 = Project::create([
             'title' => 'Proyecto Comunidad Verde',
             'description' => 'Proyecto destinado a la reforestación y mantenimiento de áreas verdes en la ciudad.',
-            'image' => 'logo-horizontal.svg',
+            'image' => 'thumbnail-proyecto.jpg',
             'start_date' => Carbon::now()->subDays(30),
             'end_date' => Carbon::now()->addMonths(3),
             'location' => 'Buenos Aires',
@@ -35,7 +35,7 @@ class ProjectSeeder extends Seeder
         $project2 = Project::create([
             'title' => 'Campaña de Donación de Alimentos',
             'description' => 'Recolección y distribución de alimentos para personas en situación de vulnerabilidad.',
-            'image' => 'logo-horizontal.svg',
+            'image' => 'thumbnail-proyecto.jpg',
             'start_date' => Carbon::now()->subDays(10),
             'end_date' => Carbon::now()->addMonths(1),
             'location' => 'Rosario',

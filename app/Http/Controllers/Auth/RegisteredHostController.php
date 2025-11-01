@@ -188,7 +188,7 @@ class RegisteredHostController extends Controller
             //nueva imagen = actualizar y borrar la anterior
             if ($request->hasFile('avatar')) {
 
-                if ($user->host->avatar == 'logo.svg') {
+                if ($user->host->avatar == 'perfil-host.svg') {
                     $this->imageService->storeImage($request->file('avatar'), 'hosts');
                 } else {
 

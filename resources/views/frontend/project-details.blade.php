@@ -37,21 +37,22 @@
                 <div class="col-md-8 col-12 mb-4">
                     <div class="card">
                         @if ($project->image)
-                            <img src="{{ asset('storage/' . $project->image) }}"
-                                 class="card-img-top object-fit-contain"
-                                 alt="{{ $project->title }}"
-                                 width="400"
-                                 height="400">
+                        <div class="ratio ratio-16x9">
+                            <img src="{{ asset('storage/' . $project->image) }}" class="card-img-top object-fit-cover" alt="{{ $project->title }}" width="854" height="480">
+                        </div>
                         @endif
 
                         <div class="card-body">
-                            <h2 class="card-title fw-bold">{{ $project->title }}</h2>
+                            <div class="d-md-flex align-items-center justify-content-between mb-2">
+                                <h2 class="card-title fw-bold mb-0">{{ $project->title }}</h2>
+                                <span class="badge bg-primary">{{ $project->projectType->name }}</span>
+                            </div>
                             <p class="card-text">{{ $project->description }}</p>
-                            <div class="row mt-4">
+                            <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <div class="d-flex gap-2 align-items-start">
                                         <i class="bi bi-geo-alt fs-5 text-primary"></i>
-                                        <div>
+                                        <div class="pt-1">
                                             <h4 class="h6 fw-semibold mb-1">Ubicación</h4>
                                             <p class="mb-0">{{ $project->location }}</p>
                                         </div>
@@ -60,7 +61,7 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="d-flex gap-2 align-items-start">
                                         <i class="bi bi-clock fs-5 text-primary"></i>
-                                        <div>
+                                        <div class="pt-1">
                                             <h4 class="h6 fw-semibold mb-1">Horas por día</h4>
                                             <p class="mb-0">{{ $project->work_hours_per_day }}</p>
                                         </div>
@@ -68,22 +69,20 @@
                                 </div>
                             </div>
 
-                            <div class="row mt-3">
+                            <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <div class="d-flex gap-2 align-items-start">
                                         <i class="bi bi-calendar4 fs-5 text-primary"></i>
-                                        <div>
+                                        <div class="pt-1">
                                             <h4 class="h6 fw-semibold mb-1">Fecha de inicio</h4>
-                                            <p class="mb-0">
-                                                {{ \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') }}
-                                            </p>
+                                            <p class="mb-0">{{ \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') }}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="d-flex gap-2 align-items-start">
                                         <i class="bi bi-calendar4 fs-5 text-primary"></i>
-                                        <div>
+                                        <div class="pt-1">
                                             <h4 class="h6 fw-semibold mb-1">Fecha de finalización</h4>
                                             <p class="mb-0">
                                                 {{ \Carbon\Carbon::parse($project->end_date)->format('d/m/Y') }}
@@ -94,20 +93,20 @@
                             </div>
 
                             @if ($project->conditions->isNotEmpty())
-                                <div class="mt-4">
-                                    <div class="d-flex gap-2 align-items-start mb-3">
-                                        <i class="bi bi-clipboard2-check fs-5 text-primary"></i>
-                                        <h4 class="h6 fw-semibold mb-0">Condiciones y Requisitos</h4>
-                                    </div>
-                                    <ul class="list-unstyled ms-4">
+                            <div class="d-flex gap-2 align-items-start">
+                                <i class="bi bi-clipboard2-check fs-5 text-primary"></i>
+                                <div class="pt-1">
+                                    <h4 class="h6 fw-semibold">Condiciones y Requisitos</h4>
+                                    <ul class="list-unstyled mb-0">
                                         @foreach ($project->conditions as $condition)
-                                            <li class="mb-2 d-flex gap-2 align-items-start">
+                                            <li class="d-flex gap-2 align-items-center">
                                                 <i class="bi bi-check2 fs-5 text-primary"></i>
                                                 <span>{{ $condition->name }}</span>
                                             </li>
                                         @endforeach
                                     </ul>
                                 </div>
+                            </div>
                             @endif
 
                         </div>
@@ -118,49 +117,39 @@
                 <div class="col-md-4 col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h2 class="card-title">Anfitrión</h2>
-
-                            <div class="mb-3">
-                                <a href="{{ route('hosts.host-profile', $project->host) }}"
-                                   class="d-flex align-items-center gap-3">
-                                    @if ($project->host->avatar)
-                                        <div class="flex-shrink-0">
-                                            <img src="{{ asset('storage/' . $project->host->avatar) }}"
-                                                 class="img-fluid rounded-start object-fit-cover avatar-md"
-                                                 alt="Foto de {{ $project->host->name }}">
-                                        </div>
-                                    @endif
-                                    <div class="flex-grow-1">
-                                        <p class="text-dark fw-semibold">{{ $project->host->name }}</p>
+                            <div class="d-flex gap-3">
+                                @if (!empty($project->host->avatar))
+                                    <div class="avatar">
+                                        <img src="{{ asset('storage/' . $project->host->avatar) }}"
+                                            alt="Foto de {{ $project->host->name }}"
+                                            class="img-fluid object-fit-contain rounded-circle"
+                                            width="80"
+                                            height="80">
                                     </div>
-                                </a>
-                            </div>
+                                @endif
+                                <div class="flex-fill">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h2 class="small text-muted">Anfitrión</h2>
+                                    </div>
+                                    <h3 class="card-title h4">{{ $project->host->name }}</h3>
+                                    <ul class="list-unstyled">
+                                        <li>{{ $project->host->location ?? 'Sin ubicación' }}</li>
+                                        <li><span class="text-muted small">En la comunidad desde:</span> {{ $project->created_at->format('Y') }}</li>
+                                    </ul>
+                                    <div class="social-media d-flex gap-3">
+                                        @if ($project->host->linkedin)
+                                            <a href="{{ $project->host->linkedin }}" target="_blank" class="fs-5"><i class="bi bi-linkedin"></i></a>
+                                        @endif
 
-                            @if ($project->host->location)
-                                <div class="mb-3 d-flex gap-2 align-items-center">
-                                    <i class="bi bi-geo-alt fs-5 text-primary"></i>
-                                    <p>{{ $project->host->location }}</p>
+                                        @if ($project->host->instagram)
+                                            <a href="{{ $project->host->instagram }}" target="_blank" class="fs-5"><i class="bi bi-instagram"></i></a>
+                                        @endif
+
+                                        @if ($project->host->facebook)
+                                            <a href="{{ $project->host->facebook }}" target="_blank" class="fs-5"><i class="bi bi-facebook"></i></a>
+                                        @endif
+                                    </div>
                                 </div>
-                            @endif
-
-                            <div class="d-flex gap-2">
-                                @if ($project->host->linkedin)
-                                    <a href="{{ $project->host->linkedin }}"
-                                       target="_blank"
-                                       class="btn btn-link"><i class="bi bi-linkedin"></i></a>
-                                @endif
-
-                                @if ($project->host->instagram)
-                                    <a href="{{ $project->host->instagram }}"
-                                       target="_blank"
-                                       class="btn btn-link"><i class="bi bi-instagram"></i></a>
-                                @endif
-
-                                @if ($project->host->facebook)
-                                    <a href="{{ $project->host->facebook }}"
-                                       target="_blank"
-                                       class="btn btn-link"><i class="bi bi-facebook"></i></a>
-                                @endif
                             </div>
                         </div>
                     </div>

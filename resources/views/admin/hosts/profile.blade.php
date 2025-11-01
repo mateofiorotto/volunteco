@@ -13,34 +13,33 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="card mb-3">
-                                    <div class="row g-0">
+                                    <div class="d-flex g-0">
                                         @if (!empty($host->host->avatar))
-                                            <div class="col-md-3">
+                                            <div class="avatar p-3">
                                                 <img src="{{ asset('storage/' . $host->host->avatar) }}"
-                                                     alt="Foto de perfil"
-                                                     class="img-fluid rounded-start object-fit-contain h-100 w-100">
+                                                    alt="Foto de perfil"
+                                                    class="img-fluid object-fit-contain rounded-circle"
+                                                    width="80"
+                                                    height="80">
                                             </div>
                                         @endif
-                                        <div class="col">
-                                            <div class="card-body">
-                                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                                    <div class="small text-muted">Anfitrión</div>
-                                                    @if ($host->status !== 'activo')
-                                                    <span class="text-uppercase fw-semibold badge {{ $host->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger'}}">
-                                                        {{ $host->status }}
-                                                    </span>
-                                                    @endif
-                                                </div>
-                                                <h2 class="card-title h3">{{ $host->host->name }}</h2>
-                                                <ul class="list-unstyled mb-0">
-                                                    <li><a href="mailto:{{ $host->email }}" target="_blank">{{ $host->email }}</a></li>
-                                                    <li>{{$host->host->cuit}}</li>
-                                                    <li>{{ $host->host->phone }}</li>
-                                                    <li>{{ $host->host->location ?? 'Sin ubicación' }}</li>
-                                                    <li><span class="text-muted small">Contacto:</span> {{ $host->host->person_full_name }}</li>
-                                                    <li><span class="text-muted small">Fecha de registro:</span> {{ $host->created_at->format('d/m/Y') }}</li>
-                                                </ul>
+                                        <div class="card-body flex-fill">
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <div class="small text-muted">Anfitrión</div>
+                                                @if ($host->status !== 'activo')
+                                                <span class="text-uppercase fw-semibold badge {{ $host->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger'}}">
+                                                    {{ $host->status }}
+                                                </span>
+                                                @endif
                                             </div>
+                                            <h2 class="card-title h3">{{ $host->host->name }}</h2>
+                                            <ul class="list-unstyled mb-0">
+                                                <li><a href="mailto:{{ $host->email }}" target="_blank">{{ $host->email }}</a></li>
+                                                <li>{{ $host->host->phone }}</li>
+                                                <li>{{ $host->host->location ?? 'Sin ubicación' }}</li>
+                                                <li><span class="text-muted small">Contacto:</span> {{ $host->host->person_full_name }}</li>
+                                                <li><span class="text-muted small">Fecha de registro:</span> {{ $host->created_at->format('d/m/Y') }}</li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
