@@ -29,7 +29,9 @@
             <div class="col-md-8 col-12 mb-4">
                 <div class="card">
                     @if ($project->image)
-                        <img src="{{ asset('storage/' . $project->image) }}" class="card-img-top object-fit-cover" alt="{{ $project->title }}" width="400" height="400">
+                    <div class="ratio ratio-16x9">
+                        <img src="{{ asset('storage/' . $project->image) }}" class="card-img-top object-fit-cover" alt="{{ $project->title }}" width="854" height="480">
+                    </div>
                     @endif
 
                     <div class="card-body">

@@ -164,7 +164,7 @@ class RegisteredHostController extends Controller
                 'linkedin' => 'nullable|string|max:255|min:3',
                 'facebook' => 'nullable|string|max:255|min:3',
                 'instagram' => 'nullable|string|max:255|min:3',
-                'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,WebP|max:100|dimensions:min_width=100,min_height=100,max_width=300,max_height=300',
                 'description' => 'required|string|max:500|min:50',
                 'location' => 'nullable|string|max:255|min:3',
             ]);
