@@ -5,7 +5,7 @@
     @guest
     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-4">
         <li class="nav-item">
-            <x-nav-link :route="'home'">Inicio</x-nav-link>
+            <x-nav-link :route="'home'">Home</x-nav-link>
         </li>
         <li class="nav-item">
             <x-nav-link :route="'projects'">Proyectos</x-nav-link>
