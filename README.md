@@ -1,6 +1,6 @@
-# Volunteco*
+# Volunteco
 
-Volunteco es una web acerca de voluntariados de carácter ecológico donde participan voluntarios y anfitriones.
+Volunteco es una web acerca de voluntariados de carácter ecológico donde participan voluntarios y anfitriones.[^1]
 
 ## Desarrolladores
 
@@ -75,4 +75,5 @@ Volunteco es una web acerca de voluntariados de carácter ecológico donde parti
 - **Manejo de condiciones**
 - **Creacion de usuarios administradores**
 
-<small>© 2025 Hermina Bento y Mateo Fiorotto — * Página Web para el proyecto final de la carrera de Diseño y Programación web en Escuela Da Vinci.</small>
+© 2025 Hermina Bento y Mateo Fiorotto
+[^1]: Página Web para el proyecto final de la carrera de Diseño y Programación web en Escuela Da Vinci.
