@@ -1,14 +1,13 @@
-# Volunteco
+# Volunteco*
 
-Página Web para el proyecto final de la carrera de Diseño y Programación web en Escuela Da Vinci.
 Volunteco es una web acerca de voluntariados de carácter ecológico donde participan voluntarios y anfitriones.
 
-## Estudiantes
+## Desarrolladores
 
 - Bento Herminia
 - Fiorotto Mateo
 
-## Tecnologias usadas
+## Tecnologías usadas
 
 - Laravel 12
 - Bootstrap
@@ -75,3 +74,5 @@ Volunteco es una web acerca de voluntariados de carácter ecológico donde parti
 - **Manejo de tipos de proyectos**
 - **Manejo de condiciones**
 - **Creacion de usuarios administradores**
+
+<small>© 2025 Hermina Bento y Mateo Fiorotto — * Página Web para el proyecto final de la carrera de Diseño y Programación web en Escuela Da Vinci.</small>
