@@ -71,7 +71,7 @@ class RegisteredVolunteerController extends Controller
              if ($request->hasFile('avatar')) {
                 $avatarPath = $this->imageService->storeImage($request->file('avatar'), 'volunteers');
             } else {
-                $avatarPath = 'logo.svg';
+                $avatarPath = 'perfil-volunteer.svg';
             }
 
             $user = User::create([
