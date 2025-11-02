@@ -5,8 +5,7 @@
         <div class="container py-5">
             <div class="d-flex justify-content-between align-items-center mb-5">
                 <h1 class="title-h1 h3 mb-0">Perfil de <span>Voluntario</span></h1>
-                <a href="{{ route('admin.volunteers.index') }}"
-                   class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
+                <a href="{{ route('admin.volunteers.index') }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
             </div>
             <div class="row mb-5">
                 <div class="col-md-8">
@@ -14,44 +13,48 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="card mb-3">
-                                    <div class="row g-0">
+                                    <div class="d-flex g-0">
                                         @if (!empty($volunteer->volunteer->avatar))
-                                            <div class="col-md-3">
+                                            <div class="avatar p-3">
                                                 <img src="{{ asset('storage/' . $volunteer->volunteer->avatar) }}"
-                                                     alt="Foto de perfil"
-                                                     class="img-fluid rounded-start object-fit-contain h-100 w-100">
+                                                    alt="Foto de perfil de {{ $volunteer->full_name }}"
+                                                    class="img-fluid object-fit-contain rounded-circle"
+                                                    width="80"
+                                                    height="80">
                                             </div>
                                         @endif
-                                        <div class="col">
-                                            <div class="card-body">
-                                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                                    <div class="small text-muted">Voluntario</div>
-                                                    @if ($volunteer->status !== 'activo')
-                                                        <span
-                                                              class="text-uppercase fw-semibold badge {{ $volunteer->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
-                                                            {{ $volunteer->status }}
-                                                        </span>
-                                                    @endif
+                                        <div class="card-body flex-fill">
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <div class="small text-muted">Voluntario</div>
+                                                @if ($volunteer->status !== 'activo')
+                                                    <span class="text-uppercase fw-semibold badge {{ $volunteer->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
+                                                        {{ $volunteer->status }}
+                                                    </span>
+                                                @endif
+                                            </div>
+                                            <h2 class="card-title h3">{{ $volunteer->volunteer->full_name }}</h2>
+                                            <div class="row gap-5">
+                                                <div class="col">
+                                                    <ul class="list-unstyled">
+                                                        <li><a href="mailto:{{ $volunteer->email }}" target="_blank">{{ $volunteer->email }}</a></li>
+                                                        <li>{{ $volunteer->volunteer->phone }}</li>
+                                                        <li><i class="bi bi-geo-alt text-primary me-2"></i>{{ $volunteer->volunteer->location }}</li>
+                                                    </ul>
                                                 </div>
-                                                <h2 class="card-title h3">{{ $volunteer->volunteer->full_name }}</h2>
-                                                <ul class="list-unstyled mb-0">
-                                                    <li><a href="mailto:{{ $volunteer->email }}"
-                                                           target="_blank">{{ $volunteer->email }}</a></li>
-                                                    <li>{{ $volunteer->volunteer->dni }}</li>
-                                                    <li>{{ $volunteer->volunteer->phone }}</li>
-                                                    <li>{{ $volunteer->volunteer->location }}</li>
-                                                    <li><span class="text-muted small">Fecha de nacimiento:</span>
-                                                        {{ \Carbon\Carbon::parse($volunteer->volunteer->birthdate)->format('d/m/Y') }}
-                                                    </li>
-                                                    <li><span class="text-muted small">Nivel educativo:</span>
-                                                        {{ $volunteer->volunteer->educational_level }}</li>
-                                                    <li><span class="text-muted small">Profesión:</span>
-                                                        {{ $volunteer->volunteer->profession ?? 'Sin profesión' }}</li>
-                                                    <li><span class="text-muted small">Fecha de registro:</span>
-                                                        {{ $volunteer->created_at->format('d/m/Y') }}</li>
-                                                </ul>
+                                                <div class="col">
+                                                    <ul class="list-unstyled">
+                                                        <li><i class="bi bi-person-vcard text-primary me-2"></i>{{ number_format($volunteer->volunteer->dni, 0, ',', '.') }}</li>
+                                                        <li><span class="text-muted small">Fecha de nacimiento: </span>{{ $volunteer->volunteer->birthdate }}</li>
+                                                        <li><span class="text-muted small">Fecha de registro: </span>{{ $volunteer->created_at->format('d/m/Y') }}</li>
+                                                    </ul>
+                                                    <ul class="list-unstyled mb-0">
+                                                        <li><span class="text-muted small">Profesión: </span><span class="text-capitalize">{{ $volunteer->volunteer->profession ?? 'Sin profesión' }}</span></li>
+                                                        <li><span class="text-muted small">Nivel educativo: </span><span class="text-capitalize">{{ $volunteer->volunteer->educational_level }}</span></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>

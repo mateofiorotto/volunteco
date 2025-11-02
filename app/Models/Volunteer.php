@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Carbon\Carbon;
 
 /**
  * Clase de VOLUNTARIOS
@@ -51,4 +53,16 @@ class Volunteer extends Model
             ->withPivot('status', 'applied_at', 'accepted_at')
             ->withTimestamps();
     }
+
+    /**
+     * Modifico el formato de la fecha de nacimiento.
+     * fuente: https://laravel.com/docs/12.x/eloquent-mutators#defining-an-accessor
+     */
+    protected function birthdate(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value ? Carbon::parse($value)->format('d/m/Y') : null
+        );
+    }
+
 }

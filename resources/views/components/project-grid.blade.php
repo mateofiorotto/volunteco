@@ -78,7 +78,7 @@
 
                     @if (isset($project->pivot) && $project->pivot?->status !== 'rechazado')
                         <form method="POST"
-                                action="{{ route('voluntarios.withdraw-project', $project->id) }}"
+                                action="{{ route('volunteers.withdraw-project', $project->id) }}"
                                 onsubmit="return confirm('¿Estás seguro de que deseas desistir de este proyecto?');">
                             @csrf
                             @method('DELETE')

@@ -64,7 +64,7 @@ class ProfileController extends Controller
             'linkedin' => 'nullable|string|max:255',
             'facebook' => 'nullable|string|max:255',
             'instagram' => 'nullable|string|max:255',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'avatar' => 'nullable|image|mimetypes:jpeg,png,jpg,gif,WebP|max:100|dimensions:min_width=100,min_height=100,max_width=300,max_height=300',
             'description' => 'required|string|max:1000|min:50',
             'location' => 'required|string|max:255|min:3',
         ]);

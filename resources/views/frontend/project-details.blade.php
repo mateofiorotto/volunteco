@@ -43,10 +43,8 @@
                         @endif
 
                         <div class="card-body">
-                            <div class="d-md-flex align-items-center justify-content-between mb-2">
-                                <h2 class="card-title fw-bold mb-0">{{ $project->title }}</h2>
-                                <span class="badge bg-primary">{{ $project->projectType->name }}</span>
-                            </div>
+                            <span class="badge bg-primary mb-2 fw-normal">{{ $project->projectType->name }}</span>
+                            <h2 class="card-title h3">{{ $project->title }}</h2>
                             <p class="card-text">{{ $project->description }}</p>
                             <div class="row">
                                 <div class="col-md-6 mb-3">

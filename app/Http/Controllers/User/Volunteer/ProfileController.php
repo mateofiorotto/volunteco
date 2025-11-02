@@ -52,7 +52,7 @@ class ProfileController extends Controller
 
     /**
      * Actualizar perfil propio
-     * 
+     *
      */
     public function updateMyProfile(Request $request)
     {
@@ -68,7 +68,7 @@ class ProfileController extends Controller
             'linkedin' => 'nullable|string|max:255',
             'facebook' => 'nullable|string|max:255',
             'instagram' => 'nullable|string|max:255',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'avatar' => 'nullable|image|mimetypes:jpeg,png,jpg,gif,WebP|max:100|dimensions:min_width=100,min_height=100,max_width=300,max_height=300',
             'biography' => 'required|string|max:500|min:50',
             'educational_level' => 'required|string',
             'profession' => 'nullable|string|max:255|min:3',
