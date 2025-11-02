@@ -4,11 +4,12 @@
     <section>
         <div class="container py-5">
 
-            <div class="row mb-5">
-                <div class="col-md-7">
-                    <h1 class="title-h1 h3">Editar perfil de <span>Anfitrión</span></h1>
+            <div class="d-flex justify-content-between align-items-start mb-5">
+                <div>
+                    <h1 class="title-h1 h3">Editar <span>Mi Perfil</span></h1>
                     <p class="mb-3">Completá todos los datos requeridos para actualizar tu perfil.</p>
                 </div>
+                <a href="{{ url()->previous() }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
             </div>
 
             <form method="POST"
@@ -91,7 +92,7 @@
                             <div class="card-body">
                                 <h2 class="card-title h3">Datos de Contacto</h2>
                                 <p class="mb-3">Completa con tus datos.</p>
-                                
+
                                 <div class="mb-3">
                                     <label for="phone"
                                            class="form-label">Teléfono *</label>
@@ -164,7 +165,7 @@
                             <div class="card-body">
                                 <h2 class="card-title h3">Información Adicional</h2>
                                 <p class="mb-3">Completa con los datos de tu organización.</p>
-                                
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
@@ -173,7 +174,7 @@
                                             <input type="file"
                                                    id="avatar"
                                                    name="avatar"
-                                                   accept="image/*"
+                                                   accept=".jpg, .jpeg, .png, .gif, .WebP"
                                                    class="form-control" />
                                             <p class="pt-3 pb-3">Foto de perfil actual:</p>
                                             <img src="{{ asset('storage/' . $host->avatar) }}"
@@ -181,7 +182,7 @@
                                                  class="mt-3 mb-3 rounded-circle img-fluid object-fit-cover avatar-md">
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="description"
@@ -204,7 +205,7 @@
 
                 <div class="d-flex gap-3 justify-content-center">
                     <a href="{{ url()->previous() }}"
-                       class="btn btn-outline-primary btn-lg px-5">Volver</a>
+                       class="btn btn-outline-primary btn-lg px-5">Cancelar</a>
                     <button type="submit"
                             class="btn btn-primary btn-lg px-5">Actualizar</button>
                 </div>

@@ -4,7 +4,7 @@
     <div class="container py-5">
         <div class="row mb-5">
             <div class="col-md-7">
-                <h2 class="title-h1 h3 mb-0">Crear <span>Proyecto</span></h2>
+                <h1 class="title-h1 h3 mb-0">Crear <span>Proyecto</span></h1>
             </div>
         </div>
 

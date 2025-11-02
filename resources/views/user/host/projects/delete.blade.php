@@ -4,7 +4,7 @@
 
     <section class="container py-5">
         <div class="d-flex flex-column align-items-center mb-5">
-            <h2 class="title-h1 h3 mb-4 text-center">Eliminar <span>Proyecto</span></h2>
+            <h1 class="title-h1 h3 mb-4 text-center">Eliminar <span>Proyecto</span></h1>
             <p class="text-center">¿Estás seguro de que deseas eliminar el proyecto "<strong>{{ $project->title }}</strong>"? Esta acción no se puede deshacer.</p>
         </div>
 

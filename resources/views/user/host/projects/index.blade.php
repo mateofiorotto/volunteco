@@ -3,9 +3,9 @@
 @section('content')
     <section class="container py-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
-            <h2 class="title-h1 h3 mb-5">Mis <span>Proyectos</span></h2>
+            <h1 class="title-h1 h3 mb-0">Mis <span>Proyectos</span></h1>
             <!--Crear proyecto-->
-            <a href="{{ route('hosts.my-projects.create') }}" class="btn btn-primary mb-4">Crear Proyecto</a>
+            <a href="{{ route('hosts.my-projects.create') }}" class="btn btn-primary">Crear Proyecto</a>
         </div>
 
         <div class="projects-list">

@@ -134,7 +134,7 @@
                                 <a href="#volunteers-list">
                                     <button class="btn btn-secondary text-light w-100 mb-3"
                                             type="submit">
-                                        Ver Voluntarios que aplicaron
+                                        Ver voluntarios que aplicaron
                                     </button>
                                 </a>
                             </div>

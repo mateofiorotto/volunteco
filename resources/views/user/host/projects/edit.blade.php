@@ -2,10 +2,9 @@
 
 @section('content')
     <div class="container py-5">
-        <div class="row mb-5">
-            <div class="col-md-7">
-                <h1 class="title-h1 h3 mb-0">Editar <span>Proyecto</span></h1>
-            </div>
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <h1 class="title-h1 h3 mb-0">Editar <span>Proyecto</h1>
+            <a href="{{ url()->previous() }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
         </div>
 
         @if ($errors->any())

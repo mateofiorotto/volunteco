@@ -166,7 +166,7 @@ class HostsController extends Controller
             'delete_reasons' => 'required|string|max:500|min:10',
         ]);
 
-        if ($host->host->avatar && $host->host->avatar !== 'logo.svg') {
+        if ($host->host->avatar && $host->host->avatar !== 'perfil-volunteer.svg') {
             $this->imageService->deleteImage($host->host->avatar);
         }
 
