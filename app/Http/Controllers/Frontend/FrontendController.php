@@ -14,9 +14,18 @@ class FrontendController extends Controller
         return view('frontend/home');
     }
 
+    /**
+     * Devolver listado de proyectos con paginación
+     */
     public function projects()
     {
-        $projects = Project::where('enabled', true)->latest()->paginate(10);
+        //proyectos activos y con anfitriones activos
+         $projects = Project::where('enabled', true)
+        ->whereHas('host.user', function($query) {
+            $query->where('status', 'activo');
+        })
+        ->latest()
+        ->paginate(9);
 
         return view('frontend/projects', compact('projects'));
     }

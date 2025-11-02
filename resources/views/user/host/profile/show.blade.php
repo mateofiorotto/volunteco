@@ -143,5 +143,15 @@
                 </div>
             </div>
         </div>
+         @if ($host->projects->isNotEmpty())
+            <div class="mb-5 mt-5">
+                <h2 class="text-center title-h1 h3 mb-5">Proyectos de <span>{{ $host->name }}</span></h2>
+                <x-project-grid :projects="$host->projects" />
+            </div>
+        @else
+            <div class="alert alert-info text-center">
+                <p class="mb-0">Este anfitrión aún no tiene proyectos publicados.</p>
+            </div>
+        @endif
     </section>
 @endsection

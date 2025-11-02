@@ -28,7 +28,11 @@ class ProfileController extends Controller
      */
     public function getProfile($id)
     {
-        $volunteer = Volunteer::with('user')->findOrFail($id);
+        $volunteer = Volunteer::with('user')
+        ->whereHas('user', function($query) {
+            $query->where('status', 'activo');
+        })
+        ->findOrFail($id);
 
         return view('user.volunteer.profile.show', compact('volunteer'));
     }
