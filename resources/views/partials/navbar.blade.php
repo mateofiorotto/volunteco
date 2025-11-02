@@ -26,6 +26,8 @@
         </div>
     </div>
     @else
+    <!-- esto es solo en modo desarrollo sacar despues en produccion -->
+    <div>Hola {{Auth::user()->role->name}}</div>
     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-4">
         <!-- Usuario autenticado -->
         @if (Auth::user()->hasRole('admin'))
