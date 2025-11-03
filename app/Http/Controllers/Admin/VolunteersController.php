@@ -55,7 +55,6 @@ class VolunteersController extends Controller
         $volunteer->status = "activo";
         $volunteer->save();
 
-        $volunteer->volunteer->disabled_at = null;
         $volunteer->volunteer->save();
 
         return redirect()->route('admin.volunteers.index');
@@ -71,9 +70,8 @@ class VolunteersController extends Controller
         $volunteer->status = "inactivo";
         $volunteer->save();
 
-        $volunteer->volunteer->disabled_at = now();
         $volunteer->volunteer->save();
-        
+
         Mail::to($volunteer->email)->send(new VolunteerDisableProfileMail($volunteer->volunteer->full_name));
 
         return redirect()->route('admin.volunteers.index');

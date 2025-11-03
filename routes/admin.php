@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HostsController;
+use App\Http\Controllers\Admin\ProjectsController;
 use App\Http\Controllers\Admin\VolunteersController;
 
 Route::middleware(['checkEnabled', 'authCheck', 'isAdmin'])->prefix('admin')->name('admin.')->group(function () {
@@ -24,5 +25,8 @@ Route::middleware(['checkEnabled', 'authCheck', 'isAdmin'])->prefix('admin')->na
     Route::put('/voluntarios/{id}/reactivar', [VolunteersController::class, 'reenableVolunteerProfile'])->name('reenable-volunteer-profile');
     Route::put('/voluntarios/{id}/desactivar', [VolunteersController::class, 'disableVolunteerProfile'])->name('disable-volunteer-profile');
     Route::delete('/voluntarios/{id}/eliminar', [VolunteersController::class, 'deleteVolunteerProfile'])->name('delete-volunteer-profile');
+
+    Route::get('/proyectos', [ProjectsController::class, 'index'])->name('projects.index');
+
 });
 ?>

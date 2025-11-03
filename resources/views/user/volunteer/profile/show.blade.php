@@ -35,7 +35,7 @@
                                     <p>{{ $volunteer->location }}</p>
                                 </div>
                                 @endif
-                                @if ($volunteer->birthdate)
+                                @if ($volunteer->dni)
                                 <div class="d-flex align-items-start">
                                     <i class="bi bi-person-vcard text-primary me-2"></i>
                                     <p>{{ number_format($volunteer->dni, 0, ',', '.') }}</p>
@@ -44,7 +44,7 @@
                                 @if ($volunteer->birthdate)
                                 <div class="d-flex align-items-start">
                                     <i class="bi bi-cake text-primary me-2"></i>
-                                    <p>{{ $volunteer->birthdate }}</p>
+                                    <p>{{ $volunteer->birthdate->format('d/m/Y') }}</p>
                                 </div>
                                 @endif
                                 <!-- Descripción -->

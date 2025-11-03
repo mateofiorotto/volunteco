@@ -41,7 +41,7 @@
                 <x-nav-link :route="'admin.volunteers.index'">Voluntarios</x-nav-link>
             </li>
             <li class="nav-item">
-                <x-nav-link :route="null">Proyectos</x-nav-link>
+                <x-nav-link :route="'admin.projects.index'">Proyectos</x-nav-link>
             </li>
         @endif
         @if (Auth::user()->hasRole('host'))

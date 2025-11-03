@@ -5,7 +5,7 @@
         <div class="container py-5">
             <div class="d-flex justify-content-between align-items-center mb-5">
                 <h1 class="title-h1 h3 mb-0">Perfil de <span>Anfitrión</span></h1>
-                <a href="{{ route('admin.hosts.index') }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
+                <a href="{{ url()->previous()}}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
             </div>
             <div class="row mb-5">
                 <div class="col-md-8">
@@ -241,20 +241,26 @@
                     <ul class="list-group list-group-flush">
                     @if (!empty($host->host->projects))
                         @foreach ($host->host->projects as $project)
-                        <li class="list-group-item">
+                        <li class="list-group-item {{ !$project->enabled ? 'bg-danger bg-opacity-25' : '' }}">
                             <div class="row align-items-center">
                                 <div class="col-12 col-md-4">{{$project->title}}</div>
-                                <div class="col-12 col-md-4">
-                                    Inicia: {{$project->start_date}}
+                                <div class="col-12 col-md-3">
+                                    <div><span class="small text-muted">Inicia: </span> {{$project->start_date->format('d/m/Y')}}</div>
+                                    <div><span class="small text-muted">Finaliza: </span>{{$project->end_date->format('d/m/Y')}}</div>
                                 </div>
-                                <div class="col-12 col-md-2">
-                                    X voluntarios postulados
-                                    X voluntarios activos
+                                <div class="col-12 col-md-3">
+                                    @if ($project->volunteers->isEmpty())
+                                        <p class="mb-0 small">No hay voluntarios asociados a este proyecto.</p>
+                                    @else
+                                        <ul class="list-unstyled">
+                                            @foreach ($project->volunteers as $volunteer)
+                                                <li><span class="{{ ($volunteer->pivot->status !== 'activo') ? 'text-danger' : '' }}">{{ $volunteer->full_name }}</span><span class="small {{ ($volunteer->pivot->status !== 'activo') ? 'text-danger' : 'text-muted' }}"> ({{ $volunteer->pivot->status ?? 'N/A' }})</span></li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
                                 </div>
                                 <div class="col-12 col-md-2 text-center">
-                                    <a href="" class="btn btn-sm btn-azul" title="ver">
-                                        Ver
-                                    </a>
+                                    <a href="" class="btn btn-sm btn-azul" title="ver">Ver</a>
                                 </div>
                             </div>
                         </li>
