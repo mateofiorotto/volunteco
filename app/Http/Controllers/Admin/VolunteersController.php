@@ -65,12 +65,15 @@ class VolunteersController extends Controller
      */
     public function disableVolunteerProfile($id)
     {
-        $volunteer = User::where('id', $id)->first();
+        $volunteer = User::findOrFail($id);
+        $volunteerProfile = $volunteer->volunteer;
 
         $volunteer->status = "inactivo";
         $volunteer->save();
 
-        $volunteer->volunteer->save();
+        if ($volunteerProfile && $volunteerProfile->projects()->exists()) {
+            $volunteerProfile->projects()->detach(); // elimina todas las filas en la tabla pivote
+        }
 
         Mail::to($volunteer->email)->send(new VolunteerDisableProfileMail($volunteer->volunteer->full_name));
 

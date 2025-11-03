@@ -55,8 +55,13 @@ class HostProjectController extends Controller
         }
 
         $registeredVolunteers = $project->volunteers()
-            ->with('user')
+            ->whereHas('user', function ($query) {
+                $query->where('status', 'activo');
+            })
             ->wherePivotIn('status', ['pendiente', 'aceptado', 'rechazado'])
+            ->with(['user' => function ($query) {
+                $query->where('status', 'activo');
+            }])
             ->orderByPivot('applied_at', 'desc')
             ->get();
 

@@ -145,74 +145,63 @@
         </div>
 
         <div id="volunteers-list" class="row">
-            <h3>Voluntarios</h3>
+            <h3>Voluntarios aplicados para este proyecto</h3>
 
-            {{-- Voluntarios ACEPTADOS --}}
-            @if ($registeredVolunteers->where('pivot.status', 'aceptado')->isNotEmpty())
-                <h4 class="mt-4 mb-3">Voluntarios Aceptados</h4>
-                @foreach ($registeredVolunteers->where('pivot.status', 'aceptado') as $volunteer)
-                    <div class="card mb-3 w-100 shadow-sm">
-                        <div class="card-body d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="card-title mb-1">{{ $volunteer->full_name }}</h5>
-                                <p class="card-text text-muted mb-0">Estado: <strong>{{ ucfirst($volunteer->pivot->status) }}</strong></p>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @endif
-
-            {{-- Voluntarios PENDIENTES --}}
-            @if ($registeredVolunteers->where('pivot.status', 'pendiente')->isNotEmpty())
-                <h4 class="mt-4 mb-3">Voluntarios Pendientes</h4>
-                @foreach ($registeredVolunteers->where('pivot.status', 'pendiente') as $volunteer)
-                    <div class="card mb-3 w-100 shadow-sm">
-                        <div class="card-body d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="card-title mb-1">{{ $volunteer->full_name }}</h5>
-                                <p class="card-text mb-0">Estado: <strong>{{ ucfirst($volunteer->pivot->status) }}</strong></p>
-                            </div>
-
-                            <div class="d-flex gap-2">
-                                <a href="{{route('volunteers.volunteer-profile', $volunteer->id)}}" class="btn btn-secondary text-light">Ver Perfil</a> <!-- Cuando esten implementados los perfiles por id -->
-                                <form method="POST" action="{{ route('hosts.my-projects.reject-volunteer', [$project->id, $volunteer->id]) }}">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" class="btn btn-outline-primary">Rechazar</button>
-                                </form>
-
-                                <form method="POST" action="{{ route('hosts.my-projects.accept-volunteer', [$project->id, $volunteer->id]) }}">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" class="btn btn-primary">Aceptar</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @endif
-
-            {{-- Voluntarios RECHAZADOS --}}
-            @if ($registeredVolunteers->where('pivot.status', 'rechazado')->isNotEmpty())
-                <h4 class="mt-4 mb-3">Voluntarios Rechazados</h4>
-                @foreach ($registeredVolunteers->where('pivot.status', 'rechazado') as $volunteer)
-                    <div class="card mb-3 w-100 shadow-sm">
-                        <div class="card-body d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="card-title mb-1">{{ $volunteer->full_name }}</h5>
-                                <p class="card-text text-muted mb-0">
-                                    Estado: <strong>{{ ucfirst($volunteer->pivot->status) }}</strong>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @endif
-
-            {{-- Si no hay ninguno --}}
-            @if ($registeredVolunteers->isEmpty())
-                <p>No hay voluntarios inscritos en este proyecto.</p>
-            @endif
+            <div class="card p-0 border-primary">
+                <div class="card-header text-bg-primary">
+                    <h3 class="h5 mb-0">Voluntarios aplicados <span class="small fw-light">(Total: )</span></h3>
+                </div>
+                <div class="card-body">
+                    @if ($registeredVolunteers->isEmpty())
+                        <p>No hay voluntarios inscritos en este proyecto.</p>
+                    @else
+                        <table class="table border-primary">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($registeredVolunteers as $volunteer)
+                                <tr>
+                                    <th scope="row">{{ $volunteer->id}}</th>
+                                    <td>{{ $volunteer->full_name }}</td>
+                                    <td>
+                                    @if ($volunteer->pivot->status !== 'aceptado')
+                                        <span class="text-uppercase fw-semibold badge {{ $volunteer->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger'}}">
+                                            {{ $volunteer->pivot->status }}
+                                        </span>
+                                    @else
+                                        <span class="text-uppercase fw-semibold badge bg-transparent text-body">{{ $volunteer->pivot->status }}</span>
+                                    @endif
+                                    </td>
+                                    <td>
+                                        <div class="d-flex gap-3">
+                                            <a href="{{route('volunteers.volunteer-profile', $volunteer->id)}}" class="btn btn-azul" title="ver">Ver Perfil</a>
+                                            <form method="POST" action="{{ route('hosts.my-projects.reject-volunteer', [$project->id, $volunteer->id]) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-outline-primary">Rechazar</button>
+                                            </form>
+                                            @if ($volunteer->pivot->status !== 'aceptado')
+                                            <form method="POST" action="{{ route('hosts.my-projects.accept-volunteer', [$project->id, $volunteer->id]) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-primary">Aceptar</button>
+                                            </form>
+                                            @endif
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @endif
+                </div>
+            </div>
         </div>
     </section>
 @endsection
