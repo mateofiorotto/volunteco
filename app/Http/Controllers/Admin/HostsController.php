@@ -58,7 +58,7 @@ class HostsController extends Controller
     public function getHostProfileById($id)
     {
         //$host = User::where('id', $id)->with('host')->first();
-        $host = User::where('id', $id)->with('host.projects')->firstOrFail();
+        $host = User::where('id', $id)->with('host.projects.volunteers')->firstOrFail();
 
         return view('admin.hosts.profile', ['host' => $host]);
     }

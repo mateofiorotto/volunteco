@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Condition;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Carbon\Carbon;
 
 class Project extends Model
 {
@@ -22,6 +24,12 @@ class Project extends Model
 
     protected $guarded = [
         'id',
+    ];
+
+    // Cast de fechas
+    protected $casts = [
+        'start_date' => 'datetime',
+        'end_date'   => 'datetime',
     ];
 
     //un proyecto puede tener muchas condiciones
@@ -48,4 +56,5 @@ class Project extends Model
             ->withPivot('status', 'applied_at', 'accepted_at')
             ->withTimestamps();
     }
+
 }

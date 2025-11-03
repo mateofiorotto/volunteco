@@ -5,7 +5,7 @@
         <div class="container py-5">
             <div class="d-flex justify-content-between align-items-center mb-5">
                 <h1 class="title-h1 h3 mb-0">Perfil de <span>Voluntario</span></h1>
-                <a href="{{ route('admin.volunteers.index') }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
+                <a href="{{ url()->previous() }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
             </div>
             <div class="row mb-5">
                 <div class="col-md-8">
@@ -44,7 +44,7 @@
                                                 <div class="col">
                                                     <ul class="list-unstyled">
                                                         <li><i class="bi bi-person-vcard text-primary me-2"></i>{{ number_format($volunteer->volunteer->dni, 0, ',', '.') }}</li>
-                                                        <li><span class="text-muted small">Fecha de nacimiento: </span>{{ $volunteer->volunteer->birthdate }}</li>
+                                                        <li><span class="text-muted small">Fecha de nacimiento: </span>{{ $volunteer->volunteer->birthdate->format('d/m/Y') }}</li>
                                                         <li><span class="text-muted small">Fecha de registro: </span>{{ $volunteer->created_at->format('d/m/Y') }}</li>
                                                     </ul>
                                                     <ul class="list-unstyled mb-0">
@@ -140,7 +140,7 @@
                                     @csrf
                                     @method('PUT')
                                     <button type="submit"
-                                            class="btn btn-primary">Desactivar</button>
+                                            class="btn btn-outline-primary">Desactivar</button>
                                 </form>
                             @endif
                         </div>

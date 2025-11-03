@@ -39,6 +39,11 @@ class Volunteer extends Model
         'created_at',
     ];
 
+    // Cast de fechas
+    protected $casts = [
+        'birthdate' => 'datetime'
+    ];
+
     /**
      * FK a User
      */
@@ -52,17 +57,6 @@ class Volunteer extends Model
         return $this->belongsToMany(Project::class, 'project_volunteer')
             ->withPivot('status', 'applied_at', 'accepted_at')
             ->withTimestamps();
-    }
-
-    /**
-     * Modifico el formato de la fecha de nacimiento.
-     * fuente: https://laravel.com/docs/12.x/eloquent-mutators#defining-an-accessor
-     */
-    protected function birthdate(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => $value ? Carbon::parse($value)->format('d/m/Y') : null
-        );
     }
 
 }

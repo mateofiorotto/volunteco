@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('project_volunteer', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constrained()->onDelete('cascade');
-            $table->foreignId('volunteer_id')->constrained()->onDelete('cascade');
+            $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
+            $table->foreignId('volunteer_id')->constrained('volunteers')->onDelete('cascade');
             $table->enum('status', ['pendiente', 'aceptado', 'rechazado']);
             $table->timestamp('applied_at')->useCurrent();
             $table->timestamp('accepted_at')->nullable();
             $table->timestamps();
+            $table->unique(['project_id', 'volunteer_id']);
         });
     }
 

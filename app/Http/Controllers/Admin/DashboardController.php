@@ -4,25 +4,41 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Host;
+use App\Models\Volunteer;
 
 class DashboardController extends Controller
 {
     //
     public function index()
     {
-        $users = \App\Models\User::whereHas('role', function ($query) {$query->where('type', '!=', 'admin');})
+        $users = User::whereHas('role', function ($query) {$query->where('type', '!=', 'admin');})
             ->get();
-        $activeUsers = \App\Models\User::where('status', 'activo')
+
+        $activeUsers = User::where('status', 'activo')
             ->whereHas('role', function ($query) {$query->where('type', '!=', 'admin');})
             ->count();
-        $hostUsers =  \App\Models\Host::count();
-        $volunteerUsers =  \App\Models\Volunteer::count();
 
-        return view('admin.dashboard', [
-            'users' => $users,
-            'activeUsers' => $activeUsers,
-            'hostCount' => $hostUsers,
-            'volunteerCount' => $volunteerUsers
-        ]);
+        $hosts = User::whereHas('role', fn($q) => $q->where('type', 'host'))
+            ->with('host')
+            ->get();
+
+        $hostsLast = $hosts->sortByDesc('created_at')->take(5);
+
+        $hostCount =  Host::count();
+
+        $volunteers = User::whereHas('role', fn($q) => $q->where('type', 'volunteer'))
+            ->with('volunteer')
+            ->get();
+
+        $volunteersLast = $volunteers->sortByDesc('created_at')->take(5);
+
+        $volunteerCount =  Volunteer::count();
+
+        return view('admin.dashboard', compact(
+            'users', 'activeUsers', 'hosts', 'hostCount', 'hostsLast', 'volunteers', 'volunteerCount', 'volunteersLast'
+        )
+    );
     }
 }
