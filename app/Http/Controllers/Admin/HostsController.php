@@ -30,12 +30,15 @@ class HostsController extends Controller
      */
     public function index()
     {
+        //asignar a cada variable llamando al metodo getHostsByStatus
         $hostsDisabled = $this->getHostsByStatus('inactivo');
         $hostsNotVerified = $this->getHostsByStatus('pendiente');
         $hostsVerified = $this->getHostsByStatus('activo');
 
         return view('admin.hosts.index', compact(
-            'hostsDisabled', 'hostsNotVerified', 'hostsVerified'
+            'hostsDisabled',
+            'hostsNotVerified',
+            'hostsVerified'
         ));
     }
 
@@ -44,12 +47,20 @@ class HostsController extends Controller
      */
     public function getHostsByStatus(string $status)
     {
+        //se manda el nombre del parametro para la paginacion, por ejemplo (?disabled=1 en vez de page, si no, se pisan los valores)
+        $pageName = match ($status) {
+            'inactivo' => 'disabled',
+            'pendiente' => 'not_verified',
+            'activo' => 'verified',
+            default => 'page'
+        };
+
         return User::whereHas('role', function ($query) {
-                    $query->where('type', 'host');
-                })
-                ->where('status', $status)
-                ->with(['host'])
-                ->get();
+            $query->where('type', 'host');
+        })
+            ->where('status', $status)
+            ->with(['host'])
+            ->paginate(6, ['*'], $pageName);
     }
 
     /**

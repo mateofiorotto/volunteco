@@ -25,7 +25,7 @@ class FrontendController extends Controller
             $query->where('status', 'activo');
         })
         ->latest()
-        ->paginate(9);
+        ->paginate(6);
 
         return view('frontend/projects', compact('projects'));
     }

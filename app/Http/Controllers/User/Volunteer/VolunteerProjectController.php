@@ -16,17 +16,12 @@ class VolunteerProjectController extends Controller
     {
         $volunteer = Auth::user()->volunteer;
 
-        if (!$volunteer) {
-            return redirect()->back()->with('error', 'No tienes un perfil de voluntario');
-        }
-
-        // Obtener proyectos con el estado de la aplicación
         $appliedProjects = $volunteer->projects()
             ->withPivot('status', 'applied_at', 'accepted_at')
             ->with(['host', 'projectType', 'conditions'])
             ->where('projects.enabled', true) //solo mostrar si esta habilitado
             ->orderByPivot('applied_at', 'desc')
-            ->paginate(10);
+            ->get();
 
         return view('user.volunteer.projects.applied', compact('appliedProjects'));
     }

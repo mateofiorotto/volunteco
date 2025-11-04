@@ -58,12 +58,12 @@ Volunteco es una web acerca de voluntariados de carácter ecológico donde parti
 - **Aplicación y seguimiento a proyectos**: Los voluntarios tienen la posibilidad de ver el listado de proyectos, ver el detalle y aplicar a los mismos. También tienen la posibilidad de desistir del proyecto solo si no fueron rechazados.
 
 ### Funcionalidades a implementar próximamente (pre-tesis --> mover despues a implementadas)
-- **API de localidad**: Se implementará para que sea mas sencillo seleccionar una ubicación a la hora de crear proyectos o registrarse y también evitar errores. 
-- **Mapa**: Será utilizado para reflejar la ubicación de proyectos
+- **API de localidad**: Se implementará para que sea mas sencillo seleccionar una ubicación a la hora de crear proyectos o registrarse y también evitar errores.
 - **Gamificación**: Los voluntarios y anfitriones tendrán insignias en su perfil, las que podrán obtener por medio de un sistema basado en evaluaciones y puntuaciones por parte de sus anfitriones. El objetivo es aportar un mayor dinamismo a la plataforma y de la mano de anteriores funcionalidades, poder aportar seguridad mediante insignias o nivel numerico.
 - **Listado de TODOS los proyectos en el dashboard**: En el administrador se mostraran todos los proyectos de todos los administradores separados por estado.
 - **Busqueda por buscador y filtros de proyectos en el listado (para voluntarios)**: Se podrán filtrar y buscar proyectos mediante una barra de busqueda y un menú.
 - **Paginación**: Se implementará principalmente en el listado de proyectos (tanto para dashboard y frontend), en el listado de usuarios y de aplicantes a proyectos.
+- **i18n**: traduccion
 
 ### Funcionalidades a implementar próximamente (tesis)
 - **Blog con noticias sobre la aplicación (administradores)**: Los administradores podran publicar noticias de la aplicacion y cosas relacionadas a ecologia o voluntariado.

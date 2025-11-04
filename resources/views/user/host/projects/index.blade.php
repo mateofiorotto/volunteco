@@ -11,8 +11,15 @@
         <div class="projects-list">
             @if ($projects->isEmpty())
                 <p>No hay proyectos publicados actualmente.</p>
+            @else
+                <x-project-grid :projects="$projects" />
+                
+                @if($projects->hasPages())
+                    <div class="d-flex justify-content-center mt-4">
+                        {{ $projects->links() }}
+                    </div>
+                @endif
             @endif
-
-            <x-project-grid :projects="$projects" />
+        </div>
     </section>
 @endsection

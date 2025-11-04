@@ -33,7 +33,7 @@ class HostProjectController extends Controller
         $projects = $host->projects()
             ->with(['projectType', 'conditions'])
             ->latest()
-            ->paginate(10);
+            ->paginate(6);
 
         return view('user.host.projects.index', compact('projects'));
     }

@@ -26,19 +26,19 @@ class ProfileController extends Controller
     public function getProfile($id)
     {
         //si el perfil esta inactivo o pendiente, no se puede ver. Si la id no existe, no se puede ver
-        $host = Host::with([
-            'user',
-            'projects' => function ($query) {
-                $query->where('enabled', true);
-                // o si usas 1/0: $query->where('enabled', 1);
-            }
-        ])
-            ->whereHas('user', function ($query) {
-                $query->where('status', 'activo');
-            })
-            ->findOrFail($id);
+       $host = Host::with('user')
+        ->whereHas('user', function ($query) {
+            $query->where('status', 'activo');
+        })
+        ->findOrFail($id);
 
-        return view('user.host.profile.show', compact('host'));
+    //paginar los proyectos
+    $projects = $host->projects()
+        ->where('enabled', true)
+        ->latest()
+        ->paginate(6); 
+
+        return view('user.host.profile.show', compact('host', 'projects'));
     }
 
     /**

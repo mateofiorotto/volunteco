@@ -29,7 +29,7 @@ class VolunteersController extends Controller
             $query->where('type', 'volunteer');
         })
         ->with('volunteer')
-        ->get();
+        ->paginate(6);
 
         return view('admin.volunteers.index', compact('volunteers'));
     }

@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
     @foreach ($projects as $project)
-    <div class="col-md-6 col-lg-3 mb-4">
+    <div class="col-md-6 col-lg-4 mb-4">
         <div class="card">
             @if ($project->image)
             <div class="ratio ratio-4x3">

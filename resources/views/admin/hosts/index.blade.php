@@ -12,26 +12,40 @@
                             <h2 class="h5 mb-0">Anfitriones <span class="fw-light">Pendientes de Verificación</span></h2>
                         </div>
                         @if ($hostsNotVerified->isEmpty())
-                        <div class="card-body">
-                            <p class="mb-0">No hay anfitriones para verificar</p>
-                        </div>
+                            <div class="card-body">
+                                <p class="mb-0">No hay anfitriones para verificar</p>
+                            </div>
                         @else
                             <x-admin.hosts-list :hosts="$hostsNotVerified" />
+                            @if($hostsNotVerified->hasPages())
+                                <div class="card-footer">
+                                    <div class="d-flex justify-content-center">
+                                        {{ $hostsNotVerified->links() }}
+                                    </div>
+                                </div>
+                            @endif
                         @endif
                     </div>
                 </div>
 
                 <div class="col-12 col-md-6">
-                    <div class="card border-primary">
+                    <div class="card mb-5 border-primary">
                         <div class="card-header text-bg-primary">
                             <h2 class="h5 mb-0">Anfitriones <span class="fw-light">Activos</span></h2>
                         </div>
                         @if ($hostsVerified->isEmpty())
-                        <div class="card-body">
-                            <p class="mb-0">No hay anfitriones activos</p>
-                        </div>
+                            <div class="card-body">
+                                <p class="mb-0">No hay anfitriones activos</p>
+                            </div>
                         @else
                             <x-admin.hosts-list :hosts="$hostsVerified" />
+                            @if($hostsVerified->hasPages())
+                                <div class="card-footer">
+                                    <div class="d-flex justify-content-center">
+                                        {{ $hostsVerified->links() }}
+                                    </div>
+                                </div>
+                            @endif
                         @endif
                     </div>
                 </div>
@@ -42,11 +56,18 @@
                             <h2 class="h5 mb-0">Anfitriones <span class="fw-light">Deshabilitados/Rechazados</span></h2>
                         </div>
                         @if ($hostsDisabled->isEmpty())
-                        <div class="card-body">
-                            <p class="mb-0">No hay anfitriones rechazados</p>
-                        </div>
+                            <div class="card-body">
+                                <p class="mb-0">No hay anfitriones rechazados</p>
+                            </div>
                         @else
                             <x-admin.hosts-list :hosts="$hostsDisabled" />
+                            @if($hostsDisabled->hasPages())
+                                <div class="card-footer">
+                                    <div class="d-flex justify-content-center">
+                                        {{ $hostsDisabled->links() }}
+                                    </div>
+                                </div>
+                            @endif
                         @endif
                     </div>
                 </div>
