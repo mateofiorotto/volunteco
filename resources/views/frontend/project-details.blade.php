@@ -188,7 +188,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger"
-                                                    type="submit"> Desistir del proyecto</button>
+                                                    type="submit">Desistir del proyecto</button>
                                         </form>
                                     @endif
                                 @else

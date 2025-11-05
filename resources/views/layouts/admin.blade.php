@@ -13,8 +13,8 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
-
 </head>
+
 <body class="d-flex h-100">
     <div class="d-flex w-100 h-100 mx-auto flex-column">
         <header>

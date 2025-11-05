@@ -187,6 +187,8 @@ return [
         'day'                      => 'día',
         'deleted_at'               => 'eliminado el',
         'description'              => 'descripción',
+        'person_full_name'         => 'persona de contacto',
+        'location'                 => 'ubicación',
         'display_type'             => 'tipo de visualización',
         'district'                 => 'distrito',
         'duration'                 => 'duración',
