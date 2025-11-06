@@ -4,6 +4,18 @@
     <section>
         <div class="container py-5">
             <h1 class="title-h1 h3 mb-5">Listado de <span>Proyectos</span></h1>
+
+            
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show"
+                     role="alert">
+                    <strong>¡Perfecto!</strong> {{ session('success') }}
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                </div>
+            @endif
             
             <div class="row">
                 <div class="col-md-8">

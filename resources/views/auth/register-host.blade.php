@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<!--Register host form-->
 @section('content')
     <section>
         <div class="container py-5">
@@ -10,6 +10,19 @@
                     <p>Completá todos los datos requeridos.<br/>Luego de enviada tu solicitud, nuestros operadores revisarán tu perfil y serás notificado cuando esté aprobado para que puedas empezar a publicar tus proyectos.</p>
                 </div>
             </div>
+
+            {{-- Alerta de errores general --}}
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show"
+                     role="alert">
+                    <strong>Ocurrió un error.</strong> Por favor, revisá los campos marcados.
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                </div>
+            @endif
+
             <form method="POST"
                 action="{{ route('register-host.store') }}"
                 enctype="multipart/form-data">
@@ -28,7 +41,11 @@
                                         placeholder="Nombre de la organización"
                                         required
                                         autocomplete="name"
-                                        class="form-control"/>
+                                        class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                                        value="{{ old('name') }}"/>
+                                    @if ($errors->has('name'))
+                                        <p class="text-danger">{{ $errors->first('name') }}</p>
+                                    @endif
                                 </div>
                                 <div class="mb-3">
                                     <label for="cuit" class="form-label">CUIT *</label>
@@ -38,7 +55,11 @@
                                         placeholder="Ej: 20123456789"
                                         inputmode="numeric"
                                         required
-                                        class="form-control"/>
+                                        class="form-control {{ $errors->has('cuit') ? 'is-invalid' : '' }}"
+                                        value="{{ old('cuit') }}"/>
+                                    @if ($errors->has('cuit'))
+                                        <p class="text-danger">{{ $errors->first('cuit') }}</p>
+                                    @endif
                                 </div>
 
                                 <div class="mb-3">
@@ -49,7 +70,11 @@
                                         required
                                         placeholder="Nombre de persona física para contacto"
                                         autocomplete="name"
-                                        class="form-control"/>
+                                        class="form-control {{ $errors->has('person_full_name') ? 'is-invalid' : '' }}"
+                                        value="{{ old('person_full_name') }}"/>
+                                    @if ($errors->has('person_full_name'))
+                                        <p class="text-danger">{{ $errors->first('person_full_name') }}</p>
+                                    @endif
                                 </div>
 
                                 <div class="mb-3">
@@ -60,7 +85,11 @@
                                         placeholder="5491112345678"
                                         autocomplete="tel"
                                         required
-                                        class="form-control"/>
+                                        class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}"
+                                        value="{{ old('phone') }}"/>
+                                    @if ($errors->has('phone'))
+                                        <p class="text-danger">{{ $errors->first('phone') }}</p>
+                                    @endif
                                 </div>
 
                                 <div class="mb-3">
@@ -70,7 +99,11 @@
                                         name="location"
                                         placeholder="Ciudad o provincia"
                                         autocomplete="address-level2"
-                                        class="form-control"/>
+                                        class="form-control {{ $errors->has('location') ? 'is-invalid' : '' }}"
+                                        value="{{ old('location') }}"/>
+                                    @if ($errors->has('location'))
+                                        <p class="text-danger">{{ $errors->first('location') }}</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -88,8 +121,11 @@
                                         placeholder="ejemplo@correo.com"
                                         required
                                         autocomplete="email"
-                                        class="form-control"
-                                        />
+                                        class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
+                                        value="{{ old('email') }}"/>
+                                    @if ($errors->has('email'))
+                                        <p class="text-danger">{{ $errors->first('email') }}</p>
+                                    @endif
                                 </div>
 
                                 <div class="mb-3">
@@ -100,7 +136,10 @@
                                         placeholder="Ingresa tu contraseña"
                                         required
                                         autocomplete="off"
-                                        class="form-control"/>
+                                        class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}"/>
+                                    @if ($errors->has('password'))
+                                        <p class="text-danger">{{ $errors->first('password') }}</p>
+                                    @endif
                                 </div>
 
                                 <div class="mb-3">
@@ -111,7 +150,10 @@
                                         placeholder="Repite tu contraseña"
                                         required
                                         autocomplete="off"
-                                        class="form-control"/>
+                                        class="form-control {{ $errors->has('password_confirmation') ? 'is-invalid' : '' }}"/>
+                                    @if ($errors->has('password_confirmation'))
+                                        <p class="text-danger">{{ $errors->first('password_confirmation') }}</p>
+                                    @endif
                                 </div>
 
                             </div>
@@ -129,7 +171,8 @@
                                         id="linkedin"
                                         name="linkedin"
                                         placeholder="https://linkedin.com/in/usuario"
-                                        class="form-control"/>
+                                        class="form-control {{ $errors->has('social_media') ? 'is-invalid' : '' }}"
+                                        value="{{ old('linkedin') }}"/>
                                 </div>
 
                                 <div class="mb-3">
@@ -138,7 +181,8 @@
                                         id="facebook"
                                         name="facebook"
                                         placeholder="https://facebook.com/usuario"
-                                        class="form-control"/>
+                                        class="form-control {{ $errors->has('social_media') ? 'is-invalid' : '' }}"
+                                        value="{{ old('facebook') }}"/>
                                 </div>
 
                                 <div class="mb-3">
@@ -147,8 +191,13 @@
                                         id="instagram"
                                         name="instagram"
                                         placeholder="https://instagram.com/usuario"
-                                        class="form-control"/>
+                                        class="form-control {{ $errors->has('social_media') ? 'is-invalid' : '' }}"
+                                        value="{{ old('instagram') }}"/>
                                 </div>
+
+                                @if ($errors->has('social_media'))
+                                    <p class="text-danger">{{ $errors->first('social_media') }}</p>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -159,11 +208,15 @@
                                 <h2 class="card-title h3">Info Extra</h2>
                                 <div class="mb-3">
                                     <label for="avatar" class="form-label">Logo</label>
+                                    <p>100x100px - 300x300px. 512KB</p>
                                     <input type="file"
                                         id="avatar"
                                         name="avatar"
                                         accept="image/*"
-                                        class="form-control"/>
+                                        class="form-control {{ $errors->has('avatar') ? 'is-invalid' : '' }}"/>
+                                    @if ($errors->has('avatar'))
+                                        <p class="text-danger">{{ $errors->first('avatar') }}</p>
+                                    @endif
                                 </div>
 
                                 <div class="mb-3">
@@ -173,7 +226,10 @@
                                             placeholder="Descripción acerca de la organización/anfitrión"
                                             rows="6"
                                             required
-                                            class="form-control"></textarea>
+                                            class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}">{{ old('description') }}</textarea>
+                                    @if ($errors->has('description'))
+                                        <p class="text-danger">{{ $errors->first('description') }}</p>
+                                    @endif
                                 </div>
 
                             </div>

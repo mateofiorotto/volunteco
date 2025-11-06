@@ -5,6 +5,17 @@
         <div class="container py-5">
             <h1 class="title-h1 h3 mb-5">Listado de <span>Anfitriones</span></h1>
 
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show"
+                     role="alert">
+                    <strong>¡Perfecto!</strong> {{ session('success') }}
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                </div>
+            @endif
+
             <div class="row">
                 <div class="col-12 col-md-6">
                     <div class="card mb-5 border-warning">
@@ -17,7 +28,7 @@
                             </div>
                         @else
                             <x-admin.hosts-list :hosts="$hostsNotVerified" />
-                            @if($hostsNotVerified->hasPages())
+                            @if ($hostsNotVerified->hasPages())
                                 <div class="card-footer">
                                     <div class="d-flex justify-content-center">
                                         {{ $hostsNotVerified->links() }}
@@ -39,7 +50,7 @@
                             </div>
                         @else
                             <x-admin.hosts-list :hosts="$hostsVerified" />
-                            @if($hostsVerified->hasPages())
+                            @if ($hostsVerified->hasPages())
                                 <div class="card-footer">
                                     <div class="d-flex justify-content-center">
                                         {{ $hostsVerified->links() }}
@@ -61,7 +72,7 @@
                             </div>
                         @else
                             <x-admin.hosts-list :hosts="$hostsDisabled" />
-                            @if($hostsDisabled->hasPages())
+                            @if ($hostsDisabled->hasPages())
                                 <div class="card-footer">
                                     <div class="d-flex justify-content-center">
                                         {{ $hostsDisabled->links() }}

@@ -7,23 +7,6 @@
             <a href="{{ url()->previous() }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
         </div>
 
-        <!-- Alerta de exito temporal -->
-        @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        @endif
-
-        <!-- Alerta de error temporal mas adelante cambiar por swal2 o algo mas lindo -->
-        @if (session('error'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{ session('error') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        @endif
-
-
         <div class="row mb-5">
             <!-- Detalles del proyecto -->
             <div class="col-md-8 col-12 mb-4">
@@ -145,11 +128,9 @@
         </div>
 
         <div id="volunteers-list" class="row">
-            <h3>Voluntarios aplicados para este proyecto</h3>
-
             <div class="card p-0 border-primary">
                 <div class="card-header text-bg-primary">
-                    <h3 class="h5 mb-0">Voluntarios aplicados <span class="small fw-light">(Total: )</span></h3>
+                    <h3 class="h5 mb-0">Voluntarios que aplicaron</h3>
                 </div>
                 <div class="card-body">
                     @if ($registeredVolunteers->isEmpty())

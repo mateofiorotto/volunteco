@@ -90,7 +90,7 @@ class HostsController extends Controller
 
         Mail::to($host->email)->send(new ProfileAcceptedMail($host->host->person_full_name));
 
-        return redirect()->route('admin.hosts.index');
+        return redirect()->route('admin.hosts.index')->with('success', 'Perfil de anfitrión activado correctamente y notificación enviada por email.');
     }
 
     /**
@@ -107,7 +107,7 @@ class HostsController extends Controller
         $host->host->rejection_reason = null;
         $host->host->save();
 
-        return redirect()->route('admin.hosts.index');
+        return redirect()->route('admin.hosts.index')->with('success', 'Perfil de anfitrión reactivado correctamente.');
     }
 
     /*
@@ -124,7 +124,7 @@ class HostsController extends Controller
         //$host->host->rejection_reason = null;
         $host->host->save();
 
-        return redirect()->route('admin.hosts.index');
+        return redirect()->route('admin.hosts.index')->with('success', 'Perfil de anfitrión desactivado correctamente.');
     }
 
     /**
@@ -163,7 +163,7 @@ class HostsController extends Controller
         $host->host->rejection_reason = $fieldsToChange['description'];
         $host->host->save();
 
-        return redirect()->route('admin.hosts.index');
+        return redirect()->route('admin.hosts.index')->with('success', 'Email enviado y perfil desactivado correctamente.');
     }
 
     /**
@@ -185,7 +185,7 @@ class HostsController extends Controller
 
         Mail::to($host->email)->send(new HostDeleteProfileMail($reasons['delete_reasons'], $host->host->person_full_name));
 
-        return redirect()->route('admin.hosts.index');
+        return redirect()->route('admin.hosts.index')->with('success', "Perfil eliminado correctamente y notificación enviada por email.");
     }
 
     /**
@@ -202,7 +202,7 @@ class HostsController extends Controller
         // $host->host->rejection_reason = null;
         $host->host->save();
 
-        return redirect()->route('admin.hosts.index');
+        return redirect()->route('admin.hosts.index')->with('success', 'Perfil de anfitrión enviado a pendiente correctamente.');
     }
 
     /**
@@ -214,6 +214,6 @@ class HostsController extends Controller
 
         Mail::to($host->email)->send(new HostRejectedReminder($host->host->rejection_reason, $host->host->person_full_name, $host->host->disabled_at));
 
-        return redirect()->route('admin.hosts.index');
+        return redirect()->route('admin.hosts.index')->with('success', 'Recordatorio enviado correctamente por email.');
     }
 }

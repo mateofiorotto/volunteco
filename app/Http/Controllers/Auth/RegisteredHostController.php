@@ -99,9 +99,8 @@ class RegisteredHostController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
-
-        return redirect()->route('home');
+        return redirect()->route('login')
+        ->with('success', 'Tu cuenta fue creada. Estaremos revisando los datos y te notificaremos cuando esté aprobada.');
     }
 
     /**
@@ -193,6 +192,7 @@ class RegisteredHostController extends Controller
         // borrar token
         DB::table('profile_change_tokens')->where('email', $email)->delete();
 
-        return redirect()->route('home')->with('success', 'Tu perfil fue actualizado y está pendiente de revisión.');
+         return redirect()->route('login')
+        ->with('success', 'Tu perfil fue actualizado. Estaremos revisando los datos y te notificaremos cuando esté aprobado.');
     }
 }

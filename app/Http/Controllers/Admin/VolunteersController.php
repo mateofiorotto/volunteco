@@ -28,8 +28,8 @@ class VolunteersController extends Controller
         $volunteers = User::whereHas('role', function ($query) {
             $query->where('type', 'volunteer');
         })
-        ->with('volunteer')
-        ->paginate(6);
+            ->with('volunteer')
+            ->paginate(6);
 
         return view('admin.volunteers.index', compact('volunteers'));
     }
@@ -57,7 +57,7 @@ class VolunteersController extends Controller
 
         $volunteer->volunteer->save();
 
-        return redirect()->route('admin.volunteers.index');
+        return redirect()->route('admin.volunteers.index')->with('success', 'Perfil de voluntario reactivado correctamente.');
     }
 
     /*
@@ -77,7 +77,7 @@ class VolunteersController extends Controller
 
         Mail::to($volunteer->email)->send(new VolunteerDisableProfileMail($volunteer->volunteer->full_name));
 
-        return redirect()->route('admin.volunteers.index');
+        return redirect()->route('admin.volunteers.index')->with('success', 'Perfil de voluntario desactivado correctamente y notificación enviada por email.');
     }
 
     /**
@@ -95,6 +95,6 @@ class VolunteersController extends Controller
 
         Mail::to($volunteer->email)->send(new VolunteerDeleteProfileMail($volunteer->volunteer->full_name));
 
-        return redirect()->route('admin.volunteers.index');
+        return redirect()->route('admin.volunteers.index')->with('success', "Perfil eliminado correctamente y notificación enviada por email.");
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 use App\Services\ImageService;
 
@@ -26,17 +27,17 @@ class ProfileController extends Controller
     public function getProfile($id)
     {
         //si el perfil esta inactivo o pendiente, no se puede ver. Si la id no existe, no se puede ver
-       $host = Host::with('user')
-        ->whereHas('user', function ($query) {
-            $query->where('status', 'activo');
-        })
-        ->findOrFail($id);
+        $host = Host::with('user')
+            ->whereHas('user', function ($query) {
+                $query->where('status', 'activo');
+            })
+            ->findOrFail($id);
 
-    //paginar los proyectos
-    $projects = $host->projects()
-        ->where('enabled', true)
-        ->latest()
-        ->paginate(6); 
+        //paginar los proyectos
+        $projects = $host->projects()
+            ->where('enabled', true)
+            ->latest()
+            ->paginate(6);
 
         return view('user.host.profile.show', compact('host', 'projects'));
     }
@@ -69,15 +70,15 @@ class ProfileController extends Controller
 
         $request->validate([
             'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
-            'name' => 'required|string|max:255|min:3',
+            'name' => ['required', 'string', 'max:255', 'min:3', Rule::unique('hosts', 'name')->ignore($host->id)],
             'person_full_name' => 'required|string|max:255|min:3',
             'phone' => ['required', 'string', 'min:6', 'max:15', 'regex:/^\d+$/'],
             'linkedin' => 'nullable|string|max:255',
             'facebook' => 'nullable|string|max:255',
             'instagram' => 'nullable|string|max:255',
-            'avatar' => 'nullable|image|mimetypes:jpeg,png,jpg,webp|max:512|dimensions:min_width=100,min_height=100,max_width=300,max_height=300',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:512|dimensions:min_width=100,min_height=100,max_width=300,max_height=300',
             'description' => 'required|string|max:5120|min:50',
-            'location' => 'required|string|max:255|min:3',
+            'location' => 'nullable|string|max:255|min:3',
         ]);
 
         //foto de perfil

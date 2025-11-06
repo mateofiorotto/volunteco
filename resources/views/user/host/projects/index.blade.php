@@ -7,6 +7,17 @@
             <!--Crear proyecto-->
             <a href="{{ route('hosts.my-projects.create') }}" class="btn btn-primary">Crear Proyecto</a>
         </div>
+        
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show"
+                 role="alert">
+                <strong>¡Perfecto!</strong> {{ session('success') }}
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"></button>
+            </div>
+        @endif
 
         <div class="projects-list">
             @if ($projects->isEmpty())

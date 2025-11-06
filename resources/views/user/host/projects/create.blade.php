@@ -8,18 +8,16 @@
             </div>
         </div>
 
+        {{-- Alerta de errores general --}}
         @if ($errors->any())
-        <div class="row mb-5">
-            <div class="col-md-7 mx-auto">
-                <div class="alert alert-danger">
-                    <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+            <div class="alert alert-danger alert-dismissible fade show"
+                 role="alert">
+                <strong>Ocurrió un error.</strong> Por favor, revisá los campos marcados.
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"></button>
             </div>
-        </div>
         @endif
 
         <form method="POST" action="{{ route('hosts.my-projects.store') }}" enctype="multipart/form-data">
@@ -30,7 +28,7 @@
                 <div class="col-md-6">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h2 class="card-title h4">Información del Proyecto</h3>
+                            <h2 class="card-title h4">Información del Proyecto</h2>
 
                             <div class="mb-3">
                                 <label for="title" class="form-label">Título del proyecto *</label>
@@ -40,10 +38,10 @@
                                        value="{{ old('title') }}"
                                        placeholder="Ej: Reforestación en la Reserva Natural"
                                        required
-                                       class="form-control @error('title') is-invalid @enderror" />
-                                @error('title')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                       class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" />
+                                @if ($errors->has('title'))
+                                    <p class="text-danger">{{ $errors->first('title') }}</p>
+                                @endif
                             </div>
 
                             <div class="mb-3">
@@ -53,10 +51,10 @@
                                           placeholder="Describe el proyecto, objetivos y actividades a realizar"
                                           rows="5"
                                           required
-                                          class="form-control  @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
-                                @error('description')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                          class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}">{{ old('description') }}</textarea>
+                                @if ($errors->has('description'))
+                                    <p class="text-danger">{{ $errors->first('description') }}</p>
+                                @endif
                             </div>
 
                             <div class="mb-3">
@@ -64,17 +62,17 @@
                                 <select id="project_type_id"
                                         name="project_type_id"
                                         required
-                                        class="form-select @error('project_type_id') is-invalid @enderror">
-                                    <option value="">Selecciona un tipo</option>
+                                        class="form-select {{ $errors->has('project_type_id') ? 'is-invalid' : '' }}">
+                                    <option value="" disabled selected>Selecciona un tipo</option>
                                     @foreach($projectTypes as $type)
                                         <option value="{{ $type->id }}" {{ old('project_type_id') == $type->id ? 'selected' : '' }}>
                                             {{ $type->name }}
                                         </option>
                                     @endforeach
                                 </select>
-                                @error('project_type_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                @if ($errors->has('project_type_id'))
+                                    <p class="text-danger">{{ $errors->first('project_type_id') }}</p>
+                                @endif
                             </div>
 
                             <div class="mb-3">
@@ -85,10 +83,10 @@
                                        value="{{ old('location') }}"
                                        placeholder="Ciudad, Provincia"
                                        required
-                                       class="form-control @error('location') is-invalid @enderror" />
-                                @error('location')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                       class="form-control {{ $errors->has('location') ? 'is-invalid' : '' }}" />
+                                @if ($errors->has('location'))
+                                    <p class="text-danger">{{ $errors->first('location') }}</p>
+                                @endif
                             </div>
 
                             <div class="mb-3">
@@ -97,11 +95,11 @@
                                        id="image"
                                        name="image"
                                        accept="image/*"
-                                       class="form-control @error('image') is-invalid @enderror" />
+                                       class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" />
                                 <small class="text-muted">Formatos: JPG, PNG, GIF. Máximo 2MB</small>
-                                @error('image')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                @if ($errors->has('image'))
+                                    <p class="text-danger">{{ $errors->first('image') }}</p>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -121,10 +119,10 @@
                                        value="{{ old('start_date') }}"
                                        min="{{ date('Y-m-d') }}"
                                        required
-                                       class="form-control @error('start_date') is-invalid @enderror" />
-                                @error('start_date')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                       class="form-control {{ $errors->has('start_date') ? 'is-invalid' : '' }}" />
+                                @if ($errors->has('start_date'))
+                                    <p class="text-danger">{{ $errors->first('start_date') }}</p>
+                                @endif
                             </div>
 
                             <div class="mb-3">
@@ -135,10 +133,10 @@
                                        value="{{ old('end_date') }}"
                                        min="{{ date('Y-m-d') }}"
                                        required
-                                       class="form-control @error('end_date') is-invalid @enderror" />
-                                @error('end_date')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                       class="form-control {{ $errors->has('end_date') ? 'is-invalid' : '' }}" />
+                                @if ($errors->has('end_date'))
+                                    <p class="text-danger">{{ $errors->first('end_date') }}</p>
+                                @endif
                             </div>
 
                             <div class="mb-3">
@@ -146,16 +144,16 @@
                                 <select id="work_hours_per_day"
                                         name="work_hours_per_day"
                                         required
-                                        class="form-select @error('work_hours_per_day') is-invalid @enderror">
+                                        class="form-select {{ $errors->has('work_hours_per_day') ? 'is-invalid' : '' }}">
                                     <option value="">Selecciona las horas</option>
                                     <option value="2 Horas" {{ old('work_hours_per_day') == '2 Horas' ? 'selected' : '' }}>2 Horas</option>
                                     <option value="4 Horas" {{ old('work_hours_per_day') == '4 Horas' ? 'selected' : '' }}>4 Horas</option>
                                     <option value="6 Horas" {{ old('work_hours_per_day') == '6 Horas' ? 'selected' : '' }}>6 Horas</option>
                                     <option value="8 Horas" {{ old('work_hours_per_day') == '8 Horas' ? 'selected' : '' }}>8 Horas</option>
                                 </select>
-                                @error('work_hours_per_day')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                @if ($errors->has('work_hours_per_day'))
+                                    <p class="text-danger">{{ $errors->first('work_hours_per_day') }}</p>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -180,9 +178,9 @@
                                 </div>
                             @endforeach
 
-                            @error('conditions')
-                                <div class="text-danger small mt-2">{{ $message }}</div>
-                            @enderror
+                            @if ($errors->has('conditions'))
+                                <p class="text-danger">{{ $errors->first('conditions') }}</p>
+                            @endif
                         </div>
                     </div>
 
@@ -201,6 +199,9 @@
                                     Proyecto habilitado (visible para voluntarios)
                                 </label>
                             </div>
+                            @if ($errors->has('enabled'))
+                                <p class="text-danger">{{ $errors->first('enabled') }}</p>
+                            @endif
                         </div>
                     </div>
                 </div>
