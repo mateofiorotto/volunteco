@@ -4,17 +4,34 @@
     <section class="container py-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
             <h1 class="title-h1 h3 mb-0">Proyecto</h1>
-            <a href="{{ url()->previous() }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
+            <a href="{{ url()->previous() }}"
+               class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
         </div>
+
+
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show"
+                 role="alert">
+                {{ session('success') }}
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"></button>
+            </div>
+        @endif
 
         <div class="row mb-5">
             <!-- Detalles del proyecto -->
             <div class="col-md-8 col-12 mb-4">
                 <div class="card">
                     @if ($project->image)
-                    <div class="ratio ratio-16x9">
-                        <img src="{{ asset('storage/' . $project->image) }}" class="card-img-top object-fit-cover" alt="{{ $project->title }}" width="854" height="480">
-                    </div>
+                        <div class="ratio ratio-16x9">
+                            <img src="{{ asset('storage/' . $project->image) }}"
+                                 class="card-img-top object-fit-cover"
+                                 alt="{{ $project->title }}"
+                                 width="854"
+                                 height="480">
+                        </div>
                     @endif
 
                     <div class="card-body">
@@ -95,7 +112,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <form method="GET"
-                                    action="{{ route('hosts.my-projects.edit', $project->id) }}">
+                                      action="{{ route('hosts.my-projects.edit', $project->id) }}">
                                     @csrf
                                     <button class="btn btn-primary w-100 mb-3"
                                             type="submit">
@@ -105,7 +122,7 @@
                             </div>
                             <div class="col-md-6">
                                 <form method="GET"
-                                    action="{{ route('hosts.my-projects.delete', $project->id) }}">
+                                      action="{{ route('hosts.my-projects.delete', $project->id) }}">
                                     @csrf
                                     <button class="btn btn-outline-primary w-100 mb-3"
                                             type="submit">
@@ -127,7 +144,8 @@
             </div>
         </div>
 
-        <div id="volunteers-list" class="row">
+        <div id="volunteers-list"
+             class="row">
             <div class="card p-0 border-primary">
                 <div class="card-header text-bg-primary">
                     <h3 class="h5 mb-0">Voluntarios que aplicaron</h3>
@@ -146,37 +164,46 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($registeredVolunteers as $volunteer)
-                                <tr>
-                                    <th scope="row">{{ $volunteer->id}}</th>
-                                    <td>{{ $volunteer->full_name }}</td>
-                                    <td>
-                                    @if ($volunteer->pivot->status !== 'aceptado')
-                                        <span class="text-uppercase fw-semibold badge {{ $volunteer->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger'}}">
-                                            {{ $volunteer->pivot->status }}
-                                        </span>
-                                    @else
-                                        <span class="text-uppercase fw-semibold badge bg-transparent text-body">{{ $volunteer->pivot->status }}</span>
-                                    @endif
-                                    </td>
-                                    <td>
-                                        <div class="d-flex gap-3">
-                                            <a href="{{route('volunteers.volunteer-profile', $volunteer->id)}}" class="btn btn-azul" title="ver">Ver Perfil</a>
-                                            <form method="POST" action="{{ route('hosts.my-projects.reject-volunteer', [$project->id, $volunteer->id]) }}">
-                                                @csrf
-                                                @method('PUT')
-                                                <button type="submit" class="btn btn-outline-primary">Rechazar</button>
-                                            </form>
+                                @foreach ($registeredVolunteers as $volunteer)
+                                    <tr>
+                                        <th scope="row">{{ $volunteer->id }}</th>
+                                        <td>{{ $volunteer->full_name }}</td>
+                                        <td>
                                             @if ($volunteer->pivot->status !== 'aceptado')
-                                            <form method="POST" action="{{ route('hosts.my-projects.accept-volunteer', [$project->id, $volunteer->id]) }}">
-                                                @csrf
-                                                @method('PUT')
-                                                <button type="submit" class="btn btn-primary">Aceptar</button>
-                                            </form>
+                                                <span
+                                                      class="text-uppercase fw-semibold badge {{ $volunteer->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
+                                                    {{ $volunteer->pivot->status }}
+                                                </span>
+                                            @else
+                                                <span
+                                                      class="text-uppercase fw-semibold badge bg-success">{{ $volunteer->pivot->status }}</span>
                                             @endif
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex gap-3">
+                                                <a href="{{ route('volunteers.volunteer-profile', $volunteer->id) }}"
+                                                   class="btn btn-azul"
+                                                   title="ver">Ver Perfil</a>
+                                                @if ($volunteer->pivot->status !== 'aceptado')
+                                                    <form method="POST"
+                                                          action="{{ route('hosts.my-projects.accept-volunteer', [$project->id, $volunteer->id]) }}">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit"
+                                                                class="btn btn-primary">Aceptar</button>
+                                                    </form>
+                                                @else
+                                                    <form method="POST"
+                                                          action="{{ route('hosts.my-projects.reject-volunteer', [$project->id, $volunteer->id]) }}">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit"
+                                                                class="btn btn-outline-primary">Rechazar</button>
+                                                    </form>
+                                                @endif
+                                            </div>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>

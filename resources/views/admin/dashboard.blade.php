@@ -3,7 +3,7 @@
 @section('content')
 <section class="container py-5">
     <div class="d-flex justify-content-between align-items-center mb-5">
-        <h1 class="title-h1 h3 mb-0">Admin <span>Dashboard</span></h1>
+        <h1 class="title-h1 h3 mb-0">Panel de <span>Administración</span></h1>
     </div>
 
     <div class="row">
@@ -38,7 +38,7 @@
                                                 {{ $host->status }}
                                             </span>
                                         @else
-                                            <span class="text-uppercase fw-semibold badge bg-transparent text-body">{{ $host->status }}</span>
+                                            <span class="text-uppercase fw-semibold badge bg-success">{{ $host->status }}</span>
                                         @endif
                                         </td>
                                         <td><a href="{{ route('admin.host.profile', $host->id) }}" class="btn btn-sm btn-azul" title="ver">Ver</a></td>
@@ -81,7 +81,7 @@
                                                     {{ $volunteer->status }}
                                                 </span>
                                             @else
-                                                <span class="text-uppercase fw-semibold badge bg-transparent text-body">{{ $volunteer->status }}</span>
+                                                <span class="text-uppercase fw-semibold badge bg-success">{{ $volunteer->status }}</span>
                                             @endif
                                         </td>
                                         <td><a href="{{ route('admin.volunteer.profile', $volunteer->id) }}" class="btn btn-sm btn-azul" title="ver">Ver</a></td>

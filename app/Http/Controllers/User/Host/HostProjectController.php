@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\ProjectType;
 use App\Models\Condition;
 use App\Services\ImageService;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
+use App\Mail\VolunteerAccepted;
 
 class HostProjectController extends Controller
 {
@@ -267,10 +269,27 @@ class HostProjectController extends Controller
             abort(403, 'Acceso denegado o proyecto inexistente.');
         }
 
+        $volunteer = $project->volunteers()
+            ->with('user')
+            ->where('volunteers.id', $volunteerId)
+            ->first();
+
+        if (!$volunteer) {
+            abort(404, 'Voluntario no encontrado.');
+        }
+
+        if (!$volunteer->user || !$volunteer->user->email) {
+            return redirect()->back()->with('error', 'El voluntario no tiene un usuario o email registrado.');
+        }
+
         $project->volunteers()->updateExistingPivot($volunteerId, [
             'status' => 'aceptado',
             'accepted_at' => now(),
         ]);
+
+        Mail::to($volunteer->user->email)->send(
+            new VolunteerAccepted($volunteer->full_name, $project->title)
+        );
 
         return redirect()->back()->with('success', 'Voluntario aceptado exitosamente.');
     }

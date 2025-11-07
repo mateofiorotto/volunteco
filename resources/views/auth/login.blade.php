@@ -37,7 +37,7 @@
 
                 <div class="mb-3">
                     <label for="email"
-                           class="form-label">Correo electrónica</label>
+                           class="form-label">Correo electrónico</label>
                     <input id="email"
                            class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
                            type="email"
