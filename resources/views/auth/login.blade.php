@@ -19,11 +19,23 @@
                 </div>
             @endif
 
-            {{-- Alerta de error general --}}
+            {{-- Alerta de error de middleware --}}
+            @if (session('error'))
+                <div class="alert alert-warning alert-dismissible fade show"
+                     role="alert">
+                    {{ session('error') }}
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                </div>
+            @endif
+
+            {{-- Alerta de error de credenciales --}}
             @if ($errors->any())
                 <div class="alert alert-danger alert-dismissible fade show"
                      role="alert">
-                    <p><strong>Error de autenticación.</strong> Por favor, verificá tus credenciales.</p>
+                    <strong>Error de autenticación.</strong> Por favor, verificá tus credenciales.
                     <button type="button"
                             class="btn-close"
                             data-bs-dismiss="alert"

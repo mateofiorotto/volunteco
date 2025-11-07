@@ -37,9 +37,9 @@ class AuthenticatedSessionController extends Controller
         if ($user->status != 'activo') {
             Auth::logout();
 
-            return redirect()->route('login')->withErrors([
-                'email' => "Tu cuenta todavia no ha sido verificada o fue desactivada. Si crees que fue un error contacta con soporte"
-            ]);
+            return redirect()->route('login')->with(
+                'error', "Tu cuenta todavia no ha sido verificada o fue desactivada. Si crees que fue un error contacta con soporte."
+            );
         }
 
         $request->session()->regenerate();

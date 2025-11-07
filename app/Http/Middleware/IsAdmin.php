@@ -23,7 +23,7 @@ class IsAdmin
 
         if (!$user || !$user->hasRole('admin')) {
             return redirect()->route('login')
-                ->withErrors(['email' => 'No tienes permiso para acceder a esta página. Por favor, inicia sesión como administrador']);
+                ->with('error', 'No tienes permiso para acceder a esta página. Por favor, inicia sesión como administrador');
         }
 
         return $next($request);

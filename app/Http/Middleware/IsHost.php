@@ -21,7 +21,7 @@ class IsHost
 
         if (!$user || !$user->hasRole('host')) {
             return redirect()->route('login')
-                ->withErrors(['email' => 'No tienes permiso para acceder a esta página. Por favor, inicia sesión como anfitrión']);
+                ->with('error', 'No tienes permiso para acceder a esta página. Por favor, inicia sesión como anfitrión');
         }
 
         return $next($request);
