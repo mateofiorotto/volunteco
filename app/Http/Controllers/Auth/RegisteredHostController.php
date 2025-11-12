@@ -42,7 +42,7 @@ class RegisteredHostController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedHost = $request->validate([
             'email' => 'required|string|lowercase|email|max:255|unique:users,email',
             'password' => ['required', 'confirmed', Rules\Password::defaults()], //8 caracts
             'name' => 'required|string|max:255|min:3|unique:hosts,name',
@@ -70,37 +70,35 @@ class RegisteredHostController extends Controller
             return back()->withErrors(['role' => 'No se encontró el rol "host".']);
         }
 
-        if ($request->hasFile('avatar')) {
-            $avatarPath = $this->imageService->storeImage($request->file('avatar'), 'hosts');
-        } else {
-            $avatarPath = 'logo.svg';
+        if($request->hasFile('avatar')){
+            $path = $request->file('avatar')->store('hosts');
+            $validatedHost['avatar'] = basename($path);
         }
 
         $user = User::create([
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'email' => $validatedHost['email'],
+            'password' => Hash::make($validatedHost['password']),
             'role_id' => $hostRole->id,
             'status' => 'pendiente'
         ]);
 
         Host::create([
             'user_id' => $user->id,
-            'name' => $request->name,
-            'person_full_name' => $request->person_full_name,
-            'cuit' => $request->cuit,
-            'linkedin' => $request->linkedin,
-            'facebook' => $request->facebook,
-            'instagram' => $request->instagram,
-            'avatar' => $avatarPath,
-            'description' => $request->description,
-            'phone' => $request->phone,
-            'location' => $request->location
+            'name' => $validatedHost['name'],
+            'person_full_name' => $validatedHost['person_full_name'],
+            'cuit' => $validatedHost['cuit'],
+            'linkedin' => $validatedHost['linkedin'],
+            'facebook' => $validatedHost['facebook'],
+            'instagram' => $validatedHost['instagram'],
+            'avatar' => $validatedHost['avatar'],
+            'description' => $validatedHost['description'],
+            'phone' => $validatedHost['phone'],
+            'location' => $validatedHost['location']
         ]);
 
         event(new Registered($user));
 
-        return redirect()->route('login')
-        ->with('success', 'Tu cuenta fue creada. Estaremos revisando los datos y te notificaremos cuando esté aprobada.');
+        return redirect()->route('login')->with('success', 'Tu cuenta fue creada. Estaremos revisando los datos y te notificaremos cuando esté aprobada.');
     }
 
     /**
@@ -136,22 +134,10 @@ class RegisteredHostController extends Controller
         }
 
         //validación de campos
-        $validated = $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-                'min:3',
-                Rule::unique('hosts', 'name')->ignore($user->host->id),
-            ],
+        $validatedHost = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'min:3', Rule::unique('hosts', 'name')->ignore($user->host->id)],
             'person_full_name' => 'required|string|max:255|min:3',
-            'cuit' => [
-                'required',
-                'string',
-                'size:11',
-                'regex:/^\d+$/',
-                Rule::unique('hosts', 'cuit')->ignore($user->host->id),
-            ],
+            'cuit' => ['required', 'string', 'size:11', 'regex:/^\d+$/', Rule::unique('hosts', 'cuit')->ignore($user->host->id)],
             'phone' => ['required', 'string', 'min:6', 'max:15', 'regex:/^\d+$/'],
             'linkedin' => 'nullable|string|max:255|min:3',
             'facebook' => 'nullable|string|max:255|min:3',
@@ -169,16 +155,9 @@ class RegisteredHostController extends Controller
         }
 
         //actualizar avatar si hay nueva imagen
-        if ($request->hasFile('avatar')) {
-            if ($user->host->avatar == 'perfil-host.svg') {
-                $validated['avatar'] = $this->imageService->storeImage($request->file('avatar'), 'hosts');
-            } else {
-                $validated['avatar'] = $this->imageService->updateImage(
-                    $request->file('avatar'),
-                    $user->host->avatar,
-                    'hosts'
-                );
-            }
+        if($request->hasFile('avatar')){
+            $path = $request->file('avatar')->store('hosts');
+            $validatedHost['avatar'] = basename($path);
         }
 
         // actualizar usuario y host
@@ -187,12 +166,11 @@ class RegisteredHostController extends Controller
 
         $user->host->disabled_at = null;
         $user->host->rejection_reason = null;
-        $user->host->update($validated);
+        $user->host->update($validatedHost);
 
         // borrar token
         DB::table('profile_change_tokens')->where('email', $email)->delete();
 
-         return redirect()->route('login')
-        ->with('success', 'Tu perfil fue actualizado. Estaremos revisando los datos y te notificaremos cuando esté aprobado.');
+         return redirect()->route('login')->with('success', 'Tu perfil fue actualizado. Estaremos revisando los datos y te notificaremos cuando esté aprobado.');
     }
 }
