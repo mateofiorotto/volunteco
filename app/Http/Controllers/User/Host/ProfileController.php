@@ -59,8 +59,7 @@ class ProfileController extends Controller
 
         //actualizar avatar si hay nueva imagen
         if ($request->hasFile('avatar')) {
-            $path = $this->imageService->storeImage($request->file('avatar'), 'hosts');
-            $validatedHost['avatar'] = basename($path);
+            $validatedHost['avatar'] = $this->imageService->storeImage($request->file('avatar'), 'hosts');
         }
 
 
@@ -140,8 +139,7 @@ class ProfileController extends Controller
 
         //foto de perfil
         if ($request->hasFile('avatar')) {
-            $path = $this->imageService->storeImage($request->file('avatar'), 'hosts');
-            $validatedHost['avatar'] = basename($path);
+            $validatedHost['avatar'] = $this->imageService->storeImage($request->file('avatar'), 'hosts');
         }
 
         //actualizar

@@ -34,7 +34,7 @@ class RegisteredHostController extends Controller
     {
         $provinces = Province::with('locations')->get();
 
-        return view('auth/register-host', compact('provinces'));
+        return view('auth.register-host', compact('provinces'));
     }
 
     /**
@@ -72,8 +72,7 @@ class RegisteredHostController extends Controller
         }
 
         if ($request->hasFile('avatar')) {
-            $path = $this->imageService->storeImage($request->file('avatar'), 'hosts');
-            $validatedHost['avatar'] = basename($path);
+            $validatedHost['avatar'] = $this->imageService->storeImage($request->file('avatar'), 'hosts');
         }
 
         $user = User::create([
@@ -155,8 +154,7 @@ class RegisteredHostController extends Controller
 
         //actualizar avatar si hay nueva imagen
         if ($request->hasFile('avatar')) {
-            $path = $this->imageService->storeImage($request->file('avatar'), 'hosts');
-            $validatedHost['avatar'] = basename($path);
+            $validatedHost['avatar'] = $this->imageService->storeImage($request->file('avatar'), 'hosts');
         }
 
         // actualizar usuario y host

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('linkedin')->nullable();
             $table->string('facebook')->nullable();
             $table->string('instagram')->nullable();
-            $table->string('avatar');
+            $table->string('avatar')->nullable();
             $table->text('biography');
             $table->string('phone');
             $table->unsignedBigInteger('location_id')->nullable();

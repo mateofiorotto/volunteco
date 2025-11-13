@@ -61,7 +61,7 @@ class ProfileController extends Controller
         $volunteer = $user->volunteer;
 
         //validaciones
-        $request->validate([
+        $validatedVolunteer = $request->validate([
             'password' => ['nullable', 'confirmed', Rules\Password::defaults()], //pw no requerido
             'full_name' => 'required|string|max:255|min:3',
             'phone' => ['required', 'string', 'min:6', 'max:15', 'regex:/^\d+$/'],
@@ -78,24 +78,22 @@ class ProfileController extends Controller
 
         //foto de perfil
         if ($request->hasFile('avatar')) {
-            $avatarPath = $this->imageService->storeImage($request->file('avatar'), 'volunteers');
-        } else {
-            $avatarPath = $volunteer->avatar;
+            $validatedVolunteer['avatar'] = $this->imageService->storeImage($request->file('avatar'), 'volunteers');
         }
 
         //actualizar
         $volunteer->update([
-            'full_name' => $request->full_name,
-            'phone' => $request->phone,
-            'linkedin' => $request->linkedin,
-            'facebook' => $request->facebook,
-            'instagram' => $request->instagram,
-            'avatar' => $avatarPath,
-            'biography' => $request->biography,
-            'educational_level' => $request->educational_level,
-            'profession' => $request->profession,
-            'location' => $request->location,
-            'birthdate' => $request->birthdate,
+            'full_name' => $validatedVolunteer['full_name'],
+            'phone' => $validatedVolunteer['phone'],
+            'linkedin' => $validatedVolunteer['linkedin'],
+            'facebook' => $validatedVolunteer['facebook'],
+            'instagram' => $validatedVolunteer['instagram'],
+            'avatar' => $validatedVolunteer['avatar'],
+            'biography' => $validatedVolunteer['biography'],
+            'educational_level' => $validatedVolunteer['educational_level'],
+            'profession' => $validatedVolunteer['profession'],
+            'location' => $validatedVolunteer['location'],
+            'birthdate' => $validatedVolunteer['birthdate'],
             // 'dni' y 'email' NO se lo permitimos editar al user
         ]);
 

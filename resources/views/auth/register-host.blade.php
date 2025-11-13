@@ -13,11 +13,15 @@
 
             {{-- Alerta de errores general --}}
             @if ($errors->any())
-                <div class="alert alert-danger alert-dismissible fade show"
-                     role="alert">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong>Ocurrió un error.</strong> Por favor, revisá los campos marcados.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
+                <ul>
+                @foreach ($errors->all() as $error)
+                <li class="text-red-600">{{ $error }}</li>
+                @endforeach
+                </ul>
             @endif
 
             <form method="POST" novalidate action="{{ route('register-host.store') }}" enctype="multipart/form-data">
