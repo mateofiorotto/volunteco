@@ -46,28 +46,28 @@
         @endif
         @if (Auth::user()->hasRole('host'))
             <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('hosts.dashboard') ? 'active' : '' }}" href="{{route('hosts.dashboard')}}">Dashboard</a>
+                <a class="nav-link {{ request()->routeIs('host.dashboard') ? 'active' : '' }}" href="{{route('host.dashboard')}}">Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('anfitriones/mis-proyectos*') ? 'active' : '' }}" href="{{route('hosts.my-projects.index')}}">Mis Proyectos</a>
+                <a class="nav-link {{ request()->is('anfitrion/mis-proyectos*') ? 'active' : '' }}" href="{{route('host.my-projects.index')}}">Mis Proyectos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('anfitriones/mi-perfil*') ? 'active' : '' }}" href="{{route('hosts.my-profile.show')}}">Mi Perfil</a>
+                <a class="nav-link {{ request()->is('anfitrion/mi-perfil*') ? 'active' : '' }}" href="{{route('host.my-profile.show')}}">Mi Perfil</a>
             </li>
         @endif
         @if (Auth::user()->hasRole('volunteer'))
             <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('volunteers.dashboard') ? 'active' : '' }}" href="{{route('volunteers.dashboard')}}">Dashboard</a>
+                <a class="nav-link {{ request()->routeIs('volunteer.dashboard') ? 'active' : '' }}" href="{{route('volunteer.dashboard')}}">Dashboard</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('proyectos*') ? 'active' : '' }}" href="{{route('projects')}}">Proyectos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('volunteers.projects.applied') ? 'active' : '' }}" href="{{route('volunteers.projects.applied')}}">Mis Postulaciones</a>
+                <a class="nav-link {{ request()->routeIs('volunteer.projects.applied') ? 'active' : '' }}" href="{{route('volunteer.projects.applied')}}">Mis Postulaciones</a>
             </li>
             <li class="nav-item">
                 <!-- mio perfil -->
-                <a class="nav-link {{ request()->is(['voluntarios/mi-perfil*', 'voluntarios/perfil*']) ? 'active' : '' }}" href="{{route('volunteers.volunteer-profile', ['id' => Auth::user()->volunteer->id])}}">Mi Perfil</a>
+                <a class="nav-link {{ request()->is(['voluntario/mi-perfil*', 'voluntario/perfil*']) ? 'active' : '' }}" href="{{route('volunteer.volunteer-profile', ['id' => Auth::user()->volunteer->id])}}">Mi Perfil</a>
             </li>
         @endif
     </ul>

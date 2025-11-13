@@ -5,7 +5,7 @@ use App\Http\Controllers\User\Volunteer\ProfileController;
 use App\Http\Controllers\User\Volunteer\VolunteerProjectController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['authCheck', 'isVolunteer', 'checkEnabled'])->prefix('voluntarios')->name('volunteers.')->group(function () {
+Route::middleware(['authCheck', 'isVolunteer', 'checkEnabled'])->prefix('usuario/voluntario')->name('volunteer.')->group(function () {
 
      //rutas de perfil + frontend y metodos de VolunteerController (logica de aplicacion a proyectos creados) y VolunteerProfileController (Edicion de perfil)
     /**
@@ -22,6 +22,6 @@ Route::middleware(['authCheck', 'isVolunteer', 'checkEnabled'])->prefix('volunta
     Route::put('/mi-perfil/editar', [ProfileController::class, 'updateMyProfile'])->name('update-my-profile');
 });
 
-Route::middleware(['checkEnabled'])->prefix('voluntarios')->name('volunteers.')->group(function () {
+Route::middleware(['checkEnabled'])->prefix('voluntario')->name('volunteer.')->group(function () {
     Route::get('/perfil/{id}', [ProfileController::class, 'getProfile'])->name('volunteer-profile');
 });

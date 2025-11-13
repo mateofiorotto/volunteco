@@ -67,7 +67,7 @@
                 <div class="d-flex gap-2">
                     <!-- Si la ruta es el admin de anfitriones -->
                     @if (request()->is('anfitriones/mis-proyectos*'))
-                    <a href="{{ route('hosts.my-projects.show', $project->id) }}" class="btn btn-sm btn-outline-primary">
+                    <a href="{{ route('host.my-projects.show', $project->id) }}" class="btn btn-sm btn-outline-primary">
                         Ver Proyecto
                     </a>
                     @else
@@ -78,7 +78,7 @@
 
                     @if (isset($project->pivot) && $project->pivot?->status !== 'rechazado')
                         <form method="POST"
-                                action="{{ route('volunteers.withdraw-project', $project->id) }}"
+                                action="{{ route('volunteer.withdraw-project', $project->id) }}"
                                 onsubmit="return confirm('¿Estás seguro de que deseas desistir de este proyecto?');">
                             @csrf
                             @method('DELETE')

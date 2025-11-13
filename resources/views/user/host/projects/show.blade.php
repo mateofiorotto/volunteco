@@ -112,7 +112,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <form method="GET"
-                                      action="{{ route('hosts.my-projects.edit', $project->id) }}">
+                                      action="{{ route('host.my-projects.edit', $project->id) }}">
                                     @csrf
                                     <button class="btn btn-primary w-100 mb-3"
                                             type="submit">
@@ -122,7 +122,7 @@
                             </div>
                             <div class="col-md-6">
                                 <form method="GET"
-                                      action="{{ route('hosts.my-projects.delete', $project->id) }}">
+                                      action="{{ route('host.my-projects.delete', $project->id) }}">
                                     @csrf
                                     <button class="btn btn-outline-primary w-100 mb-3"
                                             type="submit">
@@ -181,12 +181,12 @@
                                         </td>
                                         <td>
                                             <div class="d-flex gap-3">
-                                                <a href="{{ route('volunteers.volunteer-profile', $volunteer->id) }}"
+                                                <a href="{{ route('volunteer.volunteer-profile', $volunteer->id) }}"
                                                    class="btn btn-azul"
                                                    title="ver">Ver Perfil</a>
                                                 @if ($volunteer->pivot->status !== 'aceptado')
                                                     <form method="POST"
-                                                          action="{{ route('hosts.my-projects.accept-volunteer', [$project->id, $volunteer->id]) }}">
+                                                          action="{{ route('host.my-projects.accept-volunteer', [$project->id, $volunteer->id]) }}">
                                                         @csrf
                                                         @method('PUT')
                                                         <button type="submit"
@@ -194,7 +194,7 @@
                                                     </form>
                                                 @else
                                                     <form method="POST"
-                                                          action="{{ route('hosts.my-projects.reject-volunteer', [$project->id, $volunteer->id]) }}">
+                                                          action="{{ route('host.my-projects.reject-volunteer', [$project->id, $volunteer->id]) }}">
                                                         @csrf
                                                         @method('PUT')
                                                         <button type="submit"

@@ -20,7 +20,7 @@
                 </div>
             @endif
 
-            <form method="POST" novalidate action="{{ route('hosts.my-profile.update', $host->user_id) }}" enctype="multipart/form-data">
+            <form method="POST" novalidate action="{{ route('host.my-profile.update', $host->user_id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 

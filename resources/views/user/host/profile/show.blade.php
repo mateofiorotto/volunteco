@@ -6,7 +6,7 @@
         <div class="d-flex justify-content-between align-items-center mb-5">
             <h1 class="title-h1 h3">Mi <span>Perfil</span></h1>
             @if (Auth::id() == $host->user_id)
-                <a href="{{ route('hosts.my-profile.edit', $host->user_id) }}"
+                <a href="{{ route('host.my-profile.edit', $host->user_id) }}"
                    class="btn btn-primary">
                     Editar Perfil
                 </a>
@@ -31,7 +31,7 @@
                     <div class="card-body">
                         <div class="d-flex gap-5 align-items-start">
                             <!-- Foto de perfil -->
-                            <div>
+                            <div class="avatar">
                                 <img src="{{ asset('storage/hosts/' . $host->avatar) }}" alt="Foto de perfil de {{ $host->name }}" class="rounded-circle object-fit-contain avatar-lg" width="200" height="200"/>
                             </div>
 

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\User\Host;
 
 use App\Http\Controllers\Controller;
-use App\Models\Host;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +10,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 use App\Services\ImageService;
 use App\Models\User;
+use App\Models\Host;
 use App\Models\Province;
 
 class ProfileController extends Controller

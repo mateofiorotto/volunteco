@@ -16,7 +16,7 @@ class IsVolunteer
      */
     public function handle(Request $request, Closure $next): Response
     {
-            $user = Auth::user();
+        $user = Auth::user();
 
         if (!$user || !$user->hasRole('volunteer')) {
             return redirect()->route('login')
