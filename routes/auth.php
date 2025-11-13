@@ -14,6 +14,8 @@ Route::middleware('checkEnabled')->group(function () {
     Route::get('/registrar-anfitrion', [RegisteredHostController::class, 'create'])->name('register-host.create');
     Route::post('/registrar-anfitrion', [RegisteredHostController::class, 'store'])->name('register-host.store');
 
+    Route::get('/locations/{provinceId}', [RegisteredHostController::class, 'getLocationsByProvince']);
+
     Route::get('/registrar-voluntario', [RegisteredVolunteerController::class, 'create'])->name('register-volunteer.create');
     Route::post('/registrar-voluntario', [RegisteredVolunteerController::class, 'store'])->name('register-volunteer.store');
 
@@ -22,31 +24,22 @@ Route::middleware('checkEnabled')->group(function () {
     Route::post('/iniciar-sesion', [AuthenticatedSessionController::class, 'store']);
 
     //cambiar contraseña olvidada
-    Route::get('/cambiar-clave/{token}', [NewPasswordController::class, 'create'])
-        ->name('password.reset');
-    Route::post('/cambiar-clave', [NewPasswordController::class, 'store'])
-        ->name('password.store');
+    Route::get('/cambiar-clave/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
+    Route::post('/cambiar-clave', [NewPasswordController::class, 'store'])->name('password.store');
 
     //editar datos de un perfil host rechazado
-    Route::get('/perfil/editar-datos/{token}/{email}', [RegisteredHostController::class, 'edit'])
-        ->name('edit-rejected-profile');
-    Route::put('/perfil/editar-datos/{token}/{email}', [RegisteredHostController::class, 'update'])
-        ->name('edit-rejected-profile.update');
+    Route::get('/perfil/editar-datos/{token}/{email}', [RegisteredHostController::class, 'edit'])->name('edit-rejected-profile');
+    Route::put('/perfil/editar-datos/{token}/{email}', [RegisteredHostController::class, 'update'])->name('edit-rejected-profile.update');
 
 
     Route::middleware('authCheck')->group(function () {
-        Route::post('/cerrar-sesion', [AuthenticatedSessionController::class, 'destroy'])
-            ->name('logout');
+        Route::post('/cerrar-sesion', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     });
 });
 
     //Recuperar contraseña
-    Route::get('/clave-olvidada', [PasswordResetLinkController::class, 'create'])
-        ->name('password.request');
-    Route::post('/clave-olvidada', [PasswordResetLinkController::class, 'store'])
-        ->name('password.email');
+    Route::get('/clave-olvidada', [PasswordResetLinkController::class, 'create'])->name('password.request');
+    Route::post('/clave-olvidada', [PasswordResetLinkController::class, 'store'])->name('password.email');
 
-    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
-        ->name('password.reset');
-    Route::post('reset-password', [NewPasswordController::class, 'store'])
-        ->name('password.store');
+    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
+    Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.store');

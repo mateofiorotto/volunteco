@@ -29,7 +29,7 @@
                     <label for="email" class="form-label">Correo electrónico</label>
                     <input
                         id="email"
-                        class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
+                        class="form-control @error('email') is-invalid @enderror"
                         type="email"
                         name="email"
                         value="{{ old('email') }}"
@@ -47,7 +47,7 @@
 
                     <input
                         id="password"
-                        class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}"
+                        class="form-control @error('password') is-invalid @enderror"
                         type="password"
                         name="password"
                         required

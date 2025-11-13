@@ -26,7 +26,8 @@ return new class extends Migration
             $table->string('avatar');
             $table->text('biography');
             $table->string('phone');
-            $table->string('location');
+            $table->unsignedBigInteger('location_id')->nullable();
+            $table->foreign('location_id')->references('id')->on('locations')->onDelete('set null');
             $table->unsignedBigInteger('user_id');
             $table->timestamp('disabled_at')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

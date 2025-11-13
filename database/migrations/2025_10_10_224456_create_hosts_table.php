@@ -24,7 +24,10 @@ return new class extends Migration
             $table->string('avatar');
             $table->text('description');
             $table->string('phone');
-            $table->string('location')->nullable();
+
+            $table->unsignedBigInteger('location_id')->nullable();
+            $table->foreign('location_id')->references('id')->on('locations')->onDelete('set null');
+
             $table->unsignedBigInteger('user_id');
             $table->timestamp('disabled_at')->nullable();
             $table->string('rejection_reason')->nullable();

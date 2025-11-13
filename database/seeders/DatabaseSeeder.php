@@ -15,11 +15,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RolesTableSeeder::class,
+            GeorefSeeder::class,
             UserSeeder::class,
             ConditionSeeder::class,
             ProjectTypeSeeder::class,
-            ProjectSeeder::class,
-            GeorefSeeder::class
+            ProjectSeeder::class
         ]);
     }
 }

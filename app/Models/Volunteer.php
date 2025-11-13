@@ -26,7 +26,7 @@ class Volunteer extends Model
         'avatar',
         'biography',
         'phone',
-        'location',
+        'location_id',
         'user_id',
         'disabled_at',
     ];
@@ -57,6 +57,12 @@ class Volunteer extends Model
         return $this->belongsToMany(Project::class, 'project_volunteer')
             ->withPivot('status', 'applied_at', 'accepted_at')
             ->withTimestamps();
+    }
+
+    // localidad del voluntario
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
     }
 
 }

@@ -6,16 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\Rule;
-use App\Models\Host;
-use App\Services\ImageService;
-use Dotenv\Exception\ValidationException;
 use Illuminate\Support\Facades\DB;
+use App\Services\ImageService;
+use App\Models\Host;
+use App\Models\Province;
+use App\Models\Location;
 
 class RegisteredHostController extends Controller
 {
@@ -32,7 +32,9 @@ class RegisteredHostController extends Controller
      */
     public function create()
     {
-        return view('auth/register-host');
+        $provinces = Province::with('locations')->get();
+
+        return view('auth/register-host', compact('provinces'));
     }
 
     /**
@@ -42,6 +44,7 @@ class RegisteredHostController extends Controller
      */
     public function store(Request $request)
     {
+
         $validatedHost = $request->validate([
             'email' => 'required|string|lowercase|email|max:255|unique:users,email',
             'password' => ['required', 'confirmed', Rules\Password::defaults()], //8 caracts
@@ -49,20 +52,18 @@ class RegisteredHostController extends Controller
             'cuit' => ['required', 'string', 'size:11', 'regex:/^\d+$/', 'unique:hosts,cuit'],
             'person_full_name' => 'required|string|max:255|min:3',
             'phone' => ['required', 'string', 'min:6', 'max:15', 'regex:/^\d+$/'],
-            'linkedin' => 'nullable|string|max:255|min:3',
-            'facebook' => 'nullable|string|max:255|min:3',
-            'instagram' => 'nullable|string|max:255|min:3',
+            'linkedin' => 'nullable|string|max:255|min:3|required_without_all:facebook,instagram',
+            'facebook' => 'nullable|string|max:255|min:3|required_without_all:linkedin,instagram',
+            'instagram' => 'nullable|string|max:255|min:3|required_without_all:facebook,linkedin',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:512|dimensions:min_width=100,min_height=100,max_width=300,max_height=300',
             'description' => 'required|string|max:500|min:50',
-            'location' => 'nullable|string|max:255|min:3',
+            'location_id' => ['required', 'exists:locations,id'],
+        ], [
+            'linkedin.required_without_all' => 'Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).',
+            'facebook.required_without_all' => 'Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).',
+            'instagram.required_without_all' => 'Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).',
         ]);
 
-         //validación de al menos una red social
-        if (empty($request->linkedin) && empty($request->facebook) && empty($request->instagram)) {
-            return back()->withErrors([
-                'social_media' => 'Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).'
-            ])->withInput();
-        }
 
         $hostRole = Role::where('type', 'host')->first();
 
@@ -70,8 +71,8 @@ class RegisteredHostController extends Controller
             return back()->withErrors(['role' => 'No se encontró el rol "host".']);
         }
 
-        if($request->hasFile('avatar')){
-            $path = $request->file('avatar')->store('hosts');
+        if ($request->hasFile('avatar')) {
+            $path = $this->imageService->storeImage($request->file('avatar'), 'hosts');
             $validatedHost['avatar'] = basename($path);
         }
 
@@ -93,7 +94,7 @@ class RegisteredHostController extends Controller
             'avatar' => $validatedHost['avatar'],
             'description' => $validatedHost['description'],
             'phone' => $validatedHost['phone'],
-            'location' => $validatedHost['location']
+            'location_id' => $validatedHost['location_id'],
         ]);
 
         event(new Registered($user));
@@ -118,8 +119,9 @@ class RegisteredHostController extends Controller
         }
 
         $host = User::with('host')->where('email', $email)->firstOrFail();
+        $provinces = Province::with('locations')->get();
 
-        return view('auth.edit-rejected-profile', ['host' => $host, 'token' => $token, 'email' => $email]);
+        return view('auth.edit-rejected-profile', ['host' => $host, 'token' => $token, 'email' => $email, 'provinces' => $provinces]);
     }
 
     /**
@@ -139,24 +141,21 @@ class RegisteredHostController extends Controller
             'person_full_name' => 'required|string|max:255|min:3',
             'cuit' => ['required', 'string', 'size:11', 'regex:/^\d+$/', Rule::unique('hosts', 'cuit')->ignore($user->host->id)],
             'phone' => ['required', 'string', 'min:6', 'max:15', 'regex:/^\d+$/'],
-            'linkedin' => 'nullable|string|max:255|min:3',
-            'facebook' => 'nullable|string|max:255|min:3',
-            'instagram' => 'nullable|string|max:255|min:3',
+            'linkedin' => 'nullable|string|max:255|min:3|required_without_all:facebook,instagram',
+            'facebook' => 'nullable|string|max:255|min:3|required_without_all:linkedin,instagram',
+            'instagram' => 'nullable|string|max:255|min:3|required_without_all:facebook,linkedin',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:512|dimensions:min_width=100,min_height=100,max_width=300,max_height=300',
             'description' => 'required|string|max:500|min:50',
-            'location' => 'nullable|string|max:255|min:3',
+            'location_id' => ['required', 'exists:locations,id'],
+        ], [
+            'linkedin.required_without_all' => 'Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).',
+            'facebook.required_without_all' => 'Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).',
+            'instagram.required_without_all' => 'Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).',
         ]);
 
-         //validación de al menos una red social
-        if (empty($request->linkedin) && empty($request->facebook) && empty($request->instagram)) {
-            return back()->withErrors([
-                'social_media' => 'Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).'
-            ])->withInput();
-        }
-
         //actualizar avatar si hay nueva imagen
-        if($request->hasFile('avatar')){
-            $path = $request->file('avatar')->store('hosts');
+        if ($request->hasFile('avatar')) {
+            $path = $this->imageService->storeImage($request->file('avatar'), 'hosts');
             $validatedHost['avatar'] = basename($path);
         }
 
@@ -173,4 +172,12 @@ class RegisteredHostController extends Controller
 
          return redirect()->route('login')->with('success', 'Tu perfil fue actualizado. Estaremos revisando los datos y te notificaremos cuando esté aprobado.');
     }
+
+    public function getLocationsByProvince($provinceId)
+    {
+        $locations = Location::where('province_id', $provinceId)->get();
+
+        return response()->json($locations);
+    }
+
 }

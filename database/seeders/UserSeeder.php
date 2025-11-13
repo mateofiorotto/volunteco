@@ -56,7 +56,7 @@ class UserSeeder extends Seeder
             'avatar' => 'perfil-host.svg',
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit...',
             'phone' => '64934312',
-            'location' => 'Buenos Aires',
+            'location_id' => '10',
             'user_id' => $hostUser->id,
             'disabled_at' => null,
             'rejection_reason' => null,
@@ -82,7 +82,7 @@ class UserSeeder extends Seeder
             'biography' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit...',
             'educational_level' => 'Postgrado',
             'profession' => 'Estudiante',
-            'location' => 'Buenos Aires',
+            'location_id' => '1513',
             'birthdate' => Carbon::now()->subYears(20),
             'user_id' => $volunteerUser->id,
         ]);

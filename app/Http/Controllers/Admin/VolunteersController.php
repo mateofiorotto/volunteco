@@ -40,7 +40,15 @@ class VolunteersController extends Controller
      */
     public function getVolunteerProfileById($id)
     {
-        $volunteer = User::where('id', $id)->with('volunteer')->firstOrFail();
+        //$volunteer = User::where('id', $id)->with('volunteer')->firstOrFail();
+
+        $volunteer = User::where('id', $id)
+        ->whereHas('role', fn($q) => $q->where('type', 'volunteer'))
+        ->with(['volunteer.projects', 'volunteer.location.province'])
+        ->firstOrFail();
+
+
+        //$host = User::with('host.projects.volunteers', 'host.location.province')->findOrFail($id);
 
         return view('admin.volunteers.profile', ['volunteer' => $volunteer]);
     }

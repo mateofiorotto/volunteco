@@ -25,9 +25,7 @@
                 </div>
             @endif
 
-            <form method="POST"
-                  action="{{ route('edit-rejected-profile.update', ['token' => $token, 'email' => $email]) }}"
-                  enctype="multipart/form-data">
+            <form method="POST" action="{{ route('edit-rejected-profile.update', ['token' => $token, 'email' => $email]) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -96,19 +94,34 @@
                                         <p class="text-danger">{{ $errors->first('phone') }}</p>
                                     @endif
                                 </div>
-                                <div class="mb-3">
-                                    <label for="location"
-                                           class="form-label">Ubicación</label>
-                                    <input type="text"
-                                           id="location"
-                                           name="location"
-                                           placeholder="Ciudad o provincia"
-                                           autocomplete="address-level2"
-                                           class="form-control {{ $errors->has('location') ? 'is-invalid' : '' }}" />
-                                    @if ($errors->has('location'))
-                                        <p class="text-danger">{{ $errors->first('location') }}</p>
-                                    @endif
+                                <div class="form-group mb-3">
+                                    <label for="province_id">Provincia</label>
+                                    <select name="province_id" id="province_id" class="form-control">
+                                        <option value="">Seleccione una provincia</option>
+                                        @foreach ($provinces as $province)
+                                            <option value="{{ $province->id }}"
+                                                {{ $host->host->location && $host->host->location->province_id == $province->id ? 'selected' : '' }}>
+                                                {{ $province->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="location_id">Localidad</label>
+                                    <select name="location_id" id="location_id" class="form-control">
+                                        <option value="">Seleccione una localidad</option>
+                                        @if ($host->host->location)
+                                            @foreach ($host->host->location->province->locations as $location)
+                                                <option value="{{ $location->id }}"
+                                                    {{ $host->host->location_id == $location->id ? 'selected' : '' }}>
+                                                    {{ $location->name }}
+                                                </option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -207,4 +220,34 @@
 
         </div>
     </section>
+@endsection
+
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const provinceSelect = document.getElementById('province_id');
+    const locationSelect = document.getElementById('location_id');
+
+    provinceSelect.addEventListener('change', function() {
+        const provinceId = this.value;
+
+        locationSelect.innerHTML = '<option value="">Seleccione una localidad</option>';
+
+        if (!provinceId) return;
+
+        fetch(`/locations/${provinceId}`)
+            .then(response => response.json())
+            .then(locations => {
+                locations.forEach(location => {
+                    const option = document.createElement('option');
+                    option.value = location.id;
+                    option.textContent = location.name;
+                    locationSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error al cargar localidades:', error));
+    });
+});
+</script>
+
 @endsection

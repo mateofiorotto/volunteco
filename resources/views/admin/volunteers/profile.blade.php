@@ -38,7 +38,7 @@
                                                     <ul class="list-unstyled">
                                                         <li><a href="mailto:{{ $volunteer->email }}" target="_blank">{{ $volunteer->email }}</a></li>
                                                         <li>{{ $volunteer->volunteer->phone }}</li>
-                                                        <li><i class="bi bi-geo-alt text-primary me-2"></i>{{ $volunteer->volunteer->location }}</li>
+                                                        <li>{{ $volunteer->volunteer->location->name ?? 'Sin ubicación' }} - {{$volunteer->volunteer->location->province->name}}</li>
                                                     </ul>
                                                 </div>
                                                 <div class="col">

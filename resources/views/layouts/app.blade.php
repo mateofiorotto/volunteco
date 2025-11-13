@@ -47,10 +47,10 @@
                     <div class="col-md-4">
                         <ul class="d-flex flex-row align-items-center justify-content-center gap-5 list-unstyled mb-0">
                             <li>
-                                <x-nav-link :route="'register-host.store'">¿Querés ser Anfitrión?</x-nav-link>
+                                <a class="nav-link {{ request()->routeIs('register-host.create') ? 'active' : '' }}" href="{{route('register-host.create')}}">¿Querés ser Anfitrión?</a>
                             </li>
                             <li>
-                                <x-nav-link :route="'register-volunteer.store'">¿Querés ser Voluntario?</x-nav-link>
+                                <a class="nav-link {{ request()->routeIs('register-volunteer.create') ? 'active' : '' }}" href="{{route('register-volunteer.create')}}">¿Querés ser Voluntario?</a>
                             </li>
                         </ul>
                     </div>

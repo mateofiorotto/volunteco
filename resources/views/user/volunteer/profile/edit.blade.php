@@ -20,11 +20,9 @@
                 </div>
             @endif
 
-             <form method="POST"
-                  action="{{ route('volunteers.update-my-profile') }}"
-                  enctype="multipart/form-data">
-                @method('PUT')
+             <form method="POST" action="{{ route('volunteers.update-my-profile') }}" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="row">
 
                     {{-- DATOS PERSONALES --}}

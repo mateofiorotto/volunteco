@@ -22,7 +22,7 @@ class Host extends Model
         'avatar',
         'description',
         'phone',
-        'location',
+        'location_id',
         'disabled_at',
         'rejection_reason',
         'user_id'
@@ -53,4 +53,12 @@ class Host extends Model
     {
         return $this->hasMany(Project::class, 'host_id');
     }
+
+    // localidad del anfitrión
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
+    }
+
+
 }

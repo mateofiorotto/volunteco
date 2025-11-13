@@ -10,10 +10,10 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
 
-class ProfileAcceptedMail extends Mailable
+class HostAcceptedMail extends Mailable
 {
     use Queueable, SerializesModels;
-    
+
     public $hostFullName;
 
     /**
@@ -41,7 +41,7 @@ class ProfileAcceptedMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.profile-accepted',
+            view: 'emails.host-accepted',
         );
     }
 

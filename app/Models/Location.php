@@ -14,5 +14,4 @@ class Location extends Model
         return $this->belongsTo(Province::class);
     }
 
-    // agregar relacion con hosts, voluntarios y proyectos
 }

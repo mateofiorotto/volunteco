@@ -193,6 +193,10 @@ a {
         max-width: 1320px;
     }
 }
+.form-check-input:checked {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+}
 /*customs*/
 .title-h1 {
     color: var(--bs-primary);
@@ -222,7 +226,10 @@ a {
     width: 100px;
     height: 100px;
 }
-
+.avatar-host img {
+    width: 80px;
+    height: 80px;
+}
 .social-icon {
     width: 40px;
     height: 40px;
@@ -233,6 +240,3 @@ a {
     height: 60px;
 }
 
-.is-invalid {
-    border: 1px solid red !important;
-}

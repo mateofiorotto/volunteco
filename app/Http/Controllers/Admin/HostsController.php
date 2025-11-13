@@ -4,16 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Role;
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\HostEditRejectedProfileMail;
 use App\Mail\HostDeleteProfileMail;
-use App\Mail\ProfileAcceptedMail;
-use Illuminate\Support\Facades\Mail;
+use App\Mail\HostAcceptedMail;
 use App\Mail\HostRejectedReminder;
 use App\Services\ImageService;
+use App\Models\User;
 
 class HostsController extends Controller
 {
@@ -31,6 +30,7 @@ class HostsController extends Controller
     public function index()
     {
         //asignar a cada variable llamando al metodo getHostsByStatus
+
         $hostsDisabled = $this->getHostsByStatus('inactivo');
         $hostsNotVerified = $this->getHostsByStatus('pendiente');
         $hostsVerified = $this->getHostsByStatus('activo');
@@ -68,8 +68,9 @@ class HostsController extends Controller
      */
     public function getHostProfileById($id)
     {
-        //$host = User::where('id', $id)->with('host')->first();
-        $host = User::where('id', $id)->with('host.projects.volunteers')->firstOrFail();
+        $host = User::where('id', $id)->whereHas('role', function ($query) {
+            $query->where('type', 'host');
+        })->with('host.projects.volunteers', 'host.location.province')->firstOrFail();
 
         return view('admin.hosts.profile', ['host' => $host]);
     }
@@ -88,7 +89,7 @@ class HostsController extends Controller
         $host->host->rejection_reason = null;
         $host->host->save();
 
-        Mail::to($host->email)->send(new ProfileAcceptedMail($host->host->person_full_name));
+        Mail::to($host->email)->send(new HostAcceptedMail($host->host->person_full_name));
 
         return redirect()->route('admin.hosts.index')->with('success', 'Perfil de anfitrión activado correctamente y notificación enviada por email.');
     }
@@ -151,7 +152,7 @@ class HostsController extends Controller
         );
 
         // Crear link
-        $link = url("/perfil/editar-datos/$token/" . urlencode($host->email));
+        $link = route('edit-rejected-profile', ['token' => $token, 'email' => $host->email]);
 
         // Enviar mail
         Mail::to($host->email)->send(new HostEditRejectedProfileMail($link, $fieldsToChange['description'], $host->host->person_full_name));
@@ -177,13 +178,13 @@ class HostsController extends Controller
             'delete_reasons' => 'required|string|max:500|min:10',
         ]);
 
-        if ($host->host->avatar && $host->host->avatar !== 'perfil-volunteer.svg') {
+        if ($host->host->avatar) {
             $this->imageService->deleteImage($host->host->avatar);
         }
 
-        $host->delete();
-
         Mail::to($host->email)->send(new HostDeleteProfileMail($reasons['delete_reasons'], $host->host->person_full_name));
+
+        $host->delete();
 
         return redirect()->route('admin.hosts.index')->with('success', "Perfil eliminado correctamente y notificación enviada por email.");
     }
