@@ -78,7 +78,7 @@ class ProfileController extends Controller
             //cuit y email no se editan
         ]);
 
-        return redirect()->route('hosts.my-profile.show')->with('success', 'Perfil actualizado correctamente.');
+        return redirect()->route('host.my-profile.show')->with('success', 'Perfil actualizado correctamente.');
 
     }
 

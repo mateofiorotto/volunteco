@@ -5,8 +5,7 @@
         <div class="container pt-5 pb-5">
             <div class="d-flex justify-content-between align-items-center mb-5">
                 <h1 class="title-h1 h3 mb-0">Proyecto</h1>
-                <a href="{{ url()->previous() }}"
-                   class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
+                <a href="{{ url()->previous() }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
             </div>
 
             <!-- Alerta de exito temporal -->
@@ -14,9 +13,7 @@
                 <div class="alert alert-success alert-dismissible fade show"
                      role="alert">
                     {{ session('success') }}
-                    <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="alert"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
             @endif
 
@@ -25,9 +22,7 @@
                 <div class="alert alert-danger alert-dismissible fade show"
                      role="alert">
                     {{ session('error') }}
-                    <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="alert"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
             @endif
 
@@ -131,7 +126,7 @@
                                     </div>
                                     <h3 class="card-title h4">{{ $project->host->name }}</h3>
                                     <ul class="list-unstyled">
-                                        <li>{{ $project->host->location ?? 'Sin ubicación' }}</li>
+                                        <li>{{ $project->host->location->province->name ?? 'Sin ubicación' }}</li>
                                         <li><span class="text-muted small">En la comunidad desde:</span> {{ $project->created_at->format('Y') }}</li>
                                     </ul>
                                     <div class="social-media d-flex gap-3">
@@ -183,21 +178,19 @@
 
                                     @if ($status !== 'rechazado')
                                         <form method="POST"
-                                              action="{{ route('volunteers.withdraw-project', $project->id) }}"
+                                              action="{{ route('volunteer.withdraw-project', $project->id) }}"
                                               onsubmit="return confirm('¿Estás seguro de que deseas desistir de este proyecto?');">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-danger"
-                                                    type="submit">Desistir del proyecto</button>
+                                            <button class="btn btn-danger" type="submit">Desistir del proyecto</button>
                                         </form>
                                     @endif
                                 @else
                                     <p class="mb-3">¿Te interesa participar en este proyecto?</p>
                                     <form method="POST"
-                                          action="{{ route('volunteers.apply-project', $project->id) }}">
+                                          action="{{ route('volunteer.apply-project', $project->id) }}">
                                         @csrf
-                                        <button class="btn btn-primary"
-                                                type="submit">Aplicar al proyecto</button>
+                                        <button class="btn btn-primary" type="submit">Aplicar al proyecto</button>
                                     </form>
                                 @endif
                             </div>

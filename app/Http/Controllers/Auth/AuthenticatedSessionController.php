@@ -49,11 +49,11 @@ class AuthenticatedSessionController extends Controller
         }
 
         if ($user->role && $user->role->type === 'host') {
-            return redirect()->route('hosts.dashboard');
+            return redirect()->route('host.dashboard');
         }
 
         if ($user->role && $user->role->type === 'volunteer') {
-            return redirect()->route('volunteers.dashboard');
+            return redirect()->route('volunteer.dashboard');
         }
 
         // Por defecto (si no tiene rol)
