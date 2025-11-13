@@ -14,15 +14,13 @@
                             <div class="col-12">
                                 <div class="card mb-3">
                                     <div class="d-flex g-0">
-                                        @if (!empty($host->host->avatar))
-                                            <div class="avatar avatar-host p-3">
-                                                <img src="{{ asset('storage/hosts/' . $host->host->avatar) }}"
-                                                     alt="Foto de perfil"
-                                                     class="object-fit-contain rounded-circle"
-                                                     width="80"
-                                                     height="80">
-                                            </div>
-                                        @endif
+                                        <div class="avatar avatar-host p-3">
+                                            <img src="{{ asset('storage/' . ($host->host->avatar ?? 'perfil-host.svg')) }}"
+                                                    alt="Foto de perfil"
+                                                    class="object-fit-contain rounded-circle"
+                                                    width="80"
+                                                    height="80">
+                                        </div>
                                         <div class="card-body flex-fill">
                                             <div class="d-flex justify-content-between align-items-center mb-2">
                                                 <div class="small text-muted">Anfitrión</div>

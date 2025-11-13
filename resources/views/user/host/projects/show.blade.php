@@ -26,7 +26,7 @@
                 <div class="card">
                     @if ($project->image)
                         <div class="ratio ratio-16x9">
-                            <img src="{{ asset('storage/' . $project->image) }}"
+                            <img src="{{ asset('storage/' . ($project->image ?? 'thumbnail-proyecto.jpg')) }}"
                                  class="card-img-top object-fit-cover"
                                  alt="{{ $project->title }}"
                                  width="854"

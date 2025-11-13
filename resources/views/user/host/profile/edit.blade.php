@@ -215,7 +215,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="avatar-md mb-3">
-                                            <img src="{{ asset('storage/hosts/' . $host->avatar) }}" alt="Foto de perfil de {{ $host->name }}" class="rounded-circle img-fluid object-fit-contain avatar-md" width="100" height="100">
+                                            <img src="{{ asset('storage/' . ($host->avatar ?? 'perfil-host.svg')) }}" alt="Foto de perfil de {{ $host->name }}" class="rounded-circle img-fluid object-fit-contain avatar-md" width="100" height="100">
                                         </div>
                                         <div class="mb-3">
                                             <label for="avatar" class="form-label">Foto de perfil</label>

@@ -27,7 +27,7 @@
                         <div class="d-flex gap-5 align-items-start">
                             <!-- Foto de perfil -->
                             <div>
-                                <img src="{{ asset('storage/' . $volunteer->avatar) }}" alt="Foto de perfil de {{ $volunteer->full_name }}" class="rounded-circle object-fit-cover avatar-lg" width="200" height="200">
+                                <img src="{{ asset('storage/' . ($volunteer->avatar ?? 'perfil-volunteer.svg'))}}" alt="Foto de perfil de {{ $volunteer->full_name }}" class="rounded-circle object-fit-cover avatar-lg" width="200" height="200">
                             </div>
 
                             <div class="flex-fill">

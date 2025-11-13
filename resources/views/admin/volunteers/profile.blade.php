@@ -14,15 +14,13 @@
                             <div class="col-12">
                                 <div class="card mb-3">
                                     <div class="d-flex g-0">
-                                        @if (!empty($volunteer->volunteer->avatar))
-                                            <div class="avatar p-3">
-                                                <img src="{{ asset('storage/' . $volunteer->volunteer->avatar) }}"
-                                                    alt="Foto de perfil de {{ $volunteer->full_name }}"
-                                                    class="img-fluid object-fit-contain rounded-circle"
-                                                    width="80"
-                                                    height="80">
-                                            </div>
-                                        @endif
+                                        <div class="avatar p-3">
+                                            <img src="{{ asset('storage/' . ($volunteer->volunteer->avatar ?? 'perfil-volunteer.svg')) }}"
+                                                alt="Foto de perfil de {{ $volunteer->full_name }}"
+                                                class="img-fluid object-fit-contain rounded-circle"
+                                                width="80"
+                                                height="80">
+                                        </div>
                                         <div class="card-body flex-fill">
                                             <div class="d-flex justify-content-between align-items-center mb-2">
                                                 <div class="small text-muted">Voluntario</div>
@@ -43,7 +41,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <ul class="list-unstyled">
-                                                        <li><i class="bi bi-person-vcard text-primary me-2"></i>{{ number_format($volunteer->volunteer->dni, 0, ',', '.') }}</li>
+                                                        <li><span class="text-muted small">DNI: </span>{{ number_format($volunteer->volunteer->dni, 0, ',', '.') }}</li>
                                                         <li><span class="text-muted small">Fecha de nacimiento: </span>{{ $volunteer->volunteer->birthdate->format('d/m/Y') }}</li>
                                                         <li><span class="text-muted small">Fecha de registro: </span>{{ $volunteer->created_at->format('d/m/Y') }}</li>
                                                     </ul>

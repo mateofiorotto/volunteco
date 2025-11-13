@@ -175,7 +175,7 @@
                                 <h2 class="card-title h3">Info Extra</h2>
                                 <div class="mb-3 d-flex flex-column">
                                     <div class="mb-2">
-                                        <img src="{{ asset('storage/' . $host->host->avatar) }}"
+                                        <img src="{{ asset('storage/' . ($host->host->avatar ?? 'perfil-host.svg')) }}"
                                              width="150"
                                              height="150"
                                              alt="Foto de perfil"

@@ -249,7 +249,7 @@
                                     @endif
 
                                     <p class="pt-3 pb-3">Foto de perfil actual:</p>
-                                    <img src="{{ asset('storage/' . $volunteer->avatar) }}"
+                                    <img src="{{ asset('storage/' . ($volunteer->avatar ?? 'perfil-volunteer.svg')) }}"
                                          alt="Foto de perfil de {{ $volunteer->full_name }}"
                                          class="mt-3 mb-3 rounded-circle img-fluid object-fit-cover avatar-md">
                                 </div>

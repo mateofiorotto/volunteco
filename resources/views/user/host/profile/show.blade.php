@@ -32,7 +32,7 @@
                         <div class="d-flex gap-5 align-items-start">
                             <!-- Foto de perfil -->
                             <div class="avatar">
-                                <img src="{{ asset('storage/hosts/' . $host->avatar) }}" alt="Foto de perfil de {{ $host->name }}" class="rounded-circle object-fit-contain avatar-lg" width="200" height="200"/>
+                                <img src="{{ asset('storage/' . ($host->avatar ?? 'perfil-host.svg')) }}" alt="Foto de perfil de {{ $host->name }}" class="rounded-circle object-fit-contain avatar-lg" width="200" height="200"/>
                             </div>
 
                             <!-- Info (nombre, editar (si el perfil es propio), localidad) -->

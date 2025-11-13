@@ -4,7 +4,7 @@
         <div class="card">
             @if ($project->image)
             <div class="ratio ratio-4x3">
-                <img src="{{ asset('storage/' . $project->image) }}" class="card-img-top object-fit-cover" alt="{{ $project->title }}" width="304" height="228">
+                <img src="{{ asset('storage/' . ($project->image ?? 'thumbnail-proyecto.jpg')) }}" class="card-img-top object-fit-cover" alt="{{ $project->title }}" width="304" height="228">
             </div>
             @endif
             <div class="card-body d-flex flex-column">

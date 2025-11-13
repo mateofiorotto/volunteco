@@ -31,11 +31,9 @@
                 <!-- Detalles del proyecto -->
                 <div class="col-md-8 col-12 mb-4">
                     <div class="card">
-                        @if ($project->image)
                         <div class="ratio ratio-16x9">
-                            <img src="{{ asset('storage/' . $project->image) }}" class="card-img-top object-fit-cover" alt="{{ $project->title }}" width="854" height="480">
+                            <img src="{{ asset('storage/' . ($project->image ?? 'thumbnail-proyecto.jpg')) }}" class="card-img-top object-fit-cover" alt="{{ $project->title }}" width="854" height="480">
                         </div>
-                        @endif
 
                         <div class="card-body">
                             <span class="badge bg-primary mb-2 fw-normal">{{ $project->projectType->name }}</span>
@@ -127,21 +125,25 @@
                                     <h3 class="card-title h4">{{ $project->host->name }}</h3>
                                     <ul class="list-unstyled">
                                         <li>{{ $project->host->location->province->name ?? 'Sin ubicación' }}</li>
-                                        <li><span class="text-muted small">En la comunidad desde:</span> {{ $project->created_at->format('Y') }}</li>
+                                        <li><span class="text-muted small">En la comunidad desde</span> {{ $project->created_at->format('Y') }}</li>
                                     </ul>
-                                    <div class="social-media d-flex gap-3">
-                                        @if ($project->host->linkedin)
-                                            <a href="{{ $project->host->linkedin }}" target="_blank" class="fs-5"><i class="bi bi-linkedin"></i></a>
-                                        @endif
+                                    @if (Auth::check() && Auth::user()->hasRole('volunteer'))
+                                        @if ($hasApplied)
+                                        <div class="social-media d-flex gap-3">
+                                            @if ($project->host->linkedin)
+                                                <a href="{{ $project->host->linkedin }}" target="_blank" class="fs-5"><i class="bi bi-linkedin"></i></a>
+                                            @endif
 
-                                        @if ($project->host->instagram)
-                                            <a href="{{ $project->host->instagram }}" target="_blank" class="fs-5"><i class="bi bi-instagram"></i></a>
-                                        @endif
+                                            @if ($project->host->instagram)
+                                                <a href="{{ $project->host->instagram }}" target="_blank" class="fs-5"><i class="bi bi-instagram"></i></a>
+                                            @endif
 
-                                        @if ($project->host->facebook)
-                                            <a href="{{ $project->host->facebook }}" target="_blank" class="fs-5"><i class="bi bi-facebook"></i></a>
+                                            @if ($project->host->facebook)
+                                                <a href="{{ $project->host->facebook }}" target="_blank" class="fs-5"><i class="bi bi-facebook"></i></a>
+                                            @endif
+                                        </div>
                                         @endif
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

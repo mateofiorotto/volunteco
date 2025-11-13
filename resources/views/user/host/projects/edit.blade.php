@@ -91,15 +91,13 @@
                             <div class="mb-3">
                                 <label for="image" class="form-label">Imagen del proyecto</label>
 
-                                @if($project->image)
-                                    <div class="mb-2">
-                                        <img src="{{ asset('storage/' . $project->image) }}"
-                                             alt="Imagen actual"
-                                             class="img-thumbnail"
-                                             style="max-width: 200px">
-                                        <p class="text-muted small mt-1">Imagen actual</p>
-                                    </div>
-                                @endif
+                                <div class="mb-2">
+                                    <img src="{{ asset('storage/' . ($project->image ?? 'thumbnail-proyecto.jpg')) }}"
+                                            alt="Imagen actual"
+                                            class="img-thumbnail"
+                                            style="max-width: 200px">
+                                    <p class="text-muted small mt-1">Imagen actual</p>
+                                </div>
 
                                 <input type="file"
                                        id="image"
