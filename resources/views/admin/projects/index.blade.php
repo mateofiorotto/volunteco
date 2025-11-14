@@ -5,7 +5,7 @@
         <div class="container py-5">
             <h1 class="title-h1 h3 mb-5">Listado de <span>Proyectos</span></h1>
 
-            
+
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show"
                      role="alert">
@@ -16,7 +16,7 @@
                             aria-label="Close"></button>
                 </div>
             @endif
-            
+
             <div class="row">
                 <div class="col-md-8">
                     <table class="table">
@@ -37,17 +37,13 @@
                                     <td>{{ $project->host->name }}</td>
                                     <td>
                                         @if (!$project->enabled)
-                                            <span class="text-uppercase fw-semibold badge text-bg-warning text-bg-danger">
-                                                    No visible
-                                                </span>
+                                            <span class="text-uppercase fw-semibold badge text-bg-danger">No visible</span>
                                         @else
-                                            <span class="text-uppercase fw-semibold badge text-bg-success text-bg-success">
-                                                    Visible
-                                                </span>
+                                            <span class="text-uppercase fw-semibold badge bg-transparent text-body">Visible</span>
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="" class="btn btn-sm btn-azul">Ver Proyecto</a>
+                                        <a href="{{route('admin.projects.show', $project->id)}}" class="btn btn-sm btn-azul">Ver Proyecto</a>
                                     </td>
                                 </tr>
                             @empty
@@ -59,7 +55,7 @@
                     </table>
                 </div>
             </div>
-            
+
             @if($projects->hasPages())
                 <div class="d-flex justify-content-start mt-4">
                     {{ $projects->links() }}

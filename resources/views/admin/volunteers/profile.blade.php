@@ -17,7 +17,7 @@
                                         <div class="avatar p-3">
                                             <img src="{{ asset('storage/' . ($volunteer->volunteer->avatar ?? 'perfil-volunteer.svg')) }}"
                                                 alt="Foto de perfil de {{ $volunteer->full_name }}"
-                                                class="img-fluid object-fit-contain rounded-circle"
+                                                class="object-fit-contain rounded-circle"
                                                 width="80"
                                                 height="80">
                                         </div>
@@ -35,7 +35,7 @@
                                                 <div class="col">
                                                     <ul class="list-unstyled">
                                                         <li><a href="mailto:{{ $volunteer->email }}" target="_blank">{{ $volunteer->email }}</a></li>
-                                                        <li>{{ $volunteer->volunteer->phone }}</li>
+                                                        <li><a href="tel:{{ $volunteer->volunteer->phone }}" target="_blank">{{ $volunteer->volunteer->phone }}</a></li>
                                                         <li>{{ $volunteer->volunteer->location->name ?? 'Sin ubicación' }} - {{$volunteer->volunteer->location->province->name}}</li>
                                                     </ul>
                                                 </div>

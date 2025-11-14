@@ -15,7 +15,7 @@
                             aria-label="Close"></button>
                 </div>
             @endif
-            
+
             <div class="row">
                 <div class="col-md-8">
                     <table class="table">
@@ -36,11 +36,9 @@
                                     <td>{{ $volunteer->email }}</td>
                                     <td>
                                         @if ($volunteer->status !== 'activo')
-                                            <span
-                                                  class="text-uppercase fw-semibold badge text-bg-warning text-bg-danger">{{ $volunteer->status }}</span>
+                                            <span class="text-uppercase fw-semibold badge text-bg-warning">{{ $volunteer->status }}</span>
                                         @else
-                                            <span
-                                                  class="text-uppercase fw-semibold badge text-bg-success text-bg-ssucces">{{ $volunteer->status }}</span>
+                                            <span class="text-uppercase fw-semibold badge bg-transparent text-body">{{ $volunteer->status }}</span>
                                         @endif
                                     </td>
                                     <td>

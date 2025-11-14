@@ -33,7 +33,7 @@
         }
         .email-footer {
             background-color: #66800A;
-            color: #ffffff;
+            color: #66800a;
             padding: 15px;
             text-align: center;
             font-size: 12px;

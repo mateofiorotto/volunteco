@@ -71,7 +71,8 @@ class UserSeeder extends Seeder
         ]);
 
         Volunteer::create([
-            'full_name' => 'First Volunteer',
+            'name' => 'First',
+            'lastname' => 'Volunteer',
             'dni' => '12345678',
             'phone' => '64934312',
             'linkedin' => 'https://linkedin.com',

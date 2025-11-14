@@ -5,22 +5,13 @@
 
         <div class="d-flex justify-content-between align-items-center mb-5">
             <h1 class="title-h1 h3">Mi <span>Perfil</span></h1>
-            @if (Auth::id() == $host->user_id)
-                <a href="{{ route('host.my-profile.edit', $host->user_id) }}"
-                   class="btn btn-primary">
-                    Editar Perfil
-                </a>
-            @endif
+            <a href="{{ route('host.my-profile.edit', $host->user_id) }}" class="btn btn-primary">Editar Perfil</a>
         </div>
 
         @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show"
-                 role="alert">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>¡Perfecto!</strong> {{ session('success') }}
-                <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="alert"
-                        aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
 
@@ -44,6 +35,7 @@
                                         <p>{{ $host->location->name }} - {{ $host->location->province->name }}</p>
                                     </div>
                                 @endif
+                                <p><span class="text-muted small">CUIT:</span> {{$host->cuit}}</p>
 
                                 <!-- Descripción -->
                                 <div>
@@ -55,52 +47,51 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-5">
+                <div class="card mb-4">
+                    <div class="card-header">Contacto</div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0">
+                            <li><span class="text-muted small">Persona de contacto: </span>{{ $host->person_full_name }}</li>
+                            <li><span class="text-muted small">Teléfono: </span>{{ $host->phone }}</li>
+                            <li><span class="text-muted small">Email: </span>{{ $host->user->email }}</li>
+                        </ul>
+                    </div>
+                </div>
 
                 <div class="card mb-4">
+                    <div class="card-header">Redes sociales</div>
                     <div class="card-body">
                         <!-- Redes -->
                         @if ($host->linkedin || $host->facebook || $host->instagram)
-                            <h3 class="card-title h3">Redes sociales</h3>
-                            <ul class="list-unstyled">
+                            <ul class="list-unstyled mb-0">
                                 @if ($host->linkedin)
                                 <li>
-                                    <a href="{{ $host->linkedin }}" target="_blank" class="fs-5 text-primary">
-                                        <i class="bi bi-linkedin"></i>
+                                    <a href="{{ $host->linkedin }}" target="_blank">
+                                        <i class="bi bi-linkedin fs-5 me-2 text-azul align-middle"></i>
                                         {{$host->linkedin}}
                                     </a>
                                 </li>
                                 @endif
                                 @if ($host->facebook)
                                 <li>
-                                    <a href="{{ $host->facebook }}" target="_blank" class="fs-5 text-primary">
-                                        <i class="bi bi-facebook"></i>
+                                    <a href="{{ $host->facebook }}" target="_blank">
+                                        <i class="bi bi-facebook fs-5 me-2 text-azul align-middle"></i>
                                         {{ $host->facebook }}
                                     </a>
                                 </li>
                                 @endif
                                 @if ($host->instagram)
                                 <li>
-                                    <a href="{{ $host->instagram }}" target="_blank" class="fs-5 text-primary">
-                                        <i class="bi bi-instagram"></i>
+                                    <a href="{{ $host->instagram }}" target="_blank">
+                                        <i class="bi bi-instagram fs-5 me-2 text-azul align-middle"></i>
                                         {{ $host->instagram }}
                                     </a>
                                 </li>
                                 @endif
                             </ul>
                         @endif
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-5">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h3 class="card-title h3">Contacto</h3>
-                        <ul class="list-unstyled">
-                            <li><span class="text-muted small">Persona de contacto: </span>{{ $host->person_full_name }}
-                            </li>
-                            <li><span class="text-muted small">Teléfono: </span>{{ $host->phone }}</li>
-                            <li><span class="text-muted small">Email: </span>{{ $host->user->email }}</li>
-                        </ul>
                     </div>
                 </div>
             </div>

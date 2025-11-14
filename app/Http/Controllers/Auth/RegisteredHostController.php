@@ -71,9 +71,9 @@ class RegisteredHostController extends Controller
             return back()->withErrors(['role' => 'No se encontró el rol "host".']);
         }
 
-        if ($request->hasFile('avatar')) {
-            $validatedHost['avatar'] = $this->imageService->storeImage($request->file('avatar'), 'hosts');
-        }
+        $validatedHost['avatar'] = $request->hasFile('avatar')
+            ? $this->imageService->storeImage($request->file('avatar'), 'hosts') :
+            null;
 
         $user = User::create([
             'email' => $validatedHost['email'],

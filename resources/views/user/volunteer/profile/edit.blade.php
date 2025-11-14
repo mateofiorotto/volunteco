@@ -20,7 +20,7 @@
                 </div>
             @endif
 
-             <form method="POST" action="{{ route('volunteer.update-my-profile') }}" enctype="multipart/form-data">
+             <form method="POST" novalidate action="{{ route('volunteer.my-profile.update', $volunteer->user_id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row">
@@ -32,32 +32,64 @@
                                 <h2 class="card-title h3">Datos Personales</h2>
                                 <p class="mb-3">Completa con tus datos.</p>
 
-                                <div class="mb-3">
-                                    <label for="full_name" class="form-label">Nombre Completo *</label>
-                                    <input type="text"
-                                           id="full_name"
-                                           name="full_name"
-                                           placeholder="Tu nombre completo"
-                                           required
-                                           autocomplete="name"
-                                           value="{{ old('full_name', $volunteer->full_name) }}"
-                                           class="form-control {{ $errors->has('full_name') ? 'is-invalid' : '' }}" />
-                                    @if ($errors->has('full_name'))
-                                        <p class="text-danger">{{ $errors->first('full_name') }}</p>
-                                    @endif
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="name" class="form-label">Nombre *</label>
+                                        <input type="text"
+                                            id="name"
+                                            name="name"
+                                            placeholder="Nombre"
+                                            required
+                                            autocomplete="name"
+                                            value="{{ old('name', $volunteer->name) }}"
+                                            class="form-control @error('name') is-invalid @enderror" />
+                                        @if ($errors->has('name'))
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @endif
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="lastname" class="form-label">Apellido *</label>
+                                        <input type="text"
+                                            id="lastname"
+                                            name="lastname"
+                                            placeholder="Apellido"
+                                            required
+                                            autocomplete="lastname"
+                                            value="{{ old('lastname', $volunteer->lastname) }}"
+                                            class="form-control @error('lastname') is-invalid @enderror" />
+                                        @if ($errors->has('lastname'))
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @endif
+                                    </div>
                                 </div>
 
-                                <div class="mb-3">
-                                    <label for="birthdate" class="form-label">Fecha de nacimiento *</label>
-                                    <input type="date"
-                                           id="birthdate"
-                                           name="birthdate"
-                                           value="{{ old('birthdate', $volunteer->birthdate) }}"
-                                           required
-                                           class="form-control {{ $errors->has('birthdate') ? 'is-invalid' : '' }}" />
-                                    @if ($errors->has('birthdate'))
-                                        <p class="text-danger">{{ $errors->first('birthdate') }}</p>
-                                    @endif
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="dni" class="form-label">DNI *</label>
+                                        <input type="text"
+                                            id="dni"
+                                            name="dni"
+                                            placeholder="12345678"
+                                            inputmode="numeric"
+                                            disabled
+                                            class="form-control @error('dni') is-invalid @enderror"
+                                            value="{{ old('dni') }}"/>
+                                            @error('dni')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="birthdate" class="form-label">Fecha de nacimiento *</label>
+                                        <input type="date"
+                                            id="birthdate"
+                                            name="birthdate"
+                                            value="{{ old('birthdate', optional($volunteer->birthdate)->format('Y-m-d')) }}"
+                                            required
+                                            class="form-control @error('birthdate') is-invalid @enderror" />
+                                        @if ($errors->has('birthdate'))
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -77,11 +109,11 @@
                                            name="password"
                                            placeholder="Ingresa tu contraseña"
                                            autocomplete="new-password"
-                                           class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" />
+                                           class="form-control @error('password') is-invalid @enderror" />
                                     @if ($errors->has('password'))
-                                        <p class="text-danger">{{ $errors->first('password') }}</p>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @endif
-                                    <small class="form-text text-muted">Déjalo en blanco si no deseas cambiarla</small>
+                                    <small class="form-text text-muted">Dejalo en blanco si no deseas cambiarla</small>
                                 </div>
 
                                 <div class="mb-3">
@@ -91,51 +123,9 @@
                                            name="password_confirmation"
                                            placeholder="Repite tu contraseña"
                                            autocomplete="new-password"
-                                           class="form-control {{ $errors->has('password_confirmation') ? 'is-invalid' : '' }}" />
+                                           class="form-control @error('password_confirmation') is-invalid @enderror" />
                                     @if ($errors->has('password_confirmation'))
-                                        <p class="text-danger">{{ $errors->first('password_confirmation') }}</p>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- DATOS PROFESIONALES --}}
-                    <div class="col-md-6">
-                        <div class="card mb-5">
-                            <div class="card-body">
-                                <h2 class="card-title h3">Datos Profesionales</h2>
-                                <p class="mb-3">Completa con tus datos.</p>
-
-                                <div class="mb-3">
-                                    <label for="educational_level" class="form-label">Nivel Educativo *</label>
-                                    <select name="educational_level"
-                                            id="educational_level"
-                                            required
-                                            class="form-control {{ $errors->has('educational_level') ? 'is-invalid' : '' }}">
-                                        <option value="" disabled {{ old('educational_level', $volunteer->educational_level) == '' ? 'selected' : '' }}>
-                                            Selecciona un nivel educativo
-                                        </option>
-                                        <option value="secundario" {{ old('educational_level', $volunteer->educational_level) === 'secundario' ? 'selected' : '' }}>Secundario</option>
-                                        <option value="terciario" {{ old('educational_level', $volunteer->educational_level) === 'terciario' ? 'selected' : '' }}>Terciario</option>
-                                        <option value="universitario" {{ old('educational_level', $volunteer->educational_level) === 'universitario' ? 'selected' : '' }}>Universitario</option>
-                                        <option value="postgrado" {{ old('educational_level', $volunteer->educational_level) === 'postgrado' ? 'selected' : '' }}>Postgrado</option>
-                                    </select>
-                                    @if ($errors->has('educational_level'))
-                                        <p class="text-danger">{{ $errors->first('educational_level') }}</p>
-                                    @endif
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="profession" class="form-label">Profesión</label>
-                                    <input type="text"
-                                           id="profession"
-                                           name="profession"
-                                           placeholder="Ej: Ingeniero, Profesor, Diseñador..."
-                                           value="{{ old('profession', $volunteer->profession) }}"
-                                           class="form-control {{ $errors->has('profession') ? 'is-invalid' : '' }}" />
-                                    @if ($errors->has('profession'))
-                                        <p class="text-danger">{{ $errors->first('profession') }}</p>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @endif
                                 </div>
                             </div>
@@ -158,25 +148,40 @@
                                            placeholder="Ej: 5491112345678"
                                            autocomplete="tel"
                                            required
-                                           class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}" />
+                                           class="form-control @error('phone') is-invalid @enderror" />
                                     @if ($errors->has('phone'))
-                                        <p class="text-danger">{{ $errors->first('phone') }}</p>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @endif
                                 </div>
 
-                                <div class="mb-3">
-                                    <label for="location" class="form-label">Residencia *</label>
-                                    <input type="text"
-                                           id="location"
-                                           name="location"
-                                           placeholder="Ciudad o provincia"
-                                           required
-                                           value="{{ old('location', $volunteer->location) }}"
-                                           autocomplete="address-level2"
-                                           class="form-control {{ $errors->has('location') ? 'is-invalid' : '' }}" />
-                                    @if ($errors->has('location'))
-                                        <p class="text-danger">{{ $errors->first('location') }}</p>
-                                    @endif
+                                <div class="form-group mb-3">
+                                    <label for="province_id" class="form-label">Provincia *</label>
+                                    <select name="province_id" id="province_id" class="form-select @error('location_id') is-invalid @enderror">
+                                        <option value="">Seleccione una provincia</option>
+                                        @foreach ($provinces as $province)
+                                            <option value="{{ $province->id }}"
+                                                {{ $volunteer->location && $volunteer->location->province_id == $province->id ? 'selected' : '' }}>
+                                                {{ $province->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="location_id" class="form-label">Localidad *</label>
+                                    <select name="location_id" id="location_id" class="form-select @error('location_id') is-invalid @enderror">
+                                        @if ($volunteer->location)
+                                            @foreach ($volunteer->location->province->locations as $location)
+                                                <option value="{{ $location->id }}"
+                                                    {{ $volunteer->location_id == $location->id ? 'selected' : '' }}>
+                                                    {{ $location->name }}
+                                                </option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    @error('location_id')
+                                        <div class="invalid-feedback d-block">El campo localidad es obligatorio.</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -195,9 +200,9 @@
                                            name="linkedin"
                                            placeholder="https://linkedin.com/in/usuario"
                                            value="{{ old('linkedin', $volunteer->linkedin) }}"
-                                           class="form-control {{ $errors->has('linkedin') ? 'is-invalid' : '' }}" />
+                                           class="form-control @error('linkedin') is-invalid @enderror" />
                                     @if ($errors->has('linkedin'))
-                                        <p class="text-danger">{{ $errors->first('linkedin') }}</p>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @endif
                                 </div>
 
@@ -208,9 +213,9 @@
                                            name="facebook"
                                            placeholder="https://facebook.com/usuario"
                                            value="{{ old('facebook', $volunteer->facebook) }}"
-                                           class="form-control {{ $errors->has('facebook') ? 'is-invalid' : '' }}" />
+                                           class="form-control @error('facebook') is-invalid @enderror" />
                                     @if ($errors->has('facebook'))
-                                        <p class="text-danger">{{ $errors->first('facebook') }}</p>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @endif
                                 </div>
 
@@ -221,37 +226,81 @@
                                            name="instagram"
                                            placeholder="https://instagram.com/usuario"
                                            value="{{ old('instagram', $volunteer->instagram) }}"
-                                           class="form-control {{ $errors->has('instagram') ? 'is-invalid' : '' }}" />
+                                           class="form-control @error('instagram') is-invalid @enderror" />
                                     @if ($errors->has('instagram'))
-                                        <p class="text-danger">{{ $errors->first('instagram') }}</p>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @endif
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    {{-- DATOS PROFESIONALES --}}
+                    <div class="col-md-6">
+                        <div class="card mb-5">
+                            <div class="card-body">
+                                <h2 class="card-title h3">Datos Profesionales</h2>
+                                <p class="mb-3">Completa con tus datos.</p>
+
+                                <div class="mb-3">
+                                    <label for="educational_level" class="form-label">Nivel Educativo *</label>
+                                    <select name="educational_level"
+                                            id="educational_level"
+                                            required
+                                            class="form-select @error('educational_level') is-invalid @enderror">
+                                        <option value="" disabled {{ old('educational_level', $volunteer->educational_level) == '' ? 'selected' : '' }}>
+                                            Selecciona un nivel educativo
+                                        </option>
+                                        <option value="secundario" {{ old('educational_level', $volunteer->educational_level) === 'secundario' ? 'selected' : '' }}>Secundario</option>
+                                        <option value="terciario" {{ old('educational_level', $volunteer->educational_level) === 'terciario' ? 'selected' : '' }}>Terciario</option>
+                                        <option value="universitario" {{ old('educational_level', $volunteer->educational_level) === 'universitario' ? 'selected' : '' }}>Universitario</option>
+                                        <option value="postgrado" {{ old('educational_level', $volunteer->educational_level) === 'postgrado' ? 'selected' : '' }}>Postgrado</option>
+                                    </select>
+                                    @if ($errors->has('educational_level'))
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @endif
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="profession" class="form-label">Profesión</label>
+                                    <input type="text"
+                                           id="profession"
+                                           name="profession"
+                                           placeholder="Ingeniero, Profesor, Diseñador..."
+                                           value="{{ old('profession', $volunteer->profession) }}"
+                                           class="form-control @error('profession') is-invalid @enderror" />
+                                    @if ($errors->has('profession'))
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     {{-- INFO EXTRA --}}
                     <div class="col-md-6">
                         <div class="card mb-5">
                             <div class="card-body">
                                 <h2 class="card-title h3">Info Extra</h2>
-                                <p class="mb-3">Completa con tus datos.</p>
 
                                 <div class="mb-3">
+                                    <div class="pt-2">
+                                        <img src="{{ asset('storage/' . ($volunteer->avatar ?? 'perfil-volunteer.svg')) }}"
+                                            alt="Foto de perfil de {{ $volunteer->full_name }}"
+                                            class="mb-3 rounded-circle img-fluid object-fit-contain avatar-md">
+                                    </div>
                                     <label for="avatar" class="form-label">Foto de perfil</label>
                                     <input type="file"
                                            id="avatar"
                                            name="avatar"
                                            accept="image/*"
-                                           class="form-control {{ $errors->has('avatar') ? 'is-invalid' : '' }}" />
+                                           class="form-control @error('avatar') is-invalid @enderror" />
                                     @if ($errors->has('avatar'))
-                                        <p class="text-danger">{{ $errors->first('avatar') }}</p>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @endif
+                                    <div class="form-text">La imagen debe tener un tamaño entre 100px y 300px de ancho y de alto y no debe pesar más de 500kb</div>
 
-                                    <p class="pt-3 pb-3">Foto de perfil actual:</p>
-                                    <img src="{{ asset('storage/' . ($volunteer->avatar ?? 'perfil-volunteer.svg')) }}"
-                                         alt="Foto de perfil de {{ $volunteer->full_name }}"
-                                         class="mt-3 mb-3 rounded-circle img-fluid object-fit-cover avatar-md">
                                 </div>
 
                                 <div class="mb-3">
@@ -261,10 +310,11 @@
                                               required
                                               placeholder="Contanos sobre vos..."
                                               rows="4"
-                                              class="form-control {{ $errors->has('biography') ? 'is-invalid' : '' }}">{{ old('biography', $volunteer->biography) }}</textarea>
+                                              class="form-control @error('biography') is-invalid @enderror">{{ old('biography', $volunteer->biography) }}</textarea>
                                     @if ($errors->has('biography'))
-                                        <p class="text-danger">{{ $errors->first('biography') }}</p>
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @endif
+                                    <div class="form-text">Tené en cuenta que esta es tu carta de presentación.</div>
                                 </div>
                             </div>
                         </div>

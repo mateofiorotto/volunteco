@@ -31,15 +31,22 @@
                                                 @endif
                                             </div>
                                             <h2 class="card-title h3">{{ $host->host->name }}</h2>
-                                            <ul class="list-unstyled mb-0">
-                                                <li><a href="mailto:{{ $host->email }}" target="_blank">{{ $host->email }}</a></li>
-                                                <li>{{ $host->host->phone }}</li>
-                                                <li>{{ $host->host->location->name ?? 'Sin ubicación' }} - {{$host->host->location->province->name}}</li>
-                                                <li><span class="text-muted small">Contacto:</span>
-                                                    {{ $host->host->person_full_name }}</li>
-                                                <li><span class="text-muted small">Fecha de registro:</span>
-                                                    {{ $host->created_at->format('d/m/Y') }}</li>
-                                            </ul>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <ul class="list-unstyled mb-3">
+                                                        <li><a href="mailto:{{ $host->email }}" target="_blank">{{ $host->email }}</a></li>
+                                                        <li><a href="tel:{{ $host->host->phone }}" target="_blank">{{ $host->host->phone }}</a></li>
+                                                        <li>{{ $host->host->location->name ?? 'Sin ubicación' }} - {{$host->host->location->province->name}}</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col">
+                                                    <ul class="list-unstyled mb-0">
+                                                        <li><span class="text-muted small">CUIT:</span> {{ $host->host->cuit }}</li>
+                                                        <li><span class="text-muted small">Contacto:</span> {{ $host->host->person_full_name }}</li>
+                                                        <li><span class="text-muted small">Fecha de registro:</span> {{ $host->created_at->format('d/m/Y') }}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

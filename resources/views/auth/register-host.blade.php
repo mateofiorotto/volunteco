@@ -47,7 +47,7 @@
                                     <input type="text"
                                         id="cuit"
                                         name="cuit"
-                                        placeholder="Ej: 20123456789"
+                                        placeholder="20123456789"
                                         inputmode="numeric"
                                         required
                                         class="form-control @error('cuit') is-invalid @enderror"
@@ -91,7 +91,7 @@
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <label for="province_id" class="form-label">Provincia</label>
+                                    <label for="province_id" class="form-label">Provincia *</label>
                                     <select name="province_id" id="province_id" class="form-select">
                                         <option value="">Seleccione una provincia</option>
                                         @foreach ($provinces as $province)
@@ -101,10 +101,13 @@
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <label for="location_id" class="form-label">Localidad</label>
+                                    <label for="location_id" class="form-label">Localidad *</label>
                                     <select name="location_id" id="location_id" class="form-select">
                                         <option value="">Seleccione una localidad</option>
                                     </select>
+                                    @error('location_id')
+                                        <div class="invalid-feedback d-block">El campo localidad es obligatorio.</div>
+                                    @enderror
                                 </div>
 
                             </div>
@@ -145,6 +148,7 @@
                                     @error('password')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
+                                    <div class="form-text">La contraseña debe tener al menos 8 caracteres alfanuméricos.</div>
                                 </div>
 
                                 <div class="mb-3">
@@ -169,7 +173,7 @@
                         <div class="card mb-5">
                             <div class="card-body">
                                 <h2 class="card-title h3">Redes Sociales</h2>
-                                <p>Completá al menos una de las redes sociales.</p>
+                                <p>Completá al menos una de las redes sociales. *</p>
                                 <div class="mb-3">
                                     <label for="linkedin" class="form-label">LinkedIn</label>
                                     <input type="url"

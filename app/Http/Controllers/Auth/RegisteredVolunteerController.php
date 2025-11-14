@@ -44,7 +44,8 @@ class RegisteredVolunteerController extends Controller
         $validatedVolunteer = $request->validate([
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'full_name' => 'required|string|max:255|min:3',
+            'name' => 'required|string|max:255|min:3',
+            'lastname' => 'required|string|max:255|min:3',
             'dni' => ['required', 'string', 'size:8', 'regex:/^\d+$/', 'unique:volunteers,dni'],
             'phone' => ['required', 'string', 'min:6', 'max:15', 'regex:/^\d+$/'],
             'linkedin' => 'nullable|string|max:255|min:3',
@@ -68,9 +69,9 @@ class RegisteredVolunteerController extends Controller
             return back()->withErrors(['role' => 'No se encontró el rol "volunteer".']);
         }
 
-        if ($request->hasFile('avatar')) {
-            $validatedVolunteer['avatar'] = $this->imageService->storeImage($request->file('avatar'), 'volunteers');
-        }
+        $validatedVolunteer['avatar'] = $request->hasFile('avatar')
+            ? $this->imageService->storeImage($request->file('avatar'), 'volunteers') :
+            null;
 
         $user = User::create([
             'email' => $validatedVolunteer['email'],
@@ -81,7 +82,8 @@ class RegisteredVolunteerController extends Controller
 
         Volunteer::create([
             'user_id' => $user->id,
-            'full_name' => $validatedVolunteer['full_name'],
+            'name' => $validatedVolunteer['name'],
+            'lastname' => $validatedVolunteer['lastname'],
             'dni' => $validatedVolunteer['dni'],
             'phone' => $validatedVolunteer['phone'],
             'linkedin' => $validatedVolunteer['linkedin'],
@@ -91,14 +93,13 @@ class RegisteredVolunteerController extends Controller
             'biography' => $validatedVolunteer['biography'],
             'educational_level' => $validatedVolunteer['educational_level'],
             'profession' => $validatedVolunteer['profession'],
-            'location' => $validatedVolunteer['location'],
+            'location_id' => $validatedVolunteer['location_id'],
             'birthdate' => $validatedVolunteer['birthdate']
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user);
+        return redirect()->route('login')->with('success', 'Bienvenido, tu cuenta fue creada con éxito. Ya puedes ingresar y disfrutar de nuestra plataforma.');
 
-        return redirect()->route('home');
     }
 };

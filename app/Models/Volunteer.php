@@ -15,7 +15,8 @@ class Volunteer extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'full_name',
+        'name',
+        'lastname',
         'dni',
         'birthdate',
         'educational_level',
@@ -64,5 +65,16 @@ class Volunteer extends Model
     {
         return $this->belongsTo(Location::class);
     }
+
+    // Accessor para nombre completo
+    // https://laravel.com/docs/12.x/eloquent-mutators
+    protected function fullName(): Attribute
+    {
+        return Attribute::get(function () {
+            return trim("{$this->name} {$this->lastname}");
+        });
+    }
+
+    protected $appends = ['full_name'];
 
 }

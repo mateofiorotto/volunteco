@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use App\Services\ImageService;
 use App\Models\Volunteer;
+use App\Models\Province;
 
 class ProfileController extends Controller
 {
@@ -17,6 +18,13 @@ class ProfileController extends Controller
     public function __construct(ImageService $imageService)
     {
         $this->imageService = $imageService;
+    }
+
+    public function show()
+    {
+        $volunteer = Auth::user()->volunteer()->with('location.province')->firstOrFail();
+
+        return view('user.volunteer.profile.show', compact('volunteer'));
     }
 
     /**
@@ -36,34 +44,30 @@ class ProfileController extends Controller
     /**
      * vista de edicion de perfil
      */
-    public function editMyProfile()
+    public function edit($id)
     {
-        $userId = Auth::id();
+        $provinces = Province::with('locations')->get();
 
-        //si el usuario no es el mismo
-        if (!$userId) {
-            abort(403); //tirar error no autorizado
-        }
+        $volunteer = Auth::user()->volunteer()->with('location.province')->firstOrFail();
 
-        $volunteer = Volunteer::with('user')->where('user_id', $userId)->firstOrFail();
-
-        return view('user.volunteer.profile.edit', compact('volunteer'));
+        return view('user.volunteer.profile.edit', compact('volunteer', 'provinces'));
     }
 
     /**
      * Actualizar perfil propio
      *
      */
-    public function updateMyProfile(Request $request)
+    public function update(Request $request)
     {
+
         //datos del usuario q esta logueado
-        $user = Auth::user();
-        $volunteer = $user->volunteer;
+        $volunteer = Auth::user()->volunteer()->with('location.province')->firstOrFail();
 
         //validaciones
         $validatedVolunteer = $request->validate([
             'password' => ['nullable', 'confirmed', Rules\Password::defaults()], //pw no requerido
-            'full_name' => 'required|string|max:255|min:3',
+            'name' => 'required|string|max:255|min:3',
+            'lastname' => 'required|string|max:255|min:3',
             'phone' => ['required', 'string', 'min:6', 'max:15', 'regex:/^\d+$/'],
             'linkedin' => 'nullable|string|max:255',
             'facebook' => 'nullable|string|max:255',
@@ -72,7 +76,7 @@ class ProfileController extends Controller
             'biography' => 'required|string|max:500|min:50',
             'educational_level' => 'required|string',
             'profession' => 'nullable|string|max:255|min:3',
-            'location' => 'required|string|max:255|min:3',
+            'location_id' => ['required', 'exists:locations,id'],
             'birthdate' => ['required', 'date', 'before:' . now()->subYears(18)->toDateString()],
         ]);
 
@@ -83,19 +87,21 @@ class ProfileController extends Controller
 
         //actualizar
         $volunteer->update([
-            'full_name' => $validatedVolunteer['full_name'],
+            'name' => $validatedVolunteer['name'],
+            'lastname' => $validatedVolunteer['lastname'],
             'phone' => $validatedVolunteer['phone'],
             'linkedin' => $validatedVolunteer['linkedin'],
             'facebook' => $validatedVolunteer['facebook'],
             'instagram' => $validatedVolunteer['instagram'],
-            'avatar' => $validatedVolunteer['avatar'],
+            'avatar' => $validatedVolunteer['avatar'] ?? $volunteer->avatar,
             'biography' => $validatedVolunteer['biography'],
             'educational_level' => $validatedVolunteer['educational_level'],
             'profession' => $validatedVolunteer['profession'],
-            'location' => $validatedVolunteer['location'],
+            'location_id' => $validatedVolunteer['location_id'],
             'birthdate' => $validatedVolunteer['birthdate'],
             // 'dni' y 'email' NO se lo permitimos editar al user
         ]);
+
 
         // si cambió la contraseña, se cierra la sesion por motivos de seguridad
         if ($request->filled('password')) {
@@ -110,6 +116,6 @@ class ProfileController extends Controller
                 ->with('status', 'Contraseña actualizada. Debes volver a iniciar sesión.');
         }
 
-        return redirect()->route('volunteers.volunteer-profile', ['id' => $volunteer->id])->with('success', 'Perfil actualizado correctamente.'); //redirigir a la vista de perfil
+        return redirect()->route('volunteer.my-profile.show')->with('success', 'Perfil actualizado correctamente.'); //redirigir a la vista de perfil
     }
 }

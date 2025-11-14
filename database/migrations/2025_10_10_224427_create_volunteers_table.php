@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->softDeletes();
-            $table->string('full_name');
+            $table->string('name');
+            $table->string('lastname');
             $table->string('dni')->unique();
             $table->date('birthdate');
             $table->enum('educational_level', ['secundario', 'universitario', 'postgrado', 'terciario']);
