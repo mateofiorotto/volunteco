@@ -29,6 +29,7 @@ Route::middleware(['checkEnabled', 'authCheck', 'isAdmin'])->prefix('admin')->na
     // rutas de proyectos
     Route::get('/proyectos', [ProjectsController::class, 'index'])->name('projects.index');
     Route::get('/proyectos/{project}', [ProjectsController::class, 'show'])->name('projects.show');
+    Route::delete('/proyectos/{project}/eliminar', [ProjectsController::class, 'deleteProject'])->name('projects.delete');
 
 });
 ?>
