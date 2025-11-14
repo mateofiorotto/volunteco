@@ -66,7 +66,7 @@ class HostsController extends Controller
     /**
      * Obtener un perfil de anfitrion por id
      */
-    public function getHostProfileById($id)
+    public function profile($id)
     {
         $host = User::where('id', $id)->whereHas('role', function ($query) {
             $query->where('type', 'host');

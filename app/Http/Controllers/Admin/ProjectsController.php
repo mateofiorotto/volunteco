@@ -17,9 +17,8 @@ class ProjectsController extends Controller
         return view('admin.projects.index', compact('projects'));
     }
 
-    public function show()
+    public function show(Project $project)
     {
-
-        return view('admin.projects.show');
+        return view('admin.projects.show', compact('project'));
     }
 }

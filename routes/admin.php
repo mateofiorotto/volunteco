@@ -10,7 +10,7 @@ Route::middleware(['checkEnabled', 'authCheck', 'isAdmin'])->prefix('admin')->na
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/anfitriones', [HostsController::class, 'index'])->name('hosts.index');
-    Route::get('/anfitriones/{id}', [HostsController::class, 'getHostProfileById'])->name('host.profile');
+    Route::get('/anfitriones/{id}', [HostsController::class, 'profile'])->name('hosts.profile');
     Route::put('/anfitriones/{id}/aceptar', [HostsController::class, 'enableHostProfile'])->name('enable-host-profile');
     Route::put('/anfitriones/{id}/reactivar', [HostsController::class, 'reenableHostProfile'])->name('reenable-host-profile');
     Route::put('/anfitriones/{id}/desactivar', [HostsController::class, 'disableHostProfile'])->name('disable-host-profile');
@@ -28,7 +28,7 @@ Route::middleware(['checkEnabled', 'authCheck', 'isAdmin'])->prefix('admin')->na
 
     // rutas de proyectos
     Route::get('/proyectos', [ProjectsController::class, 'index'])->name('projects.index');
-    Route::get('/proyectos/{id}', [ProjectsController::class, 'show'])->name('projects.show');
+    Route::get('/proyectos/{project}', [ProjectsController::class, 'show'])->name('projects.show');
 
 });
 ?>

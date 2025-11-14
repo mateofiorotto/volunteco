@@ -12,7 +12,7 @@
                     {!! $host->email ? '<a href="mailto:' . $host->email . '" target="_blank">' . $host->email . '</a>' : 'Sin email' !!}
                 </div>
                 <div class="col-12 col-md-2 text-center">
-                    <a href="{{ route('admin.host.profile', $host->id) }}" class="btn btn-sm btn-azul" title="ver">
+                    <a href="{{ route('admin.hosts.profile', $host->id) }}" class="btn btn-sm btn-azul" title="ver">
                         Ver
                     </a>
                 </div>

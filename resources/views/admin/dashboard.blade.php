@@ -41,7 +41,7 @@
                                             <span class="text-uppercase fw-semibold badge bg-success">{{ $host->status }}</span>
                                         @endif
                                         </td>
-                                        <td><a href="{{ route('admin.host.profile', $host->id) }}" class="btn btn-sm btn-azul" title="ver">Ver</a></td>
+                                        <td><a href="{{ route('admin.hosts.profile', $host->id) }}" class="btn btn-sm btn-azul" title="ver">Ver</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>
