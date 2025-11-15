@@ -11,6 +11,7 @@ class VolunteerProjectController extends Controller
 {
     /**
      * Mostrar lista de proyectos a los que el voluntario ha aplicado
+     * Pasamos el parametro en el paginador para que no se pisen los valores
      */
     public function volunteerAppliedProjects()
     {

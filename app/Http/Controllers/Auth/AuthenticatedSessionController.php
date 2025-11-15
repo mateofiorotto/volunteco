@@ -56,7 +56,7 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('volunteer.dashboard');
         }
 
-        // Por defecto (si no tiene rol)
+        //Por defecto (si no tiene rol)
         return redirect()->route('home');
     }
 

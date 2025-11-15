@@ -39,8 +39,6 @@ class RegisteredHostController extends Controller
 
     /**
      * Registra un nuevo anfitrion. Revision manual
-     *
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -96,23 +94,26 @@ class RegisteredHostController extends Controller
             'location_id' => $validatedHost['location_id'],
         ]);
 
+        //evento de registro de laravel breeze
         event(new Registered($user));
 
         return redirect()->route('login')->with('success', 'Tu cuenta fue creada. Estaremos revisando los datos y te notificaremos cuando esté aprobada.');
     }
 
     /**
-     * Vista de form de edicion
+     * Vista de form de edicion de perfil rechazado por admins
      */
     public function edit($token, $email)
     {
         Auth::logout();
 
+        //traer token que verifica el link enviado por mail
         $tokenData = DB::table('profile_change_tokens')
             ->where('email', $email)
             ->where('token', $token)
             ->first();
 
+        //48 hs de expiracion
         if (!$tokenData || $tokenData->created_at < now()->subHours(48)) {
             abort(403, 'El enlace ha expirado o es inválido.');
         }
@@ -124,7 +125,7 @@ class RegisteredHostController extends Controller
     }
 
     /**
-     * Metodo de actualizacion
+     * Metodo de actualizacion de perfil rechazado
      */
     public function update(Request $request, $token, $email)
     {
@@ -171,6 +172,9 @@ class RegisteredHostController extends Controller
          return redirect()->route('login')->with('success', 'Tu perfil fue actualizado. Estaremos revisando los datos y te notificaremos cuando esté aprobado.');
     }
 
+    /**
+     * obtener localidades por provincia
+     */
     public function getLocationsByProvince($provinceId)
     {
         $locations = Location::where('province_id', $provinceId)->get();

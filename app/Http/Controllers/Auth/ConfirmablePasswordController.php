@@ -20,7 +20,7 @@ class ConfirmablePasswordController extends Controller
     }
 
     /**
-     * Confirma la contraseña del usuario antes de continuar.
+     * Confirma la contraseña del usuario antes de continuar. Metodo de laravel breeze
      */
     public function store(Request $request): RedirectResponse
     {

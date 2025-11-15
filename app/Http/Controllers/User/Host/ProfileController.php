@@ -22,6 +22,9 @@ class ProfileController extends Controller
         $this->imageService = $imageService;
     }
 
+    /**
+     * Mostrar perfil propio
+     */
     public function show()
     {
         $host = Auth::user()->host()->with('location.province', 'projects.volunteers')->firstOrFail();
@@ -29,6 +32,9 @@ class ProfileController extends Controller
         return view('user.host.profile.show', compact('host'));
     }
 
+    /**
+     * Devolver vista de edicion de perfil
+     */
     public function edit($id)
     {
         $provinces = Province::with('locations')->get();
@@ -36,6 +42,9 @@ class ProfileController extends Controller
         return view('user.host.profile.edit', compact('host', 'provinces'));
     }
 
+    /**
+     * Actualizar perfil propio de anfitrion
+     */
     public function update(Request $request, User $user)
     {
         $host = Auth::user()->host()->with('location.province', 'projects.volunteers')->firstOrFail();
@@ -62,7 +71,6 @@ class ProfileController extends Controller
             $validatedHost['avatar'] = $this->imageService->storeImage($request->file('avatar'), 'hosts');
         }
 
-
         //actualizar
         $host->update([
             'name' => $validatedHost['name'],
@@ -78,7 +86,6 @@ class ProfileController extends Controller
         ]);
 
         return redirect()->route('host.my-profile.show')->with('success', 'Perfil actualizado correctamente.');
-
     }
 
 

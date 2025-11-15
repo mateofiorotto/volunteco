@@ -16,7 +16,7 @@ use Illuminate\View\View;
 class NewPasswordController extends Controller
 {
     /**
-     * Vista de resetear password
+     * Vista de resetear contraseña
      */
     public function create(Request $request): View
     {
@@ -24,9 +24,8 @@ class NewPasswordController extends Controller
     }
 
     /**
-     * Request para Resetear pw
+     * Request para Resetear contraseña. Metodo de laravel breeze
      *
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
     {

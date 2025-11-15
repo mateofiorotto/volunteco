@@ -35,9 +35,8 @@ class RegisteredVolunteerController extends Controller
     }
 
     /**
-     * Registra un nuevo anfitrion. Revision manual
+     * Registra un nuevo voluntario. Revision manual
      *
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -63,9 +62,9 @@ class RegisteredVolunteerController extends Controller
             ],
         ]);
 
-        $hostRole = Role::where('type', 'volunteer')->first();
+        $volunteerRole = Role::where('type', 'volunteer')->first();
 
-        if (!$hostRole) {
+        if (!$volunteerRole) {
             return back()->withErrors(['role' => 'No se encontró el rol "volunteer".']);
         }
 
@@ -76,7 +75,7 @@ class RegisteredVolunteerController extends Controller
         $user = User::create([
             'email' => $validatedVolunteer['email'],
             'password' => Hash::make($validatedVolunteer['password']),
-            'role_id' => $hostRole->id,
+            'role_id' => $volunteerRole->id,
             'status' => 'activo'
         ]);
 
@@ -97,6 +96,7 @@ class RegisteredVolunteerController extends Controller
             'birthdate' => $validatedVolunteer['birthdate']
         ]);
 
+        //evento de registro de laravel breeze
         event(new Registered($user));
 
         return redirect()->route('login')->with('success', 'Bienvenido, tu cuenta fue creada con éxito. Ya puedes ingresar y disfrutar de nuestra plataforma.');

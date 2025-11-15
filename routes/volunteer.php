@@ -25,6 +25,6 @@ Route::middleware(['authCheck', 'isVolunteer', 'checkEnabled'])->prefix('usuario
 
 });
 
-Route::middleware(['checkEnabled'])->prefix('voluntario')->name('volunteer.')->group(function () {
+Route::middleware(['checkEnabled'])->prefix('usuario/voluntario')->name('volunteer.')->group(function () {
     Route::get('/perfil/{id}', [ProfileController::class, 'getProfile'])->name('volunteer-profile');
 });

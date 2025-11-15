@@ -105,6 +105,7 @@
             </div>
 
             {{-- Sidebar --}}
+
             <div class="col-md-4 col-12">
                 <div class="card">
                     <div class="card-body">

@@ -26,7 +26,7 @@ class HostProjectController extends Controller
     }
 
     /**
-     * Mostrar lista de proyectos propios del anfitrión
+     * Mostrar lista de proyectos propios del anfitrion
      */
     public function index()
     {
@@ -56,14 +56,13 @@ class HostProjectController extends Controller
             abort(403, 'Acceso denegado o proyecto inexistente.');
         }
 
+        //voluntarios registrados: filtra segun estado pendiente, aceptado y rechazado y devuelve solo voluntarios con perfiles activos
         $registeredVolunteers = $project->volunteers()
             ->whereHas('user', function ($query) {
                 $query->where('status', 'activo');
             })
             ->wherePivotIn('status', ['pendiente', 'aceptado', 'rechazado'])
-            ->with(['user' => function ($query) {
-                $query->where('status', 'activo');
-            }])
+            ->with('user')
             ->orderByPivot('applied_at', 'desc')
             ->get();
 
@@ -115,6 +114,7 @@ class HostProjectController extends Controller
 
         $validated['image'] = $imagePath;
 
+        //crear el proyecto
         $project = Project::create($validated);
 
         // Asociar condiciones si las hay
@@ -256,7 +256,9 @@ class HostProjectController extends Controller
             ->with('success', 'Proyecto eliminado exitosamente');
     }
 
-
+    /**
+     * Aceptar voluntario en un proyecto
+     */
     public function acceptVolunteer($projectId, $volunteerId)
     {
         $host = Auth::user()->host;
@@ -278,10 +280,6 @@ class HostProjectController extends Controller
             abort(404, 'Voluntario no encontrado.');
         }
 
-        if (!$volunteer->user || !$volunteer->user->email) {
-            return redirect()->back()->with('error', 'El voluntario no tiene un usuario o email registrado.');
-        }
-
         $project->volunteers()->updateExistingPivot($volunteerId, [
             'status' => 'aceptado',
             'accepted_at' => now(),
@@ -294,6 +292,9 @@ class HostProjectController extends Controller
         return redirect()->back()->with('success', 'Voluntario aceptado exitosamente.');
     }
 
+    /**
+     * Rechazar un voluntario de un proyecto
+     */
     public function rejectVolunteer($projectId, $volunteerId)
     {
         $host = Auth::user()->host;
@@ -304,6 +305,15 @@ class HostProjectController extends Controller
 
         if (!$project) {
             abort(403, 'Acceso denegado o proyecto inexistente.');
+        }
+
+        //validar que exista el voluntario en este proyecto
+        $volunteer = $project->volunteers()
+            ->where('volunteers.id', $volunteerId)
+            ->first();
+
+        if (!$volunteer) {
+            abort(404, 'Voluntario no encontrado en este proyecto.');
         }
 
         $project->volunteers()->updateExistingPivot($volunteerId, [

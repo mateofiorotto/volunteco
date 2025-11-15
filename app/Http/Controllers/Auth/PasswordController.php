@@ -11,7 +11,7 @@ use Illuminate\Validation\Rules\Password;
 class PasswordController extends Controller
 {
     /**
-     * Cambia la contraseña del usuario autenticado.
+     * Cambia la contraseña del usuario autenticado. Metodo de laravel breeze
      */
     public function update(Request $request): RedirectResponse
     {

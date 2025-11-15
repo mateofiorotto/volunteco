@@ -37,6 +37,6 @@ Route::middleware(['authCheck', 'isHost', 'checkEnabled'])->prefix('usuario/anfi
 });
 
 //perfil publico
-Route::middleware(['checkEnabled'])->prefix('anfitriones')->name('hosts.')->group(function () {
+Route::middleware(['checkEnabled'])->prefix('usuario/anfitrion')->name('hosts.')->group(function () {
     Route::get('/perfil/{id}', [ProfileController::class, 'getProfile'])->name('host-profile');
 });

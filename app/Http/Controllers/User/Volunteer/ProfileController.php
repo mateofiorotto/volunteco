@@ -20,6 +20,9 @@ class ProfileController extends Controller
         $this->imageService = $imageService;
     }
 
+    /**
+     * Devolver vista de perfil propio
+     */
     public function show()
     {
         $volunteer = Auth::user()->volunteer()->with('location.province')->firstOrFail();
@@ -60,7 +63,7 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
 
-        //datos del usuario q esta logueado
+        //datos del usuario que esta logueado
         $volunteer = Auth::user()->volunteer()->with('location.province')->firstOrFail();
 
         //validaciones

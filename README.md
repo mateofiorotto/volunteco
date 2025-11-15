@@ -48,22 +48,24 @@ Volunteco es una web acerca de voluntariados de carácter ecológico donde parti
 - **API de localidad**: Se implementará para que sea mas sencillo seleccionar una ubicación a la hora de crear proyectos o registrarse y también evitar errores.
 
 ### Funcionalidades para administradores
+
 - **Administración de perfiles**: Los administradores pueden revisar los perfiles de anfitriones y voluntarios. Se pueden deshabilitar, re-habilitar y eliminar.
 - **Verificación de perfiles de anfitriones**: Los administradores pueden los perfiles de los anfitriones que se registren para comprobar que tienen un proyecto con suficiente respaldo o son una organización seria. En caso de ser rechazados se les envia un mail con una descripción de datos a cambiar y un link con un formulario para cambiar esos datos.
+- **Listado de TODOS los proyectos en el dashboard**: En el administrador se mostraran todos los proyectos de todos los administradores y se podran eliminar en caso de que incumplan alguna norma de la web.
 
 ### Funcionalidades para anfitriones
+
 - **Administración de proyectos propios**: Los anfitriones tienen la posibilidad de publicar y administrar sus proyectos.
 - **Filtros**: Hay algunos filtros que vienen predefinidos a la hora de crear o editar proyectos (tipo de proyecto, condiciones y horas de trabajo).
 - **Aceptar o Rechazar anfitriones**: Los anfitriones pueden ver que anfitriones aplicaron a su proyecto y aceptarlos o rechazarlos.
 
 ### Funcionalidades para voluntarios
+
 - **Aplicación y seguimiento a proyectos**: Los voluntarios tienen la posibilidad de ver el listado de proyectos, ver el detalle y aplicar a los mismos. También tienen la posibilidad de desistir del proyecto solo si no fueron rechazados.
 
-### Funcionalidades a implementar próximamente (pre-tesis --> mover despues a implementadas)
-- **Listado de TODOS los proyectos en el dashboard**: En el administrador se mostraran todos los proyectos de todos los administradores separados por estado.
-- **Busqueda por buscador y filtros de proyectos en el listado (para voluntarios)**: Se podrán filtrar y buscar proyectos mediante una barra de busqueda y un menú.
-
 ### Funcionalidades a implementar próximamente (tesis, no definitivas)
+
+- **Busqueda por buscador y filtros de proyectos en el listado (para voluntarios)**: Se podrán filtrar y buscar proyectos mediante una barra de busqueda y un menú.
 - **Gamificación**: Los voluntarios y anfitriones tendrán insignias en su perfil, las que podrán obtener por medio de un sistema basado en evaluaciones y puntuaciones por parte de sus anfitriones. El objetivo es aportar un mayor dinamismo a la plataforma y de la mano de anteriores funcionalidades, poder aportar seguridad mediante insignias o nivel numerico.
 - **Blog con noticias sobre la aplicación (administradores)**: Los administradores podran publicar noticias de la aplicacion y cosas relacionadas a ecologia o voluntariado.
 - **Metodo de comunicacion dentro de la plataforma**: Una vez el voluntario sea aceptado en un proyecto, se le va a proveer los datos de contacto del anfitrion y viceversa. También habrá un sistema estilo preguntas de mercadolibre de pregunta y respuesta o mensaje ida y vuelta.

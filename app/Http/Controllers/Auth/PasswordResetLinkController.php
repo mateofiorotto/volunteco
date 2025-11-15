@@ -19,9 +19,8 @@ class PasswordResetLinkController extends Controller
     }
 
     /**
-     * Envia el correo para resetear la contraseña
+     * Envia el correo para resetear la contraseña. Metodo de laravel breeze
      *
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
     {

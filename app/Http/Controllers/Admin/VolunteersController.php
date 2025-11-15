@@ -34,21 +34,15 @@ class VolunteersController extends Controller
         return view('admin.volunteers.index', compact('volunteers'));
     }
 
-
     /**
      * Obtener un perfil de un voluntario por id
      */
     public function getVolunteerProfileById($id)
     {
-        //$volunteer = User::where('id', $id)->with('volunteer')->firstOrFail();
-
         $volunteer = User::where('id', $id)
         ->whereHas('role', fn($q) => $q->where('type', 'volunteer'))
         ->with(['volunteer.projects', 'volunteer.location.province'])
         ->firstOrFail();
-
-
-        //$host = User::with('host.projects.volunteers', 'host.location.province')->findOrFail($id);
 
         return view('admin.volunteers.profile', ['volunteer' => $volunteer]);
     }
@@ -80,7 +74,7 @@ class VolunteersController extends Controller
         $volunteer->save();
 
         if ($volunteerProfile && $volunteerProfile->projects()->exists()) {
-            $volunteerProfile->projects()->detach(); // elimina todas las filas en la tabla pivote
+            $volunteerProfile->projects()->detach(); // elimina todas las filas en la tabla pivot
         }
 
         Mail::to($volunteer->email)->send(new VolunteerDisableProfileMail($volunteer->volunteer->full_name));

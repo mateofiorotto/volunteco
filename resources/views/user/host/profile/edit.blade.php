@@ -127,7 +127,7 @@
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <label for="province_id" class="form-label">Provincia</label>
+                                    <label for="province_id" class="form-label">Provincia *</label>
                                     <select name="province_id" id="province_id" class="form-select">
                                         <option value="">Seleccione una provincia</option>
                                         @foreach ($provinces as $province)
@@ -139,7 +139,7 @@
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <label for="location_id" class="form-label">Localidad</label>
+                                    <label for="location_id" class="form-label">Localidad *</label>
                                     <select name="location_id" id="location_id" class="form-select">
                                         <option value="">Seleccione una localidad</option>
                                         @if($host->location && $host->location->province)

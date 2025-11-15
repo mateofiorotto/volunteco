@@ -66,7 +66,7 @@
 
                 <div class="d-flex gap-2">
                     <!-- Si la ruta es el admin de anfitriones -->
-                    @if (request()->is('anfitriones/mis-proyectos*'))
+                    @if (request()->is('usuario/anfitrion/mis-proyectos*'))
                     <a href="{{ route('host.my-projects.show', $project->id) }}" class="btn btn-sm btn-outline-primary">
                         Ver Proyecto
                     </a>

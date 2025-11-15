@@ -30,7 +30,6 @@ class HostsController extends Controller
     public function index()
     {
         //asignar a cada variable llamando al metodo getHostsByStatus
-
         $hostsDisabled = $this->getHostsByStatus('inactivo');
         $hostsNotVerified = $this->getHostsByStatus('pendiente');
         $hostsVerified = $this->getHostsByStatus('activo');
@@ -43,7 +42,7 @@ class HostsController extends Controller
     }
 
     /**
-     * Obtener anfitriones por status
+     * Obtener anfitriones por su estado
      */
     public function getHostsByStatus(string $status)
     {
@@ -55,6 +54,7 @@ class HostsController extends Controller
             default => 'page'
         };
 
+        //solo hosts
         return User::whereHas('role', function ($query) {
             $query->where('type', 'host');
         })
@@ -122,7 +122,6 @@ class HostsController extends Controller
         $host->save();
 
         $host->host->disabled_at = now();
-        //$host->host->rejection_reason = null;
         $host->host->save();
 
         return redirect()->route('admin.hosts.index')->with('success', 'Perfil de anfitrión desactivado correctamente.');
@@ -178,10 +177,12 @@ class HostsController extends Controller
             'delete_reasons' => 'required|string|max:500|min:10',
         ]);
 
+        //borrar img
         if ($host->host->avatar) {
             $this->imageService->deleteImage($host->host->avatar);
         }
 
+        //mandar mail
         Mail::to($host->email)->send(new HostDeleteProfileMail($reasons['delete_reasons'], $host->host->person_full_name));
 
         $host->delete();
@@ -199,8 +200,6 @@ class HostsController extends Controller
         $host->status = "pendiente";
         $host->save();
 
-        // $host->host->disabled_at = null;
-        // $host->host->rejection_reason = null;
         $host->host->save();
 
         return redirect()->route('admin.hosts.index')->with('success', 'Perfil de anfitrión enviado a pendiente correctamente.');
