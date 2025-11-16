@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->boolean('enabled')->default(true);
-            $table->string('title')->unique();
+            $table->string('title');
             $table->text('description');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->date('start_date');
             $table->date('end_date');
-            $table->string('location');
+            $table->unsignedBigInteger('location_id')->nullable();
+            $table->foreign('location_id')->references('id')->on('locations')->onDelete('set null');
             $table->enum('work_hours_per_day', ['2 Horas', '4 Horas', '6 Horas', '8 Horas']);
             $table->foreignId('project_type_id')->constrained()->onDelete('restrict');
             $table->foreignId('host_id')->constrained()->onDelete('cascade');

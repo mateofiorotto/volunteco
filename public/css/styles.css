@@ -136,6 +136,9 @@ a {
 .btn-link {
     text-decoration: none
 }
+.badge {
+    --bs-badge-font-weight: 500
+}
 .text-bg-secondary {
     color: var(--bs-body-color)!important;
 }

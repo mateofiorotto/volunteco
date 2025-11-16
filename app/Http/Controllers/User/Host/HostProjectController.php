@@ -12,6 +12,7 @@ use App\Services\ImageService;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 use App\Mail\VolunteerAccepted;
+use App\Models\Province;
 
 class HostProjectController extends Controller
 {
@@ -74,11 +75,12 @@ class HostProjectController extends Controller
      */
     public function create()
     {
+        $provinces = Province::with('locations')->get();
 
         $projectTypes = ProjectType::all();
         $conditions = Condition::all();
 
-        return view('user.host.projects.create', compact('projectTypes', 'conditions'));
+        return view('user.host.projects.create', compact('projectTypes', 'conditions', 'provinces'));
     }
 
     /**
@@ -89,10 +91,10 @@ class HostProjectController extends Controller
         $host = Auth::user()->host;
 
         $validated = $request->validate([
-            'title' => 'required|string|max:255|unique:projects,title|min:5|max:255',
+            'title' => 'required|string|max:255|min:5|max:255',
             'description' => 'required|string|min:50|max:2000',
             'project_type_id' => 'required|exists:project_types,id',
-            'location' => 'required|string|min:3|max:255',
+            'location_id' => ['required', 'exists:locations,id'],
             'start_date' => 'required|date|before_or_equal:end_date|after_or_equal:today',
             'end_date' => 'required|date|after:start_date',
             'work_hours_per_day' => 'required|in:2 Horas,4 Horas,6 Horas,8 Horas',
@@ -106,13 +108,9 @@ class HostProjectController extends Controller
         $validated['enabled'] = $request->has('enabled');
 
         //manejo de la imagen
-        if ($request->hasFile('image')) {
-            $imagePath = $this->imageService->storeImage($request->file('image'), 'projects');
-        } else {
-            $imagePath = 'thumbnail-proyecto.jpg';
-        }
-
-        $validated['image'] = $imagePath;
+        $validatedHost['image'] = $request->hasFile('image')
+            ? $this->imageService->storeImage($request->file('image'), 'projects') :
+            null;
 
         //crear el proyecto
         $project = Project::create($validated);
@@ -132,11 +130,11 @@ class HostProjectController extends Controller
      */
     public function edit($id)
     {
+        $provinces = Province::with('locations')->get();
+
         $host = Auth::user()->host;
 
-        $project = Project::where('id', $id)
-            ->where('host_id', $host->id)
-            ->first();
+        $project = Project::host()->with('location.province')->firstOrFail($id);
 
         if (!$project) {
             abort(403, 'Acceso denegado o proyecto inexistente.');
@@ -145,7 +143,7 @@ class HostProjectController extends Controller
         $projectTypes = ProjectType::all();
         $conditions = Condition::all();
 
-        return view('user.host.projects.edit', compact('project', 'projectTypes', 'conditions'));
+        return view('user.host.projects.edit', compact('project', 'projectTypes', 'conditions', 'provinces'));
     }
 
     /**
@@ -164,16 +162,10 @@ class HostProjectController extends Controller
         }
 
         $validated = $request->validate([
-            'title' => [
-                'required',
-                'string',
-                'min:5',
-                'max:255',
-                Rule::unique('projects', 'title')->ignore($project->id)
-            ],
+            'title' => ['required','string','min:5','max:255'],
             'description' => 'required|string|min:50|max:2000',
             'project_type_id' => 'required|exists:project_types,id',
-            'location' => 'required|string|min:3|max:255',
+            'location_id' => ['required', 'exists:locations,id'],
             'start_date' => 'required|date|before_or_equal:end_date',
             'end_date' => 'required|date|after:start_date',
             'work_hours_per_day' => 'required|in:2 Horas,4 Horas,6 Horas,8 Horas',
@@ -186,16 +178,9 @@ class HostProjectController extends Controller
 
         //manejo de la imagen
         if ($request->hasFile('image')) {
-            if ($project->image == 'thumbnail-proyecto.jpg') {
-                $validated['image'] = $this->imageService->storeImage($request->file('image'), 'projects');
-            } else {
-                $validated['image'] = $this->imageService->updateImage(
-                    $request->file('image'), //pasando nueva img
-                    $project->image, //img anterior a borrar
-                    'projects' //directorio nueva img
-                );
-            }
+            $validated['image'] = $this->imageService->storeImage($request->file('image'), 'projects');
         }
+
 
         $project->update($validated);
 
@@ -245,7 +230,7 @@ class HostProjectController extends Controller
         }
 
         // Eliminar imagen asociada si no es la predeterminada
-        if ($project->image && $project->image !== 'logo-horizontal.svg') {
+        if ($project->image) {
             $this->imageService->deleteImage($project->image);
         }
 

@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="card-body">
-                            <span class="badge bg-primary mb-2 fw-normal">{{ $project->projectType->name }}</span>
+                            <span class="badge bg-primary mb-2">{{ $project->projectType->name }}</span>
                             <h2 class="card-title h3">{{ $project->title }}</h2>
                             <p class="card-text">{{ $project->description }}</p>
                             <div class="row">
@@ -45,7 +45,7 @@
                                         <i class="bi bi-geo-alt fs-5 text-primary"></i>
                                         <div class="pt-1">
                                             <h4 class="h6 fw-semibold mb-1">Ubicación</h4>
-                                            <p class="mb-0">{{ $project->location }}</p>
+                                            <p class="mb-0">{{ $project->location_id ? $project->location->name . ' - ' . $project->location->province->name : ''}}</p>
                                         </div>
                                     </div>
                                 </div>

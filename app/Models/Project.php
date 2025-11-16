@@ -15,7 +15,7 @@ class Project extends Model
         'image',
         'start_date',
         'end_date',
-        'location',
+        'location_id',
         'work_hours_per_day',
         'enabled',
         'project_type_id',
@@ -55,6 +55,12 @@ class Project extends Model
         return $this->belongsToMany(Volunteer::class, 'project_volunteer')
             ->withPivot('status', 'applied_at', 'accepted_at')
             ->withTimestamps();
+    }
+
+    // localidad del anfitrión
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
     }
 
 }

@@ -4,19 +4,14 @@
     <section class="container py-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
             <h1 class="title-h1 h3 mb-0">Proyecto</h1>
-            <a href="{{ url()->previous() }}"
-               class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
+            <a href="{{ url()->previous() }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
         </div>
 
 
         @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show"
-                 role="alert">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
-                <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="alert"
-                        aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
 
@@ -45,7 +40,7 @@
                                     <i class="bi bi-geo-alt fs-5 text-primary"></i>
                                     <div>
                                         <h4 class="h6 fw-semibold mb-1">Ubicación</h4>
-                                        <p class="mb-0">{{ $project->location }}</p>
+                                        <p class="mb-0">{{ $project->location_id ? $project->location->name . ' - ' . $project->location->province->name : ''}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -66,8 +61,7 @@
                                     <i class="bi bi-calendar4 fs-5 text-primary"></i>
                                     <div>
                                         <h4 class="h6 fw-semibold mb-1">Fecha de inicio</h4>
-                                        <p class="mb-0">{{ \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') }}
-                                        </p>
+                                        <p class="mb-0">{{ \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -76,8 +70,7 @@
                                     <i class="bi bi-calendar4 fs-5 text-primary"></i>
                                     <div>
                                         <h4 class="h6 fw-semibold mb-1">Fecha de finalización</h4>
-                                        <p class="mb-0">{{ \Carbon\Carbon::parse($project->end_date)->format('d/m/Y') }}
-                                        </p>
+                                        <p class="mb-0">{{ \Carbon\Carbon::parse($project->end_date)->format('d/m/Y') }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -112,29 +105,24 @@
                         <h3 class="card-title">Acciones</h3>
                         <div class="row">
                             <div class="col-md-6">
-                                <form method="GET"
-                                      action="{{ route('host.my-projects.edit', $project->id) }}">
+                                <form method="GET" action="{{ route('host.my-projects.edit', $project->id) }}">
                                     @csrf
-                                    <button class="btn btn-primary w-100 mb-3"
-                                            type="submit">
+                                    <button class="btn btn-primary w-100 mb-3" type="submit">
                                         Editar
                                     </button>
                                 </form>
                             </div>
                             <div class="col-md-6">
-                                <form method="GET"
-                                      action="{{ route('host.my-projects.delete', $project->id) }}">
+                                <form method="GET" action="{{ route('host.my-projects.delete', $project->id) }}">
                                     @csrf
-                                    <button class="btn btn-outline-primary w-100 mb-3"
-                                            type="submit">
+                                    <button class="btn btn-outline-primary w-100 mb-3" type="submit">
                                         Eliminar
                                     </button>
                                 </form>
                             </div>
                             <div class="col-md-12">
                                 <a href="#volunteers-list">
-                                    <button class="btn btn-secondary text-light w-100 mb-3"
-                                            type="submit">
+                                    <button class="btn btn-secondary text-light w-100 mb-3" type="submit">
                                         Ver voluntarios que aplicaron
                                     </button>
                                 </a>
@@ -145,11 +133,10 @@
             </div>
         </div>
 
-        <div id="volunteers-list"
-             class="row">
+        <div id="volunteers-list" class="row">
             <div class="card p-0 border-primary">
                 <div class="card-header text-bg-primary">
-                    <h3 class="h5 mb-0">Voluntarios que aplicaron</h3>
+                    <h3 class="h5 mb-0">Voluntarios <span class="fw-light">que aplicaron</span></h3>
                 </div>
                 <div class="card-body">
                     @if ($registeredVolunteers->isEmpty())
@@ -171,35 +158,27 @@
                                         <td>{{ $volunteer->full_name }}</td>
                                         <td>
                                             @if ($volunteer->pivot->status !== 'aceptado')
-                                                <span
-                                                      class="text-uppercase fw-semibold badge {{ $volunteer->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
+                                                <span class="text-uppercase fw-semibold badge {{ $volunteer->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
                                                     {{ $volunteer->pivot->status }}
                                                 </span>
                                             @else
-                                                <span
-                                                      class="text-uppercase fw-semibold badge bg-success">{{ $volunteer->pivot->status }}</span>
+                                                <span class="text-uppercase fw-semibold badge bg-success">{{ $volunteer->pivot->status }}</span>
                                             @endif
                                         </td>
                                         <td>
                                             <div class="d-flex gap-3">
-                                                <a href="{{ route('volunteer.volunteer-profile', $volunteer->id) }}"
-                                                   class="btn btn-azul"
-                                                   title="ver">Ver Perfil</a>
+                                                <a href="{{ route('volunteer.volunteer-profile', $volunteer->id) }}" class="btn btn-azul" title="ver">Ver Perfil</a>
                                                 @if ($volunteer->pivot->status !== 'aceptado')
-                                                    <form method="POST"
-                                                          action="{{ route('host.my-projects.accept-volunteer', [$project->id, $volunteer->id]) }}">
+                                                    <form method="POST" action="{{ route('host.my-projects.accept-volunteer', [$project->id, $volunteer->id]) }}">
                                                         @csrf
                                                         @method('PUT')
-                                                        <button type="submit"
-                                                                class="btn btn-primary">Aceptar</button>
+                                                        <button type="submit" class="btn btn-primary">Aceptar</button>
                                                     </form>
                                                 @else
-                                                    <form method="POST"
-                                                          action="{{ route('host.my-projects.reject-volunteer', [$project->id, $volunteer->id]) }}">
+                                                    <form method="POST" action="{{ route('host.my-projects.reject-volunteer', [$project->id, $volunteer->id]) }}">
                                                         @csrf
                                                         @method('PUT')
-                                                        <button type="submit"
-                                                                class="btn btn-outline-primary">Rechazar</button>
+                                                        <button type="submit" class="btn btn-outline-primary">Rechazar</button>
                                                     </form>
                                                 @endif
                                             </div>

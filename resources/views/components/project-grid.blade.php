@@ -41,7 +41,7 @@
 
                     <li class="d-flex gap-2 align-items-start mb-2">
                         <i class="bi bi-geo-alt fs-5 text-primary"></i>
-                        <span>{{ $project->location }}</span>
+                        <span>{{ $project->location_id ? $project->location->name . ' - ' . $project->location->province->name : ''}}</span>
                     </li>
 
                     <li class="d-flex gap-2 align-items-start mb-2">

@@ -20,12 +20,10 @@ class FrontendController extends Controller
     public function projects()
     {
         //proyectos activos y con anfitriones activos
-         $projects = Project::where('enabled', true)
-        ->whereHas('host.user', function($query) {
-            $query->where('status', 'activo');
-        })
-        ->latest()
-        ->paginate(6);
+        $projects = Project::where('enabled', true)
+            ->with('location.province')
+            ->latest()
+            ->paginate(6);
 
         return view('frontend/projects', compact('projects'));
     }

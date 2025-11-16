@@ -13,10 +13,7 @@
             <div class="alert alert-danger alert-dismissible fade show"
                  role="alert">
                 <strong>Ocurrió un error.</strong> Por favor, revisá los campos marcados.
-                <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="alert"
-                        aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
 
@@ -38,10 +35,11 @@
                                        value="{{ old('title') }}"
                                        placeholder="Ej: Reforestación en la Reserva Natural"
                                        required
-                                       class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" />
-                                @if ($errors->has('title'))
-                                    <p class="text-danger">{{ $errors->first('title') }}</p>
-                                @endif
+                                       class="form-control @error('title') is-invalid @enderror }}"
+                                />
+                                @error('title')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="mb-3">
@@ -51,43 +49,49 @@
                                           placeholder="Describe el proyecto, objetivos y actividades a realizar"
                                           rows="5"
                                           required
-                                          class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}">{{ old('description') }}</textarea>
-                                @if ($errors->has('description'))
-                                    <p class="text-danger">{{ $errors->first('description') }}</p>
-                                @endif
+                                          class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
+                                          @error('description')
+                                              <div class="invalid-feedback">{{ $message }}</div>
+                                          @enderror
                             </div>
 
                             <div class="mb-3">
                                 <label for="project_type_id" class="form-label">Tipo de proyecto *</label>
-                                <select id="project_type_id"
-                                        name="project_type_id"
-                                        required
-                                        class="form-select {{ $errors->has('project_type_id') ? 'is-invalid' : '' }}">
-                                    <option value="" disabled selected>Selecciona un tipo</option>
-                                    @foreach($projectTypes as $type)
-                                        <option value="{{ $type->id }}" {{ old('project_type_id') == $type->id ? 'selected' : '' }}>
-                                            {{ $type->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->has('project_type_id'))
-                                    <p class="text-danger">{{ $errors->first('project_type_id') }}</p>
-                                @endif
-                            </div>
+                                    <select id="project_type_id"
+                                            name="project_type_id"
+                                            required
+                                            class="form-select @error('project_type_id') is-invalid @enderror">
+                                        <option value="" disabled selected>Selecciona un tipo</option>
+                                        @foreach($projectTypes as $type)
+                                            <option value="{{ $type->id }}" {{ old('project_type_id') == $type->id ? 'selected' : '' }}>
+                                                {{ $type->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('project_type_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
 
-                            <div class="mb-3">
-                                <label for="location" class="form-label">Ubicación *</label>
-                                <input type="text"
-                                       id="location"
-                                       name="location"
-                                       value="{{ old('location') }}"
-                                       placeholder="Ciudad, Provincia"
-                                       required
-                                       class="form-control {{ $errors->has('location') ? 'is-invalid' : '' }}" />
-                                @if ($errors->has('location'))
-                                    <p class="text-danger">{{ $errors->first('location') }}</p>
-                                @endif
-                            </div>
+                                <div class="form-group mb-3">
+                                    <label for="province_id" class="form-label">Provincia *</label>
+                                    <select name="province_id" id="province_id" class="form-select">
+                                        <option value="">Seleccione una provincia</option>
+                                        @foreach ($provinces as $province)
+                                            <option value="{{ $province->id }}">{{ $province->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="location_id" class="form-label">Localidad *</label>
+                                    <select name="location_id" id="location_id" class="form-select">
+                                        <option value="">Seleccione una localidad</option>
+                                    </select>
+                                    @error('location_id')
+                                        <div class="invalid-feedback d-block">El campo localidad es obligatorio.</div>
+                                    @enderror
+                                </div>
 
                             <div class="mb-3">
                                 <label for="image" class="form-label">Imagen del proyecto</label>
@@ -95,11 +99,11 @@
                                        id="image"
                                        name="image"
                                        accept="image/*"
-                                       class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" />
-                                <small class="text-muted">Formatos: JPG, PNG, GIF. Máximo 2MB</small>
-                                @if ($errors->has('image'))
-                                    <p class="text-danger">{{ $errors->first('image') }}</p>
-                                @endif
+                                       class="form-control @error('image') is-invalid @enderror" />
+                                @error('image')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                                <div class="form-text">Formatos: JPG, PNG, GIF. Máximo 2MB</div>
                             </div>
                         </div>
                     </div>
@@ -119,10 +123,10 @@
                                        value="{{ old('start_date') }}"
                                        min="{{ date('Y-m-d') }}"
                                        required
-                                       class="form-control {{ $errors->has('start_date') ? 'is-invalid' : '' }}" />
-                                @if ($errors->has('start_date'))
-                                    <p class="text-danger">{{ $errors->first('start_date') }}</p>
-                                @endif
+                                       class="form-control @error('start_date') is-invalid @enderror" />
+                                        @error('start_date')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                             </div>
 
                             <div class="mb-3">
@@ -133,10 +137,10 @@
                                        value="{{ old('end_date') }}"
                                        min="{{ date('Y-m-d') }}"
                                        required
-                                       class="form-control {{ $errors->has('end_date') ? 'is-invalid' : '' }}" />
-                                @if ($errors->has('end_date'))
-                                    <p class="text-danger">{{ $errors->first('end_date') }}</p>
-                                @endif
+                                       class="form-control @error('end_date') is-invalid @enderror" />
+                                        @error('end_date')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                             </div>
 
                             <div class="mb-3">
@@ -144,16 +148,16 @@
                                 <select id="work_hours_per_day"
                                         name="work_hours_per_day"
                                         required
-                                        class="form-select {{ $errors->has('work_hours_per_day') ? 'is-invalid' : '' }}">
+                                        class="form-select @error('work_hours_per_day') is-invalid @enderror">
                                     <option value="">Selecciona las horas</option>
                                     <option value="2 Horas" {{ old('work_hours_per_day') == '2 Horas' ? 'selected' : '' }}>2 Horas</option>
                                     <option value="4 Horas" {{ old('work_hours_per_day') == '4 Horas' ? 'selected' : '' }}>4 Horas</option>
                                     <option value="6 Horas" {{ old('work_hours_per_day') == '6 Horas' ? 'selected' : '' }}>6 Horas</option>
                                     <option value="8 Horas" {{ old('work_hours_per_day') == '8 Horas' ? 'selected' : '' }}>8 Horas</option>
                                 </select>
-                                @if ($errors->has('work_hours_per_day'))
-                                    <p class="text-danger">{{ $errors->first('work_hours_per_day') }}</p>
-                                @endif
+                                @error('work_hours_per_day')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -178,9 +182,9 @@
                                 </div>
                             @endforeach
 
-                            @if ($errors->has('conditions'))
-                                <p class="text-danger">{{ $errors->first('conditions') }}</p>
-                            @endif
+                            @error('condition')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -199,9 +203,9 @@
                                     Proyecto habilitado (visible para voluntarios)
                                 </label>
                             </div>
-                            @if ($errors->has('enabled'))
-                                <p class="text-danger">{{ $errors->first('enabled') }}</p>
-                            @endif
+                            @error('enabled')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -218,4 +222,35 @@
             </div>
         </form>
     </div>
+@endsection
+
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const provinceSelect = document.getElementById('province_id');
+    const locationSelect = document.getElementById('location_id');
+
+    provinceSelect.addEventListener('change', function() {
+        const provinceId = this.value;
+
+        // Limpiar localidades
+        locationSelect.innerHTML = '<option value="">Seleccione una localidad</option>';
+
+        if (!provinceId) return;
+
+        fetch(`/locations/${provinceId}`)
+            .then(response => response.json())
+            .then(locations => {
+                locations.forEach(location => {
+                    const option = document.createElement('option');
+                    option.value = location.id;
+                    option.textContent = location.name;
+                    locationSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error al cargar localidades:', error));
+    });
+});
+</script>
+
 @endsection

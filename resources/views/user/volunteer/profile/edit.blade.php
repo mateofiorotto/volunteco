@@ -277,7 +277,6 @@
                         </div>
                     </div>
 
-
                     {{-- INFO EXTRA --}}
                     <div class="col-md-6">
                         <div class="card mb-5">
@@ -331,4 +330,35 @@
 
         </div>
     </section>
+@endsection
+
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const provinceSelect = document.getElementById('province_id');
+    const locationSelect = document.getElementById('location_id');
+
+    provinceSelect.addEventListener('change', function() {
+        const provinceId = this.value;
+
+        // Limpiar localidades
+        locationSelect.innerHTML = '<option value="">Seleccione una localidad</option>';
+
+        if (!provinceId) return;
+
+        fetch(`/locations/${provinceId}`)
+            .then(response => response.json())
+            .then(locations => {
+                locations.forEach(location => {
+                    const option = document.createElement('option');
+                    option.value = location.id;
+                    option.textContent = location.name;
+                    locationSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error al cargar localidades:', error));
+    });
+});
+</script>
+
 @endsection

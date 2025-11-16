@@ -56,7 +56,7 @@
                                                         <li><span class="text-muted small">Inicio: </span>{{ $project->start_date->format('d/m/Y') }}</li>
                                                         <li><span class="text-muted small">Fin: </span>{{ $project->end_date->format('d/m/Y') }}</li>
                                                         <li><span class="text-muted small">Horas por día: </span>{{ $project->work_hours_per_day }}</li>
-                                                        <li><span class="text-muted small">Ubicación: </span>{{ $project->location }}</li>
+                                                        <li><span class="text-muted small">Ubicación: </span>{{ $project->location->name }}</li>
                                                         <li><span class="text-muted small">Creado: </span>{{ $project->created_at->format('d/m/Y') }}</li>
                                                     </ul>
                                                 </div>

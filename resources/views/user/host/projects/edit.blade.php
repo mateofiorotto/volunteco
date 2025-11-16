@@ -74,18 +74,32 @@
                                 @endif
                             </div>
 
-                            <div class="mb-3">
-                                <label for="location" class="form-label">Ubicación *</label>
-                                <input type="text"
-                                       id="location"
-                                       name="location"
-                                       value="{{ old('location', $project->location) }}"
-                                       placeholder="Ciudad, Provincia"
-                                       required
-                                       class="form-control {{ $errors->has('location') ? 'is-invalid' : '' }}" />
-                                @if ($errors->has('location'))
-                                    <p class="text-danger">{{ $errors->first('location') }}</p>
-                                @endif
+                            <div class="form-group mb-3">
+                                <label for="province_id" class="form-label">Provincia *</label>
+                                <select name="province_id" id="province_id" class="form-select">
+                                    <option value="">Seleccione una provincia</option>
+                                    @foreach ($provinces as $province)
+                                        <option value="{{ $province->id }}" {{ $project->location && $project->location->province_id == $province->id ? 'selected' : '' }}>
+                                            {{ $province->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="location_id" class="form-label">Localidad *</label>
+                                <select name="location_id" id="location_id" class="form-select">
+                                    <option value="">Seleccione una localidad</option>
+                                    @if($project->location && $project->location->province)
+                                        @foreach ($project->location->province->locations as $location)
+                                            <option
+                                                value="{{ $location->id }}"
+                                                {{ $project->location_id == $location->id ? 'selected' : '' }}>
+                                                {{ $location->name }}
+                                            </option>
+                                        @endforeach
+                                    @endif
+                                </select>
                             </div>
 
                             <div class="mb-3">
@@ -225,4 +239,35 @@
             </div>
         </form>
     </div>
+@endsection
+
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const provinceSelect = document.getElementById('province_id');
+    const locationSelect = document.getElementById('location_id');
+
+    provinceSelect.addEventListener('change', function() {
+        const provinceId = this.value;
+
+        // Limpiar localidades
+        locationSelect.innerHTML = '<option value="">Seleccione una localidad</option>';
+
+        if (!provinceId) return;
+
+        fetch(`/locations/${provinceId}`)
+            .then(response => response.json())
+            .then(locations => {
+                locations.forEach(location => {
+                    const option = document.createElement('option');
+                    option.value = location.id;
+                    option.textContent = location.name;
+                    locationSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error al cargar localidades:', error));
+    });
+});
+</script>
+
 @endsection
