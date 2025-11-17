@@ -83,10 +83,10 @@ class HostProjectController extends Controller
             'description' => 'required|string|min:50|max:2000',
             'project_type_id' => 'required|exists:project_types,id',
             'location_id' => ['required', 'exists:locations,id'],
-            'start_date' => 'required|date|before_or_equal:end_date|after_or_equal:today',
+            'start_date' => 'required|date|before_or_equal:end_date',
             'end_date' => 'required|date|after:start_date',
             'work_hours_per_day' => 'required|in:2 Horas,4 Horas,6 Horas,8 Horas',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:300|dimensions:min_width=304,min_height=228,max_width=854,max_height=480',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:300|dimensions:min_width=304,min_height=228,max_width=860,max_height=480',
             'conditions' => 'nullable|array',
             'conditions.*' => 'exists:conditions,id'
         ]);

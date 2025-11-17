@@ -42,7 +42,7 @@
                                                 <div class="col">
                                                     <ul class="list-unstyled">
                                                         <li><span class="text-muted small">DNI: </span>{{ number_format($volunteer->volunteer->dni, 0, ',', '.') }}</li>
-                                                        <li><span class="text-muted small">Fecha de nacimiento: </span>{{ $volunteer->volunteer->birthdate->format('d/m/Y') }}</li>
+                                                        <li class="text-nowrap"><span class="text-muted small">Fecha de nacimiento: </span>{{ $volunteer->volunteer->birthdate->format('d/m/Y') }} ({{ $volunteer->volunteer->birthdate->age }} años)</li>
                                                         <li><span class="text-muted small">Fecha de registro: </span>{{ $volunteer->created_at->format('d/m/Y') }}</li>
                                                     </ul>
                                                     <ul class="list-unstyled mb-0">
@@ -137,8 +137,7 @@
                                       action="{{ route('admin.disable-volunteer-profile', $volunteer->id) }}">
                                     @csrf
                                     @method('PUT')
-                                    <button type="submit"
-                                            class="btn btn-outline-primary">Desactivar</button>
+                                    <button type="submit" class="btn btn-outline-danger">Desactivar</button>
                                 </form>
                             @endif
                         </div>
@@ -147,39 +146,60 @@
             </div>
 
             <div>
+
                 <div class="card">
                     <div class="card-header">Proyectos a los que aplicó</div>
-                    <ul class="list-group list-group-flush">
-                        @if ($volunteer->volunteer->projects->count() > 0)
+                    @if ($volunteer->volunteer->projects->count() > 0)
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="fw-semibold">Título</th>
+                                    <th scope="col" class="fw-semibold">Fechas</th>
+                                    <th scope="col" class="fw-semibold">Estado</th>
+                                    <th scope="col" class="fw-semibold">Voluntarios</th>
+                                    <th scope="col" class="fw-semibold">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                             @foreach ($volunteer->volunteer->projects as $project)
-                                <li class="list-group-item">
-                                    <div class="row align-items-center">
-                                        <div class="col-12 col-md-4">{{ $project->title }}</div>
-                                        <div class="col-12 col-md-4">
-                                            Inicia: {{ $project->start_date }}
+                                <tr class="{{$project->enabled != 1 ? 'table-danger' : ''}}" >
+                                    <td>{{ $project->title }}</td>
+                                    <td>
+                                        <div>
+                                            <span class="small text-muted">Inicia: </span>
+                                            {{ $project->start_date->format('d/m/Y') }}
                                         </div>
-                                        <div class="col-12 col-md-2">
-                                            X voluntarios postulados
-                                            X voluntarios activos
+                                        <div>
+                                            <span class="small text-muted">Finaliza:
+                                            </span>{{ $project->end_date->format('d/m/Y') }}
                                         </div>
-                                        <div class="col-12 col-md-2 text-center">
-                                            <a href=""
-                                               class="btn btn-sm btn-azul"
-                                               title="ver">
-                                                Ver
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
+                                    </td>
+                                    <td>
+                                        @if($project->enabled != 1)
+                                            <span class="badge bg-danger">Deshabilitado</span>
+                                        @else
+                                            <span class="badge bg-transparent text-body">Activo</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($project->volunteers->isEmpty())
+                                            <p class="mb-0 small">No hay voluntarios asociados a este proyecto.</p>
+                                        @else
+                                            <p class="mb-0 small">Hay {{$project->volunteers->count()}} voluntarios</p>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('admin.projects.show', $project->id)}}" class="btn btn-sm btn-azul" title="ver">Ver</a>
+                                    </td>
+                                </tr>
                             @endforeach
-                        @else
-                            <li class="list-group-item">
-                                <div class="row align-items-center">
-                                    <div class="col-12 col-md-4">Este voluntario no aplico a ningun proyecto</div>
-                                </div>
-                            </li>
-                        @endif
-                    </ul>
+                            </tbody>
+                        </table>
+                    @else
+                        <div class="card-body">
+                            <p class="mb-0">Este voluntario no aplico a ningun proyecto aún</p>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

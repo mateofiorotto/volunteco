@@ -91,19 +91,19 @@
                     <div class="card-body">
                         <div class="row border-bottom mb-3">
                             <div class="col-md-6">
-                                <a href="#volunteers-list">
-                                    <button class="btn btn-primary w-100 mb-3" type="submit">
-                                        Ver Voluntarios
-                                    </button>
-                                </a>
-                            </div>
-                            <div class="col-md-6">
                                 <form method="GET" action="{{ route('host.my-projects.edit', $project->id) }}">
                                     @csrf
                                     <button class="btn btn-outline-primary w-100 mb-3" type="submit">
                                         Editar
                                     </button>
                                 </form>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="#volunteers-list">
+                                    <button class="btn btn-primary w-100 mb-3" type="submit">
+                                        Ver Voluntarios
+                                    </button>
+                                </a>
                             </div>
                         </div>
                         <div>
@@ -163,7 +163,7 @@
                                         </td>
                                         <td>
                                             <div class="d-flex gap-3">
-                                                <a href="{{ route('volunteer.profile', $volunteer->id) }}" class="btn btn-sm btn-azul" title="ver">Ver Perfil</a>
+                                                <a href="{{ route('host.volunteers.show', $volunteer->id) }}" class="btn btn-sm btn-azul" title="ver">Ver Perfil</a>
                                                 @if ($volunteer->pivot->status !== 'aceptado')
                                                     <form method="POST" action="{{ route('host.my-projects.accept-volunteer', [$project->id, $volunteer->id]) }}">
                                                         @csrf

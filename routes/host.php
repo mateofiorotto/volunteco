@@ -4,6 +4,7 @@ use App\Http\Controllers\User\Host\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\Host\HostProjectController;
 use App\Http\Controllers\User\Host\ProfileController;
+use App\Http\Controllers\User\Host\VolunteerController;
 
 Route::middleware(['authCheck', 'isHost', 'checkEnabled'])->prefix('usuario/anfitrion')->name('host.')->group(function () {
 
@@ -35,6 +36,10 @@ Route::middleware(['authCheck', 'isHost', 'checkEnabled'])->prefix('usuario/anfi
     Route::get('/mi-perfil', [ProfileController::class, 'show'])->name('my-profile.show');
     Route::get('/mi-perfil/{id}/editar', [ProfileController::class, 'edit'])->name('my-profile.edit');
     Route::put('/mi-perfil/{id}/editar', [ProfileController::class, 'update'])->name('my-profile.update');
+
+    // perfil del voluntario postulado
+    Route::get('/voluntario/{id}', [VolunteerController::class, 'show'])->name('volunteers.show');
+
 });
 
 //perfil publico

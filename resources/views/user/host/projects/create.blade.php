@@ -103,7 +103,7 @@
                                 @error('image')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                                <div class="form-text">Formatos: JPG, PNG, GIF. Máximo 2MB</div>
+                                <div class="form-text">La imagen no debe superar 860px de ancho ni 480px de alto y no debe pesar más de 300kb</div>
                             </div>
                         </div>
                     </div>
@@ -200,12 +200,13 @@
                                        value="1"
                                        {{ old('enabled', true) ? 'checked' : '' }}>
                                 <label class="form-check-label" for="enabled">
-                                    Proyecto habilitado (visible para voluntarios)
+                                    Deshabilitado / Habilitado
                                 </label>
                             </div>
                             @error('enabled')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
+                            <div class="form-text">Habilite el proyecto para que quede publicado y visible para los voluntarios</div>
                         </div>
                     </div>
                 </div>

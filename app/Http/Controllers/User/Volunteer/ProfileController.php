@@ -25,7 +25,7 @@ class ProfileController extends Controller
      */
     public function show()
     {
-        $volunteer = Auth::user()->volunteer()->with('location.province')->firstOrFail();
+        $volunteer = Volunteer::with('location.province')->firstOrFail();
 
         return view('user.volunteer.profile.show', compact('volunteer'));
     }
@@ -35,13 +35,9 @@ class ProfileController extends Controller
      */
     public function getProfile($id)
     {
-        $volunteer = Volunteer::with('user')
-        ->whereHas('user', function($query) {
-            $query->where('status', 'activo');
-        })
-        ->findOrFail($id);
+        $volunteer = Volunteer::with('user')->findOrFail($id);
 
-        return view('user.volunteer.profile.show', compact('volunteer'));
+        return view('user.host.profile.show', compact('volunteer'));
     }
 
     /**
@@ -51,7 +47,7 @@ class ProfileController extends Controller
     {
         $provinces = Province::with('locations')->get();
 
-        $volunteer = Auth::user()->volunteer()->with('location.province')->firstOrFail();
+        $volunteer = Volunteer::with('location.province')->firstOrFail();
 
         return view('user.volunteer.profile.edit', compact('volunteer', 'provinces'));
     }
@@ -64,7 +60,7 @@ class ProfileController extends Controller
     {
 
         //datos del usuario que esta logueado
-        $volunteer = Auth::user()->volunteer()->with('location.province')->firstOrFail();
+        $volunteer = Auth::user()->volunteer->with('location.province')->firstOrFail();
 
         //validaciones
         $validatedVolunteer = $request->validate([
