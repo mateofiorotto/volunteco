@@ -67,7 +67,6 @@ Volunteco es una web acerca de voluntariados de carácter ecológico donde parti
 
 - **Busqueda por buscador y filtros de proyectos en el listado (para voluntarios)**: Se podrán filtrar y buscar proyectos mediante una barra de busqueda y un menú.
 - **Gamificación**: Los voluntarios y anfitriones tendrán insignias en su perfil, las que podrán obtener por medio de un sistema basado en evaluaciones y puntuaciones por parte de sus anfitriones. El objetivo es aportar un mayor dinamismo a la plataforma y de la mano de anteriores funcionalidades, poder aportar seguridad mediante insignias o nivel numerico.
-- **Blog con noticias sobre la aplicación (administradores)**: Los administradores podran publicar noticias de la aplicacion y cosas relacionadas a ecologia o voluntariado.
 - **Metodo de comunicacion dentro de la plataforma**: Una vez el voluntario sea aceptado en un proyecto, se le va a proveer los datos de contacto del anfitrion y viceversa. También habrá un sistema estilo preguntas de mercadolibre de pregunta y respuesta o mensaje ida y vuelta.
 - **Donaciones con metas**: Se implementaran donaciones con metas que pueden ser cambiadas por administradores.
 - **Venta de merchandising**: Se implementara venta de articulos de la marca en la web.
