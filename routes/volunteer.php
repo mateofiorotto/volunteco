@@ -19,9 +19,9 @@ Route::middleware(['authCheck', 'isVolunteer', 'checkEnabled'])->prefix('usuario
     Route::delete('/desistir-proyecto/{project}', [VolunteerProjectController::class, 'withdrawFromProject'])->name('withdraw-project');
 
     //edicion de perfil
-    Route::get('/mi-perfil', [ProfileController::class, 'show'])->name('my-profile.show');
-    Route::get('/mi-perfil/{id}/editar', [ProfileController::class, 'edit'])->name('my-profile.edit');
-    Route::put('/mi-perfil/{id}/editar', [ProfileController::class, 'update'])->name('my-profile.update');
+    Route::get('/mi-perfil', [ProfileController::class, 'myProfile'])->name('my-profile.profile');
+    Route::get('/mi-perfil/editar', [ProfileController::class, 'editMyProfile'])->name('my-profile.edit');
+    Route::put('/mi-perfil/editar', [ProfileController::class, 'updateMyProfile'])->name('my-profile.update');
 
 });
 

@@ -25,11 +25,14 @@ class ProfileController extends Controller
     /**
      * Mostrar perfil propio
      */
-    public function show()
+    public function myProfile()
     {
-        $host = Auth::user()->host()->with('location.province', 'projects.volunteers')->firstOrFail();
+        $userId = Auth::id();
 
-        return view('user.host.profile.show', compact('host'));
+        $host = Host::with('location.province', 'projects.volunteers')
+            ->where('user_id', $userId)->firstOrFail();
+
+        return view('user.host.my-profile.profile', compact('host'));
     }
 
     /**
@@ -107,19 +110,20 @@ class ProfileController extends Controller
             ->latest()
             ->paginate(6);
 
-        return view('user.host.profile.show', compact('host', 'projects'));
+        return view('user.host.my-profile.edit', compact('host', 'projects'));
     }
 
     /**
      * Vista de edicion de perfil
      */
-    public function editMyProfile($id)
+    public function editMyProfile()
     {
 
-        $host = Host::with('user')->firstOrFail($id);
         $provinces = Province::with('locations')->get();
 
-        return view('user.host.profile.edit', compact('host', 'province'));
+        $host = Host::where('user_id', Auth::id())->with('user', 'location.province')->firstOrFail();
+
+        return view('user.host.my-profile.edit', compact('host', 'provinces'));
     }
 
     /**
@@ -157,7 +161,7 @@ class ProfileController extends Controller
             'linkedin' => $validatedHost['linkedin'],
             'facebook' => $validatedHost['facebook'],
             'instagram' => $validatedHost['instagram'],
-            'avatar' => $validatedHost['avatar'],
+            'avatar' => $validatedHost['avatar'] ?? $host->avatar,
             'description' => $validatedHost['description'],
             'location_id' => $validatedHost['location_id'],
             //cuit y email no se editan
@@ -176,7 +180,6 @@ class ProfileController extends Controller
                 ->with('status', 'Contraseña actualizada. Debes volver a iniciar sesión.');
         }
 
-        return redirect()->route('hosts.host-profile', ['id' => $host->id])
-            ->with('success', 'Perfil actualizado correctamente.');
+        return redirect()->route('host.my-profile.profile')->with('success', 'Perfil actualizado correctamente.');
     }
 }

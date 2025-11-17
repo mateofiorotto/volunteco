@@ -33,9 +33,9 @@ Route::middleware(['authCheck', 'isHost', 'checkEnabled'])->prefix('usuario/anfi
     Route::put('/mis-proyectos/{projectId}/anfitriones/{volunteerId}/rechazar', [HostProjectController::class, 'rejectVolunteer'])->name('my-projects.reject-volunteer');
 
     //edicion de perfil
-    Route::get('/mi-perfil', [ProfileController::class, 'show'])->name('my-profile.show');
-    Route::get('/mi-perfil/{id}/editar', [ProfileController::class, 'edit'])->name('my-profile.edit');
-    Route::put('/mi-perfil/{id}/editar', [ProfileController::class, 'update'])->name('my-profile.update');
+    Route::get('/mi-perfil', [ProfileController::class, 'myProfile'])->name('my-profile.profile');
+    Route::get('/mi-perfil/editar', [ProfileController::class, 'editMyProfile'])->name('my-profile.edit');
+    Route::put('/mi-perfil/editar', [ProfileController::class, 'updateMyProfile'])->name('my-profile.update');
 
     // perfil del voluntario postulado
     Route::get('/voluntario/{id}', [VolunteerController::class, 'show'])->name('volunteers.show');

@@ -5,7 +5,7 @@
 
         <div class="d-flex justify-content-between align-items-center mb-5">
             <h1 class="title-h1 h3">Mi <span>Perfil</span></h1>
-            <a href="{{ route('volunteer.my-profile.edit', $volunteer->user_id) }}" class="btn btn-primary">Editar Perfil</a>
+            <a href="{{ route('volunteer.my-profile.edit') }}" class="btn btn-primary">Editar Perfil</a>
         </div>
 
         @if (session('success'))

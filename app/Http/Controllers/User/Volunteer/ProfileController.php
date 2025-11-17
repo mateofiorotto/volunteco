@@ -23,11 +23,15 @@ class ProfileController extends Controller
     /**
      * Devolver vista de perfil propio
      */
-    public function show()
+    public function myProfile()
     {
-        $volunteer = Volunteer::with('location.province')->firstOrFail();
+        $userId = Auth::id();
 
-        return view('user.volunteer.profile.show', compact('volunteer'));
+        $volunteer = Volunteer::with('location.province')
+            ->where('user_id', $userId)
+            ->firstOrFail();
+
+        return view('user.volunteer.my-profile.profile', compact('volunteer'));
     }
 
     /**
@@ -41,26 +45,27 @@ class ProfileController extends Controller
     }
 
     /**
-     * vista de edicion de perfil
+     * vista de edicion de mi perfil
      */
-    public function edit($id)
+    public function editMyProfile()
     {
+
         $provinces = Province::with('locations')->get();
 
-        $volunteer = Volunteer::with('location.province')->firstOrFail();
+        $volunteer = Volunteer::where('user_id', Auth::id())->with('location.province')->firstOrFail();
 
-        return view('user.volunteer.profile.edit', compact('volunteer', 'provinces'));
+        return view('user.volunteer.my-profile.edit', compact('volunteer', 'provinces'));
     }
 
     /**
      * Actualizar perfil propio
      *
      */
-    public function update(Request $request)
+    public function updateMyProfile(Request $request)
     {
 
         //datos del usuario que esta logueado
-        $volunteer = Auth::user()->volunteer->with('location.province')->firstOrFail();
+        $volunteer = Volunteer::where('user_id', Auth::id())->with('location.province')->firstOrFail();
 
         //validaciones
         $validatedVolunteer = $request->validate([
@@ -115,6 +120,6 @@ class ProfileController extends Controller
                 ->with('status', 'Contraseña actualizada. Debes volver a iniciar sesión.');
         }
 
-        return redirect()->route('volunteer.my-profile.show')->with('success', 'Perfil actualizado correctamente.'); //redirigir a la vista de perfil
+        return redirect()->route('volunteer.my-profile.profile')->with('success', 'Perfil actualizado correctamente.'); //redirigir a la vista de perfil
     }
 }

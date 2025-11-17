@@ -52,7 +52,7 @@
                 <a class="nav-link {{ request()->is('usuario/anfitrion/mis-proyectos*') ? 'active' : '' }}" href="{{route('host.my-projects.index')}}">Mis Proyectos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('usuario/anfitrion/mi-perfil*') ? 'active' : '' }}" href="{{route('host.my-profile.show')}}">Mi Perfil</a>
+                <a class="nav-link {{ request()->is('usuario/anfitrion/mi-perfil*') ? 'active' : '' }}" href="{{route('host.my-profile.profile')}}">Mi Perfil</a>
             </li>
         @endif
         @if (Auth::user()->hasRole('volunteer'))
@@ -67,7 +67,7 @@
             </li>
             <li class="nav-item">
                 <!-- mio perfil -->
-                <a class="nav-link {{ request()->is('usuario/voluntario/mi-perfil*') ? 'active' : '' }}" href="{{route('volunteer.my-profile.show')}}">Mi Perfil</a>
+                <a class="nav-link {{ request()->is('usuario/voluntario/mi-perfil*') ? 'active' : '' }}" href="{{route('volunteer.my-profile.profile')}}">Mi Perfil</a>
             </li>
         @endif
     </ul>
