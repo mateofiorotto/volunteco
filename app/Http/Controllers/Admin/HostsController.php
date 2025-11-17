@@ -118,6 +118,11 @@ class HostsController extends Controller
     {
         $host = User::where('id', $id)->first();
 
+        // Primero deshabilito los proyectos del host
+        $host->host->projects()->update([
+            'enabled' => 0,
+        ]);
+
         $host->status = "inactivo";
         $host->save();
 
@@ -155,6 +160,11 @@ class HostsController extends Controller
 
         // Enviar mail
         Mail::to($host->email)->send(new HostEditRejectedProfileMail($link, $fieldsToChange['description'], $host->host->person_full_name));
+
+        // Primero deshabilito los proyectos del host
+        $host->host->projects()->update([
+            'enabled' => 0,
+        ]);
 
         $host->status = "inactivo";
         $host->save();

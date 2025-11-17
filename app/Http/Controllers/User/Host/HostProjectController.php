@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 use App\Mail\VolunteerAccepted;
 use App\Models\Province;
+use App\Models\Volunteer;
 
 class HostProjectController extends Controller
 {
@@ -46,26 +47,13 @@ class HostProjectController extends Controller
      */
     public function show($id)
     {
-        $host = Auth::user()->host;
 
-        $project = Project::with(['projectType', 'conditions', 'host'])
-            ->where('id', $id)
-            ->where('host_id', $host->id)
-            ->first();
+        $project = Project::with(['projectType', 'conditions', 'volunteers.user'])->findOrFail($id);
 
-        if (!$project) {
-            abort(403, 'Acceso denegado o proyecto inexistente.');
-        }
-
-        //voluntarios registrados: filtra segun estado pendiente, aceptado y rechazado y devuelve solo voluntarios con perfiles activos
-        $registeredVolunteers = $project->volunteers()
-            ->whereHas('user', function ($query) {
-                $query->where('status', 'activo');
-            })
-            ->wherePivotIn('status', ['pendiente', 'aceptado', 'rechazado'])
-            ->with('user')
-            ->orderByPivot('applied_at', 'desc')
-            ->get();
+        //voluntarios registrados
+        $registeredVolunteers = $project->volunteers->sortByDesc(function($v) {
+            return $v->pivot->applied_at;
+        });
 
         return view('user.host.projects.show', compact('project', 'registeredVolunteers'));
     }
@@ -134,7 +122,9 @@ class HostProjectController extends Controller
 
         $host = Auth::user()->host;
 
-        $project = Project::host()->with('location.province')->firstOrFail($id);
+        $project = $host->projects()
+                ->with('location.province')
+                ->findOrFail($id);
 
         if (!$project) {
             abort(403, 'Acceso denegado o proyecto inexistente.');
@@ -147,15 +137,12 @@ class HostProjectController extends Controller
     }
 
     /**
-     * Actualizar proyecto PROPIO
+     * Actualizar proyecto
      */
     public function update(Request $request, $id)
     {
-        $host = Auth::user()->host;
 
-        $project = Project::where('id', $id)
-            ->where('host_id', $host->id)
-            ->first();
+        $project = Project::findOrFail($id);
 
         if (!$project) {
             abort(403, 'Acceso denegado o proyecto inexistente.');
@@ -169,7 +156,7 @@ class HostProjectController extends Controller
             'start_date' => 'required|date|before_or_equal:end_date',
             'end_date' => 'required|date|after:start_date',
             'work_hours_per_day' => 'required|in:2 Horas,4 Horas,6 Horas,8 Horas',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:300|dimensions:min_width=304,min_height=228,max_width=854,max_height=480',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:300|dimensions:max_width=854,max_height=480',
             'conditions' => 'nullable|array',
             'conditions.*' => 'exists:conditions,id'
         ]);
@@ -180,7 +167,6 @@ class HostProjectController extends Controller
         if ($request->hasFile('image')) {
             $validated['image'] = $this->imageService->storeImage($request->file('image'), 'projects');
         }
-
 
         $project->update($validated);
 
@@ -195,6 +181,22 @@ class HostProjectController extends Controller
             ->route('host.my-projects.index')
             ->with('success', 'Proyecto actualizado exitosamente');
     }
+
+    /**
+     * Deshabilitar proyecto
+     */
+    public function updateEnabled(Request $request, $id) {
+
+        $project = Project::findOrFail($id);
+        $data = $request->validate([
+            'enabled' => 'sometimes|boolean',
+        ]);
+        $project->enabled = $request->has('enabled') ? 1 : 0;
+        $project->save();
+
+        return redirect()->back()->with('success', 'Estado del proyecto actualizado.');
+    }
+
 
     /**
      * Mostrar vista de confirmación de eliminación de proyecto PROPIO

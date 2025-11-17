@@ -5,7 +5,7 @@
         <div class="container py-5">
             <div class="d-flex justify-content-between align-items-center mb-5">
                 <h1 class="title-h1 h3 mb-0">Detalle del <span>Proyecto</span></h1>
-                <a href="{{ route('admin.projects.index') }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
+                <a href="{{ url()->previous() }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
             </div>
 
             @if (session('success'))
@@ -23,7 +23,7 @@
                                 <div class="card mb-3">
                                     <div class="d-flex g-0">
                                         <div class="avatar p-3">
-                                            <img src="{{ asset('storage/' . ($project->image ?? 'default-project.jpg')) }}"
+                                            <img src="{{ asset('storage/' . ($project->image ?? 'thumbnail-proyecto.jpg')) }}"
                                                 alt="Imagen del proyecto {{ $project->title }}"
                                                 class="object-fit-cover rounded"
                                                 width="120"
@@ -33,12 +33,8 @@
                                             <div class="d-flex justify-content-between align-items-center mb-2">
                                                 <div class="small text-muted">Proyecto</div>
                                                 @if (!$project->enabled)
-                                                    <span class="text-uppercase fw-semibold badge text-bg-danger">
-                                                        No visible
-                                                    </span>
-                                                @else
-                                                    <span class="text-uppercase fw-semibold badge text-bg-success">
-                                                        Visible
+                                                    <span class="badge text-bg-danger">
+                                                        Deshabilitado
                                                     </span>
                                                 @endif
                                             </div>
@@ -56,7 +52,7 @@
                                                         <li><span class="text-muted small">Inicio: </span>{{ $project->start_date->format('d/m/Y') }}</li>
                                                         <li><span class="text-muted small">Fin: </span>{{ $project->end_date->format('d/m/Y') }}</li>
                                                         <li><span class="text-muted small">Horas por día: </span>{{ $project->work_hours_per_day }}</li>
-                                                        <li><span class="text-muted small">Ubicación: </span>{{ $project->location->name }}</li>
+                                                        <li><span class="text-muted small">Ubicación: </span>{{ $project->location->name }} - {{ $project->location->province->name }}</li>
                                                         <li><span class="text-muted small">Creado: </span>{{ $project->created_at->format('d/m/Y') }}</li>
                                                     </ul>
                                                 </div>

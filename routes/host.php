@@ -22,6 +22,7 @@ Route::middleware(['authCheck', 'isHost', 'checkEnabled'])->prefix('usuario/anfi
 
     Route::get('/mis-proyectos/{id}/editar', [HostProjectController::class, 'edit'])->name('my-projects.edit');
     Route::put('/mis-proyectos/{id}', [HostProjectController::class, 'update'])->name('my-projects.update');
+    Route::patch('/mis-proyectos/{id}', [HostProjectController::class, 'updateEnabled'])->name('my-projects.updateEnabled');
 
     Route::get('/mis-proyectos/{id}/eliminar', [HostProjectController::class, 'delete'])->name('my-projects.delete');
     Route::delete('/mis-proyectos/{id}/eliminar', [HostProjectController::class, 'destroy'])->name('my-projects.destroy');

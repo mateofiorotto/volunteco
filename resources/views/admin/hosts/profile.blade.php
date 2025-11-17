@@ -263,40 +263,51 @@
                 <div class="card">
                     <div class="card-header">Proyectos del anfitrión</div>
                     @if ($host->host->projects->isNotEmpty())
-                        <ul class="list-group list-group-flush">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="fw-semibold">Título</th>
+                                    <th scope="col" class="fw-semibold">Fechas</th>
+                                    <th scope="col" class="fw-semibold">Estado</th>
+                                    <th scope="col" class="fw-semibold">Voluntarios</th>
+                                    <th scope="col" class="fw-semibold">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                             @foreach ($host->host->projects as $project)
-                                <li class="list-group-item {{ !$project->enabled ? 'bg-danger bg-opacity-25' : '' }}">
-                                    <div class="row align-items-center">
-                                        <div class="col-12 col-md-4">{{ $project->title }}</div>
-                                        <div class="col-12 col-md-3">
-                                            <div><span class="small text-muted">Inicia: </span>
-                                                {{ $project->start_date->format('d/m/Y') }}</div>
-                                            <div><span class="small text-muted">Finaliza:
-                                                </span>{{ $project->end_date->format('d/m/Y') }}</div>
+                                <tr class="{{$project->enabled != 1 ? 'table-danger' : ''}}" >
+                                    <td>{{ $project->title }}</td>
+                                    <td>
+                                        <div>
+                                            <span class="small text-muted">Inicia: </span>
+                                            {{ $project->start_date->format('d/m/Y') }}
                                         </div>
-                                        <div class="col-12 col-md-3">
-                                            @if ($project->volunteers->isEmpty())
-                                                <p class="mb-0 small">No hay voluntarios asociados a este proyecto.</p>
-                                            @else
-                                                <ul class="list-unstyled">
-                                                    @foreach ($project->volunteers as $volunteer)
-                                                        <li><span
-                                                                    class="{{ $volunteer->pivot->status !== 'activo' ? 'text-danger' : '' }}">{{ $volunteer->full_name }}</span><span
-                                                                    class="small {{ $volunteer->pivot->status !== 'activo' ? 'text-danger' : 'text-muted' }}">
-                                                                ({{ $volunteer->pivot->status ?? 'N/A' }})</span></li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
+                                        <div>
+                                            <span class="small text-muted">Finaliza:
+                                            </span>{{ $project->end_date->format('d/m/Y') }}
                                         </div>
-                                        <div class="col-12 col-md-2 text-center">
-                                            <a href=""
-                                                class="btn btn-sm btn-azul"
-                                                title="ver">Ver</a>
-                                        </div>
-                                    </div>
-                                </li>
+                                    </td>
+                                    <td>
+                                        @if($project->enabled != 1)
+                                            <span class="badge bg-danger">Deshabilitado</span>
+                                        @else
+                                            <span class="badge bg-transparent text-body">Activo</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($project->volunteers->isEmpty())
+                                            <p class="mb-0 small">No hay voluntarios asociados a este proyecto.</p>
+                                        @else
+                                            <p class="mb-0 small">Hay {{$project->volunteers->count()}} voluntarios</p>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('admin.projects.show', $project->id)}}" class="btn btn-sm btn-azul" title="ver">Ver</a>
+                                    </td>
+                                </tr>
                             @endforeach
-                        </ul>
+                            </tbody>
+                        </table>
                     @else
                         <div class="card-body">
                             <p class="mb-0">Este anfitrión no tiene proyectos cargados</p>
