@@ -50,6 +50,22 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <label for="cuit" class="form-label">CUIT *</label>
+                                    <input type="text"
+                                        id="cuit"
+                                        name="cuit"
+                                        placeholder="20123456789"
+                                        inputmode="numeric"
+                                        required
+                                        class="form-control @error('cuit') is-invalid @enderror"
+                                        value="{{ old('cuit', $host->cuit) }}"
+                                    />
+                                    @error('cuit')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
                                     <label for="person_full_name" class="form-label">Persona de Contacto *</label>
                                     <input type="text"
                                            id="person_full_name"

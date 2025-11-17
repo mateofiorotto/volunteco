@@ -45,52 +45,6 @@ class ProfileController extends Controller
         return view('user.host.profile.edit', compact('host', 'provinces'));
     }
 
-    /**
-     * Actualizar perfil propio de anfitrion
-     */
-    public function update(Request $request, User $user)
-    {
-        $host = Auth::user()->host()->with('location.province', 'projects.volunteers')->firstOrFail();
-
-        //validación de campos
-        $validatedHost = $request->validate([
-            'name' => ['required', 'string', 'max:255', 'min:3'],
-            'person_full_name' => 'required|string|max:255|min:3',
-            'phone' => ['required', 'string', 'min:6', 'max:15', 'regex:/^\d+$/'],
-            'linkedin' => 'nullable|string|max:255|min:3|required_without_all:facebook,instagram',
-            'facebook' => 'nullable|string|max:255|min:3|required_without_all:linkedin,instagram',
-            'instagram' => 'nullable|string|max:255|min:3|required_without_all:facebook,linkedin',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:512|dimensions:min_width=100,min_height=100,max_width=300,max_height=300',
-            'description' => 'required|string|max:500|min:50',
-            'location_id' => ['required', 'exists:locations,id'],
-        ], [
-            'linkedin.required_without_all' => 'Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).',
-            'facebook.required_without_all' => 'Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).',
-            'instagram.required_without_all' => 'Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).',
-        ]);
-
-        //actualizar avatar si hay nueva imagen
-        if ($request->hasFile('avatar')) {
-            $validatedHost['avatar'] = $this->imageService->storeImage($request->file('avatar'), 'hosts');
-        }
-
-        //actualizar
-        $host->update([
-            'name' => $validatedHost['name'],
-            'person_full_name' => $validatedHost['person_full_name'],
-            'phone' => $validatedHost['phone'],
-            'linkedin' => $validatedHost['linkedin'] ?? null,
-            'facebook' => $validatedHost['facebook'] ?? null,
-            'instagram' => $validatedHost['instagram'] ?? null,
-            'avatar' => $validatedHost['avatar'] ?? $host->avatar,
-            'description' => $validatedHost['description'],
-            'location_id' => $validatedHost['location_id'],
-            //cuit y email no se editan
-        ]);
-
-        return redirect()->route('host.my-profile.show')->with('success', 'Perfil actualizado correctamente.');
-    }
-
 
     /**
      * devolver vista de perfil publico de anfitrion
@@ -137,15 +91,20 @@ class ProfileController extends Controller
 
         $validatedHost = $request->validate([
             'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
-            'name' => ['required', 'string', 'max:255', 'min:3', Rule::unique('hosts', 'name')->ignore($host->id)],
+            'name' => ['required', 'string', 'max:255', 'min:3'],
+            'cuit' => ['required', 'string', 'size:11', 'regex:/^\d+$/', Rule::unique('hosts', 'cuit')->ignore($host->id)],
             'person_full_name' => 'required|string|max:255|min:3',
             'phone' => ['required', 'string', 'min:6', 'max:15', 'regex:/^\d+$/'],
-            'linkedin' => 'nullable|string|max:255',
-            'facebook' => 'nullable|string|max:255',
-            'instagram' => 'nullable|string|max:255',
+            'linkedin' => 'nullable|string|max:255|min:3|required_without_all:facebook,instagram',
+            'facebook' => 'nullable|string|max:255|min:3|required_without_all:linkedin,instagram',
+            'instagram' => 'nullable|string|max:255|min:3|required_without_all:facebook,linkedin',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:512|dimensions:min_width=100,min_height=100,max_width=300,max_height=300',
             'description' => 'required|string|max:5120|min:50',
             'location_id' => ['required', 'exists:locations,id'],
+        ], [
+            'linkedin.required_without_all' => 'Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).',
+            'facebook.required_without_all' => 'Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).',
+            'instagram.required_without_all' => 'Debes proporcionar al menos una red social (LinkedIn, Facebook o Instagram).',
         ]);
 
         //foto de perfil
@@ -156,6 +115,7 @@ class ProfileController extends Controller
         //actualizar
         $host->update([
             'name' => $validatedHost['name'],
+            'cuit' => $validatedHost['cuit'],
             'person_full_name' => $validatedHost['person_full_name'],
             'phone' => $validatedHost['phone'],
             'linkedin' => $validatedHost['linkedin'],
