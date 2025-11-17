@@ -44,9 +44,9 @@ class ProjectsController extends Controller
     public function deleteProject($id)
     {
         $project = Project::with('host.user')->findOrFail($id);
-
+        
         //eliminar img si existe
-        if ($project->image) {
+        if ($project->image && $project->image !== 'thumbnail-proyecto.jpg') {
             $this->imageService->deleteImage($project->image);
         }
 
