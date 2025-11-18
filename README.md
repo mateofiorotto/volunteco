@@ -46,6 +46,7 @@ Volunteco es una web acerca de voluntariados de carácter ecológico donde parti
 - **i18n**: Traducción de alertas, campos y validaciones.
 - **Paginación**: Se implementará principalmente en el listado de proyectos (tanto para dashboard y frontend), en el listado de usuarios y de aplicantes a proyectos.
 - **API de localidad**: Se implementará para que sea mas sencillo seleccionar una ubicación a la hora de crear proyectos o registrarse y también evitar errores.
+- **SoftDeletes**
 
 ### Funcionalidades para administradores
 
