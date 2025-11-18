@@ -51,35 +51,37 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-8">
-                                <div class="card mb-3">
-                                    <div class="card-header">Descripción</div>
-                                    <div class="card-body">
-                                        {{ $host->host->description }}
+                            <div class="d-md-flex gap-3">
+                                <div class="flex-fill">
+                                    <div class="card mb-3">
+                                        <div class="card-header">Descripción</div>
+                                        <div class="card-body">
+                                            {{ $host->host->description }}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card mb-3">
-                                    <div class="card-header">Redes Sociales</div>
-                                    <div class="card-body">
-                                        <ul class="list-unstyled mb-0">
-                                            @if ($host->host->linkedin)
-                                                <li>
-                                                    <a href="{{ $host->host->linkedin }}" target="_blank"><i class="bi bi-linkedin fs-5 me-2 text-azul align-middle"></i> {{ $host->host->linkedin }}</a>
-                                                </li>
-                                            @endif
-                                            @if ($host->host->instagram)
-                                                <li>
-                                                    <a href="{{ $host->host->instagram }}" target="_blank"><i class="bi bi-instagram fs-5 me-2 text-azul align-middle"></i> {{ $host->host->instagram }}</a>
-                                                </li>
-                                            @endif
-                                            @if ($host->host->facebook)
-                                                <li>
-                                                    <a href="{{ $host->host->facebook }}" target="_blank"><i class="bi bi-facebook fs-5 me-2 text-azul align-middle"></i> {{ $host->host->facebook }}</a>
-                                                </li>
-                                            @endif
-                                        </ul>
+                                <div>
+                                    <div class="card mb-3">
+                                        <div class="card-header">Redes Sociales</div>
+                                        <div class="card-body">
+                                            <ul class="list-unstyled mb-0">
+                                                @if ($host->host->linkedin)
+                                                    <li>
+                                                        <a href="{{ $host->host->linkedin }}" target="_blank" class="text-nowrap"><i class="bi bi-linkedin fs-5 me-2 text-azul align-middle"></i> {{ $host->host->linkedin }}</a>
+                                                    </li>
+                                                @endif
+                                                @if ($host->host->instagram)
+                                                    <li>
+                                                        <a href="{{ $host->host->instagram }}" target="_blank" class="text-nowrap"><i class="bi bi-instagram fs-5 me-2 text-azul align-middle"></i> {{ $host->host->instagram }}</a>
+                                                    </li>
+                                                @endif
+                                                @if ($host->host->facebook)
+                                                    <li>
+                                                        <a href="{{ $host->host->facebook }}" target="_blank" class="text-nowrap"><i class="bi bi-facebook fs-5 me-2 text-azul align-middle"></i> {{ $host->host->facebook }}</a>
+                                                    </li>
+                                                @endif
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

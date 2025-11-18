@@ -23,25 +23,25 @@
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Estado</th>
-                                    <th scope="col">Acciones</th>
+                                    <th scope="col" class="text-center">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($hostsLast as $host)
                                     <tr>
-                                        <th scope="row">{{ $host->id}}</th>
-                                        <td>{{ $host->host->name }}</td>
-                                        <td><a href="mailto:{{ $host->email }}" target="_blank">{{ $host->email }}</a></td>
+                                        <th scope="row">{{ $host->user_id}}</th>
+                                        <td>{{ $host->name }}</td>
+                                        <td><a href="mailto:{{ $host->user->email }}" target="_blank">{{ $host->user->email }}</a></td>
                                         <td>
-                                        @if ($host->status !== 'activo')
-                                            <span class="text-uppercase fw-semibold badge {{ $host->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger'}}">
-                                                {{ $host->status }}
+                                        @if ($host->user->status !== 'activo')
+                                            <span class="text-uppercase fw-semibold badge {{ $host->user->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger'}}">
+                                                {{ $host->user->status }}
                                             </span>
                                         @else
-                                            <span class="text-uppercase fw-semibold badge bg-success">{{ $host->status }}</span>
+                                            <span class="text-uppercase fw-semibold badge bg-success">{{ $host->user->status }}</span>
                                         @endif
                                         </td>
-                                        <td><a href="{{ route('admin.hosts.profile', $host->id) }}" class="btn btn-sm btn-azul" title="ver">Ver</a></td>
+                                        <td class="text-center"><a href="{{ route('admin.hosts.profile', $host->user_id) }}" class="btn btn-sm btn-azul" title="ver">Ver</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -66,25 +66,25 @@
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Estado</th>
-                                    <th scope="col">Acciones</th>
+                                    <th scope="col" class="text-center">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($volunteersLast as $volunteer)
                                     <tr>
-                                        <th scope="row">{{ $volunteer->id}}</th>
-                                        <td>{{ $volunteer->volunteer->full_name }}</td>
-                                        <td><a href="mailto:{{ $volunteer->email }}" target="_blank">{{ $volunteer->email }}</a></td>
+                                        <th scope="row">{{ $volunteer->user_id}}</th>
+                                        <td>{{ $volunteer->full_name }}</td>
+                                        <td><a href="mailto:{{ $volunteer->user->email }}" target="_blank">{{ $volunteer->user->email }}</a></td>
                                         <td>
-                                            @if ($volunteer->status !== 'activo')
-                                                <span class="text-uppercase fw-semibold badge {{ $volunteer->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger'}}">
-                                                    {{ $volunteer->status }}
+                                            @if ($volunteer->user->status !== 'activo')
+                                                <span class="text-uppercase fw-semibold badge {{ $volunteer->user->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger'}}">
+                                                    {{ $volunteer->user->status }}
                                                 </span>
                                             @else
-                                                <span class="text-uppercase fw-semibold badge bg-success">{{ $volunteer->status }}</span>
+                                                <span class="text-uppercase fw-semibold badge bg-success">{{ $volunteer->user->status }}</span>
                                             @endif
                                         </td>
-                                        <td><a href="{{ route('admin.volunteer.profile', $volunteer->id) }}" class="btn btn-sm btn-azul" title="ver">Ver</a></td>
+                                        <td class="text-center"><a href="{{ route('admin.volunteer.profile', $volunteer->user_id) }}" class="btn btn-sm btn-azul" title="ver">Ver</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

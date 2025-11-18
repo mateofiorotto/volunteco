@@ -181,21 +181,24 @@ class HostsController extends Controller
      */
     public function deleteHostProfile(Request $request, $id)
     {
-        $host = User::where('id', $id)->firstOrFail();
+        $user = User::where('id', $id)->firstOrFail();
 
         $reasons = $request->validate([
             'delete_reasons' => 'required|string|max:500|min:10',
         ]);
 
-        //borrar img
-        if ($host->host->avatar) {
-            $this->imageService->deleteImage($host->host->avatar);
+        // Chequeo que tenga anfitrion y si lo tiene checkea que tenga avatar sino es null
+        if ($user->host?->avatar) {
+            $this->imageService->deleteImage($user->host->avatar);
         }
 
         //mandar mail
-        Mail::to($host->email)->send(new HostDeleteProfileMail($reasons['delete_reasons'], $host->host->person_full_name));
+        Mail::to($user->email)->send(new HostDeleteProfileMail($reasons['delete_reasons'], $user->host->person_full_name));
 
-        $host->delete();
+        // Elimino tambien el perfil del host
+        $user->host?->delete();
+
+        $user->delete();
 
         return redirect()->route('admin.hosts.index')->with('success', "Perfil eliminado correctamente y notificación enviada por email.");
     }

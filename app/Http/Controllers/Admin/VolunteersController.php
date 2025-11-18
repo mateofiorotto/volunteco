@@ -8,6 +8,7 @@ use App\Services\ImageService;
 use Illuminate\Http\Request;
 use App\Mail\VolunteerDeleteProfileMail;
 use App\Mail\VolunteerDisableProfileMail;
+use App\Models\Volunteer;
 use Illuminate\Support\Facades\Mail;
 
 class VolunteersController extends Controller
@@ -25,11 +26,7 @@ class VolunteersController extends Controller
      */
     public function index()
     {
-        $volunteers = User::whereHas('role', function ($query) {
-            $query->where('type', 'volunteer');
-        })
-            ->with('volunteer')
-            ->paginate(6);
+        $volunteers = Volunteer::with('user.volunteer')->latest()->paginate(8);
 
         return view('admin.volunteers.index', compact('volunteers'));
     }
@@ -39,10 +36,9 @@ class VolunteersController extends Controller
      */
     public function getVolunteerProfileById($id)
     {
-        $volunteer = User::where('id', $id)
-        ->whereHas('role', fn($q) => $q->where('type', 'volunteer'))
-        ->with(['volunteer.projects', 'volunteer.location.province'])
-        ->firstOrFail();
+        $volunteer = Volunteer::where('user_id', $id)
+            ->with(['user','projects','location.province'])
+            ->firstOrFail();
 
         return view('admin.volunteers.profile', ['volunteer' => $volunteer]);
     }
@@ -67,7 +63,7 @@ class VolunteersController extends Controller
      */
     public function disableVolunteerProfile($id)
     {
-        $volunteer = User::findOrFail($id);
+        $volunteer = User::with('volunteer')->findOrFail($id);
         $volunteerProfile = $volunteer->volunteer;
 
         $volunteer->status = "inactivo";
@@ -87,15 +83,19 @@ class VolunteersController extends Controller
      */
     public function deleteVolunteerProfile($id)
     {
-        $volunteer = User::where('id', $id)->firstOrFail();
+        $user = User::with('volunteer')->findOrFail($id);
 
-        if ($volunteer->volunteer->avatar && $volunteer->volunteer->avatar !== 'logo.svg') {
-            $this->imageService->deleteImage($volunteer->volunteer->avatar);
+        // Chequeo que tenga voluntario y si lo tiene checkea que tenga avatar sino es null
+        if ($user->volunteer?->avatar) {
+            $this->imageService->deleteImage($user->volunteer->avatar);
         }
 
-        $volunteer->delete();
+        Mail::to($user->email)->send(new VolunteerDeleteProfileMail($user->volunteer->full_name));
 
-        Mail::to($volunteer->email)->send(new VolunteerDeleteProfileMail($volunteer->volunteer->full_name));
+        // Elimino tambien el perfil del volunteer
+        $user->volunteer?->delete();
+
+        $user->delete();
 
         return redirect()->route('admin.volunteers.index')->with('success', "Perfil eliminado correctamente y notificación enviada por email.");
     }

@@ -105,6 +105,8 @@
                                 </li>
                                 @endif
                             </ul>
+                        @else
+                            <p class="mb-0">No tiene cargada ninguna red social</p>
                         @endif
                     </div>
                 </div>

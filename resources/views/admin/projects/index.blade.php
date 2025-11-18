@@ -53,14 +53,13 @@
                             @endforelse
                         </tbody>
                     </table>
+                    @if($projects->hasPages())
+                        {{ $projects->links() }}
+                    @endif
                 </div>
             </div>
 
-            @if($projects->hasPages())
-                <div class="d-flex justify-content-start mt-4">
-                    {{ $projects->links() }}
-                </div>
-            @endif
+
         </div>
     </section>
 @endsection

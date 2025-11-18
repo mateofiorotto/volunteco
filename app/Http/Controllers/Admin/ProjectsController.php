@@ -25,7 +25,8 @@ class ProjectsController extends Controller
     public function index()
     {
         $projects = Project::with('host')
-        ->paginate(6);
+        ->latest()
+        ->paginate(10);
 
         return view('admin.projects.index', compact('projects'));
     }
@@ -44,7 +45,7 @@ class ProjectsController extends Controller
     public function deleteProject($id)
     {
         $project = Project::with('host.user')->findOrFail($id);
-        
+
         //eliminar img si existe
         if ($project->image && $project->image !== 'thumbnail-proyecto.jpg') {
             $this->imageService->deleteImage($project->image);

@@ -15,38 +15,18 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //users distintos de admin
-        $users = User::whereHas('role', function ($query) {$query->where('type', '!=', 'admin');})
-            ->get();
-
-        //usuarios activos
-        $activeUsers = User::where('status', 'activo')
-            ->whereHas('role', function ($query) {$query->where('type', '!=', 'admin');})
-            ->count();
-
-        //usuarios hosts
-        $hosts = User::whereHas('role', fn($q) => $q->where('type', 'host'))
-            ->with('host')
-            ->get();
 
         //5 ultimos
-        $hostsLast = $hosts->sortByDesc('created_at')->take(5);
+        $hostsLast = Host::with('user')->latest()->take(5)->get();
 
         $hostCount =  Host::count();
 
-        //usuarios voluntarios
-        $volunteers = User::whereHas('role', fn($q) => $q->where('type', 'volunteer'))
-            ->with('volunteer')
-            ->get();
-
         //5 ultimos
-        $volunteersLast = $volunteers->sortByDesc('created_at')->take(5);
+        $volunteersLast = Volunteer::with('user')->latest()->take(5)->get();
 
         $volunteerCount =  Volunteer::count();
 
-        return view('admin.dashboard', compact(
-            'users', 'activeUsers', 'hosts', 'hostCount', 'hostsLast', 'volunteers', 'volunteerCount', 'volunteersLast'
-        )
+        return view('admin.dashboard', compact('hostCount', 'hostsLast', 'volunteerCount', 'volunteersLast')
     );
     }
 }

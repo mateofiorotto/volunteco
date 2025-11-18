@@ -31,37 +31,38 @@
                         <tbody>
                             @forelse($volunteers as $volunteer)
                                 <tr>
-                                    <th scope="row">{{ $volunteer->volunteer->id }}</th>
-                                    <td>{{ $volunteer->volunteer->full_name }}</td>
-                                    <td>{{ $volunteer->email }}</td>
+                                    <th scope="row">{{ $volunteer->user_id }}</th>
+                                    <td>{{ $volunteer->full_name }}</td>
+                                    <td>{{ $volunteer->user->email }}</td>
                                     <td>
-                                        @if ($volunteer->status !== 'activo')
-                                            <span class="text-uppercase fw-semibold badge text-bg-warning">{{ $volunteer->status }}</span>
+                                        @if ($volunteer->user->status !== 'activo')
+                                            <span class="text-uppercase fw-semibold badge {{$volunteer->user->status === 'pendiente' ? 'text-bg-warning' : 'bg-danger'}}">{{ $volunteer->user->status }}</span>
                                         @else
-                                            <span class="text-uppercase fw-semibold badge bg-transparent text-body">{{ $volunteer->status }}</span>
+                                            <span class="text-uppercase fw-semibold badge bg-transparent text-body">{{ $volunteer->user->status }}</span>
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.volunteer.profile', $volunteer->id) }}"
+                                        <a href="{{ route('admin.volunteer.profile', $volunteer->user_id) }}"
                                            class="btn btn-sm btn-azul">Ver Perfil</a>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5"
-                                        class="text-center">No hay voluntarios disponibles</td>
+                                    <td colspan="5" class="text-center">No hay voluntarios disponibles</td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
+
+                    @if ($volunteers->hasPages())
+                        <div>
+                            {{ $volunteers->links() }}
+                        </div>
+                    @endif
+
                 </div>
             </div>
 
-            @if ($volunteers->hasPages())
-                <div class="d-flex justify-content-start mt-4">
-                    {{ $volunteers->links() }}
-                </div>
-            @endif
         </div>
     </section>
 @endsection
