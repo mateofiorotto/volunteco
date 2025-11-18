@@ -73,7 +73,7 @@ Volunteco es una web acerca de voluntariados de carácter ecológico donde parti
 - **MercadoPago**: Se implementara como pasarela de pago para solventar el tema de las donaciones y la venta de merchandising.
 - **Manejo de tipos de proyectos**
 - **Manejo de condiciones**
-- **Creacion de usuarios administradores**
+- **Pre-loaders**
 
 © 2025 Hermina Bento y Mateo Fiorotto
 [^1]: Página Web para el proyecto final de la carrera de Diseño y Programación web en Escuela Da Vinci.
