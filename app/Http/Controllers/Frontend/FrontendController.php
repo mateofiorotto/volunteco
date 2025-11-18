@@ -11,7 +11,7 @@ class FrontendController extends Controller
 {
     public function home()
     {
-        return view('frontend/home');
+        return view('frontend.home');
     }
 
     /**
@@ -25,25 +25,29 @@ class FrontendController extends Controller
             ->latest()
             ->paginate(6);
 
-        return view('frontend/projects', compact('projects'));
+        return view('frontend.projects', compact('projects'));
     }
 
     public function projectById($id)
     {
-        $project = Project::where('id', $id)->where('enabled', true)->firstOrFail();
+        $project = Project::where('id', $id)->where('enabled', true)->with('volunteers')->firstOrFail();
 
         //obtener el voluntario asociado al usuario autenticado
-        $volunteer = Volunteer::where('user_id', auth()->id())->first();
+        $volunteer = Volunteer::where('user_id', Auth::id())->first();
 
-        $hasApplied = false;
+        $volunteerStatus = null;
 
         if ($volunteer) {
-            $hasApplied = $project->volunteers()
+            // Obtenemos el estado del voluntario en este proyecto
+            $pivotRecord = $project->volunteers()
                 ->where('volunteer_id', $volunteer->id)
-                ->exists();
+                ->first();
+
+            if ($pivotRecord) {
+                $volunteerStatus = $pivotRecord->pivot->status;
+            }
         }
 
-
-        return view('frontend/project-details', compact('project', 'hasApplied'));
+        return view('frontend.project-details', compact('project', 'volunteerStatus'));
     }
 }

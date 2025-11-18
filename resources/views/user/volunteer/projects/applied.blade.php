@@ -4,7 +4,7 @@
     <section>
         <div class="container py-5">
             <div class="d-flex justify-content-between align-items-center mb-5">
-                <h1 class="title-h1 h3 mb-0">Mis <span>Proyectos</span></h1>
+                <h1 class="title-h1 h3 mb-0">Mis <span>Postulaciones</span></h1>
             </div>
 
             @if (session('success'))
@@ -21,53 +21,55 @@
                 </div>
             @endif
 
-            {{-- Proyectos Aceptados --}}
-            @if ($acceptedProjects->isNotEmpty())
-                <div class="mb-5">
-                    <h2 class="h4 mb-3">Proyectos en los que participo</h2>
-                    <x-project-grid :projects="$acceptedProjects" />
-                    
-                    @if ($acceptedProjects->hasPages())
-                        <div class="d-flex justify-content-center mt-4">
-                            {{ $acceptedProjects->links() }}
-                        </div>
-                    @endif
-                </div>
-            @endif
-
-            {{-- Proyectos Pendientes --}}
-            @if ($pendingProjects->isNotEmpty())
-                <div class="mb-5">
-                    <h2 class="h4 mb-3">Proyectos a los que apliqué</h2>
-                    <x-project-grid :projects="$pendingProjects" />
-                    
-                    @if ($pendingProjects->hasPages())
-                        <div class="d-flex justify-content-center mt-4">
-                            {{ $pendingProjects->links() }}
-                        </div>
-                    @endif
-                </div>
-            @endif
-
-            {{-- Proyectos Rechazados --}}
-            @if ($rejectedProjects->isNotEmpty())
-                <div class="mb-5">
-                    <h2 class="h4 mb-3">Proyectos en los que me rechazaron</h2>
-                    <x-project-grid :projects="$rejectedProjects" />
-                    
-                    @if ($rejectedProjects->hasPages())
-                        <div class="d-flex justify-content-center mt-4">
-                            {{ $rejectedProjects->links() }}
-                        </div>
-                    @endif
-                </div>
-            @endif
-
-            {{-- Si no hay proyectos --}}
-            @if ($acceptedProjects->isEmpty() && $pendingProjects->isEmpty() && $rejectedProjects->isEmpty())
-                <div class="alert alert-info">
-                    <p class="mb-0">No has aplicado a ningún proyecto aún</p>
-                </div>
+            @if($voluntario->projects->isNotEmpty())
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Título</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Lugar</th>
+                        <th scope="col">Anfitrión</th>
+                        <th scope="col">Solicitud de aplicación</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($voluntario->projects as $project)
+                    <tr class="align-middle {{$project->enabled === 0 ? 'table-danger' : ''}}">
+                        <td>
+                            {{$project->title}}
+                            @if($project->enabled === 0)
+                                <span class="badge text-bg-danger">Deshabilitado</span>
+                            @endif
+                        </td>
+                        <td>
+                            <div>
+                                <span class="small text-muted">Inicia: </span>
+                                {{ $project->start_date->format('d/m/Y') }}
+                            </div>
+                            <div>
+                                <span class="small text-muted">Finaliza:
+                                </span>{{ $project->end_date->format('d/m/Y') }}
+                            </div>
+                        </td>
+                        <td>{{$project->location->name}} - {{$project->location->province->name}}</td>
+                        <td>{{$project->host->name}}</td>
+                        <td>
+                            @if($project->pivot->status !== 'aceptado')
+                            <span class="badge text-capitalize {{$project->pivot->status == 'pendiente' ? 'bg-warning text-bg-warning' : 'bg-danger'}}">{{$project->pivot->status}}</span>
+                            @else
+                            <span class="badge bg-primary text-capitalize">{{$project->pivot->status}}</span>
+                            @endif
+                        </td>
+                        <td><a href="{{route('project', $project->id)}}" class="btn btn-azul btn-sm @if($project->enabled === 0) disabled @endif">Ver</a></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @else
+            <div class="alert alert-info">
+                <p class="mb-0">No has aplicado a ningún proyecto aún</p>
+            </div>
             @endif
         </div>
     </section>

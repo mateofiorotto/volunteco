@@ -36,17 +36,6 @@ class ProfileController extends Controller
     }
 
     /**
-     * Devolver vista de edicion de perfil
-     */
-    public function edit($id)
-    {
-        $provinces = Province::with('locations')->get();
-        $host = Auth::user()->host()->with('location.province', 'projects.volunteers')->firstOrFail();
-        return view('user.host.profile.edit', compact('host', 'provinces'));
-    }
-
-
-    /**
      * devolver vista de perfil publico de anfitrion
      */
     public function getProfile($id)

@@ -163,7 +163,7 @@
                                         </td>
                                         <td>
                                             <div class="d-flex gap-3">
-                                                <a href="{{ route('host.volunteers.show', $volunteer->id) }}" class="btn btn-sm btn-azul" title="ver">Ver Perfil</a>
+                                                <a href="{{ route('host.volunteers.profile', $volunteer->id) }}" class="btn btn-sm btn-azul" title="ver">Ver Perfil</a>
                                                 @if ($volunteer->pivot->status !== 'aceptado')
                                                     <form method="POST" action="{{ route('host.my-projects.accept-volunteer', [$project->id, $volunteer->id]) }}">
                                                         @csrf
@@ -174,7 +174,7 @@
                                                     <form method="POST" action="{{ route('host.my-projects.reject-volunteer', [$project->id, $volunteer->id]) }}">
                                                         @csrf
                                                         @method('PUT')
-                                                        <button type="submit" class="btn btn-sm btn-outline-primary">Rechazar</button>
+                                                        <button type="submit" class="btn btn-sm btn-outline-danger">Rechazar</button>
                                                     </form>
                                                 @endif
                                             </div>

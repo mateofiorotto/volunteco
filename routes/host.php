@@ -38,7 +38,7 @@ Route::middleware(['authCheck', 'isHost', 'checkEnabled'])->prefix('usuario/anfi
     Route::put('/mi-perfil/editar', [ProfileController::class, 'updateMyProfile'])->name('my-profile.update');
 
     // perfil del voluntario postulado
-    Route::get('/voluntario/{id}', [VolunteerController::class, 'show'])->name('volunteers.show');
+    Route::get('/voluntario/perfil/{id}', [VolunteerController::class, 'profile'])->name('volunteers.profile');
 
 });
 

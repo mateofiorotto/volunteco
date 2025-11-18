@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Gate;
 class VolunteerController extends Controller
 {
     //
-    public function show($id)
+    public function profile($id)
     {
         $volunteer = Volunteer::with(['user'])->findOrFail($id);
 
@@ -31,6 +31,6 @@ class VolunteerController extends Controller
             return $project->pivot->status === 'aceptado';
         });
 
-        return view('user.host.volunteers.show', compact('volunteer', 'hasAccepted'));
+        return view('user.host.volunteers.profile', compact('volunteer', 'hasAccepted'));
     }
 }

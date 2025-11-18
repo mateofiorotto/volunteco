@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Project;
+use App\Models\Volunteer;
 
 class VolunteerProjectController extends Controller
 {
@@ -15,7 +16,14 @@ class VolunteerProjectController extends Controller
      */
     public function volunteerAppliedProjects()
     {
-         $volunteer = Auth::user()->volunteer;
+        $volunteer = Auth::user()->volunteer;
+
+        $userId = Auth::id();
+
+        $voluntario = Volunteer::with('location.province')
+            ->where('user_id', $userId)
+            ->firstOrFail();
+
 
         // Proyectos aceptados
         $acceptedProjects = $volunteer->projects()
@@ -44,7 +52,7 @@ class VolunteerProjectController extends Controller
             ->orderByPivot('applied_at', 'desc')
             ->paginate(6, ['*'], 'rejected');
 
-        return view('user.volunteer.projects.applied', compact('acceptedProjects', 'pendingProjects', 'rejectedProjects'));
+        return view('user.volunteer.projects.applied', compact('acceptedProjects', 'pendingProjects', 'rejectedProjects', 'voluntario'));
     }
 
     /**

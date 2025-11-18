@@ -4,6 +4,7 @@ use App\Http\Controllers\User\Volunteer\DashboardController;
 use App\Http\Controllers\User\Volunteer\ProfileController;
 use App\Http\Controllers\User\Volunteer\VolunteerProjectController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\Volunteer\HostController;
 
 Route::middleware(['authCheck', 'isVolunteer', 'checkEnabled'])->prefix('usuario/voluntario')->name('volunteer.')->group(function () {
 
@@ -23,8 +24,11 @@ Route::middleware(['authCheck', 'isVolunteer', 'checkEnabled'])->prefix('usuario
     Route::get('/mi-perfil/editar', [ProfileController::class, 'editMyProfile'])->name('my-profile.edit');
     Route::put('/mi-perfil/editar', [ProfileController::class, 'updateMyProfile'])->name('my-profile.update');
 
+    // perfil del host donde tiene algun proyecto activo
+    Route::get('/anfitrion/perfil/{id}', [HostController::class, 'profile'])->name('hosts.profile');
+
 });
 
 Route::middleware(['checkEnabled'])->prefix('usuario')->name('volunteer.')->group(function () {
-    Route::get('/voluntario/{id}', [ProfileController::class, 'getProfile'])->name('profile');
+    Route::get('/voluntario/perfil/{id}', [ProfileController::class, 'getProfile'])->name('profile');
 });
