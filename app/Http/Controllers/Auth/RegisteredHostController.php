@@ -169,7 +169,7 @@ class RegisteredHostController extends Controller
         // borrar token
         DB::table('profile_change_tokens')->where('email', $email)->delete();
 
-         return redirect()->route('login')->with('success', 'Tu perfil fue actualizado. Estaremos revisando los datos y te notificaremos cuando esté aprobado.');
+        return redirect()->route('login')->with('success', 'Tu perfil fue actualizado. Estaremos revisando los datos y te notificaremos cuando esté aprobado.');
     }
 
     /**

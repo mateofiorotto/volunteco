@@ -4,18 +4,25 @@
     <div class="container py-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
             <h1 class="title-h1 h3 mb-0">Editar <span>Proyecto</span></h1>
-            <a href="{{ url()->previous() }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
+            <a href="{{ url()->previous() }}"
+               class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
         </div>
 
         {{-- Alerta de errores general --}}
         @if ($errors->any())
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show"
+                 role="alert">
                 <strong>Ocurrió un error.</strong> Por favor, revisá los campos marcados.
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"></button>
             </div>
         @endif
 
-        <form method="POST" action="{{ route('host.my-projects.update', $project) }}" enctype="multipart/form-data">
+        <form method="POST"
+              action="{{ route('host.my-projects.update', $project) }}"
+              enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row">
@@ -26,22 +33,23 @@
                             <h2 class="card-title h4">Información del Proyecto</h2>
 
                             <div class="mb-3">
-                                <label for="title" class="form-label">Título del proyecto *</label>
+                                <label for="title"
+                                       class="form-label">Título del proyecto *</label>
                                 <input type="text"
                                        id="title"
                                        name="title"
                                        value="{{ old('title', $project->title) }}"
                                        placeholder="Ej: Reforestación en la Reserva Natural"
                                        required
-                                       class="form-control @error('title') is-invalid @enderror"
-                                />
+                                       class="form-control @error('title') is-invalid @enderror" />
                                 @error('title')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="mb-3">
-                                <label for="description" class="form-label">Descripción *</label>
+                                <label for="description"
+                                       class="form-label">Descripción *</label>
                                 <textarea id="description"
                                           name="description"
                                           placeholder="Describe el proyecto, objetivos y actividades a realizar"
@@ -54,14 +62,17 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="project_type_id" class="form-label">Tipo de proyecto *</label>
+                                <label for="project_type_id"
+                                       class="form-label">Tipo de proyecto *</label>
                                 <select id="project_type_id"
                                         name="project_type_id"
                                         required
                                         class="form-select @error('project_type_id') is-invalid @enderror">
-                                    <option value="" disabled>Selecciona un tipo</option>
-                                    @foreach($projectTypes as $type)
-                                        <option value="{{ $type->id }}" {{ old('project_type_id', $project->project_type_id) == $type->id ? 'selected' : '' }}>
+                                    <option value=""
+                                            disabled>Selecciona un tipo</option>
+                                    @foreach ($projectTypes as $type)
+                                        <option value="{{ $type->id }}"
+                                                {{ old('project_type_id', $project->project_type_id) == $type->id ? 'selected' : '' }}>
                                             {{ $type->name }}
                                         </option>
                                     @endforeach
@@ -72,11 +83,15 @@
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="province_id" class="form-label">Provincia *</label>
-                                <select name="province_id" id="province_id" class="form-select">
+                                <label for="province_id"
+                                       class="form-label">Provincia *</label>
+                                <select name="province_id"
+                                        id="province_id"
+                                        class="form-select">
                                     <option value="">Seleccione una provincia</option>
                                     @foreach ($provinces as $province)
-                                        <option value="{{ $province->id }}" {{ $project->location && $project->location->province_id == $province->id ? 'selected' : '' }}>
+                                        <option value="{{ $province->id }}"
+                                                {{ $project->location && $project->location->province_id == $province->id ? 'selected' : '' }}>
                                             {{ $province->name }}
                                         </option>
                                     @endforeach
@@ -84,14 +99,16 @@
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="location_id" class="form-label">Localidad *</label>
-                                <select name="location_id" id="location_id" class="form-select @error('localidad_id') is-invalid @enderror">
+                                <label for="location_id"
+                                       class="form-label">Localidad *</label>
+                                <select name="location_id"
+                                        id="location_id"
+                                        class="form-select @error('localidad_id') is-invalid @enderror">
                                     <option value="">Seleccione una localidad</option>
-                                    @if($project->location && $project->location->province)
+                                    @if ($project->location && $project->location->province)
                                         @foreach ($project->location->province->locations as $location)
-                                            <option
-                                                value="{{ $location->id }}"
-                                                {{ $project->location_id == $location->id ? 'selected' : '' }}>
+                                            <option value="{{ $location->id }}"
+                                                    {{ $project->location_id == $location->id ? 'selected' : '' }}>
                                                 {{ $location->name }}
                                             </option>
                                         @endforeach
@@ -103,12 +120,13 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="image" class="form-label">Imagen del proyecto</label>
+                                <label for="image"
+                                       class="form-label">Imagen del proyecto</label>
 
                                 <div class="mb-2">
                                     <img src="{{ asset('storage/' . ($project->image ?? 'thumbnail-proyecto.jpg')) }}"
-                                            alt="Imagen actual"
-                                            class="avatar-project w-100 object-fit-cover">
+                                         alt="Imagen actual"
+                                         class="avatar-project w-100 object-fit-cover">
                                 </div>
 
                                 <input type="file"
@@ -119,7 +137,8 @@
                                 @error('image')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
-                                <div class="form-text">La imagen no debe superar 860px de ancho ni 480px de alto y no debe pesar más de 300kb</div>
+                                <div class="form-text">La imagen no debe superar 860px de ancho ni 480px de alto y no debe
+                                    pesar más de 300kb</div>
                             </div>
                         </div>
                     </div>
@@ -132,7 +151,8 @@
                             <h3 class="card-title h4">Fechas y Horarios</h3>
 
                             <div class="mb-3">
-                                <label for="start_date" class="form-label">Fecha de inicio *</label>
+                                <label for="start_date"
+                                       class="form-label">Fecha de inicio *</label>
                                 <input type="date"
                                        id="start_date"
                                        name="start_date"
@@ -145,7 +165,8 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="end_date" class="form-label">Fecha de finalización *</label>
+                                <label for="end_date"
+                                       class="form-label">Fecha de finalización *</label>
                                 <input type="date"
                                        id="end_date"
                                        name="end_date"
@@ -159,16 +180,26 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="work_hours_per_day" class="form-label">Horas de trabajo por día *</label>
+                                <label for="work_hours_per_day"
+                                       class="form-label">Horas de trabajo por día *</label>
                                 <select id="work_hours_per_day"
                                         name="work_hours_per_day"
                                         required
                                         class="form-select @error('work_hours_per_day') is-invalid @enderror">
-                                    <option value="" disabled>Selecciona las horas</option>
-                                    <option value="2 Horas" {{ old('work_hours_per_day', $project->work_hours_per_day) == '2 Horas' ? 'selected' : '' }}>2 Horas</option>
-                                    <option value="4 Horas" {{ old('work_hours_per_day', $project->work_hours_per_day) == '4 Horas' ? 'selected' : '' }}>4 Horas</option>
-                                    <option value="6 Horas" {{ old('work_hours_per_day', $project->work_hours_per_day) == '6 Horas' ? 'selected' : '' }}>6 Horas</option>
-                                    <option value="8 Horas" {{ old('work_hours_per_day', $project->work_hours_per_day) == '8 Horas' ? 'selected' : '' }}>8 Horas</option>
+                                    <option value=""
+                                            disabled>Selecciona las horas</option>
+                                    <option value="2 Horas"
+                                            {{ old('work_hours_per_day', $project->work_hours_per_day) == '2 Horas' ? 'selected' : '' }}>
+                                        2 Horas</option>
+                                    <option value="4 Horas"
+                                            {{ old('work_hours_per_day', $project->work_hours_per_day) == '4 Horas' ? 'selected' : '' }}>
+                                        4 Horas</option>
+                                    <option value="6 Horas"
+                                            {{ old('work_hours_per_day', $project->work_hours_per_day) == '6 Horas' ? 'selected' : '' }}>
+                                        6 Horas</option>
+                                    <option value="8 Horas"
+                                            {{ old('work_hours_per_day', $project->work_hours_per_day) == '8 Horas' ? 'selected' : '' }}>
+                                        8 Horas</option>
                                 </select>
                                 @error('work_hours_per_day')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -183,7 +214,7 @@
                             <h3 class="card-title h4">Condiciones</h3>
                             <p class="text-muted small">Selecciona las condiciones que aplican para este proyecto</p>
 
-                            @foreach($conditions as $condition)
+                            @foreach ($conditions as $condition)
                                 <div class="form-check">
                                     <input class="form-check-input @error('conditions') is-invalid @enderror"
                                            type="checkbox"
@@ -191,7 +222,8 @@
                                            value="{{ $condition->id }}"
                                            id="condition_{{ $condition->id }}"
                                            {{ (is_array(old('conditions')) ? in_array($condition->id, old('conditions')) : $project->conditions->contains($condition->id)) ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="condition_{{ $condition->id }}">
+                                    <label class="form-check-label"
+                                           for="condition_{{ $condition->id }}">
                                         {{ $condition->name }}
                                     </label>
                                 </div>
@@ -214,14 +246,16 @@
                                        id="enabled"
                                        value="1"
                                        {{ old('enabled', $project->enabled) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="enabled">
+                                <label class="form-check-label"
+                                       for="enabled">
                                     Deshabilitado / Habilitado
                                 </label>
                             </div>
                             @error('enabled')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
-                            <div class="form-text">Habilite el proyecto para que quede publicado y visible para los voluntarios</div>
+                            <div class="form-text">Habilite el proyecto para que quede publicado y visible para los
+                                voluntarios</div>
                         </div>
                     </div>
                 </div>
@@ -229,10 +263,12 @@
 
             <!-- Botones -->
             <div class="d-flex gap-3 justify-content-center mt-4 mb-5">
-                <a href="{{ route('host.my-projects.index') }}" class="btn btn-outline-primary btn-lg px-5">
+                <a href="{{ route('host.my-projects.index') }}"
+                   class="btn btn-outline-primary btn-lg px-5">
                     Cancelar
                 </a>
-                <button type="submit" class="btn btn-primary btn-lg px-5 text-capitalize">
+                <button type="submit"
+                        class="btn btn-primary btn-lg px-5 text-capitalize">
                     Actualizar Proyecto
                 </button>
             </div>
@@ -241,32 +277,31 @@
 @endsection
 
 @section('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const provinceSelect = document.getElementById('province_id');
-    const locationSelect = document.getElementById('location_id');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const provinceSelect = document.getElementById('province_id');
+            const locationSelect = document.getElementById('location_id');
 
-    provinceSelect.addEventListener('change', function() {
-        const provinceId = this.value;
+            provinceSelect.addEventListener('change', function() {
+                const provinceId = this.value;
 
-        // Limpiar localidades
-        locationSelect.innerHTML = '<option value="">Seleccione una localidad</option>';
+                // Limpiar localidades
+                locationSelect.innerHTML = '<option value="">Seleccione una localidad</option>';
 
-        if (!provinceId) return;
+                if (!provinceId) return;
 
-        fetch(`/locations/${provinceId}`)
-            .then(response => response.json())
-            .then(locations => {
-                locations.forEach(location => {
-                    const option = document.createElement('option');
-                    option.value = location.id;
-                    option.textContent = location.name;
-                    locationSelect.appendChild(option);
-                });
-            })
-            .catch(error => console.error('Error al cargar localidades:', error));
-    });
-});
-</script>
-
+                fetch(`/locations/${provinceId}`)
+                    .then(response => response.json())
+                    .then(locations => {
+                        locations.forEach(location => {
+                            const option = document.createElement('option');
+                            option.value = location.id;
+                            option.textContent = location.name;
+                            locationSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error al cargar localidades:', error));
+            });
+        });
+    </script>
 @endsection

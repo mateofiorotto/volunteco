@@ -5,7 +5,8 @@
         <div class="container pt-5 pb-5">
             <div class="d-flex justify-content-between align-items-center mb-5">
                 <h1 class="title-h1 h3 mb-0">Proyecto</h1>
-                <a href="{{ url()->previous() }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
+                <a href="{{ url()->previous() }}"
+                   class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
             </div>
 
             <!-- Alerta de exito temporal -->
@@ -13,7 +14,9 @@
                 <div class="alert alert-success alert-dismissible fade show"
                      role="alert">
                     {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"></button>
                 </div>
             @endif
 
@@ -22,7 +25,9 @@
                 <div class="alert alert-danger alert-dismissible fade show"
                      role="alert">
                     {{ session('error') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"></button>
                 </div>
             @endif
 
@@ -32,7 +37,11 @@
                 <div class="col-md-8 col-12 mb-4">
                     <div class="card">
                         <div class="ratio ratio-16x9">
-                            <img src="{{ asset('storage/' . ($project->image ?? 'thumbnail-proyecto.jpg')) }}" class="card-img-top object-fit-cover" alt="{{ $project->title }}" width="854" height="480">
+                            <img src="{{ asset('storage/' . ($project->image ?? 'thumbnail-proyecto.jpg')) }}"
+                                 class="card-img-top object-fit-cover"
+                                 alt="{{ $project->title }}"
+                                 width="854"
+                                 height="480">
                         </div>
 
                         <div class="card-body">
@@ -45,7 +54,9 @@
                                         <i class="bi bi-geo-alt fs-5 text-primary"></i>
                                         <div class="pt-1">
                                             <h4 class="h6 fw-semibold mb-1">Ubicación</h4>
-                                            <p class="mb-0">{{ $project->location_id ? $project->location->name . ' - ' . $project->location->province->name : ''}}</p>
+                                            <p class="mb-0">
+                                                {{ $project->location_id ? $project->location->name . ' - ' . $project->location->province->name : '' }}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -66,7 +77,8 @@
                                         <i class="bi bi-calendar4 fs-5 text-primary"></i>
                                         <div class="pt-1">
                                             <h4 class="h6 fw-semibold mb-1">Fecha de inicio</h4>
-                                            <p class="mb-0">{{ \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') }}</p>
+                                            <p class="mb-0">
+                                                {{ \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -84,20 +96,20 @@
                             </div>
 
                             @if ($project->conditions->isNotEmpty())
-                            <div class="d-flex gap-2 align-items-start">
-                                <i class="bi bi-clipboard2-check fs-5 text-primary"></i>
-                                <div class="pt-1">
-                                    <h4 class="h6 fw-semibold">Condiciones y Requisitos</h4>
-                                    <ul class="list-unstyled mb-0">
-                                        @foreach ($project->conditions as $condition)
-                                            <li class="d-flex gap-2 align-items-center">
-                                                <i class="bi bi-check2 fs-5 text-primary"></i>
-                                                <span>{{ $condition->name }}</span>
-                                            </li>
-                                        @endforeach
-                                    </ul>
+                                <div class="d-flex gap-2 align-items-start">
+                                    <i class="bi bi-clipboard2-check fs-5 text-primary"></i>
+                                    <div class="pt-1">
+                                        <h4 class="h6 fw-semibold">Condiciones y Requisitos</h4>
+                                        <ul class="list-unstyled mb-0">
+                                            @foreach ($project->conditions as $condition)
+                                                <li class="d-flex gap-2 align-items-center">
+                                                    <i class="bi bi-check2 fs-5 text-primary"></i>
+                                                    <span>{{ $condition->name }}</span>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
                             @endif
 
                         </div>
@@ -112,10 +124,10 @@
                                 @if (!empty($project->host->avatar))
                                     <div class="avatar">
                                         <img src="{{ asset('storage/' . $project->host->avatar) }}"
-                                            alt="Foto de {{ $project->host->name }}"
-                                            class="img-fluid object-fit-contain rounded-circle"
-                                            width="80"
-                                            height="80">
+                                             alt="Foto de {{ $project->host->name }}"
+                                             class="img-fluid object-fit-contain rounded-circle"
+                                             width="80"
+                                             height="80">
                                     </div>
                                 @endif
                                 <div class="flex-fill">
@@ -125,33 +137,42 @@
                                     <h3 class="card-title h4">{{ $project->host->name }}</h3>
                                     <ul class="list-unstyled mb-3">
                                         <li>{{ $project->host->location->province->name ?? 'Sin ubicación' }}</li>
-                                        <li><span class="text-muted small">En la comunidad desde</span> {{ $project->created_at->format('Y') }}</li>
+                                        <li><span class="text-muted small">En la comunidad desde</span>
+                                            {{ $project->created_at->format('Y') }}</li>
                                     </ul>
 
                                     @if (Auth::check() && Auth::user()->hasRole('volunteer'))
                                         @if ($volunteerStatus === 'aceptado' || $volunteerStatus === 'pendiente')
-                                        <div class="social-media d-flex gap-3">
-                                            @if ($project->host->linkedin)
-                                                <a href="{{ $project->host->linkedin }}" target="_blank" class="fs-5"><i class="bi bi-linkedin"></i></a>
-                                            @endif
+                                            <div class="social-media d-flex gap-3">
+                                                @if ($project->host->linkedin)
+                                                    <a href="{{ $project->host->linkedin }}"
+                                                       target="_blank"
+                                                       class="fs-5"><i class="bi bi-linkedin"></i></a>
+                                                @endif
 
-                                            @if ($project->host->instagram)
-                                                <a href="{{ $project->host->instagram }}" target="_blank" class="fs-5"><i class="bi bi-instagram"></i></a>
-                                            @endif
+                                                @if ($project->host->instagram)
+                                                    <a href="{{ $project->host->instagram }}"
+                                                       target="_blank"
+                                                       class="fs-5"><i class="bi bi-instagram"></i></a>
+                                                @endif
 
-                                            @if ($project->host->facebook)
-                                                <a href="{{ $project->host->facebook }}" target="_blank" class="fs-5"><i class="bi bi-facebook"></i></a>
-                                            @endif
-                                        </div>
+                                                @if ($project->host->facebook)
+                                                    <a href="{{ $project->host->facebook }}"
+                                                       target="_blank"
+                                                       class="fs-5"><i class="bi bi-facebook"></i></a>
+                                                @endif
+                                            </div>
                                         @endif
                                         @if ($volunteerStatus === 'aceptado')
-                                        <hr/>
-                                        <ul class="list-unstyled">
-                                            <li>Contacto: {{$project->host->person_full_name}}</li>
-                                            <li>Telefono: {{$project->host->phone}}</li>
-                                            <li>Email: <a href="mailto:{{$project->host->user->email}}" target="_blank" >{{$project->host->user->email}}</a></li>
-                                        </ul>
-                                        <a href="{{route('volunteer.hosts.profile', $project->host->id)}}" class="btn-azul btn-sm btn mb-3">Ver Perfil</a>
+                                            <hr />
+                                            <ul class="list-unstyled">
+                                                <li>Contacto: {{ $project->host->person_full_name }}</li>
+                                                <li>Telefono: {{ $project->host->phone }}</li>
+                                                <li>Email: <a href="mailto:{{ $project->host->user->email }}"
+                                                       target="_blank">{{ $project->host->user->email }}</a></li>
+                                            </ul>
+                                            <a href="{{ route('volunteer.hosts.profile', $project->host->id) }}"
+                                               class="btn-azul btn-sm btn mb-3">Ver Perfil</a>
                                         @endif
                                     @endif
                                 </div>
@@ -181,7 +202,10 @@
                                     @endif
 
                                     @if ($volunteerStatus !== 'rechazado')
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#desistirModal">
+                                        <button type="button"
+                                                class="btn btn-danger"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#desistirModal">
                                             Desistir del proyecto
                                         </button>
                                     @endif
@@ -190,7 +214,8 @@
                                     <form method="POST"
                                           action="{{ route('volunteer.apply-project', $project->id) }}">
                                         @csrf
-                                        <button class="btn btn-primary" type="submit">Aplicar al proyecto</button>
+                                        <button class="btn btn-primary"
+                                                type="submit">Aplicar al proyecto</button>
                                     </form>
                                 @endif
                             </div>
@@ -203,37 +228,45 @@
 @endsection
 
 @section('modals')
-<div class="modal fade" id="desistirModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title h5">Desistir del proyecto</h2>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>¿Desea cancelar su aplicación a este proyecto?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">No</button>
-        <form method="POST"
-            id="withdrawBtn"
-            action="{{ route('volunteer.withdraw-project', $project->id) }}">
-            @csrf
-            @method('DELETE')
-            <button class="btn btn-danger" type="submit">Sí, cancelo</button>
-        </form>
-      </div>
+    <div class="modal fade"
+         id="desistirModal"
+         tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title h5">Desistir del proyecto</h2>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Desea cancelar su aplicación a este proyecto?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-outline-primary"
+                            data-bs-dismiss="modal">No</button>
+                    <form method="POST"
+                          id="withdrawBtn"
+                          action="{{ route('volunteer.withdraw-project', $project->id) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger"
+                                type="submit">Sí, cancelo</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 @endsection
 @section('scripts')
-<script>
-// Cierro el modal manualmente cuando envio el form
-document.getElementById('withdrawBtn').addEventListener('submit', function () {
-    const modalEl = document.getElementById('desistirModal');
-    const modalInstance = bootstrap.Modal.getOrCreateInstance(modalEl);
-    modalInstance.hide();
-});
-</script>
+    <script>
+        // Cierro el modal manualmente cuando envio el form
+        document.getElementById('withdrawBtn').addEventListener('submit', function() {
+            const modalEl = document.getElementById('desistirModal');
+            const modalInstance = bootstrap.Modal.getOrCreateInstance(modalEl);
+            modalInstance.hide();
+        });
+    </script>
 @endsection

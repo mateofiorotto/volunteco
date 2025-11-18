@@ -15,7 +15,11 @@
                         <div class="d-flex gap-5 align-items-start">
                             <!-- Foto de perfil -->
                             <div class="avatar">
-                                <img src="{{ asset('storage/' . ($host->avatar ?? 'perfil-host.svg')) }}" alt="Foto de perfil de {{ $host->name }}" class="rounded-circle object-fit-contain avatar-lg" width="200" height="200"/>
+                                <img src="{{ asset('storage/' . ($host->avatar ?? 'perfil-host.svg')) }}"
+                                     alt="Foto de perfil de {{ $host->name }}"
+                                     class="rounded-circle object-fit-contain avatar-lg"
+                                     width="200"
+                                     height="200" />
                             </div>
 
                             <!-- Info (nombre, editar (si el perfil es propio), localidad) -->
@@ -44,7 +48,8 @@
                     <div class="card-header">Contacto</div>
                     <div class="card-body">
                         <ul class="list-unstyled mb-0">
-                            <li><span class="text-muted small">Persona de contacto: </span>{{ $host->person_full_name }}</li>
+                            <li><span class="text-muted small">Persona de contacto: </span>{{ $host->person_full_name }}
+                            </li>
                             <li><span class="text-muted small">Teléfono: </span>{{ $host->phone }}</li>
                             <li><span class="text-muted small">Email: </span>{{ $host->user->email }}</li>
                         </ul>
@@ -58,28 +63,31 @@
                         @if ($host->linkedin || $host->facebook || $host->instagram)
                             <ul class="list-unstyled mb-0">
                                 @if ($host->linkedin)
-                                <li>
-                                    <a href="{{ $host->linkedin }}" target="_blank">
-                                        <i class="bi bi-linkedin fs-5 me-2 text-azul align-middle"></i>
-                                        {{$host->linkedin}}
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a href="{{ $host->linkedin }}"
+                                           target="_blank">
+                                            <i class="bi bi-linkedin fs-5 me-2 text-azul align-middle"></i>
+                                            {{ $host->linkedin }}
+                                        </a>
+                                    </li>
                                 @endif
                                 @if ($host->facebook)
-                                <li>
-                                    <a href="{{ $host->facebook }}" target="_blank">
-                                        <i class="bi bi-facebook fs-5 me-2 text-azul align-middle"></i>
-                                        {{ $host->facebook }}
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a href="{{ $host->facebook }}"
+                                           target="_blank">
+                                            <i class="bi bi-facebook fs-5 me-2 text-azul align-middle"></i>
+                                            {{ $host->facebook }}
+                                        </a>
+                                    </li>
                                 @endif
                                 @if ($host->instagram)
-                                <li>
-                                    <a href="{{ $host->instagram }}" target="_blank">
-                                        <i class="bi bi-instagram fs-5 me-2 text-azul align-middle"></i>
-                                        {{ $host->instagram }}
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a href="{{ $host->instagram }}"
+                                           target="_blank">
+                                            <i class="bi bi-instagram fs-5 me-2 text-azul align-middle"></i>
+                                            {{ $host->instagram }}
+                                        </a>
+                                    </li>
                                 @endif
                             </ul>
                         @endif

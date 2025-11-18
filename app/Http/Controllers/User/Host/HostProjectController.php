@@ -17,7 +17,6 @@ use App\Models\Volunteer;
 
 class HostProjectController extends Controller
 {
-
     //inyectar el servicio de manejo de imagenes
     protected $imageService;
 
@@ -51,7 +50,7 @@ class HostProjectController extends Controller
         $project = Project::with(['projectType', 'conditions', 'volunteers.user'])->findOrFail($id);
 
         //voluntarios registrados
-        $registeredVolunteers = $project->volunteers->sortByDesc(function($v) {
+        $registeredVolunteers = $project->volunteers->sortByDesc(function ($v) {
             return $v->pivot->applied_at;
         });
 
@@ -185,7 +184,8 @@ class HostProjectController extends Controller
     /**
      * Deshabilitar proyecto
      */
-    public function updateEnabled(Request $request, $id) {
+    public function updateEnabled(Request $request, $id)
+    {
 
         $project = Project::findOrFail($id);
         $data = $request->validate([

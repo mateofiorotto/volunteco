@@ -12,8 +12,9 @@ use Illuminate\Queue\SerializesModels;
 
 class VolunteerDisableProfileMail extends Mailable
 {
-    use Queueable, SerializesModels;
-    
+    use Queueable;
+    use SerializesModels;
+
     public $volunteerFullName;
 
     /**

@@ -39,21 +39,24 @@
                                         @if (!$project->enabled)
                                             <span class="text-uppercase fw-semibold badge text-bg-danger">No visible</span>
                                         @else
-                                            <span class="text-uppercase fw-semibold badge bg-transparent text-body">Visible</span>
+                                            <span
+                                                  class="text-uppercase fw-semibold badge bg-transparent text-body">Visible</span>
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{route('admin.projects.show', $project->id)}}" class="btn btn-sm btn-azul">Ver Proyecto</a>
+                                        <a href="{{ route('admin.projects.show', $project->id) }}"
+                                           class="btn btn-sm btn-azul">Ver Proyecto</a>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center">No hay proyectos disponibles</td>
+                                    <td colspan="5"
+                                        class="text-center">No hay proyectos disponibles</td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
-                    @if($projects->hasPages())
+                    @if ($projects->hasPages())
                         {{ $projects->links() }}
                     @endif
                 </div>

@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Condition extends Model
 {
-
     protected $fillable = [
         'key', // dormitorio, comida, separado_por_guion_bajo
         'name', // "Dormitorio", "Comida", etc..

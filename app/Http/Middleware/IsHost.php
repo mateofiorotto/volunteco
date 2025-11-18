@@ -17,7 +17,7 @@ class IsHost
     public function handle(Request $request, Closure $next): Response
     {
 
-       $user = Auth::user();
+        $user = Auth::user();
 
         if (!$user || !$user->hasRole('host')) {
             return redirect()->route('login')

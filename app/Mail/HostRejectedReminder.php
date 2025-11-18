@@ -12,8 +12,9 @@ use Illuminate\Queue\SerializesModels;
 
 class HostRejectedReminder extends Mailable
 {
-    use Queueable, SerializesModels;
-    
+    use Queueable;
+    use SerializesModels;
+
     public $reasons;
     public $hostFullName;
     public $date;

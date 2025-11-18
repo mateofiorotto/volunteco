@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
     <title>Proyecto Eliminado</title>
     <style>
         /* Estilos básicos, inline preferido para compatibilidad */
@@ -12,25 +14,29 @@
             margin: 0;
             padding: 0;
         }
+
         .email-container {
             max-width: 600px;
             margin: 30px auto;
             background-color: #ffffff;
             border-radius: 6px;
             overflow: hidden;
-            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
+
         .email-header {
             background-color: #dc3545;
             color: white;
             padding: 20px;
             text-align: center;
         }
+
         .email-body {
             padding: 20px;
             color: #1e1e1e;
             line-height: 1.6;
         }
+
         .email-footer {
             background-color: #f8f9fa;
             color: #66800a;
@@ -38,6 +44,7 @@
             text-align: center;
             font-size: 12px;
         }
+
         .project-title {
             background-color: #f8f9fa;
             padding: 10px;
@@ -45,6 +52,7 @@
             margin: 15px 0;
             font-weight: bold;
         }
+
         .info-box {
             background-color: #fff3cd;
             border: 1px solid #ffc107;
@@ -54,6 +62,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="email-container">
         <div class="email-header">
@@ -64,7 +73,7 @@
             <p>
                 Nos comunicamos para informarle que su proyecto ha sido eliminado de nuestra plataforma.
             </p>
-            
+
             <div class="project-title">
                 Proyecto eliminado: {{ $projectTitle }}
             </div>
@@ -72,12 +81,14 @@
             <div class="info-box">
                 <strong>¿Por qué fue eliminado?</strong>
                 <p style="margin: 10px 0 0 0;">
-                    Su proyecto fue revisado por nuestro equipo de administración y fue eliminado por no cumplir con nuestras políticas de la plataforma o por otras razones administrativas.
+                    Su proyecto fue revisado por nuestro equipo de administración y fue eliminado por no cumplir con
+                    nuestras políticas de la plataforma o por otras razones administrativas.
                 </p>
             </div>
 
             <p>
-                Si considera que esto es un error o desea más información sobre la eliminación, puede contactarnos respondiendo a este correo.
+                Si considera que esto es un error o desea más información sobre la eliminación, puede contactarnos
+                respondiendo a este correo.
             </p>
 
             <p>
@@ -94,4 +105,5 @@
         </div>
     </div>
 </body>
+
 </html>

@@ -32,4 +32,3 @@ Route::middleware(['checkEnabled', 'authCheck', 'isAdmin'])->prefix('admin')->na
     Route::delete('/proyectos/{project}/eliminar', [ProjectsController::class, 'deleteProject'])->name('projects.delete');
 
 });
-?>

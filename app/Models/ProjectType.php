@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProjectType extends Model
 {
-
     protected $fillable = [
         'key', // construccion_de_granjas
         'name', // "Construccion de granjas", "Reforestacion", etc..

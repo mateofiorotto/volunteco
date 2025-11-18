@@ -4,13 +4,18 @@
     <section class="container py-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
             <h1 class="title-h1 h3 mb-0">Proyecto</h1>
-            <a href="{{ url()->previous() }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
+            <a href="{{ url()->previous() }}"
+               class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
         </div>
 
         @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert alert-success alert-dismissible fade show"
+                 role="alert">
                 {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"></button>
             </div>
         @endif
 
@@ -41,14 +46,18 @@
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <ul class="list-unstyled">
-                                    <li><span class="text-muted small">Tipo: </span>{{ $project->projectType->name ?? 'Sin tipo' }}</li>
-                                    <li><span class="text-muted small">Ubicación: </span>{{ $project->location->name }} - {{ $project->location->province->name }}</li>
+                                    <li><span class="text-muted small">Tipo:
+                                        </span>{{ $project->projectType->name ?? 'Sin tipo' }}</li>
+                                    <li><span class="text-muted small">Ubicación: </span>{{ $project->location->name }} -
+                                        {{ $project->location->province->name }}</li>
                                 </ul>
                             </div>
                             <div class="col-12 col-md-6">
                                 <ul class="list-unstyled">
-                                    <li><span class="text-muted small">Inicio: </span>{{ $project->start_date->format('d/m/Y') }}</li>
-                                    <li><span class="text-muted small">Fin: </span>{{ $project->end_date->format('d/m/Y') }}</li>
+                                    <li><span class="text-muted small">Inicio:
+                                        </span>{{ $project->start_date->format('d/m/Y') }}</li>
+                                    <li><span class="text-muted small">Fin: </span>{{ $project->end_date->format('d/m/Y') }}
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -64,7 +73,8 @@
                             <div class="card">
                                 <div class="card-header">Condiciones y Requisitos</div>
                                 <div class="card-body">
-                                    <p><span class="text-muted small">Horas por día: </span>{{ $project->work_hours_per_day }}</p>
+                                    <p><span class="text-muted small">Horas por día:
+                                        </span>{{ $project->work_hours_per_day }}</p>
 
                                     <ul class="list-unstyled mb-0">
                                         @foreach ($project->conditions as $condition)
@@ -91,39 +101,44 @@
                     <div class="card-body">
                         <div class="row border-bottom mb-3">
                             <div class="col-md-6">
-                                <form method="GET" action="{{ route('host.my-projects.edit', $project->id) }}">
+                                <form method="GET"
+                                      action="{{ route('host.my-projects.edit', $project->id) }}">
                                     @csrf
-                                    <button class="btn btn-outline-primary w-100 mb-3" type="submit">
+                                    <button class="btn btn-outline-primary w-100 mb-3"
+                                            type="submit">
                                         Editar
                                     </button>
                                 </form>
                             </div>
                             <div class="col-md-6">
                                 <a href="#volunteers-list">
-                                    <button class="btn btn-primary w-100 mb-3" type="submit">
+                                    <button class="btn btn-primary w-100 mb-3"
+                                            type="submit">
                                         Ver Voluntarios
                                     </button>
                                 </a>
                             </div>
                         </div>
                         <div>
-                            <form method="POST" action="{{ route('host.my-projects.updateEnabled', $project->id) }}">
+                            <form method="POST"
+                                  action="{{ route('host.my-projects.updateEnabled', $project->id) }}">
                                 @csrf
                                 @method('PATCH')
                                 <div class="mb-2">Estado</div>
                                 <div class="form-check form-switch mb-3">
                                     <input class="form-check-input"
-                                        type="checkbox"
-                                        name="enabled"
-                                        id="enabled"
-                                        value="1"
-                                        {{ $project->enabled ? 'checked' : '' }}
-                                    />
-                                    <label class="form-check-label small" for="enabled">
+                                           type="checkbox"
+                                           name="enabled"
+                                           id="enabled"
+                                           value="1"
+                                           {{ $project->enabled ? 'checked' : '' }} />
+                                    <label class="form-check-label small"
+                                           for="enabled">
                                         Deshabilitado / Habilitado
                                     </label>
                                 </div>
-                                <button type="submit" class="btn-outline-primary btn btn-sm">Confirmar</button>
+                                <button type="submit"
+                                        class="btn-outline-primary btn btn-sm">Confirmar</button>
                             </form>
                         </div>
                     </div>
@@ -156,25 +171,32 @@
                                         <td>{{ $volunteer->full_name }}</td>
                                         <td>
                                             @if ($volunteer->pivot->status !== 'aceptado')
-                                                <span class="text-capitalize badge {{ $volunteer->pivot->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
+                                                <span
+                                                      class="text-capitalize badge {{ $volunteer->pivot->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
                                                     {{ $volunteer->pivot->status }}
                                                 </span>
                                             @endif
                                         </td>
                                         <td>
                                             <div class="d-flex gap-3">
-                                                <a href="{{ route('host.volunteers.profile', $volunteer->id) }}" class="btn btn-sm btn-azul" title="ver">Ver Perfil</a>
+                                                <a href="{{ route('host.volunteers.profile', $volunteer->id) }}"
+                                                   class="btn btn-sm btn-azul"
+                                                   title="ver">Ver Perfil</a>
                                                 @if ($volunteer->pivot->status !== 'aceptado')
-                                                    <form method="POST" action="{{ route('host.my-projects.accept-volunteer', [$project->id, $volunteer->id]) }}">
+                                                    <form method="POST"
+                                                          action="{{ route('host.my-projects.accept-volunteer', [$project->id, $volunteer->id]) }}">
                                                         @csrf
                                                         @method('PUT')
-                                                        <button type="submit" class="btn btn-sm btn-primary">Aceptar</button>
+                                                        <button type="submit"
+                                                                class="btn btn-sm btn-primary">Aceptar</button>
                                                     </form>
                                                 @else
-                                                    <form method="POST" action="{{ route('host.my-projects.reject-volunteer', [$project->id, $volunteer->id]) }}">
+                                                    <form method="POST"
+                                                          action="{{ route('host.my-projects.reject-volunteer', [$project->id, $volunteer->id]) }}">
                                                         @csrf
                                                         @method('PUT')
-                                                        <button type="submit" class="btn btn-sm btn-outline-danger">Rechazar</button>
+                                                        <button type="submit"
+                                                                class="btn btn-sm btn-outline-danger">Rechazar</button>
                                                     </form>
                                                 @endif
                                             </div>

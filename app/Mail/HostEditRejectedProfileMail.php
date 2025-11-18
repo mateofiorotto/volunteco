@@ -12,8 +12,9 @@ use Illuminate\Queue\SerializesModels;
 
 class HostEditRejectedProfileMail extends Mailable
 {
-    use Queueable, SerializesModels;
-    
+    use Queueable;
+    use SerializesModels;
+
     public $link;
     public $fieldsToChange;
     public $hostFullName;

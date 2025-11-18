@@ -12,8 +12,9 @@ use Illuminate\Queue\SerializesModels;
 
 class HostDeleteProfileMail extends Mailable
 {
-    use Queueable, SerializesModels;
-    
+    use Queueable;
+    use SerializesModels;
+
     public $reasons;
     public $hostFullName;
 

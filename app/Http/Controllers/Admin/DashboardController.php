@@ -26,7 +26,9 @@ class DashboardController extends Controller
 
         $volunteerCount =  Volunteer::count();
 
-        return view('admin.dashboard', compact('hostCount', 'hostsLast', 'volunteerCount', 'volunteersLast')
-    );
+        return view(
+            'admin.dashboard',
+            compact('hostCount', 'hostsLast', 'volunteerCount', 'volunteersLast')
+        );
     }
 }

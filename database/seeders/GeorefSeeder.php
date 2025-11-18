@@ -29,14 +29,14 @@ class GeorefSeeder extends Seeder
         }
 
         $provinces = $response->json()['provincias'] ?? [];
-        
+
         foreach ($provinces as $prov) {
             Province::firstOrCreate(['name' => $prov['nombre']]);
         }
-        
+
         //localidades x provincia
         $allProvinces = Province::all();
-        
+
         foreach ($allProvinces as $province) {
             $response = Http::withOptions(['verify' => false])
                 ->timeout(60)
@@ -53,7 +53,7 @@ class GeorefSeeder extends Seeder
             }
 
             $locations = $response->json()['localidades'] ?? [];
-            
+
             foreach ($locations as $loc) {
                 Location::firstOrCreate([
                     'name' => $loc['nombre'],

@@ -16,7 +16,7 @@ class CheckEnabled
      */
     public function handle(Request $request, Closure $next): Response
     {
-         if (Auth::check()) {
+        if (Auth::check()) {
             $user = Auth::user();
             // Si el usuario no está habilitado
             if ($user->status != 'activo') {

@@ -36,9 +36,11 @@
                                     <td>{{ $volunteer->user->email }}</td>
                                     <td>
                                         @if ($volunteer->user->status !== 'activo')
-                                            <span class="text-uppercase fw-semibold badge {{$volunteer->user->status === 'pendiente' ? 'text-bg-warning' : 'bg-danger'}}">{{ $volunteer->user->status }}</span>
+                                            <span
+                                                  class="text-uppercase fw-semibold badge {{ $volunteer->user->status === 'pendiente' ? 'text-bg-warning' : 'bg-danger' }}">{{ $volunteer->user->status }}</span>
                                         @else
-                                            <span class="text-uppercase fw-semibold badge bg-transparent text-body">{{ $volunteer->user->status }}</span>
+                                            <span
+                                                  class="text-uppercase fw-semibold badge bg-transparent text-body">{{ $volunteer->user->status }}</span>
                                         @endif
                                     </td>
                                     <td>
@@ -48,7 +50,8 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center">No hay voluntarios disponibles</td>
+                                    <td colspan="5"
+                                        class="text-center">No hay voluntarios disponibles</td>
                                 </tr>
                             @endforelse
                         </tbody>

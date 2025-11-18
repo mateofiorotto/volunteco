@@ -5,13 +5,18 @@
 
         <div class="d-flex justify-content-between align-items-center mb-5">
             <h1 class="title-h1 h3">Mi <span>Perfil</span></h1>
-            <a href="{{ route('volunteer.my-profile.edit') }}" class="btn btn-primary">Editar Perfil</a>
+            <a href="{{ route('volunteer.my-profile.edit') }}"
+               class="btn btn-primary">Editar Perfil</a>
         </div>
 
         @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert alert-success alert-dismissible fade show"
+                 role="alert">
                 <strong>¡Perfecto!</strong> {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"></button>
             </div>
         @endif
 
@@ -23,7 +28,11 @@
                         <div class="d-flex gap-5 align-items-start">
                             <!-- Foto de perfil -->
                             <div class="avatar">
-                                <img src="{{ asset('storage/' . ($volunteer->avatar ?? 'perfil-volunteer.svg'))}}" alt="Foto de perfil de {{ $volunteer->full_name }}" class="rounded-circle object-fit-contain avatar-lg" width="200" height="200">
+                                <img src="{{ asset('storage/' . ($volunteer->avatar ?? 'perfil-volunteer.svg')) }}"
+                                     alt="Foto de perfil de {{ $volunteer->full_name }}"
+                                     class="rounded-circle object-fit-contain avatar-lg"
+                                     width="200"
+                                     height="200">
                             </div>
 
                             <div class="flex-fill">
@@ -35,12 +44,14 @@
                                     </div>
                                 @endif
                                 <ul class="list-unstyled">
-                                @if ($volunteer->dni)
-                                    <li><span class="text-muted small">DNI: </span>{{ number_format($volunteer->dni, 0, ',', '.') }}</li>
-                                @endif
-                                @if ($volunteer->birthdate)
-                                    <li><span class="text-muted small">Fecha de nacimiento: </span>{{ $volunteer->birthdate->format('d/m/Y') }}</li>
-                                @endif
+                                    @if ($volunteer->dni)
+                                        <li><span class="text-muted small">DNI:
+                                            </span>{{ number_format($volunteer->dni, 0, ',', '.') }}</li>
+                                    @endif
+                                    @if ($volunteer->birthdate)
+                                        <li><span class="text-muted small">Fecha de nacimiento:
+                                            </span>{{ $volunteer->birthdate->format('d/m/Y') }}</li>
+                                    @endif
                                 </ul>
                                 <!-- Descripción -->
                                 <div>
@@ -56,8 +67,10 @@
                     <div class="card-header">Datos de Profesionales</div>
                     <div class="card-body">
                         <ul class="list-unstyled mb-0">
-                            <li><span class="text-muted small">Profesión: </span><span class="text-capitalize">{{ $volunteer->profession }}</span></li>
-                            <li><span class="text-muted small">Nivel educativo: </span><span class="text-capitalize">{{ $volunteer->educational_level }}</span></li>
+                            <li><span class="text-muted small">Profesión: </span><span
+                                      class="text-capitalize">{{ $volunteer->profession }}</span></li>
+                            <li><span class="text-muted small">Nivel educativo: </span><span
+                                      class="text-capitalize">{{ $volunteer->educational_level }}</span></li>
                         </ul>
                     </div>
                 </div>
@@ -81,28 +94,31 @@
                         @if ($volunteer->linkedin || $volunteer->facebook || $volunteer->instagram)
                             <ul class="list-unstyled mb-0">
                                 @if ($volunteer->linkedin)
-                                <li>
-                                    <a href="{{ $volunteer->linkedin }}" target="_blank">
-                                        <i class="bi bi-linkedin fs-5 me-2 text-azul align-middle"></i>
-                                        {{$volunteer->linkedin}}
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a href="{{ $volunteer->linkedin }}"
+                                           target="_blank">
+                                            <i class="bi bi-linkedin fs-5 me-2 text-azul align-middle"></i>
+                                            {{ $volunteer->linkedin }}
+                                        </a>
+                                    </li>
                                 @endif
                                 @if ($volunteer->facebook)
-                                <li>
-                                    <a href="{{ $volunteer->facebook }}" target="_blank">
-                                        <i class="bi bi-facebook fs-5 me-2 text-azul align-middle"></i>
-                                        {{$volunteer->facebook}}
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a href="{{ $volunteer->facebook }}"
+                                           target="_blank">
+                                            <i class="bi bi-facebook fs-5 me-2 text-azul align-middle"></i>
+                                            {{ $volunteer->facebook }}
+                                        </a>
+                                    </li>
                                 @endif
                                 @if ($volunteer->instagram)
-                                <li>
-                                    <a href="{{ $volunteer->instagram }}" target="_blank">
-                                        <i class="bi bi-instagram fs-5 me-2 text-azul align-middle"></i>
-                                        {{$volunteer->instagram}}
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a href="{{ $volunteer->instagram }}"
+                                           target="_blank">
+                                            <i class="bi bi-instagram fs-5 me-2 text-azul align-middle"></i>
+                                            {{ $volunteer->instagram }}
+                                        </a>
+                                    </li>
                                 @endif
                             </ul>
                         @else

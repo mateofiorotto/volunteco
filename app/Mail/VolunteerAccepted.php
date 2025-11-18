@@ -12,7 +12,8 @@ use Illuminate\Mail\Mailables\Address;
 
 class VolunteerAccepted extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     public $volunteerName;
     public $projectName;

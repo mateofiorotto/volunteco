@@ -8,7 +8,6 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\EditRejectedProfileController;
 
-
 Route::middleware('checkEnabled')->group(function () {
     //Registros
     Route::get('/registrar-anfitrion', [RegisteredHostController::class, 'create'])->name('register-host.create');
@@ -37,9 +36,9 @@ Route::middleware('checkEnabled')->group(function () {
     });
 });
 
-    //Recuperar contraseña
-    Route::get('/clave-olvidada', [PasswordResetLinkController::class, 'create'])->name('password.request');
-    Route::post('/clave-olvidada', [PasswordResetLinkController::class, 'store'])->name('password.email');
+//Recuperar contraseña
+Route::get('/clave-olvidada', [PasswordResetLinkController::class, 'create'])->name('password.request');
+Route::post('/clave-olvidada', [PasswordResetLinkController::class, 'store'])->name('password.email');
 
-    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
-    Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.store');
+Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
+Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.store');

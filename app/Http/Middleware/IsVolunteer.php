@@ -20,7 +20,7 @@ class IsVolunteer
 
         if (!$user || !$user->hasRole('volunteer')) {
             return redirect()->route('login')
-                ->with('error','No tienes permiso para acceder a esta página. Por favor, inicia sesión como voluntario');
+                ->with('error', 'No tienes permiso para acceder a esta página. Por favor, inicia sesión como voluntario');
         }
 
         return $next($request);

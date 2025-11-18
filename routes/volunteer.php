@@ -8,11 +8,11 @@ use App\Http\Controllers\User\Volunteer\HostController;
 
 Route::middleware(['authCheck', 'isVolunteer', 'checkEnabled'])->prefix('usuario/voluntario')->name('volunteer.')->group(function () {
 
-     //rutas de perfil + frontend y metodos de VolunteerController (logica de aplicacion a proyectos creados) y VolunteerProfileController (Edicion de perfil)
+    //rutas de perfil + frontend y metodos de VolunteerController (logica de aplicacion a proyectos creados) y VolunteerProfileController (Edicion de perfil)
     /**
      * Proyectos: metodos para vista de proyectos aplicados (lista), desistir de proyectos
      */
-    Route::get('/', [DashboardController::class, 'index'] )->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/mis-proyectos-aplicados', [VolunteerProjectController::class, 'volunteerAppliedProjects'])->name('projects.applied');
 
