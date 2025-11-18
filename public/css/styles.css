@@ -173,6 +173,10 @@ a {
 .card {
     --bs-card-cap-bg: rgba(var(--bs-primary-rgb), 0.1);
 }
+.pagination {
+    --bs-pagination-active-bg: var(--bs-primary);
+    --bs-pagination-active-border-color: var(--bs-primary);
+}
 @media (min-width: 576px) {
     .container-sm {
         max-width: 540px;

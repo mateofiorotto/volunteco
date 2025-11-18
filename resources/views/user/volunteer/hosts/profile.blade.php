@@ -4,7 +4,7 @@
     <section class="container py-5">
 
         <div class="d-flex justify-content-between align-items-center mb-5">
-            <h1 class="title-h1 h3">Perfil <span>del Anfitrión para el voluntario</span></h1>
+            <h1 class="title-h1 h3">Perfil <span>del Anfitrión</span></h1>
         </div>
 
         <!-- Perfil -->

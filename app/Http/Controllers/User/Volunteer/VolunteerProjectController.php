@@ -18,41 +18,9 @@ class VolunteerProjectController extends Controller
     {
         $volunteer = Auth::user()->volunteer;
 
-        $userId = Auth::id();
+        $projects = $volunteer->projects()->paginate(10);
 
-        $voluntario = Volunteer::with('location.province')
-            ->where('user_id', $userId)
-            ->firstOrFail();
-
-
-        // Proyectos aceptados
-        $acceptedProjects = $volunteer->projects()
-            ->withPivot('status', 'applied_at', 'accepted_at')
-            ->with(['host', 'projectType', 'conditions'])
-            ->where('projects.enabled', true)
-            ->wherePivot('status', 'aceptado')
-            ->orderByPivot('applied_at', 'desc')
-            ->paginate(6, ['*'], 'accepted');
-
-        // Proyectos pendientes
-        $pendingProjects = $volunteer->projects()
-            ->withPivot('status', 'applied_at', 'accepted_at')
-            ->with(['host', 'projectType', 'conditions'])
-            ->where('projects.enabled', true)
-            ->wherePivot('status', 'pendiente')
-            ->orderByPivot('applied_at', 'desc')
-            ->paginate(6, ['*'], 'pending');
-
-        // Proyectos rechazados
-        $rejectedProjects = $volunteer->projects()
-            ->withPivot('status', 'applied_at', 'accepted_at')
-            ->with(['host', 'projectType', 'conditions'])
-            ->where('projects.enabled', true)
-            ->wherePivot('status', 'rechazado')
-            ->orderByPivot('applied_at', 'desc')
-            ->paginate(6, ['*'], 'rejected');
-
-        return view('user.volunteer.projects.applied', compact('acceptedProjects', 'pendingProjects', 'rejectedProjects', 'voluntario'));
+        return view('user.volunteer.projects.applied', compact('projects'));
     }
 
     /**

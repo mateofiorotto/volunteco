@@ -21,8 +21,9 @@
                 </div>
             @endif
 
-            @if($voluntario->projects->isNotEmpty())
+            @if($projects->isNotEmpty())
             <table class="table">
+                <caption><small>Lista de proyectos donde has aplicado</small></caption>
                 <thead>
                     <tr>
                         <th scope="col">Título</th>
@@ -34,7 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($voluntario->projects as $project)
+                    @foreach($projects as $project)
                     <tr class="align-middle {{$project->enabled === 0 ? 'table-danger' : ''}}">
                         <td>
                             {{$project->title}}
@@ -66,6 +67,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div>
+                {{ $projects->links() }}
+            </div>
             @else
             <div class="alert alert-info">
                 <p class="mb-0">No has aplicado a ningún proyecto aún</p>
