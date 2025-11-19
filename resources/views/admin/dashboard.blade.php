@@ -61,7 +61,7 @@
             <div class="col-md-6">
                 <div class="card border-warning">
                     <div class="card-header text-bg-warning">
-                        <h2 class="h5 mb-0">Últimos Volutarios <span class="small fw-light">(Total:
+                        <h2 class="h5 mb-0">Últimos Voluntarios <span class="small fw-light">(Total:
                                 {{ $volunteerCount }})</span></h2>
                     </div>
                     <div class="card-body">
