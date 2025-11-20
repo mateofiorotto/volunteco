@@ -48,7 +48,7 @@
                                         @endif
 
                                         <a href="{{ route('host.my-projects.show', $project->id) }}"
-                                            class="btn btn-sm btn-azul">
+                                            class="btn btn-sm btn-azul mt-3">
                                             Ver Detalles
                                         </a>
                                     </div>
@@ -61,8 +61,8 @@
 
                 <div class="col-md-3 bg-body-tertiary rounded py-3">
                     @if ($host->projects->isNotEmpty())
-                    <p>¿Tenes un proyecto nuevo?</p>
-                    <a href="{{route('host.my-projects.create')}}" class="btn btn-primary">Crear Proyecto Nuevo</a>
+                    <p class="fw-bold">¿Tenés un proyecto nuevo?</p>
+                    <a href="{{route('host.my-projects.create')}}" class="btn btn-primary mb-3 mt-3">Crear Proyecto Nuevo</a>
                     <hr>
                     @endif
                     <div class="rounded bg-primary bg-opacity-10 border border-primary p-3">
@@ -73,7 +73,7 @@
                             ({{ $lastAppliedVolunteer['applied_at']->format('Y-m-d H:i') }})
                             </p>
 
-                            <a href="{{route('host.my-projects.show', $lastAppliedVolunteer['project']->id)}}" class="btn btn-outline-primary">Ir al Proyecto</a>
+                            <a href="{{route('host.my-projects.show', $lastAppliedVolunteer['project']->id)}}" class="btn btn-outline-primary mt-3">Ir al Proyecto</a>
                         @else
                             No aplicó nadie aún
                         @endif

@@ -193,7 +193,7 @@
                                                         @csrf
                                                         @method('PUT')
                                                         <button type="submit"
-                                                                class="btn btn-sm btn-primary">Aceptar</button>
+                                                                class="btn btn-sm btn-primary {{ $project->enabled == false ? 'disabled' : '' }}">Aceptar</button>
                                                     </form>
                                                 @else
                                                     <form method="POST"
