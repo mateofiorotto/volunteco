@@ -105,41 +105,48 @@
                     <div class="card mb-3">
                         <div class="card-header">Acciones</div>
                         <div class="card-body">
-                            <form method="POST"
-                                  action="{{ route('admin.projects.delete', $project->id) }}"
-                                  onsubmit="return confirm('¿Estás seguro de eliminar este proyecto? Esta acción no se puede deshacer.');">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger w-100"
-                                        type="submit">
-                                    <i class="bi bi-trash me-2"></i>Eliminar Proyecto
-                                </button>
-                                <small class="text-muted d-block mt-2">
-                                    Se enviará una notificación al anfitrión
-                                </small>
-                            </form>
+                            @if($project->enabled)
+                                <p class="text-muted d-block small">
+                                    Si decide desactivar este proyecto se le enviará una notificación al anfitrión vía email.
+                                </p>
+                                <div class="text-end">
+                                    <button type="button"
+                                            class="btn btn-danger"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#desactivarModal">
+                                        Desactivar Proyecto
+                                    </button>
+                                </div>
+                            @else
+                                <p class="text-muted d-block small mb-0">
+                                    El proyecto solo puede ser activado por el anfitrión que lo creó.
+                                </p>
+                            @endif
+
                         </div>
                     </div>
 
                     <div class="card">
                         <div class="card-header">Información del Anfitrión</div>
                         <div class="card-body">
-                            <h6 class="card-subtitle mb-2">{{ $project->host->organization_name }}</h6>
-                            <ul class="list-unstyled small mb-0">
-                                <li><i class="bi bi-envelope me-2"></i>{{ $project->host->user->email }}</li>
+                            <h6 class="card-subtitle mb-2">{{ $project->host->name }}</h6>
+                            <ul class="list-unstyled small">
+                                <li><i class="bi bi-envelope me-2"></i><a href="mailto:{{ $project->host->user->email }}" target="_blank"> {{ $project->host->user->email }}</a></li>
                                 @if ($project->host->phone)
                                     <li><i class="bi bi-telephone me-2"></i>{{ $project->host->phone }}</li>
                                 @endif
                                 @if ($project->host->location)
                                     <li><i
-                                           class="bi bi-geo-alt me-2"></i>{{ $project->host->location->name ?? 'Sin ubicación' }}
+                                           class="bi bi-geo-alt me-2"></i>{{ $project->host->location->name }} - {{ $project->host->location->province->name }}
                                     </li>
                                 @endif
                             </ul>
-                            <a href="{{ route('admin.hosts.profile', $project->host->user->id) }}"
-                               class="btn btn-sm btn-outline-primary mt-3 w-100">
-                                Ver perfil del anfitrión
-                            </a>
+                            <div class="text-end">
+                                <a href="{{ route('admin.hosts.profile', $project->host->id) }}"
+                                class="btn btn-outline-primary">
+                                    Ver perfil del anfitrión
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -173,7 +180,7 @@
                                             {{ \Carbon\Carbon::parse($volunteer->pivot->applied_at)->format('d/m/Y') }}
                                         </div>
                                         <div class="col-12 col-md-3 text-center">
-                                            <a href="{{ route('admin.volunteer.profile', $volunteer->user_id) }}"
+                                            <a href="{{ route('admin.volunteer.profile', $volunteer->id) }}"
                                                class="btn btn-sm btn-azul"
                                                title="Ver perfil del voluntario">
                                                 Ver Perfil
@@ -196,4 +203,52 @@
             </div>
         </div>
     </section>
+@endsection
+
+
+@section('modals')
+    <div class="modal fade"
+         id="desactivarModal"
+         tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title h5">Desactivar proyecto</h2>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Desea desactivar este proyecto?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-outline-primary"
+                            data-bs-dismiss="modal">No</button>
+
+                    <form method="POST"
+                            id="withdrawBtn"
+                            action="{{ route('admin.projects.delete', $project->id) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger w-100"
+                                type="submit">Sí, desactivar proyecto
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+@section('scripts')
+    <script>
+        // Cierro el modal manualmente cuando envio el form
+        document.getElementById('withdrawBtn').addEventListener('submit', function() {
+            const modalEl = document.getElementById('desactivarModal');
+            const modalInstance = bootstrap.Modal.getOrCreateInstance(modalEl);
+            modalInstance.hide();
+        });
+    </script>
 @endsection

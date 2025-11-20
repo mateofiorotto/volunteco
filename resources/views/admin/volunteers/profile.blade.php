@@ -36,8 +36,8 @@
                                             <div class="row gap-5">
                                                 <div class="col">
                                                     <ul class="list-unstyled">
-                                                        <li><a href="mailto:{{ $volunteer->email }}"
-                                                               target="_blank">{{ $volunteer->email }}</a></li>
+                                                        <li><a href="mailto:{{ $volunteer->user->email }}"
+                                                               target="_blank">{{ $volunteer->user->email }}</a></li>
                                                         <li><a href="tel:{{ $volunteer->phone }}"
                                                                target="_blank">{{ $volunteer->phone }}</a></li>
                                                         <li>{{ $volunteer->location->name ?? 'Sin ubicación' }} -
@@ -188,7 +188,7 @@
                                     <th scope="col"
                                         class="fw-semibold">Estado</th>
                                     <th scope="col"
-                                        class="fw-semibold">Voluntarios</th>
+                                        class="fw-semibold">Anfitrión</th>
                                     <th scope="col"
                                         class="fw-semibold">Acciones</th>
                                 </tr>
@@ -215,12 +215,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            @if ($project->volunteers->isEmpty())
-                                                <p class="mb-0 small">No hay voluntarios asociados a este proyecto.</p>
-                                            @else
-                                                <p class="mb-0 small">Hay {{ $project->volunteers->count() }} voluntarios
-                                                </p>
-                                            @endif
+                                            <p class="mb-0 small">{{$project->host->name}}</p>
                                         </td>
                                         <td>
                                             <a href="{{ route('admin.projects.show', $project->id) }}"

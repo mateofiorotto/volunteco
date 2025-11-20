@@ -175,6 +175,11 @@
                                                       class="text-capitalize badge {{ $volunteer->pivot->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
                                                     {{ $volunteer->pivot->status }}
                                                 </span>
+                                            @else
+                                                <span
+                                                      class="text-capitalize badge text-body">
+                                                    {{ $volunteer->pivot->status }}
+                                                </span>
                                             @endif
                                         </td>
                                         <td>

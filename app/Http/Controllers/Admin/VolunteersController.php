@@ -36,7 +36,7 @@ class VolunteersController extends Controller
      */
     public function getVolunteerProfileById($id)
     {
-        $volunteer = Volunteer::where('user_id', $id)
+        $volunteer = Volunteer::where('id', $id)
             ->with(['user','projects','location.province'])
             ->firstOrFail();
 
@@ -48,12 +48,12 @@ class VolunteersController extends Controller
      */
     public function reenableVolunteerProfile($id)
     {
-        $volunteer = User::where('id', $id)->first();
+        $user = User::where('id', $id)->first();
 
-        $volunteer->status = "activo";
-        $volunteer->save();
+        $user->status = "activo";
+        $user->save();
 
-        $volunteer->volunteer->save();
+        $user->volunteer->save();
 
         return redirect()->route('admin.volunteers.index')->with('success', 'Perfil de voluntario reactivado correctamente.');
     }
@@ -63,17 +63,17 @@ class VolunteersController extends Controller
      */
     public function disableVolunteerProfile($id)
     {
-        $volunteer = User::with('volunteer')->findOrFail($id);
-        $volunteerProfile = $volunteer->volunteer;
+        $user = User::with('volunteer')->findOrFail($id);
+        $volunteerProfile = $user->volunteer;
 
-        $volunteer->status = "inactivo";
-        $volunteer->save();
+        $user->status = "inactivo";
+        $user->save();
 
         if ($volunteerProfile && $volunteerProfile->projects()->exists()) {
             $volunteerProfile->projects()->detach(); // elimina todas las filas en la tabla pivot
         }
 
-        Mail::to($volunteer->email)->send(new VolunteerDisableProfileMail($volunteer->volunteer->full_name));
+        Mail::to($user->email)->send(new VolunteerDisableProfileMail($user->volunteer->full_name));
 
         return redirect()->route('admin.volunteers.index')->with('success', 'Perfil de voluntario desactivado correctamente y notificación enviada por email.');
     }

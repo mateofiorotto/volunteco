@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Host;
+use App\Models\Project;
 use App\Models\Volunteer;
 
 class DashboardController extends Controller
@@ -26,9 +27,13 @@ class DashboardController extends Controller
 
         $volunteerCount =  Volunteer::count();
 
+        $projectsLast = Project::latest()->take(5)->get();
+
+        $projectsCount = Project::count();
+
         return view(
             'admin.dashboard',
-            compact('hostCount', 'hostsLast', 'volunteerCount', 'volunteersLast')
+            compact('hostCount', 'hostsLast', 'volunteerCount', 'volunteersLast', 'projectsLast', 'projectsCount')
         );
     }
 }

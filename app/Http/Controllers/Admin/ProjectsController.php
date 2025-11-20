@@ -47,7 +47,7 @@ class ProjectsController extends Controller
         $project = Project::with('host.user')->findOrFail($id);
 
         //eliminar img si existe
-        if ($project->image && $project->image !== 'thumbnail-proyecto.jpg') {
+        if ($project->image) {
             $this->imageService->deleteImage($project->image);
         }
 

@@ -59,7 +59,7 @@
                        href="{{ route('admin.volunteers.index') }}">Voluntarios</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/projectos*') ? 'active' : '' }}"
+                    <a class="nav-link {{ request()->is('admin/proyectos*') ? 'active' : '' }}"
                        href="{{ route('admin.projects.index') }}">Proyectos</a>
                 </li>
             @endif

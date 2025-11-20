@@ -10,6 +10,7 @@
           content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Volunteco') }}</title>
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
           rel="stylesheet">

@@ -13,6 +13,7 @@ use App\Mail\HostAcceptedMail;
 use App\Mail\HostRejectedReminder;
 use App\Services\ImageService;
 use App\Models\User;
+use App\Models\Host;
 
 class HostsController extends Controller
 {
@@ -54,12 +55,10 @@ class HostsController extends Controller
             default => 'page'
         };
 
-        //solo hosts
-        return User::whereHas('role', function ($query) {
-            $query->where('type', 'host');
+         return Host::whereHas('user', function ($query) use ($status) {
+            $query->where('status', $status);
         })
-            ->where('status', $status)
-            ->with(['host'])
+            ->with('user')
             ->paginate(6, ['*'], $pageName);
     }
 
@@ -68,9 +67,7 @@ class HostsController extends Controller
      */
     public function profile($id)
     {
-        $host = User::where('id', $id)->whereHas('role', function ($query) {
-            $query->where('type', 'host');
-        })->with('host.projects.volunteers', 'host.location.province')->firstOrFail();
+        $host = Host::where('id', $id)->with('projects.volunteers', 'location.province')->firstOrFail();
 
         return view('admin.hosts.profile', ['host' => $host]);
     }
@@ -99,14 +96,14 @@ class HostsController extends Controller
      */
     public function reenableHostProfile($id)
     {
-        $host = User::where('id', $id)->first();
+        $user = User::where('id', $id)->first();
 
-        $host->status = "activo";
-        $host->save();
+        $user->status = "activo";
+        $user->save();
 
-        $host->host->disabled_at = null;
-        $host->host->rejection_reason = null;
-        $host->host->save();
+        $user->host->disabled_at = null;
+        $user->host->rejection_reason = null;
+        $user->host->save();
 
         return redirect()->route('admin.hosts.index')->with('success', 'Perfil de anfitrión reactivado correctamente.');
     }
@@ -116,18 +113,18 @@ class HostsController extends Controller
      */
     public function disableHostProfile($id)
     {
-        $host = User::where('id', $id)->first();
+        $user = User::where('id', $id)->first();
 
         // Primero deshabilito los proyectos del host
-        $host->host->projects()->update([
+        $user->host->projects()->update([
             'enabled' => 0,
         ]);
 
-        $host->status = "inactivo";
-        $host->save();
+        $user->status = "inactivo";
+        $user->save();
 
-        $host->host->disabled_at = now();
-        $host->host->save();
+        $user->host->disabled_at = now();
+        $user->host->save();
 
         return redirect()->route('admin.hosts.index')->with('success', 'Perfil de anfitrión desactivado correctamente.');
     }
@@ -137,7 +134,7 @@ class HostsController extends Controller
      */
     public function sendMailDisabledProfile(Request $request, $id)
     {
-        $host = User::with('host')->findOrFail($id);
+        $user = User::with('host')->findOrFail($id);
 
         $fieldsToChange = $request->validate([
             'description' => 'required|string|max:500|min:10',
@@ -148,7 +145,7 @@ class HostsController extends Controller
 
         // Guardar en tabla profile_change_tokens (reemplaza si ya existe)
         DB::table('profile_change_tokens')->updateOrInsert(
-            ['email' => $host->email],
+            ['email' => $user->email],
             [
                 'token' => $token,
                 'created_at' => now(),
@@ -156,22 +153,22 @@ class HostsController extends Controller
         );
 
         // Crear link
-        $link = route('edit-rejected-profile', ['token' => $token, 'email' => $host->email]);
+        $link = route('edit-rejected-profile', ['token' => $token, 'email' => $user->email]);
 
         // Enviar mail
-        Mail::to($host->email)->send(new HostEditRejectedProfileMail($link, $fieldsToChange['description'], $host->host->person_full_name));
+        Mail::to($user->email)->send(new HostEditRejectedProfileMail($link, $fieldsToChange['description'], $user->host->person_full_name));
 
         // Primero deshabilito los proyectos del host
-        $host->host->projects()->update([
+        $user->host->projects()->update([
             'enabled' => 0,
         ]);
 
-        $host->status = "inactivo";
-        $host->save();
+        $user->status = "inactivo";
+        $user->save();
 
-        $host->host->disabled_at = now();
-        $host->host->rejection_reason = $fieldsToChange['description'];
-        $host->host->save();
+        $user->host->disabled_at = now();
+        $user->host->rejection_reason = $fieldsToChange['description'];
+        $user->host->save();
 
         return redirect()->route('admin.hosts.index')->with('success', 'Email enviado y perfil desactivado correctamente.');
     }
@@ -208,12 +205,12 @@ class HostsController extends Controller
      */
     public function setHostProfilePending($id)
     {
-        $host = User::where('id', $id)->first();
+        $user = User::where('id', $id)->first();
 
-        $host->status = "pendiente";
-        $host->save();
+        $user->status = "pendiente";
+        $user->save();
 
-        $host->host->save();
+        $user->host->save();
 
         return redirect()->route('admin.hosts.index')->with('success', 'Perfil de anfitrión enviado a pendiente correctamente.');
     }
@@ -223,9 +220,9 @@ class HostsController extends Controller
      */
     public function sendHostRejectedReminder($id)
     {
-        $host = User::with('host')->findOrFail($id);
+        $user = User::with('host')->findOrFail($id);
 
-        Mail::to($host->email)->send(new HostRejectedReminder($host->host->rejection_reason, $host->host->person_full_name, $host->host->disabled_at));
+        Mail::to($user->email)->send(new HostRejectedReminder($user->host->rejection_reason, $user->host->person_full_name, $user->host->disabled_at));
 
         return redirect()->route('admin.hosts.index')->with('success', 'Recordatorio enviado correctamente por email.');
     }

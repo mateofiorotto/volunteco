@@ -16,7 +16,7 @@
                                 <div class="card mb-3">
                                     <div class="d-flex g-0">
                                         <div class="avatar avatar-host p-3">
-                                            <img src="{{ asset('storage/' . ($host->host->avatar ?? 'perfil-host.svg')) }}"
+                                            <img src="{{ asset('storage/' . ($host->avatar ?? 'perfil-host.svg')) }}"
                                                  alt="Foto de perfil"
                                                  class="object-fit-contain rounded-circle"
                                                  width="80"
@@ -25,31 +25,31 @@
                                         <div class="card-body flex-fill">
                                             <div class="d-flex justify-content-between align-items-center mb-2">
                                                 <div class="small text-muted">Anfitrión</div>
-                                                @if ($host->status !== 'activo')
+                                                @if ($host->user->status !== 'activo')
                                                     <span
-                                                          class="text-uppercase fw-semibold badge {{ $host->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
-                                                        {{ $host->status }}
+                                                          class="text-uppercase fw-semibold badge {{ $host->user->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
+                                                        {{ $host->user->status }}
                                                     </span>
                                                 @endif
                                             </div>
-                                            <h2 class="card-title h3">{{ $host->host->name }}</h2>
+                                            <h2 class="card-title h3">{{ $host->name }}</h2>
                                             <div class="row">
                                                 <div class="col">
                                                     <ul class="list-unstyled mb-3">
-                                                        <li><a href="mailto:{{ $host->email }}"
-                                                               target="_blank">{{ $host->email }}</a></li>
-                                                        <li><a href="tel:{{ $host->host->phone }}"
-                                                               target="_blank">{{ $host->host->phone }}</a></li>
-                                                        <li>{{ $host->host->location->name ?? 'Sin ubicación' }} -
-                                                            {{ $host->host->location->province->name }}</li>
+                                                        <li><a href="mailto:{{ $host->user->email }}"
+                                                               target="_blank">{{ $host->user->email }}</a></li>
+                                                        <li><a href="tel:{{ $host->phone }}"
+                                                               target="_blank">{{ $host->phone }}</a></li>
+                                                        <li>{{ $host->location->name ?? 'Sin ubicación' }} -
+                                                            {{ $host->location->province->name }}</li>
                                                     </ul>
                                                 </div>
                                                 <div class="col">
                                                     <ul class="list-unstyled mb-0">
                                                         <li><span class="text-muted small">CUIT:</span>
-                                                            {{ $host->host->cuit }}</li>
+                                                            {{ $host->cuit }}</li>
                                                         <li><span class="text-muted small">Contacto:</span>
-                                                            {{ $host->host->person_full_name }}</li>
+                                                            {{ $host->person_full_name }}</li>
                                                         <li><span class="text-muted small">Fecha de registro:</span>
                                                             {{ $host->created_at->format('d/m/Y') }}</li>
                                                     </ul>
@@ -64,7 +64,7 @@
                                     <div class="card mb-3">
                                         <div class="card-header">Descripción</div>
                                         <div class="card-body">
-                                            {{ $host->host->description }}
+                                            {{ $host->description }}
                                         </div>
                                     </div>
                                 </div>
@@ -73,31 +73,31 @@
                                         <div class="card-header">Redes Sociales</div>
                                         <div class="card-body">
                                             <ul class="list-unstyled mb-0">
-                                                @if ($host->host->linkedin)
+                                                @if ($host->linkedin)
                                                     <li>
-                                                        <a href="{{ $host->host->linkedin }}"
+                                                        <a href="{{ $host->linkedin }}"
                                                            target="_blank"
                                                            class="text-nowrap"><i
                                                                class="bi bi-linkedin fs-5 me-2 text-azul align-middle"></i>
-                                                            {{ $host->host->linkedin }}</a>
+                                                            {{ $host->linkedin }}</a>
                                                     </li>
                                                 @endif
-                                                @if ($host->host->instagram)
+                                                @if ($host->instagram)
                                                     <li>
-                                                        <a href="{{ $host->host->instagram }}"
+                                                        <a href="{{ $host->instagram }}"
                                                            target="_blank"
                                                            class="text-nowrap"><i
                                                                class="bi bi-instagram fs-5 me-2 text-azul align-middle"></i>
-                                                            {{ $host->host->instagram }}</a>
+                                                            {{ $host->instagram }}</a>
                                                     </li>
                                                 @endif
-                                                @if ($host->host->facebook)
+                                                @if ($host->facebook)
                                                     <li>
-                                                        <a href="{{ $host->host->facebook }}"
+                                                        <a href="{{ $host->facebook }}"
                                                            target="_blank"
                                                            class="text-nowrap"><i
                                                                class="bi bi-facebook fs-5 me-2 text-azul align-middle"></i>
-                                                            {{ $host->host->facebook }}</a>
+                                                            {{ $host->facebook }}</a>
                                                     </li>
                                                 @endif
                                             </ul>
@@ -112,31 +112,31 @@
                     <div class="card mb-3">
                         <div class="card-header">Acciones</div>
                         <div class="card-body">
-
                             {{-- Si el perfil esta pendiente --}}
-                            @if ($host->status == 'pendiente')
+                            @if ($host->user->status == 'pendiente')
                                 <div>
-                                    @if ($host->host->disabled_at || $host->host->rejection_reason)
+                                    @if ($host->disabled_at || $host->rejection_reason)
                                         <div class="alert-warning alert">
                                             <p class="mb-0 fw-semibold">Último mensaje</p>
                                             <ul class="list-unstyled mb-0">
-                                                @if ($host->host->disabled_at)
+                                                @if ($host->disabled_at)
                                                     <li><span class="text-muted small">Fecha:</span>
-                                                        {{ $host->host->disabled_at->format('d/m/Y') }}</li>
+                                                        {{ $host->disabled_at->format('d/m/Y') }}</li>
                                                 @endif
-                                                @if ($host->host->rejection_reason)
+                                                @if ($host->rejection_reason)
                                                     <li><span class="text-muted small">Motivo:</span>
-                                                        <p class="mb-0">{{ $host->host->rejection_reason }}</p>
+                                                        <p class="mb-0">{{ $host->rejection_reason }}</p>
                                                     </li>
                                                 @endif
                                             </ul>
                                         </div>
                                     @endif
 
-                                    @if ($host->host->rejection_reason != null)
+                                    @if ($host->rejection_reason != null)
                                         <div class="mb-3 text-end">
                                             <form method="POST"
-                                                  action="{{ route('admin.send-host-rejected-reminder', $host->id) }}">
+                                                  novalidate
+                                                  action="{{ route('admin.send-host-rejected-reminder', $host->user_id) }}">
                                                 @csrf
                                                 @method('POST')
                                                 <button class="btn btn-outline-primary"
@@ -146,7 +146,8 @@
                                     @else
                                         <form method="POST"
                                               class="d-flex flex-column mb-3"
-                                              action="{{ route('admin.send-mail-disabled-profile', $host->id) }}">
+                                              novalidate
+                                              action="{{ route('admin.send-mail-disabled-profile', $host->user_id) }}">
                                             @csrf
 
                                             <div class="mb-3">
@@ -156,13 +157,13 @@
                                                 <textarea required
                                                           id="description"
                                                           name="description"
-                                                          class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
+                                                          class="form-control @error('description') 'is-invalid' @enderror"
                                                           rows="3">{{ old('description') }}</textarea>
-                                                @if ($errors->has('description'))
-                                                    <p class="text-danger">{{ $errors->first('description') }}</p>
-                                                @endif
-                                                <p class="form-text">Indicá los motivos que debe corregir o completar para
-                                                    que podamos aceptar su perfil.</p>
+                                                @error('description')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                                <div class="form-text">Indicá los motivos que debe corregir o completar para
+                                                    que podamos aceptar su perfil.</div>
                                             </div>
                                             <button class="btn btn-outline-primary ms-auto"
                                                     type="submit">Enviar Email y Desactivar</button>
@@ -172,14 +173,15 @@
 
                                 <div class="border-top pt-3 d-flex justify-content-between">
                                     <form method="POST"
-                                          action="{{ route('admin.disable-host-profile', $host->id) }}">
+                                          novalidate
+                                          action="{{ route('admin.disable-host-profile', $host->user_id) }}">
                                         @csrf
                                         @method('PUT')
                                         <button class="btn btn-outline-danger"
                                                 type="submit">Desactivar</button>
                                     </form>
                                     <form method="POST"
-                                          action="{{ route('admin.enable-host-profile', $host->id) }}">
+                                          action="{{ route('admin.enable-host-profile', $host->user_id) }}">
                                         @csrf
                                         @method('PUT')
                                         <button type="submit"
@@ -188,18 +190,18 @@
                                 </div>
 
                                 {{-- Si el perfil esta inactivo --}}
-                            @elseif ($host->status == 'inactivo')
+                            @elseif ($host->user->status == 'inactivo')
                                 <p class="alert-danger alert">Este anfitrión está desactivado</p>
                                 <div class="d-flex flex-column mb-3">
-                                    @if ($host->host->disabled_at || $host->host->rejection_reason)
+                                    @if ($host->disabled_at || $host->rejection_reason)
                                         <ul class="list-unstyled">
-                                            @if ($host->host->disabled_at)
+                                            @if ($host->disabled_at)
                                                 <li><span class="text-muted small">Fecha de desactivación:</span>
-                                                    {{ $host->host->disabled_at->format('d/m/Y') }}</li>
+                                                    {{ $host->disabled_at->format('d/m/Y') }}</li>
                                             @endif
-                                            @if ($host->host->rejection_reason)
+                                            @if ($host->rejection_reason)
                                                 <li><span class="text-muted small">Motivo:</span>
-                                                    <p class="mb-0">{{ $host->host->rejection_reason }}</p>
+                                                    <p class="mb-0">{{ $host->rejection_reason }}</p>
                                                 </li>
                                             @endif
                                         </ul>
@@ -208,7 +210,7 @@
 
                                 <div class="d-flex mb-3 justify-content-between pt-3 border-top">
                                     <form method="POST"
-                                          action="{{ route('admin.pending-host-profile', $host->id) }}">
+                                          action="{{ route('admin.pending-host-profile', $host->user_id) }}">
                                         @csrf
                                         @method('PUT')
                                         <button class="btn btn-outline-secondary"
@@ -216,7 +218,7 @@
                                     </form>
 
                                     <form method="POST"
-                                          action="{{ route('admin.reenable-host-profile', $host->id) }}">
+                                          action="{{ route('admin.reenable-host-profile', $host->user_id) }}">
                                         @csrf
                                         @method('PUT')
                                         <button class="btn btn-primary"
@@ -227,7 +229,7 @@
                                 <div class="pt-3 border-top">
                                     <form method="POST"
                                           class="d-flex flex-column"
-                                          action="{{ route('admin.delete-host-profile', $host->id) }}">
+                                          action="{{ route('admin.delete-host-profile', $host->user_id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <div class="mb-3">
@@ -236,12 +238,12 @@
                                             <textarea required
                                                       id="delete_reasons"
                                                       name="delete_reasons"
-                                                      class="form-control {{ $errors->has('delete_reasons') ? 'is-invalid' : '' }}"
+                                                      class="form-control @error('delete_reasons') is-invalid @enderror"
                                                       rows="3">{{ old('delete_reasons') }}</textarea>
-                                            @if ($errors->has('delete_reasons'))
-                                                <p class="text-danger">{{ $errors->first('delete_reasons') }}</p>
-                                            @endif
-                                            <p class="form-text">Indicá los motivos por los que eliminamos su perfil.</p>
+                                            @error('delete_reasons')
+                                                <div class="invalid-feedback">{{ $errors->first('delete_reasons') }}</div>
+                                            @enderror
+                                            <div class="form-text">Indicá los motivos por los que eliminamos su perfil.</div>
                                         </div>
                                         <button class="btn btn-danger ms-auto"
                                                 type="submit">Eliminar Definitivamente</button>
@@ -251,8 +253,9 @@
                             @else
                                 <div>
                                     <form method="POST"
+                                          novalidate
                                           class="d-flex flex-column mb-3"
-                                          action="{{ route('admin.send-mail-disabled-profile', $host->id) }}">
+                                          action="{{ route('admin.send-mail-disabled-profile', $host->user_id) }}">
                                         @csrf
                                         <div class="mb-3">
                                             {{-- enviar mail manualmente con los datos a cambiar y link para reactivar --}}
@@ -264,11 +267,11 @@
                                                       class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
                                                       rows="3">{{ old('description') }}</textarea>
                                             @if ($errors->has('description'))
-                                                <p class="text-danger">{{ $errors->first('description') }}</p>
+                                                <div class="invalid-feedback">{{ $errors->first('description') }}</div>
                                             @endif
                                             <p class="form-text">Indicá los motivos por los que desactivamos su perfil.</p>
                                         </div>
-                                        <button class="btn btn-outline-primary ms-auto"
+                                        <button class="btn btn-outline-danger ms-auto"
                                                 type="submit">Enviar Email y Desactivar</button>
                                     </form>
                                 </div>
@@ -284,7 +287,7 @@
                 {{-- Agregar el listado de todos los proyectos con un link de ver cada proyecto tal cual el host --}}
                 <div class="card">
                     <div class="card-header">Proyectos del anfitrión</div>
-                    @if ($host->host->projects->isNotEmpty())
+                    @if ($host->projects->isNotEmpty())
                         <table class="table">
                             <thead>
                                 <tr>
@@ -301,7 +304,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($host->host->projects as $project)
+                                @foreach ($host->projects as $project)
                                     <tr class="{{ $project->enabled != 1 ? 'table-danger' : '' }}">
                                         <td>{{ $project->title }}</td>
                                         <td>

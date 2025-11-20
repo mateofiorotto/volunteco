@@ -3,7 +3,7 @@
 @section('content')
     <section>
         <div class="container py-5">
-            <h2>Proyectos</h2>
+            <h1 class="title-h1 h3 mb-5">Proyectos</h1>
             <div class="projects-list">
                 @if ($projects->isEmpty())
                     <p>No hay proyectos publicados actualmente.</p>
@@ -30,34 +30,12 @@
                                         </p>
 
                                         <ul class="list-unstyled mt-auto mb-3">
-                                            <li class="d-flex gap-2 align-items-start mb-2">
-                                                <i class="bi bi-diagram-3 fs-5 text-primary"></i>
-                                                <span>{{ $project->host->name }}</span>
-                                            </li>
 
                                             <li class="d-flex gap-2 align-items-start mb-2">
                                                 <i class="bi bi-geo-alt fs-5 text-primary"></i>
                                                 <span>{{ $project->location_id ? $project->location->name . ' - ' . $project->location->province->name : '' }}</span>
                                             </li>
 
-                                            <li class="d-flex gap-2 align-items-start mb-2">
-                                                <i class="bi bi-calendar4 fs-5 text-primary"></i>
-                                                <span>
-                                                    {{ \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') }}
-                                                    -
-                                                    {{ \Carbon\Carbon::parse($project->end_date)->format('d/m/Y') }}
-                                                </span>
-                                            </li>
-
-                                            <li class="d-flex gap-2 align-items-start mb-2">
-                                                <i class="bi-clock fs-5 text-primary"></i>
-                                                <span>{{ $project->work_hours_per_day }} por día</span>
-                                            </li>
-
-                                            <li class="d-flex gap-2 align-items-start mb-2">
-                                                <i class="bi bi-clipboard2-check fs-5 text-primary"></i>
-                                                <span>{{ $project->conditions->count() }} Condiciones</span>
-                                            </li>
                                         </ul>
 
                                         <div>
