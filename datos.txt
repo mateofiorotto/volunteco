@@ -1,0 +1,9 @@
+- CARRERA: Diseño y Programación web
+- MATERIA: Clientes web mobile / proyecto final
+- AÑO: 2025, Segundo cuatrimestre del año
+- CUATRIMESTRE: Cuarto cuatrimestre de la carrera
+- TURNO: Tarde
+- COMISIÓN: DWT4AV
+- ALUMNOS: Bento Herminia y Fiorotto Mateo
+- DOCENTE: Santiago Gallino
+- CARACTER DE ENTREGA: Segundo Parcial / Proyecto Final, Modalidad Virtual
