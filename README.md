@@ -20,9 +20,9 @@ Volunteco es una web acerca de voluntariados de carácter ecológico donde parti
 2. Configurar variables de entorno en .env (crear archivo similar a .env.example)
 3. Crear base de datos con el nombre utilizado en el .env (nombre por defecto "volunteco")
 4. Entrar al proyecto con "cd volunteco" y ejecutar EN ORDEN:
-    - "composer install" para traer dependencias necesarias
+    - "composer install" y "npm install" para traer dependencias necesarias"
     - "php artisan storage:link" para crear enlace con la carpeta de imagenes
-    - "php artisan migrate:fresh --seed" para crear la base de datos mediante eloquent y cargar datos por defecto (chequear seeders)
+    - "php artisan migrate:fresh --seed" para crear la base de datos mediante eloquent y cargar datos por defecto (con seeders)
     - "php artisan serve" para ejecutar el proyecto
 5. Entrar en localhost:puerto
 
