@@ -11,7 +11,13 @@ class FrontendController extends Controller
 {
     public function home()
     {
-        return view('frontend.home');
+        $projects = Project::where('enabled', true)
+            ->with('location.province')
+            ->take(3)
+            ->latest()
+            ->get();
+
+        return view('frontend.home', compact('projects'));
     }
 
     /**
