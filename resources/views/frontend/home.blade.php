@@ -7,7 +7,7 @@
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="hero-title">Conecta con la Naturaleza</h1>
-            <p class="hero-subtitle">Únete a proyectos de voluntariado ecológico alrededor del mundo</p>
+            <p class="hero-subtitle">Unite a proyectos de voluntariado ecológico alrededor de Argentina</p>
             <div>
                 <a href="{{ route('projects') }}"
                    class="btn btn-primary btn-hero btn-hero-primary">Explorar Proyectos</a>
@@ -20,7 +20,7 @@
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="section-title">Últimos Proyectos</h2>
-                <p class="section-subtitle">Descubre oportunidades increíbles para hacer la diferencia</p>
+                <p class="section-subtitle">Descubrí oportunidades increíbles para hacer la diferencia</p>
             </div>
 
             @if ($projects->isEmpty())
@@ -154,23 +154,23 @@
                 <p class="section-subtitle">Organizaciones comprometidas con el medio ambiente</p>
             </div>
 
-            <div class="row align-items-center justify-content-center g-5">
-                <div class="col-6 col-md-3 text-center">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-12 col-md-3 text-center mb-lg-0 mb-5">
                     <img src="images/wwf-logo.png"
                          alt="WWF"
                          class="sponsor-logo img-fluid">
                 </div>
-                <div class="col-6 col-md-3 text-center">
+                <div class="col-12 col-md-3 text-center mb-lg-0 mb-5">
                     <img src="images/wwf-logo.png"
                          alt="Greenpeace"
                          class="sponsor-logo img-fluid">
                 </div>
-                <div class="col-6 col-md-3 text-center">
+                <div class="col-12 col-md-3 text-center mb-5 mb-lg-0">
                     <img src="images/wwf-logo.png"
                          alt="Nature Conservancy"
                          class="sponsor-logo img-fluid">
                 </div>
-                <div class="col-6 col-md-3 text-center">
+                <div class="col-12 col-md-3 text-center mb-5 mb-lg-0">
                     <img src="images/wwf-logo.png"
                          alt="Conservation"
                          class="sponsor-logo img-fluid">
@@ -184,9 +184,9 @@
         <div class="container">
             <div class="text-center">
                 <h2 class="section-title mb-4">¿Estás Listo/a?</h2>
-                <p class="section-subtitle mb-4">Únete a nuestra comunidad</p>
+                <p class="section-subtitle mb-4">Unite a nuestra comunidad</p>
                 <a href="{{ route('register-volunteer.create') }}"
-                   class="btn btn-light btn-hero px-5 mx-2">Ser Voluntario</a>
+                   class="btn btn-light btn-hero px-5 mx-2 mb-3 mb-lg-0">Ser Voluntario</a>
                 <a href="{{ route('register-host.create') }}"
                    class="btn btn-light btn-hero px-5 mx-2">Ser Anfitrión</a>
             </div>

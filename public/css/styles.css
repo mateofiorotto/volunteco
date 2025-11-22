@@ -16,6 +16,9 @@
   font-variation-settings:
     "wdth" 100;
 } */
+* {
+    box-sizing: border-box;
+}
 
 /*resets*/
 :root {
