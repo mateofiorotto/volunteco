@@ -48,25 +48,21 @@
                                             años</li>
                                     @endif
                                 </ul>
-                                <!-- Descripción -->
-                                <div>
-                                    <h3 class="card-title h5">Biografía</h3>
-                                    <p class="text-muted mb-0">{{ $volunteer->biography }}</p>
-                                </div>
+                                <ul class="list-unstyled mb-0">
+                                    <li><span class="text-muted small">Profesión: </span><span
+                                            class="text-capitalize">{{ $volunteer->profession }}</span></li>
+                                    <li><span class="text-muted small">Nivel educativo: </span><span
+                                            class="text-capitalize">{{ $volunteer->educational_level }}</span></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="card mb-4">
-                    <div class="card-header">Datos de Profesionales</div>
+                    <div class="card-header">Biografía</div>
                     <div class="card-body">
-                        <ul class="list-unstyled mb-0">
-                            <li><span class="text-muted small">Profesión: </span><span
-                                      class="text-capitalize">{{ $volunteer->profession }}</span></li>
-                            <li><span class="text-muted small">Nivel educativo: </span><span
-                                      class="text-capitalize">{{ $volunteer->educational_level }}</span></li>
-                        </ul>
+                        <p class="mb-0">{{ $volunteer->biography }}</p>
                     </div>
                 </div>
             </div>

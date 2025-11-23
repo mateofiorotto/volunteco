@@ -63,8 +63,7 @@
                                 <td>{{ $project->host->name }}</td>
                                 <td>
                                     @if ($project->pivot->status !== 'aceptado')
-                                        <span
-                                              class="badge text-capitalize {{ $project->pivot->status == 'pendiente' ? 'bg-warning text-bg-warning' : 'bg-danger' }}">{{ $project->pivot->status }}</span>
+                                        <span class="badge text-capitalize {{ $project->pivot->status == 'pendiente' ? 'bg-warning text-bg-warning' : 'bg-danger' }}">{{ $project->pivot->status }}</span>
                                     @else
                                         <span class="badge bg-primary text-capitalize">{{ $project->pivot->status }}</span>
                                     @endif
