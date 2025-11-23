@@ -4,22 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Services\ImageService;
 use Illuminate\Http\Request;
 use App\Mail\VolunteerDeleteProfileMail;
 use App\Mail\VolunteerDisableProfileMail;
 use App\Models\Volunteer;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class VolunteersController extends Controller
 {
-    protected $imageService;
-
-    //inyectar el servicio de imgs
-    public function __construct(ImageService $imageService)
-    {
-        $this->imageService = $imageService;
-    }
 
     /**
      * Vista de listado de voluntarios
@@ -87,7 +80,10 @@ class VolunteersController extends Controller
 
         // Chequeo que tenga voluntario y si lo tiene checkea que tenga avatar sino es null
         if ($user->volunteer?->avatar) {
-            $this->imageService->deleteImage($user->volunteer->avatar);
+            Storage::disk('public')->delete($user->volunteer->avatar);
+            // Usuario softDeletes
+            $user->volunteer->avatar = null;
+            $user->volunteer->save();
         }
 
         Mail::to($user->email)->send(new VolunteerDeleteProfileMail($user->volunteer->full_name));

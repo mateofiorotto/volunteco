@@ -3,21 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\ImageService;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ProjectDeletedMail;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectsController extends Controller
 {
-    protected $imageService;
-
-    //inyectar el servicio de imgs
-    public function __construct(ImageService $imageService)
-    {
-        $this->imageService = $imageService;
-    }
 
     /**
      * mostrar lista de proyectos
@@ -48,7 +41,7 @@ class ProjectsController extends Controller
 
         //eliminar img si existe
         if ($project->image) {
-            $this->imageService->deleteImage($project->image);
+            Storage::disk('public')->delete($project->image);
         }
 
         //desvincular a los voluntarios del proyecto
@@ -61,11 +54,11 @@ class ProjectsController extends Controller
         $hostName = $project->host->name;
         $projectTitle = $project->title;
 
-        //eliminar
-        $project->delete();
-
         //mail
         Mail::to($hostEmail)->send(new ProjectDeletedMail($hostName, $projectTitle));
+
+        //eliminar
+        $project->delete();
 
         return redirect()->route('admin.projects.index')
             ->with('success', 'Proyecto eliminado correctamente y notificación enviada por email al anfitrión.');

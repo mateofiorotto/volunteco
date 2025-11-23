@@ -10,19 +10,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use App\Services\ImageService;
 use App\Models\Volunteer;
 use App\Models\Province;
 
 class RegisteredVolunteerController extends Controller
 {
-    protected $imageService;
-
-    //inyectar el servicio de imgs
-    public function __construct(ImageService $imageService)
-    {
-        $this->imageService = $imageService;
-    }
 
     /**
      * Vista de registro de voluntarios
@@ -69,7 +61,7 @@ class RegisteredVolunteerController extends Controller
         }
 
         $validatedVolunteer['avatar'] = $request->hasFile('avatar')
-            ? $this->imageService->storeImage($request->file('avatar'), 'volunteers') :
+            ? $request->file('avatar')->store('volunteers','public') :
             null;
 
         $user = User::create([

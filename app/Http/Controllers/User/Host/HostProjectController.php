@@ -8,23 +8,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ProjectType;
 use App\Models\Condition;
-use App\Services\ImageService;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 use App\Mail\VolunteerAccepted;
 use App\Models\Province;
 use App\Models\Volunteer;
+use Illuminate\Support\Facades\Storage;
 
 class HostProjectController extends Controller
 {
-    //inyectar el servicio de manejo de imagenes
-    protected $imageService;
-
-    //inyectar el servicio de imgs
-    public function __construct(ImageService $imageService)
-    {
-        $this->imageService = $imageService;
-    }
 
     /**
      * Mostrar lista de proyectos propios del anfitrion
@@ -95,8 +87,8 @@ class HostProjectController extends Controller
         $validated['enabled'] = $request->has('enabled');
 
         //manejo de la imagen
-        $validatedHost['image'] = $request->hasFile('image')
-            ? $this->imageService->storeImage($request->file('image'), 'projects') :
+        $validated['image'] = $request->hasFile('image')
+            ? $request->file('image')->store('projects','public') :
             null;
 
         //crear el proyecto
@@ -164,8 +156,10 @@ class HostProjectController extends Controller
 
         //manejo de la imagen
         if ($request->hasFile('image')) {
-            $validated['image'] = $this->imageService->storeImage($request->file('image'), 'projects');
+            $path = $request->file('image')->store('projects','public');
+            $validated['image'] = $path;
         }
+
 
         $project->update($validated);
 
@@ -233,7 +227,7 @@ class HostProjectController extends Controller
 
         // Eliminar imagen asociada si no es la predeterminada
         if ($project->image) {
-            $this->imageService->deleteImage($project->image);
+            Storage::disk('public')->delete($project->image);
         }
 
         $project->delete();

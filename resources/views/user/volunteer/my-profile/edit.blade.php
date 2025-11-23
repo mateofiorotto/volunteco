@@ -332,12 +332,11 @@
                                            name="avatar"
                                            accept="image/*"
                                            class="form-control @error('avatar') is-invalid @enderror" />
-                                    @if ($errors->has('avatar'))
+                                    @error('avatar')
                                         <div class="invalid-feedback">{{ $message }}</div>
-                                    @endif
+                                    @enderror
                                     <div class="form-text">La imagen debe tener un tamaño entre 100px y 300px de ancho y de
                                         alto y no debe pesar más de 500kb</div>
-
                                 </div>
 
                                 <div class="mb-3">

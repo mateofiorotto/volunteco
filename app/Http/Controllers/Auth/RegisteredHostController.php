@@ -12,20 +12,12 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
-use App\Services\ImageService;
 use App\Models\Host;
 use App\Models\Province;
 use App\Models\Location;
 
 class RegisteredHostController extends Controller
 {
-    protected $imageService;
-
-    //inyectar el servicio de imgs
-    public function __construct(ImageService $imageService)
-    {
-        $this->imageService = $imageService;
-    }
 
     /**
      * Vista de registro de anfitrion
@@ -70,7 +62,7 @@ class RegisteredHostController extends Controller
         }
 
         $validatedHost['avatar'] = $request->hasFile('avatar')
-            ? $this->imageService->storeImage($request->file('avatar'), 'hosts') :
+            ? $request->file('avatar')->store('hosts','public') :
             null;
 
         $user = User::create([
@@ -155,7 +147,8 @@ class RegisteredHostController extends Controller
 
         //actualizar avatar si hay nueva imagen
         if ($request->hasFile('avatar')) {
-            $validatedHost['avatar'] = $this->imageService->storeImage($request->file('avatar'), 'hosts');
+            $path = $request->file('avatar')->store('hosts','public');
+            $validatedHost['avatar'] = $path;
         }
 
         // actualizar usuario y host

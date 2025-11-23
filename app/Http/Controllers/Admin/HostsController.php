@@ -11,19 +11,12 @@ use App\Mail\HostEditRejectedProfileMail;
 use App\Mail\HostDeleteProfileMail;
 use App\Mail\HostAcceptedMail;
 use App\Mail\HostRejectedReminder;
-use App\Services\ImageService;
 use App\Models\User;
 use App\Models\Host;
+use Illuminate\Support\Facades\Storage;
 
 class HostsController extends Controller
 {
-    protected $imageService;
-
-    //inyectar el servicio de imgs
-    public function __construct(ImageService $imageService)
-    {
-        $this->imageService = $imageService;
-    }
 
     /**
      * Retornar la lista de anfitriones por estado
@@ -186,7 +179,10 @@ class HostsController extends Controller
 
         // Chequeo que tenga anfitrion y si lo tiene checkea que tenga avatar sino es null
         if ($user->host?->avatar) {
-            $this->imageService->deleteImage($user->host->avatar);
+            Storage::disk('public')->delete($user->host->avatar);
+            // Usuario softDeletes
+            $user->host->avatar = null;
+            $user->host->save();
         }
 
         //mandar mail

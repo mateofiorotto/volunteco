@@ -8,19 +8,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
-use App\Services\ImageService;
 use App\Models\User;
 use App\Models\Host;
 use App\Models\Province;
 
 class ProfileController extends Controller
 {
-    protected $imageService;
-
-    public function __construct(ImageService $imageService)
-    {
-        $this->imageService = $imageService;
-    }
 
     /**
      * Mostrar perfil propio
@@ -75,8 +68,7 @@ class ProfileController extends Controller
     public function updateMyProfile(Request $request)
     {
         //datos user logueado
-        $user = Auth::user();
-        $host = $user->host;
+        $host = Host::where('user_id', Auth::id())->with('location.province')->firstOrFail();
 
         $validatedHost = $request->validate([
             'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
@@ -98,7 +90,8 @@ class ProfileController extends Controller
 
         //foto de perfil
         if ($request->hasFile('avatar')) {
-            $validatedHost['avatar'] = $this->imageService->storeImage($request->file('avatar'), 'hosts');
+            $path = $request->file('avatar')->store('hosts','public');
+            $validatedHost['avatar'] = $path;
         }
 
         //actualizar
@@ -118,8 +111,8 @@ class ProfileController extends Controller
 
         //cambiar pw y cerrar sesion
         if ($request->filled('password')) {
-            $user->password = Hash::make($validatedHost['password']);
-            $user->save();
+            $host->user->password = Hash::make($validatedHost['password']);
+            $host->user->save();
 
             Auth::logout();
             $request->session()->invalidate();

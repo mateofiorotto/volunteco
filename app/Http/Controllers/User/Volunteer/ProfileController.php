@@ -7,18 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use App\Services\ImageService;
 use App\Models\Volunteer;
 use App\Models\Province;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    protected $imageService;
-
-    public function __construct(ImageService $imageService)
-    {
-        $this->imageService = $imageService;
-    }
 
     /**
      * Devolver vista de perfil propio
@@ -86,7 +80,8 @@ class ProfileController extends Controller
 
         //foto de perfil
         if ($request->hasFile('avatar')) {
-            $validatedVolunteer['avatar'] = $this->imageService->storeImage($request->file('avatar'), 'volunteers');
+            $path = $request->file('avatar')->store('volunteers','public');
+            $validatedVolunteer['avatar'] = $path;
         }
 
         //actualizar
@@ -109,8 +104,8 @@ class ProfileController extends Controller
 
         // si cambió la contraseña, se cierra la sesion por motivos de seguridad
         if ($request->filled('password')) {
-            $user->password = Hash::make($request->password);
-            $user->save();
+            $volunteer->user->password = Hash::make($request->password);
+            $volunteer->user->save();
 
             Auth::logout();
             $request->session()->invalidate();
