@@ -13,10 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
-            'isAdmin' => \App\Http\Middleware\IsAdmin::class,
             'checkEnabled' => \App\Http\Middleware\CheckEnabled::class,
-            // 'isHost' => \App\Http\Middleware\IsHost::class,
-            // 'isVolunteer' => \App\Http\Middleware\IsVolunteer::class,
             'CheckRole' => CheckRole::class
         ]);
     })
