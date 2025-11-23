@@ -9,3 +9,5 @@ Route::middleware('checkEnabled')->group(function () {
     Route::get('/proyectos', [FrontendController::class, 'projects'])->name('projects');
     Route::get('/proyectos/{id}', [FrontendController::class, 'projectById'])->name('project');
 });
+
+Route::get('/landing', function () { return view('frontend.landing');})->name('landing');

@@ -10,7 +10,7 @@
             <p class="hero-subtitle">Unite a proyectos de voluntariado ecológico alrededor de Argentina</p>
             <div>
                 <a href="{{ route('projects') }}"
-                   class="btn btn-primary btn-hero btn-hero-primary">Explorar Proyectos</a>
+                   class="btn btn-primary btn-lg">Explorar Proyectos</a>
             </div>
         </div>
     </section>
@@ -48,12 +48,10 @@
                                     </p>
 
                                     <ul class="list-unstyled mt-auto mb-3">
-
                                         <li class="d-flex gap-2 align-items-start mb-2">
                                             <i class="bi bi-geo-alt fs-5 text-primary"></i>
                                             <span>{{ $project->location_id ? $project->location->name . ' - ' . $project->location->province->name : '' }}</span>
                                         </li>
-
                                     </ul>
 
                                     <div>
@@ -72,17 +70,17 @@
     </section>
 
     <!-- Reseñas -->
-    <section class="testimonials-section py-5 my-5">
+    <section class="testimonials-section py-5">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="section-title">Experiencias Transformadoras</h2>
-                <p class="section-subtitle">Lee lo que dicen nuestros voluntarios y anfitriones</p>
+                <h2 class="section-title text-white">Experiencias Transformadoras</h2>
+                <p class="section-subtitle text-white">Lee lo que dicen nuestros voluntarios y anfitriones</p>
             </div>
 
             <div class="row g-4">
                 <!-- Reseña 1 -->
                 <div class="col-md-4">
-                    <div class="testimonial-card">
+                    <div class="testimonial-card text-body">
                         <div class="testimonial-stars">
                             ★★★★★
                         </div>
@@ -103,7 +101,7 @@
 
                 <!-- Reseña 2 -->
                 <div class="col-md-4">
-                    <div class="testimonial-card">
+                    <div class="testimonial-card text-body">
                         <div class="testimonial-stars">
                             ★★★★★
                         </div>
@@ -124,7 +122,7 @@
 
                 <!-- Reseña 3 -->
                 <div class="col-md-4">
-                    <div class="testimonial-card">
+                    <div class="testimonial-card text-body">
                         <div class="testimonial-stars">
                             ★★★★★
                         </div>
@@ -183,8 +181,8 @@
     <section class="cta-section py-5">
         <div class="container">
             <div class="text-center">
-                <h2 class="section-title mb-4">¿Estás Listo/a?</h2>
-                <p class="section-subtitle mb-4">Unite a nuestra comunidad</p>
+                <h2 class="section-title mb-4 text-white">¿Estás Listo/a?</h2>
+                <p class="section-subtitle mb-4 text-white">Unite a nuestra comunidad</p>
                 <a href="{{ route('register-volunteer.create') }}"
                    class="btn btn-light btn-hero px-5 mx-2 mb-3 mb-lg-0">Ser Voluntario</a>
                 <a href="{{ route('register-host.create') }}"

@@ -56,4 +56,5 @@ class FrontendController extends Controller
 
         return view('frontend.project-details', compact('project', 'volunteerStatus'));
     }
+
 }
