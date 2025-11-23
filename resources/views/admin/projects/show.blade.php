@@ -121,6 +121,18 @@
                                 <p class="text-muted d-block small mb-0">
                                     El proyecto solo puede ser activado por el anfitrión que lo creó.
                                 </p>
+                                <hr>
+                                <p class="text-muted d-block small">
+                                    Si decide eliminar definitivamente este proyecto se le enviará una notificación al anfitrión vía email.
+                                </p>
+                                <div class="text-end">
+                                    <button type="button"
+                                            class="btn btn-danger"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#eliminarModal">
+                                        Eliminar Definitivamente este Proyecto
+                                    </button>
+                                </div>
                             @endif
 
                         </div>
@@ -155,50 +167,60 @@
             <div>
                 <div class="card">
                     <div class="card-header">Voluntarios Postulados</div>
-                    <ul class="list-group list-group-flush">
-                        @if ($project->volunteers->count() > 0)
-                            @foreach ($project->volunteers as $volunteer)
-                                <li class="list-group-item">
-                                    <div class="row align-items-center">
-                                        <div class="col-12 col-md-3">
+                    <table class="table border-primary">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Voluntario</th>
+                                    <th scope="col">Estado del usuario</th>
+                                    <th scope="col">Estado en el proyecto</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if ($project->volunteers->count() > 0)
+                                    @foreach ($project->volunteers as $volunteer)
+                                    <tr class="{{$volunteer->user->status !== 'activo' ? 'table-danger' : ''}}">
+                                    <td>
+                                        <div class="d-flex align-items-center">
                                             <img src="{{ asset('storage/' . ($volunteer->avatar ?? 'perfil-volunteer.svg')) }}"
-                                                 alt="Avatar de {{ $volunteer->full_name }}"
-                                                 class="rounded-circle me-2"
-                                                 width="40"
-                                                 height="40">
+                                                alt="Avatar de {{ $volunteer->full_name }}"
+                                                class="rounded-circle me-2"
+                                                width="40"
+                                                height="40">
                                             {{ $volunteer->full_name }}
                                         </div>
-                                        <div class="col-12 col-md-3">
+                                    </td>
+                                    <td class="align-middle">
+                                        <span class="text-muted small">Usuario:</span> <span class="badge text-capitalize {{ $volunteer->user->status !== 'activo' ? ($volunteer->user->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger') : 'text-body' }}">{{ $volunteer->user->status }}</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <div class="d-flex align-items-center">
                                             <span class="text-muted small me-2">Estado: </span>
-                                            <span
-                                                  class="badge {{ $volunteer->pivot->status === 'aceptado' ? 'text-bg-success' : ($volunteer->pivot->status === 'rechazado' ? 'text-bg-danger' : 'text-bg-warning') }}">
-                                                {{ ucfirst($volunteer->pivot->status) }}
-                                            </span>
+                                            <span class="badge text-capitalize {{ $volunteer->pivot->status === 'aceptado' ? 'text-bg-success' : ($volunteer->pivot->status === 'rechazado' ? 'text-bg-danger' : 'text-bg-warning') }}">{{ $volunteer->pivot->status }}</span>
                                         </div>
-                                        <div class="col-12 col-md-3">
-                                            <span class="text-muted small">Aplicó: </span>
-                                            {{ \Carbon\Carbon::parse($volunteer->pivot->applied_at)->format('d/m/Y') }}
+                                    </td>
+                                    <td class="align-middle">
+                                        <div class="d-flex align-items-center">
+                                            <span class="text-muted small">Aplicó: </span> {{ \Carbon\Carbon::parse($volunteer->pivot->applied_at)->format('d/m/Y') }}
                                         </div>
-                                        <div class="col-12 col-md-3 text-center">
-                                            <a href="{{ route('admin.volunteer.profile', $volunteer->id) }}"
-                                               class="btn btn-sm btn-azul"
-                                               title="Ver perfil del voluntario">
-                                                Ver Perfil
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-                            @endforeach
-                        @else
-                            <li class="list-group-item">
-                                <div class="row align-items-center">
-                                    <div class="col-12 text-center text-muted">
-                                        No hay voluntarios postulados a este proyecto
-                                    </div>
-                                </div>
-                            </li>
-                        @endif
-                    </ul>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('admin.volunteer.profile', $volunteer->id) }}"
+                                            class="btn btn-sm btn-azul"
+                                            title="Ver perfil del voluntario">
+                                            Ver Perfil
+                                        </a>
+                                    </td>
+                                    </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="5" class="text-center">No hay voluntarios postulados a este proyecto</td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -229,11 +251,45 @@
 
                     <form method="POST"
                             id="withdrawBtn"
+                            action="{{ route('admin.projects.disabled', $project->id) }}">
+                        @csrf
+                        <button class="btn btn-danger w-100"
+                                type="submit">Sí, desactivar proyecto
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade"
+         id="eliminarModal"
+         tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title h5">Eliminar proyecto</h2>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Desea eliminar definitivamente este proyecto?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-outline-primary"
+                            data-bs-dismiss="modal">No</button>
+
+                    <form method="POST"
+                            id="withdrawBtnDelete"
                             action="{{ route('admin.projects.delete', $project->id) }}">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger w-100"
-                                type="submit">Sí, desactivar proyecto
+                                type="submit">Sí, eliminar proyecto
                         </button>
 
                     </form>
@@ -247,6 +303,12 @@
         // Cierro el modal manualmente cuando envio el form
         document.getElementById('withdrawBtn').addEventListener('submit', function() {
             const modalEl = document.getElementById('desactivarModal');
+            const modalInstance = bootstrap.Modal.getOrCreateInstance(modalEl);
+            modalInstance.hide();
+        });
+
+        document.getElementById('withdrawBtnDelete').addEventListener('submit', function() {
+            const modalEl = document.getElementById('eleminarModal');
             const modalInstance = bootstrap.Modal.getOrCreateInstance(modalEl);
             modalInstance.hide();
         });

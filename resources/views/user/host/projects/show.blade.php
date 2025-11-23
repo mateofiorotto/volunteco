@@ -151,67 +151,80 @@
                 <div class="card-header text-bg-primary">
                     <h2 class="h5 mb-0">Voluntarios <span class="fw-light">que aplicaron</span></h2>
                 </div>
+
+                @if ($registeredVolunteers->isEmpty())
                 <div class="card-body">
-                    @if ($registeredVolunteers->isEmpty())
-                        <p class="mb-0">No hay voluntarios inscriptos en este proyecto.</p>
-                    @else
-                        <table class="table border-primary">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">Estado</th>
-                                    <th scope="col">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($registeredVolunteers as $volunteer)
-                                    <tr>
-                                        <th scope="row">{{ $volunteer->id }}</th>
-                                        <td>{{ $volunteer->full_name }}</td>
-                                        <td>
+                    <p class="mb-0">No hay voluntarios inscriptos en este proyecto.</p>
+                </div>
+                @else
+                    <table class="table border-primary">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($registeredVolunteers as $volunteer)
+                                <tr class="{{$volunteer->user->status !== 'activo' ? 'table-danger' : ''}}">
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ asset('storage/' . ($volunteer->avatar ?? 'perfil-volunteer.svg')) }}"
+                                                alt="Avatar de {{ $volunteer->full_name }}"
+                                                class="rounded-circle me-2"
+                                                width="40"
+                                                height="40">
+                                            {{ $volunteer->full_name }}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @if($volunteer->user->status == 'activo')
                                             @if ($volunteer->pivot->status !== 'aceptado')
                                                 <span
-                                                      class="text-capitalize badge {{ $volunteer->pivot->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
+                                                    class="text-capitalize badge {{ $volunteer->pivot->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
                                                     {{ $volunteer->pivot->status }}
                                                 </span>
                                             @else
-                                                <span
-                                                      class="text-capitalize badge text-body">
+                                                <span class="text-capitalize badge text-body">
                                                     {{ $volunteer->pivot->status }}
                                                 </span>
                                             @endif
-                                        </td>
-                                        <td>
-                                            <div class="d-flex gap-3">
-                                                <a href="{{ route('host.volunteers.profile', $volunteer->id) }}"
-                                                   class="btn btn-sm btn-azul"
-                                                   title="ver">Ver Perfil</a>
-                                                @if ($volunteer->pivot->status !== 'aceptado')
-                                                    <form method="POST"
-                                                          action="{{ route('host.my-projects.accept-volunteer', [$project->id, $volunteer->id]) }}">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button type="submit"
-                                                                class="btn btn-sm btn-primary {{ $project->enabled == false ? 'disabled' : '' }}">Aceptar</button>
-                                                    </form>
-                                                @else
-                                                    <form method="POST"
-                                                          action="{{ route('host.my-projects.reject-volunteer', [$project->id, $volunteer->id]) }}">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button type="submit"
-                                                                class="btn btn-sm btn-outline-danger">Rechazar</button>
-                                                    </form>
-                                                @endif
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    @endif
-                </div>
+                                        @else
+                                            <span class="text-capitalize badge text-bg-danger }}">{{ $volunteer->user->status }}</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <div class="d-flex gap-3">
+                                            @if($volunteer->user->status == 'activo')
+                                            <a href="{{ route('host.volunteers.profile', $volunteer->id) }}"
+                                                class="btn btn-sm btn-azul"
+                                                title="ver">Ver Perfil</a>
+                                            @endif
+                                            @if ($volunteer->pivot->status !== 'aceptado')
+                                                <form method="POST"
+                                                        action="{{ route('host.my-projects.accept-volunteer', [$project->id, $volunteer->id]) }}">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit"
+                                                            class="btn btn-sm btn-primary {{$volunteer->user->status !== 'activo' ? 'disabled' : ''}} {{ $project->enabled == false ? 'disabled' : '' }}">Aceptar</button>
+                                                </form>
+                                            @else
+                                                <form method="POST"
+                                                        action="{{ route('host.my-projects.reject-volunteer', [$project->id, $volunteer->id]) }}">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit"
+                                                            class="btn btn-sm btn-outline-danger {{$volunteer->user->status !== 'activo' ? 'disabled' : ''}}" >Rechazar</button>
+                                                </form>
+                                            @endif
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @endif
             </div>
         </div>
     </section>

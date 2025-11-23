@@ -32,21 +32,34 @@ class ProjectsController extends Controller
         return view('admin.projects.show', compact('project'));
     }
 
+
+    public function disabled($id) {
+        $project = Project::with('host.user')->findOrFail($id);
+
+        $project->enabled = false;
+        $project->save();
+
+        //guardar info para enviar mail
+        $hostEmail = $project->host->user->email;
+        $hostName = $project->host->name;
+        $projectTitle = $project->title;
+
+        Mail::to($hostEmail)->send(new ProjectDeletedMail($hostName, $projectTitle));
+
+        return redirect()->route('admin.projects.index')->with('success', 'El proyecto se desactivo correctamente y se notificó al anfitrión.');
+
+    }
+
     /**
      * eliminar un proyecto y enviar mail notificando la eliminación
      */
-    public function deleteProject($id)
+    public function delete($id)
     {
         $project = Project::with('host.user')->findOrFail($id);
 
         //eliminar img si existe
         if ($project->image) {
             Storage::disk('public')->delete($project->image);
-        }
-
-        //desvincular a los voluntarios del proyecto
-        if ($project->volunteers()->exists()) {
-            $project->volunteers()->detach();
         }
 
         //guardar info para enviar mail

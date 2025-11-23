@@ -62,9 +62,7 @@ class VolunteersController extends Controller
         $user->status = "inactivo";
         $user->save();
 
-        if ($volunteerProfile && $volunteerProfile->projects()->exists()) {
-            $volunteerProfile->projects()->detach(); // elimina todas las filas en la tabla pivot
-        }
+        // Deshabilito al voluntario en todos los proyectos a los que aplico
 
         Mail::to($user->email)->send(new VolunteerDisableProfileMail($user->volunteer->full_name));
 

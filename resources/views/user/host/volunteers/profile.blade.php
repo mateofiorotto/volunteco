@@ -5,6 +5,7 @@
 
         <div class="d-flex justify-content-between align-items-center mb-5">
             <h1 class="title-h1 h3">Perfil <span>del Voluntario</span></h1>
+            <a href="{{ url()->previous() }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
         </div>
 
         @if (session('success'))

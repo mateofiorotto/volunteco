@@ -31,7 +31,7 @@ Route::middleware('checkEnabled')->group(function () {
     Route::put('/perfil/editar-datos/{token}/{email}', [RegisteredHostController::class, 'update'])->name('edit-rejected-profile.update');
 
 
-    Route::middleware('authCheck')->group(function () {
+    Route::middleware('auth')->group(function () {
         Route::post('/cerrar-sesion', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     });
 });

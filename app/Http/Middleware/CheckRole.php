@@ -4,25 +4,25 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
-class IsVolunteer
+class CheckRole
 {
     /**
-     * Chequear si el usuario es volunteer
+     * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, string $role): Response
     {
         $user = Auth::user();
-
-        if (!$user || !$user->hasRole('volunteer')) {
+        if (!$user || !$user->hasRole($role)) {
             return redirect()->route('login')
-                ->with('error', 'No tienes permiso para acceder a esta página. Por favor, inicia sesión como voluntario');
+                ->with('error', 'No tienes permiso para acceder a esta página.');
         }
 
         return $next($request);
     }
+
 }

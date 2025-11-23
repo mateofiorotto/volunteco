@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\HostsController;
 use App\Http\Controllers\Admin\ProjectsController;
 use App\Http\Controllers\Admin\VolunteersController;
 
-Route::middleware(['checkEnabled', 'authCheck', 'isAdmin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['checkEnabled', 'auth', 'CheckRole:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/anfitriones', [HostsController::class, 'index'])->name('hosts.index');
@@ -29,6 +29,7 @@ Route::middleware(['checkEnabled', 'authCheck', 'isAdmin'])->prefix('admin')->na
     // rutas de proyectos
     Route::get('/proyectos', [ProjectsController::class, 'index'])->name('projects.index');
     Route::get('/proyectos/{project}', [ProjectsController::class, 'show'])->name('projects.show');
-    Route::delete('/proyectos/{project}/eliminar', [ProjectsController::class, 'deleteProject'])->name('projects.delete');
+    Route::post('/proyectos/{project}', [ProjectsController::class, 'disabled'])->name('projects.disabled');
+    Route::delete('/proyectos/{project}/eliminar', [ProjectsController::class, 'delete'])->name('projects.delete');
 
 });

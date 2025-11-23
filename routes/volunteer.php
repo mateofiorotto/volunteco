@@ -6,7 +6,7 @@ use App\Http\Controllers\User\Volunteer\VolunteerProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\Volunteer\HostController;
 
-Route::middleware(['authCheck', 'isVolunteer', 'checkEnabled'])->prefix('usuario/voluntario')->name('volunteer.')->group(function () {
+Route::middleware(['auth', 'CheckRole:volunteer', 'checkEnabled'])->prefix('usuario/voluntario')->name('volunteer.')->group(function () {
 
     //rutas de perfil + frontend y metodos de VolunteerController (logica de aplicacion a proyectos creados) y VolunteerProfileController (Edicion de perfil)
     /**

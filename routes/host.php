@@ -6,7 +6,7 @@ use App\Http\Controllers\User\Host\HostProjectController;
 use App\Http\Controllers\User\Host\ProfileController;
 use App\Http\Controllers\User\Host\VolunteerController;
 
-Route::middleware(['authCheck', 'isHost', 'checkEnabled'])->prefix('usuario/anfitrion')->name('host.')->group(function () {
+Route::middleware(['auth', 'CheckRole:host', 'checkEnabled'])->prefix('usuario/anfitrion')->name('host.')->group(function () {
 
     //rutas de perfil + frontend y metodos de HostController (logica de creacion de proyectos, edicion, eliminacion, etc) y HostProfileController (Edicion de perfil)
     /**
