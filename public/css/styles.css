@@ -55,6 +55,9 @@
     --bs-azul-color: #143d60;
     --bs-azul-color-rgb: 20, 61, 96;
 }
+body {
+    font-family: "Nunito", sans-serif;
+}
 a {
     text-decoration: none;
 }
@@ -199,6 +202,9 @@ h6 {
 .pagination {
     --bs-pagination-active-bg: var(--bs-primary);
     --bs-pagination-active-border-color: var(--bs-primary);
+}
+.paginator p {
+    font-size: 0;
 }
 @media (min-width: 576px) {
     .container-sm {
@@ -455,7 +461,6 @@ small {
     margin: auto;
 }
 
-
 .cta-section {
     background: linear-gradient(
         135deg,
@@ -471,6 +476,545 @@ small {
 .testimonials-section .section-subtitle {
     color: white;
 }
+/*PROYECTOS*/
+.projects-hero {
+    background: linear-gradient(
+        135deg,
+        var(--bs-primary) 0%,
+        var(--bs-primary-dark) 100%
+    );
+    color: white;
+    padding: 60px 0 80px;
+    margin-bottom: -40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.projects-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
+    opacity: 0.3;
+}
+
+.projects-hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.projects-hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.projects-hero p {
+    font-size: 1.2rem;
+    opacity: 0.95;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.filters-section {
+    background: white;
+    border: 1px solid var(--bs-border-color-translucent);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 1.5em;
+    margin: 2em 0;
+    position: relative;
+    z-index: 2;
+}
+
+.filter-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--bs-body-color);
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box input {
+    padding-left: 45px;
+    border-radius: 50px;
+    border: 2px solid var(--bs-border-color-translucent);
+}
+
+.search-box input:focus {
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.25rem rgba(102, 128, 10, 0.15);
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--bs-gray-700);
+}
+
+.project-card {
+    border: var(--bs-primary) 1px solid;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 100%;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.project-card .ratio {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card .ratio img {
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .ratio img {
+    transform: scale(1.1);
+}
+
+.project-badge-overlay {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 1;
+}
+
+.projects-count {
+    font-size: 1.1rem;
+    color: var(--bs-gray-700);
+    margin-bottom: 20px;
+}
+
+.projects-count strong {
+    color: var(--bs-primary);
+    font-weight: 700;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.empty-state svg {
+    width: 120px;
+    height: 120px;
+    color: var(--bs-gray-400);
+    margin-bottom: 30px;
+}
+
+.empty-state h3 {
+    color: var(--bs-body-color);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.empty-state p {
+    color: var(--bs-gray-700);
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto 30px;
+}
+
+/*Dashboard host*/
+.dashboard-header {
+    background: linear-gradient(
+        135deg,
+        var(--bs-primary) 0%,
+        var(--bs-primary-dark) 100%
+    );
+    color: white;
+    padding: 40px 0;
+    margin-bottom: 40px;
+}
+
+.dashboard-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.dashboard-header p {
+    font-size: 1.1rem;
+    opacity: 0.95;
+}
+
+.stats-card {
+    background: white;
+    border: 1px solid var(--bs-border-color-translucent);
+    border-radius: 15px;
+    padding: 25px;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.stats-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--bs-primary-bg-subtle);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.stats-icon svg {
+    width: 28px;
+    height: 28px;
+    color: var(--bs-primary);
+}
+
+.stats-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--bs-body-color);
+    font-family: "Nunito", sans-serif;
+}
+
+.stats-label {
+    color: var(--bs-gray-700);
+    font-size: 0.95rem;
+}
+
+.project-card-dashboard {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 100%;
+}
+
+.project-card-dashboard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.project-card-dashboard.disabled {
+    border: 2px solid var(--bs-danger);
+    opacity: 0.85;
+}
+
+.project-card-dashboard .card-img-top {
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.project-card-dashboard:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.empty-state svg {
+    width: 80px;
+    height: 80px;
+    color: var(--bs-gray-400);
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--bs-body-color);
+}
+
+.empty-state p {
+    color: var(--bs-gray-700);
+    margin-bottom: 25px;
+}
+
+.sidebar-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.notification-card {
+    background: linear-gradient(
+        135deg,
+        rgba(102, 128, 10, 0.1) 0%,
+        rgba(176, 206, 136, 0.2) 100%
+    );
+    border: 2px solid var(--bs-primary-bg-subtle);
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.notification-card.has-applicant {
+    background: linear-gradient(
+        135deg,
+        rgba(102, 128, 10, 0.15) 0%,
+        rgba(176, 206, 136, 0.3) 100%
+    );
+    border-color: var(--bs-primary);
+}
+
+.notification-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--bs-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.notification-icon svg {
+    width: 28px;
+    height: 28px;
+    color: white;
+}
+
+.section-title-dashboard {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: var(--bs-body-color);
+}
+
+.section-title-dashboard span {
+    font-weight: 300;
+    color: var(--bs-gray-700);
+}
+
+/**Mis proyectos - HOST**/
+.page-header {
+    background: linear-gradient(
+        135deg,
+        var(--bs-primary) 0%,
+        var(--bs-primary-dark) 100%
+    );
+    color: white;
+    padding: 40px 0;
+    margin-bottom: 40px;
+    border-radius: 0 0 20px 20px;
+}
+
+.page-header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.page-header p {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    margin: 0;
+}
+
+.table-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.table-header {
+    padding: 25px 30px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.table-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--bs-body-color);
+}
+
+.table-modern {
+    margin: 0;
+}
+
+.table-modern thead {
+    background: #f9fafb;
+}
+
+.table-modern thead th {
+    border: none;
+    padding: 20px 30px;
+    font-weight: 600;
+    color: var(--bs-body-color);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+.table-modern tbody td {
+    padding: 20px 30px;
+    vertical-align: middle;
+    border-top: 1px solid #f3f4f6;
+}
+
+.table-modern tbody tr {
+    transition: all 0.2s ease;
+}
+
+.table-modern tbody tr:hover {
+    background: #f9fafb;
+}
+
+.table-modern tbody tr.disabled {
+    background: #fef2f2;
+}
+
+.table-modern tbody tr.disabled:hover {
+    background: #fee2e2;
+}
+
+.project-thumb {
+    width: 70px;
+    height: 70px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.project-title-cell {
+    font-weight: 600;
+    color: var(--bs-body-color);
+    font-size: 1rem;
+}
+
+.date-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.date-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.date-label {
+    color: #6b7280;
+    font-weight: 500;
+    min-width: 60px;
+}
+
+.date-value {
+    color: var(--bs-body-color);
+}
+
+.status-badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-badge.active {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status-badge.inactive {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.volunteers-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.volunteers-count {
+    background: var(--bs-primary-bg-subtle);
+    color: var(--bs-primary);
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.volunteers-icon {
+    color: var(--bs-primary);
+}
+
+.empty-state-table {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.empty-state-table svg {
+    width: 100px;
+    height: 100px;
+    color: #d1d5db;
+    margin-bottom: 25px;
+}
+
+.empty-state-table h3 {
+    color: var(--bs-body-color);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.empty-state-table p {
+    color: #6b7280;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.pagination {
+    padding: 25px 30px;
+    margin: 0;
+}
+
+/**Responsive proyectos**/
+@media (max-width: 768px) {
+    .projects-hero h1 {
+        font-size: 2rem;
+    }
+
+    .filters-section {
+        padding: 20px;
+    }
+}
+
+/*Landing responsive*/
 
 @media (max-width: 768px) {
     .hero-title {
