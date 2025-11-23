@@ -84,7 +84,7 @@ class HostProjectController extends Controller
 
         //asignar el host_id del anfitrión autenticado
         $validated['host_id'] = $host->id;
-        $validated['enabled'] = $request->has('enabled');
+        $validated['enabled'] = $request->boolean('enabled');
 
         //manejo de la imagen
         $validated['image'] = $request->hasFile('image')
@@ -95,9 +95,7 @@ class HostProjectController extends Controller
         $project = Project::create($validated);
 
         // Asociar condiciones si las hay
-        if ($request->has('conditions')) {
-            $project->conditions()->attach($request->conditions);
-        }
+        $project->conditions()->sync($request->input('conditions', []));
 
         return redirect()
             ->route('host.my-projects.index')
@@ -152,7 +150,7 @@ class HostProjectController extends Controller
             'conditions.*' => 'exists:conditions,id'
         ]);
 
-        $validated['enabled'] = $request->has('enabled');
+        $validated['enabled'] = $request->boolean('enabled');
 
         //manejo de la imagen
         if ($request->hasFile('image')) {
@@ -164,11 +162,7 @@ class HostProjectController extends Controller
         $project->update($validated);
 
         // Sincronizar condiciones
-        if ($request->has('conditions')) {
-            $project->conditions()->sync($request->conditions);
-        } else {
-            $project->conditions()->detach();
-        }
+        $project->conditions()->sync($request->input('conditions', []));
 
         return redirect()
             ->route('host.my-projects.index')
@@ -185,7 +179,7 @@ class HostProjectController extends Controller
         $data = $request->validate([
             'enabled' => 'sometimes|boolean',
         ]);
-        $project->enabled = $request->has('enabled') ? 1 : 0;
+        $project->enabled = $request->boolean('enabled');
         $project->save();
 
         return redirect()->back()->with('success', 'Estado del proyecto actualizado.');

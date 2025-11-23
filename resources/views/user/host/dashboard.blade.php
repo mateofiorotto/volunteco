@@ -62,20 +62,21 @@
                 <div class="col-md-3 bg-body-tertiary rounded py-3">
                     @if ($host->projects->isNotEmpty())
                     <p class="fw-bold">¿Tenés un proyecto nuevo?</p>
-                    <a href="{{route('host.my-projects.create')}}" class="btn btn-primary mb-3 mt-3">Crear Proyecto Nuevo</a>
-                    <hr>
+                    <a href="{{route('host.my-projects.create')}}" class="btn btn-primary">Crear Proyecto Nuevo</a>
+                    <hr class="my-4">
                     @endif
                     <div class="rounded bg-primary bg-opacity-10 border border-primary p-3">
-                        @if($lastAppliedVolunteer)
+                        @if($lastAppliedVolunteer && $lastAppliedVolunteer->volunteers->isNotEmpty())
+                            @php
+                                $volunteer = $lastAppliedVolunteer->volunteers->first(); // obtenemos el voluntario
+                            @endphp
                             <p class="h5 text-primary fw-semibold">Alguien se postuló a tu proyecto!</p>
-                            <p><strong>{{ $lastAppliedVolunteer['volunteer']->name }}</strong>
-                            está pendiente de aceptación en el proyecto: <strong>{{ $lastAppliedVolunteer['project']->title }}</strong>
-                            ({{ $lastAppliedVolunteer['applied_at']->format('Y-m-d H:i') }})
+                            <p><strong>{{ $volunteer->name }}</strong> aplicó el {{ \Carbon\Carbon::parse($volunteer->pivot->applied_at)->format('d/m/Y') }}
+                            y está pendiente de aceptación en el proyecto: <strong>{{ $lastAppliedVolunteer->title }}</strong>
                             </p>
-
-                            <a href="{{route('host.my-projects.show', $lastAppliedVolunteer['project']->id)}}" class="btn btn-outline-primary mt-3">Ir al Proyecto</a>
+                            <a href="{{route('host.my-projects.show', $lastAppliedVolunteer->id)}}" class="btn btn-outline-primary">Ir al Proyecto</a>
                         @else
-                            No aplicó nadie aún
+                            <p>No hay voluntarios pendientes de revisión.</p>
                         @endif
                     </div>
                 </div>

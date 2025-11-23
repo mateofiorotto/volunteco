@@ -24,28 +24,28 @@ class DashboardController extends Controller
         ])->where('user_id', Auth::id())
         ->firstOrFail();
 
+        $projectsWithVolunteers = null;
         $lastAppliedVolunteer = null;
 
-        foreach ($host->projects as $project) {
-            if (!$project->enabled) {
-                continue;
-            }
+        $projectsWithVolunteers = Project::whereHas('host', function ($q) {
+                $q->where('user_id', Auth::id()); // Traigo los proyectos de host logeado
+            })
+            ->where('enabled', true) // solo los proyectos activos
+            ->whereHas('volunteers', function ($q) {
+                $q->where('project_volunteer.status', 'pendiente'); // que tengan voluntario en estado pendiente
+            })
+            ->with(['volunteers' => function ($q) {
+                $q->where('project_volunteer.status', 'pendiente') // Carga los voluntarios pendientes
+                ->orderBy('project_volunteer.applied_at', 'desc') // y los ordena del mas nuevo al mas viejo
+                ->limit(1); // Trae solo el último
+            }])
+            ->get()
+            ->sortByDesc(function ($project) {
+                return $project->volunteers->first()->pivot->applied_at ?? null; // Orden apor fecha de aplicado
+            })
+            ->first(); // Trae el primero de la lista, osea el mas reciente por fecha
 
-            foreach ($project->volunteers as $volunteer) {
-                if ($volunteer->pivot->status !== 'pendiente') {
-                    continue;
-                }
-                $appliedAt = \Carbon\Carbon::parse($volunteer->pivot->applied_at);
-
-                if (!$lastAppliedVolunteer || $appliedAt->gt($lastAppliedVolunteer['applied_at'])) {
-                    $lastAppliedVolunteer = [
-                        'volunteer' => $volunteer,
-                        'project' => $project,
-                        'applied_at' => $appliedAt
-                    ];
-                }
-            }
-        }
+        $lastAppliedVolunteer = $projectsWithVolunteers;
 
         return view('user.host.dashboard', compact('host', 'lastAppliedVolunteer'));
     }
