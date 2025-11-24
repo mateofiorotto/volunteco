@@ -4,7 +4,7 @@
         <div class="text-center">
             <h2 class="section-title mb-4 text-white">Registrate <span class="fw-light">ahora mismo</span></h2>
             <p class="section-subtitle mb-5 text-white">Unite a nuestra comunidad</p>
-            <div class="d-flex gap-5 justify-content-center">
+            <div class="d-flex flex-column flex-md-row gap-5 justify-content-center">
                 <div class="text-center">
                     <svg class="d-block mx-auto mb-3" width="100" height="100" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path d="M82.1526 84.2855C65.6115 99.7487 35.846 99.7822 18.501 84.4614C31.8092 65.4297 64.439 61.9367 82.1526 84.2855Z"/>

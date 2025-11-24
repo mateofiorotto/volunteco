@@ -54,8 +54,10 @@
     <!-- Features Section -->
     <section class="features-section py-5">
         <div class="container py-5">
-            <h2 class="section-title">Elegí <span class="fw-semibold ff-nunito text-primary">Volunt<span class="fw-light">eco</span></span></h2>
-            <p class="section-subtitle">Tu plataforma de confianza para voluntariado ecológico</p>
+            <div class="text-center">
+                <h2 class="section-title">Elegí <span class="fw-semibold ff-nunito text-primary">Volunt<span class="fw-light">eco</span></span></h2>
+                <p class="section-subtitle">Tu plataforma de confianza para voluntariado ecológico</p>
+            </div>
 
             <div class="row g-4">
                 <div class="col-md-4">
@@ -105,8 +107,10 @@
     <!-- How It Works -->
     <section class="how-section bg-body-tertiary">
         <div class="container">
-            <h2 class="section-title">¿Cómo <span class="fw-light">Funciona</span>?</h2>
-            <p class="section-subtitle">Comenzá tu aventura en 4 simples pasos</p>
+            <div class="text-center">
+                <h2 class="section-title">¿Cómo <span class="fw-light">Funciona</span>?</h2>
+                <p class="section-subtitle">Comenzá tu aventura en 4 simples pasos</p>
+            </div>
 
             <div class="row justify-content-center">
                 <div class="col-lg-8">

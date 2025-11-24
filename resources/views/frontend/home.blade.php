@@ -177,7 +177,7 @@
                 <p class="section-subtitle">Organizaciones comprometidas con el medio ambiente</p>
             </div>
 
-            <div class="d-flex align-items-center justify-content-center gap-5 mb-5">
+            <div class="d-md-flex align-items-center justify-content-center gap-5 mb-5">
                 <div class="text-center mb-5 mb-lg-0 px-3">
                     <img src="{{asset('images/sponsors/temaiken-bioparque.svg')}}" alt="Temaiken" width="130" height="130" class="sponsor-logo object-fit-contain">
                 </div>
