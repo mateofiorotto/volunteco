@@ -57,4 +57,15 @@ class FrontendController extends Controller
         return view('frontend.project-details', compact('project', 'volunteerStatus'));
     }
 
+    public function about()
+    {
+        return view('frontend.about');
+    }
+
+    public function contact()
+    {
+        return view('frontend.contact');
+    }
+
+
 }

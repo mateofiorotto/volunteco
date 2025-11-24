@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Bienvenidos')
+
 @section('content')
     <!-- Hero Section -->
     <section class="hero-section">

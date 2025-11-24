@@ -15,6 +15,12 @@
         <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('projects') ? 'active' : '' }}" href="{{ route('projects') }}">Proyectos</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">Nosotros</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contacto</a>
+        </li>
     </ul>
     @guest
         <div class="d-flex align-items-center">
