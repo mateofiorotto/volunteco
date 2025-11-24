@@ -25,7 +25,7 @@
         <!-- Footer -->
     <footer class="landing-footer text-bg-dark">
         <div class="container py-4 text-center">
-            <p class="mb-0">© 2025 Volunteco. Todos los derechos reservados. | <a href="{{ route('home') }}" class="link-primary fw-semibold">Ir a la Plataforma</a></p>
+            <p class="mb-0">© 2025 Volunteco. Todos los derechos reservados.</p>
         </div>
     </footer>
 

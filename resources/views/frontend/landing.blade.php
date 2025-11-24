@@ -1,288 +1,6 @@
 @extends('layouts.blank')
 
-@section('title', 'Cambia el Mundo, Una Acción a la Vez')
-
-@section('styles')
-<style>
-
-    .landing-hero {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 679px;
-        width: 100%;
-        aspect-ratio: 19 / 9;
-    }
-
-    .hero-bg-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg,
-                rgba(102, 128, 10, 0.7) 0%,
-                rgba(34, 63, 5, 0.8) 100%),
-            url('images/landing-hero.jpg') center/cover;
-        z-index: 1;
-    }
-
-    .hero-content {
-        animation: fadeInUp 1s ease-out;
-    }
-
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .hero-title {
-        font-size: 4rem;
-        margin-bottom: 1.5rem;
-        line-height: 1.1;
-        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    .hero-subtitle {
-        font-size: 1.5rem;
-        font-weight: 300;
-        margin-bottom: 3rem;
-        line-height: 1.6;
-        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-    }
-
-    .btn-landing {
-        padding: 18px 50px;
-        font-size: 1.2rem;
-        font-weight: 700;
-        border-radius: 50px;
-        text-decoration: none;
-        display: inline-block;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .btn-landing-primary {
-        background: white;
-        color: var(--bs-primary);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    .btn-landing-primary:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        color: var(--bs-primary-dark);
-    }
-
-    .scroll-indicator {
-        position: absolute;
-        bottom: 40px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 2;
-        animation: bounce 2s infinite;
-    }
-
-    @keyframes bounce {
-
-        0%,
-        20%,
-        50%,
-        80%,
-        100% {
-            transform: translateX(-50%) translateY(0);
-        }
-
-        40% {
-            transform: translateX(-50%) translateY(-10px);
-        }
-
-        60% {
-            transform: translateX(-50%) translateY(-5px);
-        }
-    }
-
-    .scroll-indicator svg {
-        width: 30px;
-        height: 30px;
-        color: white;
-        opacity: 0.8;
-    }
-
-    /* Stats Section */
-    .stats-section {
-        background: var(--bs-primary);
-        color: white;
-        padding: 80px 0;
-    }
-
-    .stat-item {
-        text-align: center;
-        padding: 20px;
-    }
-
-    .stat-number {
-        font-size: 4rem;
-        font-weight: 700;
-        font-family: 'Nunito', sans-serif;
-        margin-bottom: 10px;
-        line-height: 1;
-    }
-
-    .stat-label {
-        font-size: 1.1rem;
-        font-weight: 300;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-    }
-
-    /* Features Section */
-    .section-title {
-        font-size: 3rem;
-        text-align: center;
-        margin-bottom: 1rem;
-        color: var(--bs-body-color);
-    }
-
-    .section-subtitle {
-        font-size: 1.3rem;
-        text-align: center;
-        margin-bottom: 60px;
-        font-weight: 300;
-    }
-
-    .feature-card {
-        text-align: center;
-        padding: 40px 30px;
-        border-radius: 20px;
-        background: white;
-        transition: all 0.3s ease;
-        height: 100%;
-    }
-
-    .feature-card:hover {
-        transform: translateY(-10px);
-    }
-
-    .feature-icon {
-        width: 80px;
-        height: 80px;
-    }
-
-    .feature-icon svg {
-        width: 40px;
-        height: 40px;
-    }
-
-    .feature-title {
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 15px;
-    }
-
-    /* How it Works */
-    .how-section {
-        padding: 100px 0;
-        background: white;
-    }
-
-    .step-item {
-        padding: 30px;
-        margin-bottom: 40px;
-    }
-
-    .step-number {
-        content: '';
-        display: block;
-        border: 1px solid var(--bs-secondary);
-        padding: 6px;
-        position: relative;
-        z-index: 0;
-        border-radius: 50%;
-    }
-    .step-number span {
-        display: block;
-        width: 60px;
-        height: 60px;
-        flex: 0 0 60px;
-        line-height: 60px;
-        text-align: center;
-        background: var(--bs-secondary);
-        color: white;
-        border-radius: 50%;
-        font-size: 1.8rem;
-        font-weight: 700;
-        font-family: 'Nunito', sans-serif;
-        position: relative;
-    }
-    .step-number + .step-content { padding-top: 13px;}
-
-    .step-title {
-        font-size: 1.8rem;
-        margin-bottom: 15px;
-        color: var(--bs-body-color);
-    }
-
-    /* CTA Section */
-    .cta-section {
-        background-image: linear-gradient(
-            rgba(34, 63, 5, 0.98),
-            rgba(102, 128, 10, 0.75)
-        ), /* color overlay */
-        url('images/madre-e-hija-preparandose-para-plantar-un-arbol-en-el-bosque.jpg');
-        background-color: var(--bs-primary);
-        background-size: cover, cover;
-        background-position: center center;
-        background-repeat:  no-repeat;
-        padding: 100px 0;
-        color: white;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .cta-content {
-        position: relative;
-        z-index: 1;
-    }
-
-    .cta-title {
-        font-size: 3.5rem;
-        margin-bottom: 20px;
-    }
-
-    .cta-subtitle {
-        font-size: 1.5rem;
-        font-weight: 300;
-        margin-bottom: 40px;
-        opacity: 0.95;
-    }
-
-    .btn-landing-white {
-        background: white;
-        color: var(--bs-primary);
-    }
-
-    .btn-landing-white:hover {
-        background: var(--bs-light);
-        color: var(--bs-primary-dark);
-    }
-
-    .hero-img {
-        max-width: 300px;
-    }
-
-</style>
-@endsection
+@section('title', 'Uníte a Volunteco')
 
 @section('content')
 
@@ -295,23 +13,14 @@
             </div>
             <h1 class="hero-title fw-semibold">Cambía el Mundo,<br>Una Acción a la Vez</h1>
             <p class="hero-subtitle">
-                Uníte a la comunidad de voluntarios y anfitriones comprometidos con el planeta.
+                Uníte a <span class="fw-semibold ff-nunito fs-3">Volunt<span class="fw-light">eco</span></span>, la comunidad de voluntarios y anfitriones comprometidos con el planeta.
                 Tu aventura empieza acá.
             </p>
-            <a href="{{ route('home') }}"
-               class="btn-landing btn-landing-primary">
-                Explorar Ahora
-            </a>
+            <a href="{{ route('home') }}" class="btn btn-lg btn-light fw-medium">Explorar Ahora</a>
         </div>
-        <div class="scroll-indicator">
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 fill="none"
-                 viewBox="0 0 24 24"
-                 stroke-width="2"
-                 stroke="currentColor">
-                <path stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+        <div class="scroll-indicator" id="scrollArrow">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
             </svg>
         </div>
     </section>
@@ -345,7 +54,7 @@
     <!-- Features Section -->
     <section class="features-section py-5">
         <div class="container py-5">
-            <h2 class="section-title">¿Por Qué <span class="fw-light">Elegirnos</span>?</h2>
+            <h2 class="section-title">Elegí <span class="fw-semibold ff-nunito text-primary">Volunt<span class="fw-light">eco</span></span></h2>
             <p class="section-subtitle">Tu plataforma de confianza para voluntariado ecológico</p>
 
             <div class="row g-4">
@@ -442,12 +151,26 @@
         <div class="container">
             <div class="cta-content">
                 <h2 class="cta-title">Tu Aventura Te Está Esperando</h2>
-                <p class="cta-subtitle">Unite a la comunidad y dejá tu huella</p>
-                <a href="{{ route('home') }}"
-                   class="btn-landing btn-landing-white">
-                    Comenzar Ahora
-                </a>
+                <p class="cta-subtitle fs-4 fw-light mb-5">Unite a la comunidad de <span class="fw-semibold ff-nunito text-marca">Volunt<span class="fw-light">eco</span></span> y dejá tu huella</p>
+                <a href="{{ route('home') }}" class="btn btn-lg fw-medium btn-light">Comenzar Ahora</a>
             </div>
         </div>
     </section>
+@endsection
+@section('scripts')
+<script>
+document.getElementById("scrollArrow").addEventListener("click", () => {
+    const sections = [...document.querySelectorAll("section")];
+    const currentY = window.scrollY;
+
+    const nextSection = sections.find(sec => sec.offsetTop > currentY + 10);
+
+    if (nextSection) {
+        nextSection.scrollIntoView({
+            behavior: "smooth"
+        });
+    }
+});
+
+</script>
 @endsection
