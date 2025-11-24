@@ -14,6 +14,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+
+    @yield('styles')
 </head>
 
 <body class="d-flex h-100">

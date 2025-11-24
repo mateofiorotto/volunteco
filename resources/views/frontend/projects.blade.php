@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Proyectos')
+
 @section('content')
     <section>
         <div class="container py-5">

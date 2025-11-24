@@ -13,6 +13,9 @@
             <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('howItWorks') ? 'active' : '' }}" href="{{ route('howItWorks') }}">Cómo funciona</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('projects') ? 'active' : '' }}" href="{{ route('projects') }}">Proyectos</a>
         </li>
         <li class="nav-item">

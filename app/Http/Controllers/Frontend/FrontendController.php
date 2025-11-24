@@ -67,5 +67,10 @@ class FrontendController extends Controller
         return view('frontend.contact');
     }
 
+    public function howItWorks()
+    {
+        return view('frontend.how-it-works');
+    }
+
 
 }

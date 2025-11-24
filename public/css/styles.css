@@ -72,6 +72,11 @@ h6 {
 .text-muted {
     color: var(--bs-gray-700) !important;
 }
+.link-primary:focus, .link-primary:hover {
+    color: RGBA(var(--bs-primary-rgb), 0.75) !important;
+    -webkit-text-decoration-color: RGBA(var(--bs-primary-rgb), 0.75)!important;
+    text-decoration-color: RGBA(var(--bs-primary-rgb), 0.75) !important;
+}
 .form-control {
     color: var(--bs-secondary-color);
 }
@@ -151,6 +156,9 @@ h6 {
 }
 .btn-link {
     text-decoration: none;
+}
+.bg-azul {
+    background-color: rgba(var(--bs-azul-color-rgb), var(--bs-bg-opacity, 1)) !important;
 }
 .badge {
     --bs-badge-font-weight: 500;
@@ -291,7 +299,7 @@ small {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("../images/ecologia.jpeg");
+    background-image: url("../images/ecologia.jpg");
     background-size: cover;
     background-position: center;
     filter: blur(2px);
@@ -316,10 +324,8 @@ small {
 
 .hero-title {
     font-size: 3.5rem;
-    font-weight: 700;
     margin-bottom: 1.5rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    font-family: "Nunito", sans-serif;
 }
 
 .hero-subtitle {
@@ -331,15 +337,11 @@ small {
 
 .section-title {
     font-size: 2.5rem;
-    font-weight: 700;
     margin-bottom: 1rem;
-    color: var(--bs-body-color);
-    font-family: "Nunito", sans-serif;
 }
 
 .section-subtitle {
     font-size: 1.1rem;
-    color: var(--bs-gray-700);
     margin-bottom: 3rem;
 }
 
