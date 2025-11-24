@@ -4,7 +4,7 @@
     <section>
         <div class="container-sm py-5">
             <div class="border rounded-3 p-5">
-                <h1 class="h2 text-center mb-3">Ingresar</h1>
+                <h1 class="h2 text-center mb-5">Ingresar</h1>
 
                 {{-- Alerta de éxito --}}
                 @if (session('success'))

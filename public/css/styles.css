@@ -16,9 +16,6 @@
   font-variation-settings:
     "wdth" 100;
 } */
-* {
-    box-sizing: border-box;
-}
 
 /*resets*/
 :root {
@@ -199,6 +196,10 @@ h6 {
 .pagination {
     --bs-pagination-active-bg: var(--bs-primary);
     --bs-pagination-active-border-color: var(--bs-primary);
+}
+.dropdown-menu[data-bs-popper] {
+    left: auto;
+    right: -50%;
 }
 @media (min-width: 576px) {
     .container-sm {
