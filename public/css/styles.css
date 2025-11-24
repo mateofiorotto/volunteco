@@ -227,6 +227,9 @@ h6 {
     --bs-pagination-active-bg: var(--bs-primary);
     --bs-pagination-active-border-color: var(--bs-primary);
 }
+.paginator p {
+    font-size: 0;
+}
 .dropdown-menu[data-bs-popper] {
     left: auto;
     right: -50%;
@@ -729,4 +732,154 @@ small {
 
 .hero-img {
     max-width: 300px;
+}
+
+/**proyectos**/
+.projects-hero {
+    background: linear-gradient(
+        135deg,
+        var(--bs-primary) 0%,
+        var(--bs-primary-dark) 100%
+    );
+    color: white;
+    padding: 60px 0 80px;
+    margin-bottom: -40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.projects-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
+    opacity: 0.3;
+}
+
+.projects-hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.projects-hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.projects-hero p {
+    font-size: 1.2rem;
+    opacity: 0.95;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.filters-section {
+    background: white;
+    border: 1px solid var(--bs-border-color-translucent);
+    border-radius: 15px;
+    padding: 1.5em;
+    margin: 2em 0;
+    position: relative;
+    z-index: 2;
+}
+
+.filter-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--bs-body-color);
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box input {
+    padding-left: 45px;
+    border-radius: 50px;
+    border: 2px solid var(--bs-border-color-translucent);
+}
+
+.search-box input:focus {
+    border-color: var(--bs-primary);
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--bs-gray-700);
+}
+
+.project-card {
+    border: var(--bs-primary) 1px solid;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+}
+
+.project-card .ratio {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card .ratio img {
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .ratio img {
+    transform: scale(1.1);
+}
+
+.project-badge-overlay {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 1;
+}
+
+.projects-count {
+    font-size: 1.1rem;
+    color: var(--bs-gray-700);
+    margin-bottom: 20px;
+}
+
+.projects-count strong {
+    color: var(--bs-primary);
+    font-weight: 700;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.empty-state svg {
+    width: 120px;
+    height: 120px;
+    color: var(--bs-gray-400);
+    margin-bottom: 30px;
+}
+
+.empty-state h3 {
+    color: var(--bs-body-color);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.empty-state p {
+    color: var(--bs-gray-700);
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto 30px;
 }
