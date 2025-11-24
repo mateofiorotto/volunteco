@@ -248,7 +248,7 @@
                 </a>
                 <button type="submit"
                         class="btn btn-primary btn-lg px-5 text-capitalize">
-                    Crear Proyecto
+                    Crear
                 </button>
             </div>
         </form>

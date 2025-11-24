@@ -23,7 +23,7 @@
                     <path d="M72.6094 90.4006C41.1956 106.327 16.1079 83.6895 11.8516 76.7779C22.9849 60.8681 60.0572 53.606 72.6094 90.4006Z"/>
                     <path d="M70.1552 25.2421C76.5982 25.2421 81.8227 30.5509 81.7893 37.0284C81.7559 43.4057 76.5147 48.6477 70.1552 48.6477C63.6955 48.6477 58.4376 43.4057 58.4209 36.9449C58.4209 30.4841 63.6621 25.2421 70.1552 25.2421Z"/>
                     </svg>
-                    <a href="{{ route('register-host.create') }}" class="btn btn-light fw-medium btn-lg d-flex justify-content-center flex-column gap-3">Ser Anfitrión</a>
+                    <a href="{{ route('register-host.create') }}" class="btn btn-light fw-medium btn-lg">Ser Anfitrión</a>
                 </div>
             </div>
         </div>

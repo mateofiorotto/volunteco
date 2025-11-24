@@ -269,7 +269,7 @@
                 </a>
                 <button type="submit"
                         class="btn btn-primary btn-lg px-5 text-capitalize">
-                    Actualizar Proyecto
+                    Actualizar
                 </button>
             </div>
         </form>

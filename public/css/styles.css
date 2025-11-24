@@ -458,16 +458,15 @@ small {
     }
 }
 
-
 /*landing*/
 .landing-hero {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 679px;
     width: 100%;
-   
+    aspect-ratio: 19 / 9;
 }
 
 .hero-bg-image {
