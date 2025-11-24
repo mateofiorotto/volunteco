@@ -157,12 +157,17 @@
 
     <!-- Call to Action -->
     @if (!$projects->isEmpty())
-        <section class="py-5 bg-light">
-            <div class="container text-center">
-                <h2 class="ff-nunito mb-3 h2">¿Todavía no estas en la comunidad?</h2>
+        <section class="cta-section-proyectos py-5">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title mb-4 text-white">¿Aún no formas parte?</h2>
+                <p class="section-subtitle mb-4 text-white">Unite a nuestra comunidad</p>
                 <a href="{{ route('register-volunteer.create') }}"
-                   class="btn btn-primary btn-lg">Unirme</a>
+                   class="btn btn-light btn-hero px-5 mx-2 mb-3 mb-lg-0">Ser Voluntario</a>
+                <a href="{{ route('register-host.create') }}"
+                   class="btn btn-light btn-hero px-5 mx-2">Ser Anfitrión</a>
             </div>
-        </section>
+        </div>
+    </section>
     @endif
 @endsection

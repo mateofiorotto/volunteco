@@ -883,3 +883,19 @@ small {
     max-width: 500px;
     margin: 0 auto 30px;
 }
+
+.cta-section-proyectos {
+    background-color: var(--bs-primary-dark);
+    background-size: cover, cover;
+    background-position: center center;
+    background-repeat:  no-repeat;
+    padding: 100px 0;
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section-proyectos .text-marca {
+    font-size: 1.6rem!important;
+}
