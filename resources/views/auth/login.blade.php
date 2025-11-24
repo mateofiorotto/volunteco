@@ -62,7 +62,7 @@
                                name="password"
                                required
                                autocomplete="current-password"
-                               placeholder="Ingresa tu contraseña" />
+                               placeholder="Ingresá tu contraseña" />
                         @error('password')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

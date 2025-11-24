@@ -8,7 +8,7 @@
 
         <!-- Últimos Proyectos Aplicados -->
         <div class="mb-5">
-            <h2 class="h4 mb-4">Mis <span class="fw-light">Últimas Proyectos</span></h2>
+            <h2 class="h4 mb-4">Mis <span class="fw-light">Últimos Proyectos</span></h2>
 
             <div class="row">
                 <div class="col-md-9 pe-md-5">

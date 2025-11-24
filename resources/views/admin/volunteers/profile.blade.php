@@ -228,7 +228,7 @@
                         </table>
                     @else
                         <div class="card-body">
-                            <p class="mb-0">Este voluntario no aplico a ningun proyecto aún</p>
+                            <p class="mb-0">Este voluntario no aplicó a ningún proyecto aún</p>
                         </div>
                     @endif
                 </div>

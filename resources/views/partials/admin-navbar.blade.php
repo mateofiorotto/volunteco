@@ -18,7 +18,7 @@
                         type="button"
                         data-bs-toggle="dropdown"
                         aria-expanded="false">
-                    Registrate
+                    Regístrate
                 </button>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item {{ request()->routeIs('register-host.create') ? 'active' : '' }}" href="{{ route('register-host.create') }}">¿Querés ser Anfitrión?</a></li>

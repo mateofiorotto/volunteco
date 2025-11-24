@@ -33,7 +33,7 @@
                         <div class="card mb-5">
                             <div class="card-body">
                                 <h2 class="card-title h3">Datos Personales</h2>
-                                <p>Completa con tus datos.</p>
+                                <p>Completá con tus datos.</p>
 
                                 <div class="row">
                                     <div class="mb-3 col-md-6">
@@ -107,7 +107,7 @@
                         <div class="card mb-5">
                             <div class="card-body">
                                 <h2 class="card-title h3">Datos de Acceso</h2>
-                                <p>Completa con los datos que te serviran para acceder al sistema.</p>
+                                <p>Completá con los datos que te serviran para acceder al sistema.</p>
                                 <div class="mb-3">
                                     <label for="email"
                                            class="form-label">Email *</label>
@@ -130,7 +130,7 @@
                                     <input type="password"
                                            id="password"
                                            name="password"
-                                           placeholder="Ingresa tu contraseña"
+                                           placeholder="Ingresá tu contraseña"
                                            required
                                            autocomplete="new-password"
                                            class="form-control @error('password') is-invalid @enderror" />
@@ -147,7 +147,7 @@
                                     <input type="password"
                                            id="password_confirmation"
                                            name="password_confirmation"
-                                           placeholder="Repite tu contraseña"
+                                           placeholder="Repetí tu contraseña"
                                            required
                                            autocomplete="new-password"
                                            class="form-control @error('password_confirmation') is-invalid @enderror" />
@@ -163,7 +163,7 @@
                         <div class="card mb-5">
                             <div class="card-body">
                                 <h2 class="card-title h3">Datos de Contacto</h2>
-                                <p>Completa con tus datos.</p>
+                                <p>Completá con tus datos.</p>
                                 <div class="mb-3">
                                     <label for="phone"
                                            class="form-label">Teléfono *</label>
@@ -271,7 +271,7 @@
                             <div class="card mb-5">
                                 <div class="card-body">
                                     <h2 class="card-title h3">Datos Profesionales</h2>
-                                    <p>Completa con tus datos.</p>
+                                    <p>Completá con tus datos.</p>
                                     <div class="mb-3">
                                         <label for="educational_level"
                                                class="form-label">Nivel Educativo *</label>

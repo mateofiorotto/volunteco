@@ -35,7 +35,7 @@
                         <div class="card mb-5">
                             <div class="card-body">
                                 <h2 class="card-title h3">Organización</h2>
-                                <p>Completa con los datos de la organización.</p>
+                                <p>Completá con los datos de la organización.</p>
                                 <div class="mb-3">
                                     <label for="nombre"
                                            class="form-label">Nombre *</label>
@@ -133,7 +133,7 @@
                         <div class="card mb-5">
                             <div class="card-body">
                                 <h2 class="card-title h3">Datos de Acceso</h2>
-                                <p>Completá con los datos que te serviran para acceder al sistema.</p>
+                                <p>Completá con los datos que te servirán para acceder al sistema.</p>
                                 <div class="mb-3">
                                     <label for="email"
                                            class="form-label">Email *</label>
@@ -156,7 +156,7 @@
                                     <input type="password"
                                            id="password"
                                            name="password"
-                                           placeholder="Ingresa tu contraseña"
+                                           placeholder="Ingresá tu contraseña"
                                            required
                                            autocomplete="off"
                                            class="form-control @error('password') is-invalid @enderror" />
@@ -173,7 +173,7 @@
                                     <input type="password"
                                            id="password_confirmation"
                                            name="password_confirmation"
-                                           placeholder="Repite tu contraseña"
+                                           placeholder="Repetí tu contraseña"
                                            required
                                            autocomplete="off"
                                            class="form-control @error('password_confirmation') is-invalid @enderror" />

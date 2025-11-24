@@ -3,7 +3,7 @@
     <div class="container py-5">
         <div class="text-center">
             <h2 class="section-title mb-4 text-white">Registrate <span class="fw-light">ahora mismo</span></h2>
-            <p class="section-subtitle mb-5 text-white">Unite a nuestra comunidad</p>
+            <p class="section-subtitle mb-5 text-white">Uníte a nuestra comunidad</p>
             <div class="d-flex flex-column flex-md-row gap-5 justify-content-center">
                 <div class="text-center">
                     <svg class="d-block mx-auto mb-3" width="100" height="100" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

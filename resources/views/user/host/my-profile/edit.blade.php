@@ -106,7 +106,7 @@
                                     <input type="password"
                                            id="password"
                                            name="password"
-                                           placeholder="Ingresa tu contraseña"
+                                           placeholder="Ingresá tu contraseña"
                                            autocomplete="new-password"
                                            class="form-control @error('password') is-invalid @enderror" />
                                     @error('password')
@@ -121,7 +121,7 @@
                                     <input type="password"
                                            id="password_confirmation"
                                            name="password_confirmation"
-                                           placeholder="Repite tu contraseña"
+                                           placeholder="Repetí tu contraseña"
                                            autocomplete="new-password"
                                            class="form-control @error('password_confirmation') is-invalid @enderror" />
                                     @error('password_confirmation')

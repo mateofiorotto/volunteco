@@ -33,7 +33,7 @@
                     <div class="text-center mb-4">
                         <button type="submit"
                                 class="btn btn-primary">
-                            Reestablecer mi contraseña
+                            Restablecer mi contraseña
                         </button>
                     </div>
 

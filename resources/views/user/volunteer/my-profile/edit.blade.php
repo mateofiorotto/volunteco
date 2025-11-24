@@ -120,13 +120,13 @@
                                     <input type="password"
                                            id="password"
                                            name="password"
-                                           placeholder="Ingresa tu contraseña"
+                                           placeholder="Ingresá tu contraseña"
                                            autocomplete="new-password"
                                            class="form-control @error('password') is-invalid @enderror" />
                                     @if ($errors->has('password'))
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @endif
-                                    <small class="form-text text-muted">Dejalo en blanco si no deseas cambiarla</small>
+                                    <small class="form-text text-muted">Dejálo en blanco si no deseas cambiarla</small>
                                 </div>
 
                                 <div class="mb-3">
@@ -135,7 +135,7 @@
                                     <input type="password"
                                            id="password_confirmation"
                                            name="password_confirmation"
-                                           placeholder="Repite tu contraseña"
+                                           placeholder="Repetí tu contraseña"
                                            autocomplete="new-password"
                                            class="form-control @error('password_confirmation') is-invalid @enderror" />
                                     @if ($errors->has('password_confirmation'))

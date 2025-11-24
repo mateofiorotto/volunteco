@@ -465,9 +465,9 @@ small {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 679px;
+    height: 100vh;
     width: 100%;
-    aspect-ratio: 19 / 9;
+   
 }
 
 .hero-bg-image {
@@ -625,6 +625,22 @@ small {
 .how-section {
     padding: 100px 0;
     background: white;
+}
+
+.hero-background-how-it-works {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/how-it-works.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: blur(2px);
+}
+
+.how-section-page {
+    padding: 100px 0px 20px 0px;
 }
 
 .step-item {

@@ -6,7 +6,7 @@
             <div class="row mb-5">
                 <div class="col-md-7">
                     <h1 class="title-h1 h3">Actualiza <span>tu perfil</span></h1>
-                    <p>Estimado <span class="fw-semibold fs-5">{{ old('email', $host->email ?? '') }}:</span><br />Completá
+                    <p>Estimado/a <span class="fw-semibold fs-5">{{ old('email', $host->email ?? '') }}:</span><br />Completá
                         todos los datos que te pedimos por correo.<br />Luego de enviada tu solicitud, nuestros
                         administradores revisarán tu perfil y serás notificado cuando esté aprobado para que puedas empezar
                         a publicar tus proyectos.</p>

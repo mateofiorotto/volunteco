@@ -308,7 +308,7 @@
         });
 
         document.getElementById('withdrawBtnDelete').addEventListener('submit', function() {
-            const modalEl = document.getElementById('eleminarModal');
+            const modalEl = document.getElementById('eliminarModal');
             const modalInstance = bootstrap.Modal.getOrCreateInstance(modalEl);
             modalInstance.hide();
         });

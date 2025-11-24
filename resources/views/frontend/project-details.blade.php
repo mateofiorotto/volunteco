@@ -162,7 +162,7 @@
                                             <hr />
                                             <ul class="list-unstyled">
                                                 <li>Contacto: {{ $project->host->person_full_name }}</li>
-                                                <li>Telefono: {{ $project->host->phone }}</li>
+                                                <li>Teléfono: {{ $project->host->phone }}</li>
                                                 <li>Email: <a href="mailto:{{ $project->host->user->email }}"
                                                        target="_blank">{{ $project->host->user->email }}</a></li>
                                             </ul>

@@ -100,7 +100,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
-                    <div class="card-header">Otros proyectos del anfitríon</div>
+                    <div class="card-header">Otros proyectos del anfitrión</div>
                     <div class="card-body">
                         <table class="table">
                             <thead>

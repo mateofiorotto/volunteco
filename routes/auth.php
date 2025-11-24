@@ -23,8 +23,8 @@ Route::middleware('checkEnabled')->group(function () {
     Route::post('/iniciar-sesion', [AuthenticatedSessionController::class, 'store']);
 
     //cambiar contraseña olvidada
-    Route::get('/cambiar-clave/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
-    Route::post('/cambiar-clave', [NewPasswordController::class, 'store'])->name('password.store');
+    // Route::get('/cambiar-clave/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
+    // Route::post('/cambiar-clave', [NewPasswordController::class, 'store'])->name('password.store');
 
     //editar datos de un perfil host rechazado
     Route::get('/perfil/editar-datos/{token}/{email}', [RegisteredHostController::class, 'edit'])->name('edit-rejected-profile');
