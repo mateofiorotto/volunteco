@@ -8,7 +8,7 @@
         <div class="hero-background"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 class="hero-title">Conecta con la Naturaleza</h1>
+            <h1 class="hero-title">Conecta con <span class="fw-light">la Naturaleza</span></h1>
             <p class="hero-subtitle">Unite a proyectos de voluntariado ecológico alrededor de Argentina</p>
             <div>
                 <a href="{{ route('projects') }}"

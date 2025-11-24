@@ -13,7 +13,7 @@
             </div>
             <h1 class="hero-title fw-semibold">Cambía el Mundo,<br>Una Acción a la Vez</h1>
             <p class="hero-subtitle">
-                Uníte a <span class="fw-semibold ff-nunito fs-3">Volunt<span class="fw-light">eco</span></span>, la comunidad de voluntarios y anfitriones comprometidos con el planeta.
+                Unite a <span class="fw-semibold ff-nunito fs-3">Volunt<span class="fw-light">eco</span></span>, la comunidad de voluntarios y anfitriones comprometidos con el planeta.
                 Tu aventura empieza acá.
             </p>
             <a href="{{ route('home') }}" class="btn btn-lg btn-light fw-medium">Explorar Ahora</a>
