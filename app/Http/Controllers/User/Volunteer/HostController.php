@@ -7,13 +7,16 @@ use Illuminate\Http\Request;
 use App\Models\Host;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Volunteer;
+use App\Models\Project;
+use Illuminate\Support\Facades\Auth;
 
 class HostController extends Controller
 {
     //
     public function profile($id)
     {
-        $host = Host::with(['user'])->findOrFail($id);
+        $user = Auth::user()->volunteer->id;
+        $host = Host::with(['user', 'projects.volunteers'])->findOrFail($id);
 
         if (Gate::denies('view', $host)) {
             return redirect()->route('volunteer.projects.applied')->with('error', 'No tienes permiso para ver el perfil del usuario solicitado.');

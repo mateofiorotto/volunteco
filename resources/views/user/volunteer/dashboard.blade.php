@@ -8,7 +8,14 @@
 
         <!-- Últimos Proyectos Aplicados -->
         <div class="mb-5">
-            <h2 class="h4 mb-4">Mis <span class="fw-light">Últimas Postulaciones</span></h2>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="h4 mb-0">Mis <span class="fw-light">Últimos Proyectos</span></h2>
+                <a href="{{ route('volunteer.projects.applied') }}"
+                   class="btn btn-sm btn-primary">
+                    Ver Todos
+                </a>
+            </div>
+
 
             @if ($appliedProjects->isEmpty())
                 <div class="alert alert-info">
@@ -38,17 +45,17 @@
                                         {{ Str::limit($project->description, 100) }}
                                     </p>
 
-                                    <p class="mb-3 small">
-                                        <i class="bi bi-calendar me-1"></i>
-                                        Aplicado: {{ \Carbon\Carbon::parse($project->pivot->applied_at)->format('d/m/Y') }}
-                                    </p>
-
-                                    @if ($project->pivot->accepted_at)
+                                    @if ($project->pivot->status === 'aceptado')
                                         <p class="mb-3 small">
                                             <i class="bi bi-check-circle me-1"></i>
                                             Aceptado:
                                             {{ \Carbon\Carbon::parse($project->pivot->accepted_at)->format('d/m/Y') }}
                                         </p>
+                                    @else
+                                    <p class="mb-3 small">
+                                        <i class="bi bi-calendar me-1"></i>
+                                        Aplicado: {{ \Carbon\Carbon::parse($project->pivot->applied_at)->format('d/m/Y') }}
+                                    </p>
                                     @endif
 
                                     @if ($project->enabled === 0)
@@ -107,14 +114,9 @@
                                         {{ Str::limit($project->description, 120) }}
                                     </p>
 
-                                    <div class="small mb-3">Es un proyecto de:
-                                        <span class=" fw-semibold">{{ $project->host->name }}</span>
-                                    </div>
-
-
                                     <div class="d-flex gap-2">
                                         <a href="{{ route('project', $project->id) }}"
-                                           class="btn btn-sm btn-azul flex-grow-1">
+                                           class="btn btn-sm btn-azul">
                                             Ver Detalles
                                         </a>
                                     </div>

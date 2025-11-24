@@ -26,6 +26,9 @@ class DashboardController extends Controller
 
         //ultimos 3 proyectos publicados en general
         $latestProjects = Project::where('enabled', true)
+            ->whereDoesntHave('volunteers', function ($q) {
+                $q->where('volunteer_id', Auth::user()->volunteer->id);
+            })
             ->orderBy('created_at', 'desc')
             ->take(3)
             ->get();
