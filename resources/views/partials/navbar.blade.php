@@ -16,10 +16,13 @@
             <a class="nav-link {{ request()->routeIs('howItWorks') ? 'active' : '' }}" href="{{ route('howItWorks') }}">Cómo funciona</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('projects') ? 'active' : '' }}" href="{{ route('projects') }}">Proyectos</a>
+            <a class="nav-link {{ request()->routeIs('projects', 'project') ? 'active' : '' }}" href="{{ route('projects') }}">Proyectos</a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">Nosotros</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('donate') ? 'active' : '' }}" href="{{ route('donate') }}">Donar</a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contacto</a>

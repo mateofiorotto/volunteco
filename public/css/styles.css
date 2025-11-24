@@ -708,14 +708,8 @@ small {
 
 /**proyectos**/
 .projects-hero {
-    background: linear-gradient(
-        135deg,
-        var(--bs-primary) 0%,
-        var(--bs-primary-dark) 100%
-    );
     color: white;
     padding: 60px 0 80px;
-    margin-bottom: -40px;
     position: relative;
     overflow: hidden;
 }
@@ -738,7 +732,6 @@ small {
 
 .projects-hero h1 {
     font-size: 3rem;
-    font-weight: 700;
     margin-bottom: 1rem;
 }
 
@@ -772,8 +765,6 @@ small {
 
 .search-box input {
     padding-left: 45px;
-    border-radius: 50px;
-    border: 2px solid var(--bs-border-color-translucent);
 }
 
 .search-box input:focus {

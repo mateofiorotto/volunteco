@@ -7,29 +7,22 @@
         <div class="container pt-5 pb-5">
             <div class="d-flex justify-content-between align-items-center mb-5">
                 <h1 class="title-h1 h3 mb-0">Proyecto</h1>
-                <a href="{{ url()->previous() }}"
-                   class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
+                <a href="{{ url()->previous() }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
             </div>
 
             <!-- Alerta de exito temporal -->
             @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show"
-                     role="alert">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('success') }}
-                    <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="alert"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
             @endif
 
             <!-- Alerta de error temporal mas adelante cambiar por swal2 o algo mas lindo -->
             @if (session('error'))
-                <div class="alert alert-danger alert-dismissible fade show"
-                     role="alert">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     {{ session('error') }}
-                    <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="alert"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
             @endif
 

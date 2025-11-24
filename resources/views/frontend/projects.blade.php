@@ -2,10 +2,10 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="projects-hero">
+    <section class="projects-hero bg-primary">
         <div class="container">
             <div class="projects-hero-content text-center">
-                <h1 class="ff-nunito">Participá en proyectos de voluntariado</h1>
+                <h1>Participá en proyectos de voluntariado</h1>
                 <p>Encontrá un proyecto que te guste y formá parte del cambio</p>
             </div>
         </div>
@@ -89,15 +89,13 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="card project-card">
                                     <div>
-                                        <img src="{{ asset('storage/' . ($project->image ?? 'thumbnail-proyecto.jpg')) }}"
-                                             class="card-img-top object-fit-cover"
-                                             alt="{{ $project->title }}">
+                                        <img src="{{ asset('storage/' . ($project->image ?? 'thumbnail-proyecto.jpg')) }}" class="card-img-top object-fit-cover" alt="{{ $project->title }}" width="414" height="232">
                                         <div class="project-badge-overlay">
                                             <span class="badge bg-primary">{{ $project->projectType->name }}</span>
                                         </div>
                                     </div>
                                     <div class="card-body d-flex flex-column">
-                                        <h3 class="card-title h5 ff-nunito">{{ $project->title }}</h3>
+                                        <h3 class="card-title h5">{{ $project->title }}</h3>
 
                                         <p class="card-text mb-3 small text-muted">
                                             {{ Str::limit($project->description, 100) }}
@@ -120,11 +118,11 @@
                                                           stroke-linejoin="round"
                                                           d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                                                 </svg>
-                                                <span>{{ $project->location_id ? $project->location->name . ', ' . $project->location->province->name : 'Ubicación por definir' }}</span>
+                                                <span>{{ $project->location->province->name }}</span>
                                             </div>
 
                                             <a href="{{ route('project', $project->id) }}"
-                                               class="btn btn-outline-primary w-100">
+                                               class="btn btn-azul w-100">
                                                 Ver Detalles
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      fill="none"
@@ -157,17 +155,6 @@
 
     <!-- Call to Action -->
     @if (!$projects->isEmpty())
-        <section class="cta-section-proyectos py-5">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-title mb-4 text-white">¿Aún no formas parte?</h2>
-                <p class="section-subtitle mb-4 text-white">Unite a nuestra comunidad</p>
-                <a href="{{ route('register-volunteer.create') }}"
-                   class="btn btn-light btn-hero px-5 mx-2 mb-3 mb-lg-0">Ser Voluntario</a>
-                <a href="{{ route('register-host.create') }}"
-                   class="btn btn-light btn-hero px-5 mx-2">Ser Anfitrión</a>
-            </div>
-        </div>
-    </section>
+        @include('partials.banner-register')
     @endif
 @endsection

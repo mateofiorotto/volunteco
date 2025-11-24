@@ -72,5 +72,10 @@ class FrontendController extends Controller
         return view('frontend.how-it-works');
     }
 
+    public function donate()
+    {
+        return view('frontend.donate');
+    }
+
 
 }
