@@ -39,6 +39,8 @@
     --bs-primary-dark-rgb: 34, 63, 5;
     --bs-secondary: #ec5228;
     --bs-secondary-rgb: 236, 82, 40;
+    --bs-secondary-bg-subtle: #ffc7b7;
+    --bs-secondary-border-subtle:  #ffc7b7;
     --bs-success: var(--bs-primary);
     --bs-success-rgb: var(--bs-primary-rgb);
     --bs-warning: #f6c445;
@@ -146,7 +148,6 @@ h6 {
     --bs-btn-bg: var(--bs-azul-color);
     --bs-btn-border-color: var(--bs-azul-color);
     --bs-btn-active-bg: var(--bs-body-color);
-    --bs-btn-border-color: var(--bs-body-color);
     --bs-btn-active-color: #fff;
     --bs-btn-disabled-bg: var(--bs-azul-color);
     --bs-btn-disabled-color: #fff;
@@ -361,8 +362,7 @@ small {
 }
 
 .section-title {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    font-size: 3rem;
 }
 
 .section-subtitle {
@@ -438,21 +438,10 @@ small {
 }
 
 .sponsor-logo {
-    height: 200px;
+    height: 130px;
     display: block;
     margin: auto;
 }
-
-
-.cta-section {
-    background: linear-gradient(
-        135deg,
-        var(--bs-primary) 0%,
-        var(--bs-primary-dark) 100%
-    );
-    color: white;
-}
-
 
 @media (max-width: 768px) {
     .hero-title {
@@ -603,20 +592,6 @@ small {
 }
 
 /* Features Section */
-.section-title {
-    font-size: 3rem;
-    text-align: center;
-    margin-bottom: 1rem;
-    color: var(--bs-body-color);
-}
-
-.section-subtitle {
-    font-size: 1.3rem;
-    text-align: center;
-    margin-bottom: 60px;
-    font-weight: 300;
-}
-
 .feature-card {
     text-align: center;
     padding: 40px 30px;
@@ -691,10 +666,7 @@ small {
 
 /* CTA Section */
 .cta-section {
-    background-image: linear-gradient(
-        rgba(34, 63, 5, 0.98),
-        rgba(102, 128, 10, 0.75)
-    ), /* color overlay */
+    background-image: linear-gradient( rgba(30, 30, 30, 0.85)), /* color overlay */
     url('/images/madre-e-hija-preparandose-para-plantar-un-arbol-en-el-bosque.jpg');
     background-color: var(--bs-primary);
     background-size: cover, cover;

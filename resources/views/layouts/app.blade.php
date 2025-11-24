@@ -92,7 +92,7 @@
             </div>
             <!-- copyright -->
             <div class="text-center p-3 text-bg-dark">
-                <p class="mb-0 small fw-light">&copy Copyright 2025 - Volunteco</p>
+                <p class="mb-0 small fw-light">&copy Copyright 2025 - Volunteco. Todos los derechos reservados</p>
             </div>
         </footer>
     </div>
