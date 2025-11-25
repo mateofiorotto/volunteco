@@ -21,8 +21,8 @@
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="text-center mb-5">
-                        <h2 class="h3 mb-4">¿Qué es Volunteco?</h2>
-                        <p class="lead text-muted">
+                        <h2 class="section-title mb-4">¿Qué es Volunteco?</h2>
+                        <p class="section-subtitle">
                             Volunteco es una plataforma pensada para quienes gustan de compartir experiencias de vida y
                             conocimiento profesional a través de actividades de voluntariado, incentivadas por la ecología y
                             el cuidado ambiental.
@@ -145,8 +145,8 @@
     <section class="py-5">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="h3 mb-3">Nuestros Valores</h2>
-                <p class="text-muted">Los pilares que guían nuestro trabajo</p>
+                <h2 class="text-primary section-title mb-3">Nuestros Valores</h2>
+                <p class="section-subtitle">Los pilares que guían nuestro trabajo</p>
             </div>
 
             <div class="row g-4">
