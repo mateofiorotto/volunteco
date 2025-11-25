@@ -21,7 +21,8 @@
             <div class="row justify-content-center">
                 <div class="col-lg-10 col-xl-9">
                     <div class="border rounded-3 p-5 px-md-5 px-3">
-                        <h2 class="section-title text-primary text-center mb-4">Envianos tu mensaje</h2>
+                        <h2 class="section-title text-primary text-center mb-4">Envianos <span class="fw-light">tu
+                                mensaje</span></h2>
                         <p class="text-center section-subtitle mb-5">Completá el formulario y nos pondremos en contacto a la
                             brevedad</p>
 

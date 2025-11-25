@@ -21,7 +21,7 @@
             <div class="row align-items-center g-5">
                 <!-- Donation Info -->
                 <div class="col-lg-6">
-                    <h2 class="section-title text-primary">Colaborá con nosotros</h2>
+                    <h2 class="section-title text-primary">Colaborá <span class="fw-light">con nosotros</span></h2>
                     <p class="section-subtitle text-muted mb-4">
                         Cada aporte hace la diferencia. Tu donación nos ayuda a mantener la plataforma
                         activa y a seguir conectando voluntarios con proyectos ecológicos en toda Argentina.
@@ -104,7 +104,7 @@
             <!-- Impact Section -->
             <div class="row mt-5 pt-5">
                 <div class="col-12">
-                    <h3 class="text-center mb-5 text-primary section-title">¿Cómo ayuda tu donación?</h3>
+                    <h3 class="text-center mb-5 text-primary section-title">Tu ayuda <span class="fw-light">impacta</span></h3>
                 </div>
                 <div class="col-md-4 text-center mb-4">
                     <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
