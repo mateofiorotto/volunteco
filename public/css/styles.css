@@ -458,6 +458,52 @@ small {
     max-width: 300px;
     width: 70%;
 }
+.hero-section::after {
+    content: '';
+    display: block;
+    background-image: url('/images/background.png');
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.2;
+    z-index: 1;
+    width: 100%;
+    height: 48%;
+    bottom: 0;
+}
+.cta-section .container {
+    z-index: 100;
+    position: relative;
+}
+.cta-section::after {
+    content: '';
+    display: block;
+    background-image: url('/images/background-2.png');
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom center;
+    opacity: 0.1;
+    z-index: 1;
+    width: 100%;
+    height:94%;
+    top: 0;
+
+}
+.landing-hero::after {
+    content: '';
+    display: block;
+    background-image: url('/images/background.png');
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.4;
+    z-index: 1;
+    width: 100%;
+    height: 48%;
+    bottom: 0;
+}
+
 @media (max-width: 767px){
     .landing-hero .hero-title {
         font-size: 2.5rem;
