@@ -3,7 +3,7 @@
 @section('content')
     <section>
         <div class="container-sm py-5">
-            <div class="border rounded-3 p-5">
+            <div class="border rounded-3 p-5 px-md-5 px-3">
                 <h1 class="h2 text-center mb-5">Ingresar</h1>
 
                 {{-- Alerta de éxito --}}
@@ -68,8 +68,8 @@
                         @enderror
                     </div>
 
-                    <div class="mb-4 d-flex justify-content-between align-items-center">
-                        <div class="form-check">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+                        <div class="form-check mb-4 ">
                             <input id="remember_me"
                                    type="checkbox"
                                    class="form-check-input"
@@ -82,7 +82,7 @@
                         </div>
                         @if (Route::has('password.request'))
                             <a href="{{ route('password.request') }}"
-                               class="small">
+                               class="small mb-4 ">
                                 ¿Olvidaste tu contraseña?
                             </a>
                         @endif

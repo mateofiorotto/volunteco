@@ -29,7 +29,15 @@
         </li>
     </ul>
     @guest
-        <div class="d-flex align-items-center">
+        <div class="d-md-none pb-3">
+            <a class="btn btn-outline-primary w-100 mb-3 py-2" href="{{ route('login') }}">Ingresar</a>
+            <div class="d-flex gap-3">
+                <a class="btn btn-primary" href="{{ route('register-host.create') }}">¿Querés ser Anfitrión?</a></li>
+                <a class="btn btn-primary" href="{{ route('register-volunteer.create') }}">¿Querés ser Voluntario?</a></li>
+            </div>
+        </div>
+
+        <div class="d-md-flex align-items-center d-none">
             <!-- Usuario NO autenticado -->
             <a class="py-0 px-3 {{ request()->routeIs('login') ? 'active' : '' }}" href="{{ route('login') }}">
                 <img src="{{asset('storage/perfil-volunteer.svg')}}" width="40" height="40"/>

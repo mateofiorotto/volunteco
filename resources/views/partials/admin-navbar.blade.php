@@ -8,25 +8,7 @@
     <span class="navbar-toggler-icon"></span>
 </button>
 <div class="collapse navbar-collapse align-items-lg-center" id="navbarMenu">
-    @guest
-        <div class="d-flex gap-3">
-            <!-- Usuario NO autenticado -->
-            <a class="btn btn-primary {{ request()->routeIs('login') ? 'active' : '' }}" href="{{ route('login') }}">Ingresar</a>
-
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                    Regístrate
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item {{ request()->routeIs('register-host.create') ? 'active' : '' }}" href="{{ route('register-host.create') }}">¿Querés ser Anfitrión?</a></li>
-                    <li><a class="dropdown-item {{ request()->routeIs('register-volunteer.create') ? 'active' : '' }}" href="{{ route('register-volunteer.create') }}">¿Querés ser Voluntario?</a></li>
-                </ul>
-            </div>
-        </div>
-    @else
+    @auth
         <!-- esto es solo en modo desarrollo sacar despues en produccion -->
         <div class="d-flex align-items-center"><p class="mb-0">Hola {{ Auth::user()->role->name }}</p></div>
         <a href="{{route('home')}}" class="btn btn-outline-primary ms-auto me-4">Ir al sitio web</a>
@@ -111,5 +93,5 @@
                 @endif
             </li>
         </ul>
-    @endguest
+    @endauth
 </div>

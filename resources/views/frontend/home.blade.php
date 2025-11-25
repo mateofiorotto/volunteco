@@ -7,12 +7,11 @@
     <section class="hero-section">
         <div class="hero-background"></div>
         <div class="hero-overlay"></div>
-        <div class="hero-content">
+        <div class="hero-content container">
             <h1 class="hero-title">Conectá con <span class="fw-light">la Naturaleza</span></h1>
             <p class="hero-subtitle">Uníte a proyectos de voluntariado ecológico alrededor de Argentina.</p>
             <div>
-                <a href="{{ route('projects') }}"
-                   class="btn btn-primary btn-lg">Explorar Proyectos</a>
+                <a href="{{ route('projects') }}" class="btn btn-primary btn-lg">Explorar Proyectos</a>
             </div>
         </div>
     </section>
@@ -95,7 +94,7 @@
             </div>
 
             <div class="text-center">
-                <a href="{{route('projects')}}" class="btn mx-auto btn-outline-primary">Ver Todos</a>
+                <a href="{{route('projects')}}" class="btn mx-auto btn-warning">Ver Todos</a>
             </div>
         </div>
     </section>
@@ -196,7 +195,7 @@
             </div>
 
             <div class="text-center small">
-                <a href="{{route('donate')}}" class="btn btn-outline-primary">Quiero Ser Sponsor</a>
+                <a href="{{route('donate')}}" class="btn btn-warning">Quiero Ser Sponsor</a>
             </div>
         </div>
     </section>

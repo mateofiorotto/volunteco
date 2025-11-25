@@ -5,11 +5,11 @@
 @section('content')
 
     <!-- Hero Section -->
-    <section class="landing-hero">
+    <section class="landing-hero py-3">
         <div class="hero-bg-image"></div>
         <div class="hero-content container-md">
             <div class="hero-logo mb-5">
-                <img class="img-fluid  d-block m-auto hero-img mb-5"
+                <img class="img-fluid  d-block m-auto hero-img mb-md-5"
                      src="images/logo-white.svg"
                      alt="Volunteco"
                      width="300"
@@ -42,19 +42,19 @@
     <section class="stats-section">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-md-4">
                     <div class="stat-item">
                         <div class="stat-number">120+</div>
                         <div class="stat-label">Proyectos Activos</div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-md-4">
                     <div class="stat-item">
                         <div class="stat-number">1K+</div>
                         <div class="stat-label">Voluntarios</div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-md-4">
                     <div class="stat-item">
                         <div class="stat-number">100%</div>
                         <div class="stat-label">Confiable</div>
@@ -68,8 +68,7 @@
     <section class="features-section py-5">
         <div class="container py-5">
             <div class="text-center">
-                <h2 class="section-title">Elegí <span class="fw-semibold ff-nunito text-primary">Volunt<span
-                              class="fw-light">eco</span></span></h2>
+                <h2 class="section-title">Elegí <span class="fw-semibold ff-nunito text-primary">Volunt<span class="fw-light">eco</span></span></h2>
                 <p class="section-subtitle">Tu plataforma de confianza para voluntariado ecológico</p>
             </div>
 

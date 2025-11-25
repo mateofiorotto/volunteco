@@ -43,8 +43,8 @@
         <footer class="bg-primary text-white border-top border-white mt-auto">
             <div class="container mx-auto">
                 <!-- Sección superior: logo y links -->
-                <div class="row align-items-center justify-content-between py-3">
-                    <div class="col-md-4">
+                <div class="row align-items-center justify-content-between pt-3">
+                    <div class="col-md-4 mb-3">
                         <a href="{{ route('home') }}"
                            class="mb-3 d-inline-block">
                             <img src="{{ asset('images/logo-white.svg') }}"
@@ -56,7 +56,7 @@
                     </div>
 
                     <!-- Enlaces -->
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-3">
                         <ul class="d-flex flex-row align-items-center justify-content-center gap-5 list-unstyled mb-0">
                             <li>
                                 <a class="nav-link {{ request()->routeIs('register-host.create') ? 'active' : '' }}"
@@ -69,8 +69,8 @@
                         </ul>
                     </div>
 
-                    <div class="col-md-4">
-                        <ul class="d-flex flex-row justify-content-end gap-4 list-unstyled mb-0">
+                    <div class="col-md-4 mb-3">
+                        <ul class="d-flex flex-row justify-content-center justify-content-md-end gap-4 list-unstyled mb-0">
                             <li>
                                 <a href="https://www.instagram.com/volunteco"
                                    target="_blank"
