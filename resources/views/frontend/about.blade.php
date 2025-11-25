@@ -21,7 +21,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="text-center mb-5">
-                        <h2 class="section-title mb-4">¿Qué es Volunteco?</h2>
+                        <h2 class="section-title text-primary mb-4">¿Qué es Volunteco?</h2>
                         <p class="section-subtitle">
                             Volunteco es una plataforma pensada para quienes gustan de compartir experiencias de vida y
                             conocimiento profesional a través de actividades de voluntariado, incentivadas por la ecología y
