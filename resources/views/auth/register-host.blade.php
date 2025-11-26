@@ -37,7 +37,7 @@
                                 <h2 class="card-title h3">Organización</h2>
                                 <p>Completá con los datos de la organización.</p>
                                 <div class="mb-3">
-                                    <label for="nombre"
+                                    <label for="name"
                                            class="form-label">Nombre *</label>
                                     <input type="text"
                                            id="name"

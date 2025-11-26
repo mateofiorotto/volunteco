@@ -129,9 +129,11 @@
     </section>
     <!-- Call to action Final -->
     <section class="contact-footer py-5">
-        <div class="container py-">
+        <div class="container">
             <div class="text-center">
                 <h2 class="section-title text-white">Gracias <span class="fw-light">por confiar</span></h2>
+            </div>
+        </div>
     </section>
 
 @endsection

@@ -39,7 +39,7 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="stats-section">
+    <div class="stats-section">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-4">
@@ -62,7 +62,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Features Section -->
     <section class="features-section py-5">

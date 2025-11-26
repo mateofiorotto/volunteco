@@ -59,7 +59,7 @@
                                                name="lastname"
                                                placeholder="Apellido"
                                                required
-                                               autocomplete="lastname"
+                                               autocomplete="family-name"
                                                class="form-control @error('lastname') is-invalid @enderror"
                                                value="{{ old('lastname') }}" />
                                         @error('lastname')
