@@ -274,6 +274,9 @@ h6 {
     border-color: var(--bs-primary);
 }
 /*customs*/
+.text-volunteco {
+    font-size: 115%;
+}
 .title-h1 {
     color: var(--bs-primary);
     font-family: "Nunito", sans-serif;
@@ -367,7 +370,7 @@ small {
 }
 
 .section-subtitle {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     margin-bottom: 3rem;
 }
 
@@ -708,7 +711,6 @@ small {
 @media (min-width: 768px) {
     .step-item {
         padding: 30px;
-        margin-bottom: 40px;
     }
 }
 
@@ -737,6 +739,9 @@ small {
     position: relative;
 }
 .step-number + .step-content { padding-top: 13px;}
+@media (min-width: 768px) {
+    .step-number + .step-content { padding-top: 19px;}
+}
 
 .step-title {
     font-size: 1.8rem;
