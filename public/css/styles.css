@@ -276,6 +276,12 @@ h6 {
 /*customs*/
 .text-volunteco {
     font-size: 115%;
+    color: var(--bs-primary);
+    font-family: 'Nunito';
+    font-weight: 600;
+}
+.text-volunteco span {
+    font-weight: 300;
 }
 .title-h1 {
     color: var(--bs-primary);

@@ -19,67 +19,70 @@
     <section class="py-5">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-10">
+                <div class="col-md-8">
                     <div class="text-center mb-5">
-                        <h2 class="section-title text-primary mb-4">Somos <span class="fw-light">Volunteco</span></h2>
+                        <h2 class="section-title text-primary mb-4">Somos <span class="text-volunteco">Volunt<span>eco</span></span></h2>
                         <p class="section-subtitle">
-                            Volunteco es una plataforma pensada para quienes gustan de compartir experiencias de vida y
+                            <span class="text-volunteco">Volunt<span>eco</span></span> es una plataforma pensada para quienes gustan de compartir experiencias de vida y
                             conocimiento profesional a través de actividades de voluntariado, incentivadas por la ecología y
                             el cuidado ambiental.
                         </p>
                     </div>
-
-                    <div class="row g-4 mb-5">
-                        <div class="col-md-6">
-                            <div class="d-flex align-items-start">
-                                <div class="flex-shrink-0 me-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                         width="32"
-                                         height="32"
-                                         fill="currentColor"
-                                         class="bi bi-bullseye text-primary"
-                                         viewBox="0 0 16 16">
-                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                        <path d="M8 13A5 5 0 1 1 8 3a5 5 0 0 1 0 10m0 1A6 6 0 1 0 8 2a6 6 0 0 0 0 12" />
-                                        <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8" />
-                                        <path d="M9.5 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 class="h5 mb-2">Nuestro objetivo</h3>
-                                    <p class="text-muted mb-0">
-                                        Desarrollar una web a nivel nacional donde ONGs, organizaciones de investigación,
-                                        fundaciones o comunidades puedan publicar sus proyectos de carácter ecológico,
-                                        especificando tareas y condiciones.
-                                    </p>
-                                </div>
+                </div>
+            </div>
+            <div class="row g-4 mb-5 align-items-center">
+                <div class="col-md-5 mx-auto order-md-last order-first">
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="flex-shrink-0 me-3">
+                            <div class="icono text-white bg-primary rounded-circle p-3">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                        width="32"
+                                        height="32"
+                                        fill="currentColor"
+                                        class="bi bi-bullseye"
+                                        viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                    <path d="M8 13A5 5 0 1 1 8 3a5 5 0 0 1 0 10m0 1A6 6 0 1 0 8 2a6 6 0 0 0 0 12" />
+                                    <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8" />
+                                    <path d="M9.5 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                </svg>
                             </div>
                         </div>
-
-                        <div class="col-md-6">
-                            <div class="d-flex align-items-start">
-                                <div class="flex-shrink-0 me-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                         width="32"
-                                         height="32"
-                                         fill="currentColor"
-                                         class="bi bi-diagram-3 text-primary"
-                                         viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                              d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5zm-6 8A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5zm6 0A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5zm6 0a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5z" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 class="h5 mb-2">Nuestro rol</h3>
-                                    <p class="text-muted mb-0">
-                                        Actuamos como nexo entre organizaciones que necesitan colaboración y personas
-                                        motivadas por el voluntariado ecológico, facilitando el registro y postulación a
-                                        proyectos verificados.
-                                    </p>
-                                </div>
-                            </div>
+                        <div>
+                            <h3>Nuestro objetivo</h3>
+                            <p class="text-muted">
+                                Desarrollar una web a nivel nacional donde ONGs, organizaciones de investigación,
+                                fundaciones o comunidades puedan publicar sus proyectos de carácter ecológico,
+                                especificando tareas y condiciones.
+                            </p>
                         </div>
                     </div>
+                    <div class="d-flex align-items-start">
+                        <div class="flex-shrink-0 me-3">
+                            <div class="icono text-white bg-primary rounded-circle p-3">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="32"
+                                    height="32"
+                                    fill="currentColor"
+                                    class="bi bi-diagram-3"
+                                    viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                        d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5zm-6 8A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5zm6 0A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5zm6 0a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5z" />
+                            </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h3>Nuestro rol</h3>
+                            <p class="text-muted mb-0">
+                                Actuamos como nexo entre organizaciones que necesitan colaboración y personas
+                                motivadas por el voluntariado ecológico, facilitando el registro y postulación a
+                                proyectos verificados.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 offset-md-1">
+                    <img src="{{asset('images/voluntariado.png')}}" width="550" height="512" alt="Voluntariado" class="img-fluid"/>
                 </div>
             </div>
         </div>
