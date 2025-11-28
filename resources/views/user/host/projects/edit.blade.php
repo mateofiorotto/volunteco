@@ -3,7 +3,7 @@
 @section('content')
     <div class="container py-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
-            <h1 class="title-h1 h3 mb-0">Editar <span>Proyecto</span></h1>
+            <h1 class="title-h1 h3 mb-0">Editar <span>proyecto</span></h1>
             <a href="{{ url()->previous() }}"
                class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
         </div>
@@ -30,7 +30,7 @@
                 <div class="col-md-6">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h2 class="card-title h4">Información del Proyecto</h2>
+                            <h2 class="card-title h4">Información del proyecto</h2>
 
                             <div class="mb-3">
                                 <label for="title"
@@ -148,7 +148,7 @@
                 <div class="col-md-6">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h3 class="card-title h4">Fechas y Horarios</h3>
+                            <h3 class="card-title h4">Fechas y horarios</h3>
 
                             <div class="mb-3">
                                 <label for="start_date"

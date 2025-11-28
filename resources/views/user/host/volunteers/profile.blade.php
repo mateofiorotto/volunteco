@@ -4,7 +4,7 @@
     <section class="container py-5">
 
         <div class="d-flex justify-content-between align-items-center mb-5">
-            <h1 class="title-h1 h3">Perfil <span>del Voluntario</span></h1>
+            <h1 class="title-h1 h3">Perfil <span>del voluntario</span></h1>
             <a href="{{ url()->previous() }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
         </div>
 
@@ -69,7 +69,7 @@
 
             <div class="col-md-5">
                 <div class="card mb-4">
-                    <div class="card-header">Datos de Contacto</div>
+                    <div class="card-header">Datos de contacto</div>
                     <div class="card-body">
                         @if ($hasAccepted)
                             <ul class="list-unstyled mb-0">

@@ -4,7 +4,7 @@
     <section>
         <div class="container py-5">
             <div class="d-flex justify-content-between align-items-center mb-5">
-                <h1 class="title-h1 h3 mb-0">Perfil de <span>Voluntario</span></h1>
+                <h1 class="title-h1 h3 mb-0">Perfil de <span>voluntario</span></h1>
                 <a href="{{ url()->previous() }}"
                    class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
             </div>
@@ -82,7 +82,7 @@
 
                                 <div>
                                     <div class="card mb-3">
-                                        <div class="card-header">Redes Sociales</div>
+                                        <div class="card-header">Redes sociales</div>
                                         <div class="card-body">
                                             @if ($volunteer->linkedin || $volunteer->facebook || $volunteer->instagram)
                                                 <ul class="list-unstyled mb-0">

@@ -6,7 +6,7 @@
 
             <div class="d-flex justify-content-between align-items-start mb-5">
                 <div>
-                    <h1 class="title-h1 h3">Editar <span>Mi Perfil</span></h1>
+                    <h1 class="title-h1 h3">Editar <span>mi perfil</span></h1>
                     <p class="mb-3">Completá todos los datos requeridos para actualizar tu perfil.</p>
                 </div>
                 <a href="{{ url()->previous() }}"
@@ -38,12 +38,12 @@
                     <div class="col-md-6">
                         <div class="card mb-5">
                             <div class="card-body">
-                                <h2 class="card-title h3">Datos del Anfitrión</h2>
+                                <h2 class="card-title h3">Datos del anfitrión</h2>
                                 <p class="mb-3">Completa con los datos de tu organización o nombre.</p>
 
                                 <div class="mb-3">
                                     <label for="name"
-                                           class="form-label">Nombre del Anfitrión *</label>
+                                           class="form-label">Nombre del anfitrión *</label>
                                     <input type="text"
                                            id="name"
                                            name="name"
@@ -76,7 +76,7 @@
 
                                 <div class="mb-3">
                                     <label for="person_full_name"
-                                           class="form-label">Persona de Contacto *</label>
+                                           class="form-label">Persona de contacto *</label>
                                     <input type="text"
                                            id="person_full_name"
                                            name="person_full_name"
@@ -97,7 +97,7 @@
                     <div class="col-md-6">
                         <div class="card mb-5">
                             <div class="card-body">
-                                <h2 class="card-title h3">Datos de Acceso</h2>
+                                <h2 class="card-title h3">Datos de acceso</h2>
                                 <p class="mb-3">Completa con los datos que te servirán para acceder al sistema.</p>
 
                                 <div class="mb-3">
@@ -136,7 +136,7 @@
                     <div class="col-md-6">
                         <div class="card mb-5">
                             <div class="card-body">
-                                <h2 class="card-title h3">Datos de Contacto</h2>
+                                <h2 class="card-title h3">Datos de contacto</h2>
                                 <p class="mb-3">Completa con tus datos.</p>
 
                                 <div class="mb-3">
@@ -196,7 +196,7 @@
                     <div class="col-md-6">
                         <div class="card mb-5">
                             <div class="card-body">
-                                <h2 class="card-title h3">Redes Sociales</h2>
+                                <h2 class="card-title h3">Redes sociales</h2>
 
                                 <div class="mb-3">
                                     <label for="linkedin"
@@ -247,7 +247,7 @@
                         <div class="col-md-12">
                             <div class="card mb-5">
                                 <div class="card-body">
-                                    <h2 class="card-title h3">Información Adicional</h2>
+                                    <h2 class="card-title h3">Información adicional</h2>
                                     <p class="mb-3">Completa con los datos de tu organización.</p>
 
                                     <div class="row">

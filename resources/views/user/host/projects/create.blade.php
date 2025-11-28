@@ -4,7 +4,7 @@
     <div class="container py-5">
         <div class="row mb-5">
             <div class="col-md-7">
-                <h1 class="title-h1 h3 mb-0">Crear <span>Proyecto</span></h1>
+                <h1 class="title-h1 h3 mb-0">Crear <span>proyecto</span></h1>
             </div>
         </div>
 
@@ -30,7 +30,7 @@
                 <div class="col-md-6">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h2 class="card-title h4">Información del Proyecto</h2>
+                            <h2 class="card-title h4">Información del proyecto</h2>
 
                             <div class="mb-3">
                                 <label for="title"
@@ -131,7 +131,7 @@
                 <div class="col-md-6">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h3 class="card-title h4">Fechas y Horarios</h3>
+                            <h3 class="card-title h4">Fechas y horarios</h3>
 
                             <div class="mb-3">
                                 <label for="start_date"

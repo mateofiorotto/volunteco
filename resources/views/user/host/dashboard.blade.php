@@ -8,7 +8,7 @@
 
         <!-- Últimos Proyectos Aplicados -->
         <div class="mb-5">
-            <h2 class="h4 mb-4">Mis <span class="fw-light">Últimos Proyectos</span></h2>
+            <h2 class="h4 mb-4">Mis <span class="fw-light">últimos proyectos</span></h2>
 
             <div class="row">
                 <div class="col-md-9 pe-md-5">
@@ -31,12 +31,12 @@
                                             <h3 class="card-title mb-0 h4">
                                                 {{ $project->title }}
                                             </h3>
-                                            @if($project->enabled != 1)
+                                            <!-- @if($project->enabled != 1)
                                             <span
                                                     class="badge text-capitalize bg-danger">
                                                     desactivado
                                             </span>
-                                            @endif
+                                            @endif -->
                                         </div>
 
                                         <p class="card-text small mb-3">
@@ -49,7 +49,7 @@
 
                                         <a href="{{ route('host.my-projects.show', $project->id) }}"
                                             class="btn btn-sm btn-azul mt-3">
-                                            Ver Detalles
+                                            Ver detalles
                                         </a>
                                     </div>
                                 </div>
@@ -62,7 +62,7 @@
                 <div class="col-md-3 bg-body-tertiary rounded py-3">
                     @if ($host->projects->isNotEmpty())
                     <p class="fw-bold">¿Tenés un proyecto nuevo?</p>
-                    <a href="{{route('host.my-projects.create')}}" class="btn btn-primary">Crear Proyecto Nuevo</a>
+                    <a href="{{route('host.my-projects.create')}}" class="btn btn-primary">Crear proyecto nuevo</a>
                     <hr class="my-4">
                     @endif
                     <div class="rounded bg-primary bg-opacity-10 border border-primary p-3">
@@ -74,7 +74,7 @@
                             <p><strong>{{ $volunteer->name }}</strong> aplicó el {{ \Carbon\Carbon::parse($volunteer->pivot->applied_at)->format('d/m/Y') }}
                             y está pendiente de aceptación en el proyecto: <strong>{{ $lastAppliedVolunteer->title }}</strong>
                             </p>
-                            <a href="{{route('host.my-projects.show', $lastAppliedVolunteer->id)}}" class="btn btn-outline-primary">Ir al Proyecto</a>
+                            <a href="{{route('host.my-projects.show', $lastAppliedVolunteer->id)}}" class="btn btn-outline-primary">Ir al proyecto</a>
                         @else
                             <p>No hay voluntarios pendientes de revisión.</p>
                         @endif

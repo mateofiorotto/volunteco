@@ -3,14 +3,14 @@
 @section('content')
     <section class="container py-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
-            <h1 class="title-h1 h3 mb-0">Panel de <span>Administración</span></h1>
+            <h1 class="title-h1 h3 mb-0">Panel de <span>administración</span></h1>
         </div>
 
         <div class="row mb-5">
             <div class="col-md-6">
                 <div class="card border-primary">
                     <div class="card-header text-bg-primary">
-                        <h2 class="h5 mb-0">Últimos Anfitriones <span class="small fw-light">(Total:
+                        <h2 class="h5 mb-0">Últimos anfitriones <span class="small fw-light">(Total:
                                 {{ $hostCount }})</span></h2>
                     </div>
                     <div class="card-body">
@@ -55,7 +55,7 @@
                                 </tbody>
                             </table>
                             <div class="text-end">
-                                <a href="{{route('admin.hosts.index')}}" class="btn btn-primary">Ver Todos</a>
+                                <a href="{{route('admin.hosts.index')}}" class="btn btn-primary">Ver todos</a>
                             </div>
                         @endif
                     </div>
@@ -64,7 +64,7 @@
             <div class="col-md-6">
                 <div class="card border-warning">
                     <div class="card-header text-bg-warning">
-                        <h2 class="h5 mb-0">Últimos Voluntarios <span class="small fw-light">(Total:
+                        <h2 class="h5 mb-0">Últimos voluntarios <span class="small fw-light">(Total:
                                 {{ $volunteerCount }})</span></h2>
                     </div>
                     <div class="card-body">
@@ -109,7 +109,7 @@
                                 </tbody>
                             </table>
                             <div class="text-end">
-                                <a href="{{route('admin.volunteers.index')}}" class="btn btn-warning">Ver Todos</a>
+                                <a href="{{route('admin.volunteers.index')}}" class="btn btn-warning">Ver todos</a>
                             </div>
                         @endif
                     </div>
@@ -121,7 +121,7 @@
             <div class="col-12">
                 <div class="card border-azul">
                     <div class="card-header text-bg-azul">
-                        <h2 class="h5 mb-0">Últimos Proyectos <span class="small fw-light">(Total:
+                        <h2 class="h5 mb-0">Últimos proyectos <span class="small fw-light">(Total:
                                 {{ $projectsCount }})</span></h2>
                     </div>
                     <div class="card-body">
@@ -164,7 +164,7 @@
                                 </tbody>
                             </table>
                             <div class="text-end">
-                                <a href="{{route('admin.projects.index')}}" class="btn btn-azul">Ver Todos</a>
+                                <a href="{{route('admin.projects.index')}}" class="btn btn-azul">Ver todos</a>
                             </div>
                         @endif
                     </div>

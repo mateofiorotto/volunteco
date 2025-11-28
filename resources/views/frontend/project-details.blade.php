@@ -167,7 +167,7 @@
                                                        target="_blank">{{ $project->host->user->email }}</a></li>
                                             </ul>
                                             <a href="{{ route('volunteer.hosts.profile', $project->host->id) }}"
-                                               class="btn-azul btn-sm btn mb-3">Ver Perfil</a>
+                                               class="btn-azul btn-sm btn mb-3">Ver perfil</a>
                                         @endif
                                     @endif
                                 </div>

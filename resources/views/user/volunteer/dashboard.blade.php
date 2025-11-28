@@ -9,10 +9,10 @@
         <!-- Últimos Proyectos Aplicados -->
         <div class="mb-5">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="h4 mb-0">Mis <span class="fw-light">Últimos Proyectos</span></h2>
+                <h2 class="h4 mb-0">Mis <span class="fw-light">últimos proyectos</span></h2>
                 <a href="{{ route('volunteer.projects.applied') }}"
                    class="btn btn-sm btn-primary">
-                    Ver Todos
+                    Ver todos
                 </a>
             </div>
 
@@ -65,7 +65,7 @@
                                     @if ($project->enabled === 1)
                                     <a href="{{ route('project', $project->id) }}"
                                        class="btn btn-sm btn-azul">
-                                        Ver Detalles
+                                        Ver detalles
                                     </a>
                                     @endif
                                 </div>
@@ -79,10 +79,10 @@
         <!-- Últimos Proyectos Publicados -->
         <div class="mb-5">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="h4 mb-0">Proyectos <span class="fw-light">Nuevos</span></h2>
+                <h2 class="h4 mb-0">Proyectos <span class="fw-light">nuevos</span></h2>
                 <a href="{{ route('projects') }}"
                    class="btn btn-sm btn-primary">
-                    Ver Todos
+                    Ver todos
                 </a>
             </div>
 
@@ -117,7 +117,7 @@
                                     <div class="d-flex gap-2">
                                         <a href="{{ route('project', $project->id) }}"
                                            class="btn btn-sm btn-azul">
-                                            Ver Detalles
+                                            Ver detalles
                                         </a>
                                     </div>
                                 </div>

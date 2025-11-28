@@ -9,7 +9,7 @@
         <div class="hero-overlay"></div>
         <div class="hero-content container">
             <div class="text-center">
-                <h1 class="hero-title">¿Cómo <span class="fw-light">Funciona</span>?</h1>
+                <h1 class="hero-title">¿Cómo <span class="fw-light">funciona</span>?</h1>
                 <p class="hero-subtitle">Sin complicaciones y totalmente confiable</p>
             </div>
         </div>
@@ -17,7 +17,7 @@
     <section class="how-section bg-body-tertiary">
         <div class="container">
             <div class="text-center">
-                <h2 class="section-title text-primary">Simples <span class="fw-light">Pasos</span></h2>
+                <h2 class="section-title text-primary">Simples <span class="fw-light">pasos</span></h2>
                 <p class="section-subtitle">Comenzá tu aventura como anfitrión o voluntario</p>
             </div>
             <div class="row justify-content-center">
@@ -25,7 +25,7 @@
                     <div class="step-item d-flex align-items-start gap-4">
                         <div class="step-number"><span>1</span></div>
                         <div class="step-content">
-                            <h3 class="step-title">Creá tu Perfil</h3>
+                            <h3 class="step-title">Creá tu perfil</h3>
                             <p class="step-text text-muted">Regístrate gratis como voluntario o anfitrión, solo toma unos
                                 minutos.</p>
                         </div>
@@ -52,7 +52,7 @@
                     <div class="step-item d-flex align-items-start gap-4">
                         <div class="step-number"><span>4</span></div>
                         <div class="step-content">
-                            <h3 class="step-title">Viví la Experiencia</h3>
+                            <h3 class="step-title">Viví la experiencia</h3>
                             <p class="step-text text-muted">Entre todos ayudamos a crear un mundo mejor.</p>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                                   d="M32.5,14.9c0-2.6-2-4.6-4.6-4.6c-2.6,0-4.6,2.1-4.6,4.6c0,2.5,2.1,4.6,4.6,4.6C30.5,19.5,32.5,17.4,32.5,14.9z" />
                         </svg>
                     </i>
-                    <span class="d-block fs-4">Ser Anfitrión</span>
+                    <span class="d-block fs-4">Ser anfitrión</span>
                 </a>
                 <a href="{{ route('register-volunteer.create') }}"
                    class="btn btn-lg btn-primary d-flex align-items-center">
@@ -114,7 +114,7 @@
                                   d="M6.5,8C7.3,8,8,7.3,8,6.5C8,5.7,7.3,5,6.5,5C5.6,5,5,5.7,5,6.5C5,7.3,5.6,8,6.5,8z" />
                         </svg>
                     </i>
-                    <span class="d-block fs-4">Ser Voluntario</span>
+                    <span class="d-block fs-4">Ser voluntario</span>
                 </a>
             </div>
         </div>

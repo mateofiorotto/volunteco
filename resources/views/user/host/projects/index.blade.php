@@ -3,10 +3,10 @@
 @section('content')
     <section class="container py-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
-            <h1 class="title-h1 h3 mb-0">Mis <span>Proyectos</span></h1>
+            <h1 class="title-h1 h3 mb-0">Mis <span>proyectos</span></h1>
             <!--Crear proyecto-->
             <a href="{{ route('host.my-projects.create') }}"
-               class="btn btn-primary">Crear Proyecto</a>
+               class="btn btn-primary">Crear proyecto</a>
         </div>
 
         @if (session('success'))
@@ -55,7 +55,7 @@
                     </thead>
                     <tbody>
                         @foreach ($projects as $project)
-                            <tr class="{{ $project->enabled != 1 ? 'table-danger' : '' }}">
+                            <tr class="{{ $project->enabled !== 1 ? 'table-danger' : '' }}">
                                 <td>
                                     <img src="{{ asset('storage/' . ($project->image ?? 'thumbnail-proyecto.jpg')) }}"
                                          alt="Imagen del proyecto {{ $project->title }}"

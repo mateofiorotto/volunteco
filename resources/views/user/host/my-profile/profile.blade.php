@@ -4,9 +4,9 @@
     <section class="container py-5">
 
         <div class="d-flex justify-content-between align-items-center mb-5">
-            <h1 class="title-h1 h3">Mi <span>Perfil</span></h1>
+            <h1 class="title-h1 h3">Mi <span>perfil</span></h1>
             <a href="{{ route('host.my-profile.edit') }}"
-               class="btn btn-primary">Editar Perfil</a>
+               class="btn btn-primary">Editar perfil</a>
         </div>
 
         @if (session('success'))

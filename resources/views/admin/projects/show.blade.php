@@ -4,7 +4,7 @@
     <section>
         <div class="container py-5">
             <div class="d-flex justify-content-between align-items-center mb-5">
-                <h1 class="title-h1 h3 mb-0">Detalle del <span>Proyecto</span></h1>
+                <h1 class="title-h1 h3 mb-0">Detalle del <span>proyecto</span></h1>
                 <a href="{{ url()->previous() }}"
                    class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
             </div>
@@ -78,7 +78,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="card mb-3">
-                                    <div class="card-header">Descripción del Proyecto</div>
+                                    <div class="card-header">Descripción del proyecto</div>
                                     <div class="card-body">
                                         {{ $project->description }}
                                     </div>
@@ -87,7 +87,7 @@
                             @if ($project->conditions->count() > 0)
                                 <div class="col-12">
                                     <div class="card mb-3">
-                                        <div class="card-header">Condiciones y Requisitos</div>
+                                        <div class="card-header">Condiciones y requisitos</div>
                                         <div class="card-body">
                                             <ul class="mb-0">
                                                 @foreach ($project->conditions as $condition)
@@ -114,7 +114,7 @@
                                             class="btn btn-danger"
                                             data-bs-toggle="modal"
                                             data-bs-target="#desactivarModal">
-                                        Desactivar Proyecto
+                                        Desactivar proyecto
                                     </button>
                                 </div>
                             @else
@@ -139,7 +139,7 @@
                     </div>
 
                     <div class="card">
-                        <div class="card-header">Información del Anfitrión</div>
+                        <div class="card-header">Información del anfitrión</div>
                         <div class="card-body">
                             <h6 class="card-subtitle mb-2">{{ $project->host->name }}</h6>
                             <ul class="list-unstyled small">
@@ -166,7 +166,7 @@
 
             <div>
                 <div class="card">
-                    <div class="card-header">Voluntarios Postulados</div>
+                    <div class="card-header">Voluntarios postulados</div>
                     <table class="table border-primary">
                             <thead>
                                 <tr>

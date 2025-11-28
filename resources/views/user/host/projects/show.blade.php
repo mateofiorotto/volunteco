@@ -36,7 +36,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <h2 class="card-title h3">{{ $project->title }}</h2>
-                            @if (!$project->enabled)
+                            @if ($project->enabled === 0)
                                 <span class="badge text-bg-danger">
                                     Deshabilitado
                                 </span>
@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="card mb-3">
-                            <div class="card-header">Descripción del Proyecto</div>
+                            <div class="card-header">Descripción del proyecto</div>
                             <div class="card-body">
                                 {{ $project->description }}
                             </div>
@@ -71,7 +71,7 @@
 
                         @if ($project->conditions->isNotEmpty())
                             <div class="card">
-                                <div class="card-header">Condiciones y Requisitos</div>
+                                <div class="card-header">Condiciones y requisitos</div>
                                 <div class="card-body">
                                     <p><span class="text-muted small">Horas por día:
                                         </span>{{ $project->work_hours_per_day }}</p>
@@ -114,7 +114,7 @@
                                 <a href="#volunteers-list">
                                     <button class="btn btn-primary w-100 mb-3"
                                             type="submit">
-                                        Ver Voluntarios
+                                        Ver voluntarios
                                     </button>
                                 </a>
                             </div>
@@ -199,7 +199,7 @@
                                             @if($volunteer->user->status == 'activo')
                                             <a href="{{ route('host.volunteers.profile', $volunteer->id) }}"
                                                 class="btn btn-sm btn-azul"
-                                                title="ver">Ver Perfil</a>
+                                                title="ver">Ver perfil</a>
                                             @endif
                                             @if ($volunteer->pivot->status !== 'aceptado')
                                                 <form method="POST"

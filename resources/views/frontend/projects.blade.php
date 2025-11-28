@@ -123,7 +123,7 @@
 
                                             <a href="{{ route('project', $project->id) }}"
                                                class="btn btn-azul w-100">
-                                                Ver Detalles
+                                                Ver detalles
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      fill="none"
                                                      viewBox="0 0 24 24"

@@ -32,8 +32,8 @@
         <div class="d-md-none pb-3">
             <a class="btn btn-outline-primary w-100 mb-3 py-2" href="{{ route('login') }}">Ingresar</a>
             <div class="d-flex gap-3">
-                <a class="btn btn-primary" href="{{ route('register-host.create') }}">¿Querés ser Anfitrión?</a>
-                <a class="btn btn-primary" href="{{ route('register-volunteer.create') }}">¿Querés ser Voluntario?</a>
+                <a class="btn btn-primary" href="{{ route('register-host.create') }}">¿Querés ser anfitrión?</a>
+                <a class="btn btn-primary" href="{{ route('register-volunteer.create') }}">¿Querés ser voluntario?</a>
             </div>
         </div>
 
@@ -51,8 +51,8 @@
                     Registrate
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item {{ request()->routeIs('register-host.create') ? 'active' : '' }}" href="{{ route('register-host.create') }}">¿Querés ser Anfitrión?</a></li>
-                    <li><a class="dropdown-item {{ request()->routeIs('register-volunteer.create') ? 'active' : '' }}" href="{{ route('register-volunteer.create') }}">¿Querés ser Voluntario?</a></li>
+                    <li><a class="dropdown-item {{ request()->routeIs('register-host.create') ? 'active' : '' }}" href="{{ route('register-host.create') }}">¿Querés ser anfitrión?</a></li>
+                    <li><a class="dropdown-item {{ request()->routeIs('register-volunteer.create') ? 'active' : '' }}" href="{{ route('register-volunteer.create') }}">¿Querés ser voluntario?</a></li>
                 </ul>
             </div>
         </div>
@@ -83,8 +83,8 @@
                     <img src="{{asset('storage/perfil-host.svg')}}" width="40" height="40" alt="Avatar anfitrión"/>
                 </a>
                 <ul class="dropdown-menu pb-0">
-                    <li><a class="dropdown-item" href="{{ route('host.dashboard') }}">Mi Cuenta</a></li>
-                    <li><a class="dropdown-item" href="{{ route('host.my-profile.profile') }}">Mi Perfil</a></li>
+                    <li><a class="dropdown-item" href="{{ route('host.dashboard') }}">Mi cuenta</a></li>
+                    <li><a class="dropdown-item" href="{{ route('host.my-profile.profile') }}">Mi perfil</a></li>
                     <li><hr class="dropdown-divider mb-0"></li>
                     <li class="p-0">
                         <form method="POST" action="{{ route('logout') }}">
@@ -101,8 +101,8 @@
                     <img src="{{asset('storage/perfil-volunteer.svg')}}" width="40" height="40" alt="Avatar voluntario"/>
                 </a>
                 <ul class="dropdown-menu pb-0">
-                    <li><a class="dropdown-item" href="{{ route('volunteer.dashboard') }}">Mi Cuenta</a></li>
-                    <li><a class="dropdown-item" href="{{ route('volunteer.my-profile.profile') }}">Mi Perfil</a></li>
+                    <li><a class="dropdown-item" href="{{ route('volunteer.dashboard') }}">Mi cuenta</a></li>
+                    <li><a class="dropdown-item" href="{{ route('volunteer.my-profile.profile') }}">Mi perfil</a></li>
                     <li><hr class="dropdown-divider mb-0"></li>
                     <li class="p-0">
                         <form method="POST" action="{{ route('logout') }}">

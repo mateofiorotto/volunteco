@@ -4,9 +4,9 @@
     <section class="container py-5">
 
         <div class="d-flex justify-content-between align-items-center mb-5">
-            <h1 class="title-h1 h3">Mi <span>Perfil</span></h1>
+            <h1 class="title-h1 h3">Mi <span>perfil</span></h1>
             <a href="{{ route('volunteer.my-profile.edit') }}"
-               class="btn btn-primary">Editar Perfil</a>
+               class="btn btn-primary">Editar perfil</a>
         </div>
 
         @if (session('success'))
@@ -75,7 +75,7 @@
 
             <div class="col-md-5">
                 <div class="card mb-4">
-                    <div class="card-header">Datos de Contacto</div>
+                    <div class="card-header">Datos de contacto</div>
                     <div class="card-body">
                         <ul class="list-unstyled mb-0">
                             <li><span class="text-muted small">Teléfono: </span>{{ $volunteer->phone }}</li>

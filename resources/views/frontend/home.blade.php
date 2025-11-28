@@ -8,10 +8,10 @@
         <div class="hero-background"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content container">
-            <h1 class="hero-title">Conectá con <span class="fw-light">la Naturaleza</span></h1>
+            <h1 class="hero-title">Conectá con <span class="fw-light">la naturaleza</span></h1>
             <p class="hero-subtitle">Uníte a proyectos de voluntariado ecológico alrededor de Argentina.</p>
             <div>
-                <a href="{{ route('projects') }}" class="btn btn-primary btn-lg">Explorar Proyectos</a>
+                <a href="{{ route('projects') }}" class="btn btn-primary btn-lg">Explorar proyectos</a>
             </div>
         </div>
     </section>
@@ -19,7 +19,7 @@
     <!-- Últimos Proyectos -->
     <section class="py-5">
         <div class="container">
-            <h2 class="section-title text-center text-primary">Últimos <span class="fw-light">Proyectos</span></h2>
+            <h2 class="section-title text-center text-primary">Últimos <span class="fw-light">proyectos</span></h2>
             <p class="section-subtitle text-center">Descubrí oportunidades increíbles para hacer la diferencia</p>
 
             <!-- Lista de proyectos -->
@@ -70,7 +70,7 @@
 
                                             <a href="{{ route('project', $project->id) }}"
                                                class="btn btn-azul w-100">
-                                                Ver Detalles
+                                                Ver detalles
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      fill="none"
                                                      viewBox="0 0 24 24"
@@ -94,7 +94,7 @@
             </div>
 
             <div class="text-center">
-                <a href="{{route('projects')}}" class="btn mx-auto btn-warning">Ver Todos</a>
+                <a href="{{route('projects')}}" class="btn mx-auto btn-warning">Ver todos</a>
             </div>
         </div>
     </section>
@@ -103,7 +103,7 @@
     <section class="testimonials-section py-5">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="section-title text-white">Experiencias <span class="fw-light">Transformadoras</span></h2>
+                <h2 class="section-title text-white">Experiencias <span class="fw-light">transformadoras</span></h2>
                 <p class="section-subtitle text-white">Testimonios de quienes forman nuestra comunidad.</p>
             </div>
 
@@ -172,7 +172,7 @@
     <section class="sponsors-section py-5">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="section-title text-primary">Nos <span class="fw-light">Apoyan</span></h2>
+                <h2 class="section-title text-primary">Nos <span class="fw-light">apoyan</span></h2>
                 <p class="section-subtitle">Organizaciones comprometidas con el medio ambiente</p>
             </div>
 
@@ -195,7 +195,7 @@
             </div>
 
             <div class="text-center small">
-                <a href="{{route('donate')}}" class="btn btn-warning">Quiero Ser Sponsor</a>
+                <a href="{{route('donate')}}" class="btn btn-warning">Quiero ser sponsor</a>
             </div>
         </div>
     </section>

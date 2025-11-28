@@ -6,7 +6,7 @@
 
             <div class="d-flex justify-content-between align-items-start mb-5">
                 <div>
-                    <h1 class="title-h1 h3">Editar <span>Mi Perfil</span></h1>
+                    <h1 class="title-h1 h3">Editar <span>mi perfil</span></h1>
                     <p class="mb-3">Completá todos los datos requeridos para actualizar tu perfil.</p>
                 </div>
                 <a href="{{ url()->previous() }}"
@@ -37,7 +37,7 @@
                     <div class="col-md-6">
                         <div class="card mb-5">
                             <div class="card-body">
-                                <h2 class="card-title h3">Datos Personales</h2>
+                                <h2 class="card-title h3">Datos personales</h2>
                                 <p class="mb-3">Completa con tus datos.</p>
 
                                 <div class="row">
@@ -111,7 +111,7 @@
                     <div class="col-md-6">
                         <div class="card mb-5">
                             <div class="card-body">
-                                <h2 class="card-title h3">Datos de Acceso</h2>
+                                <h2 class="card-title h3">Datos de acceso</h2>
                                 <p class="mb-3">Completa con los datos que te servirán para acceder al sistema.</p>
 
                                 <div class="mb-3">
@@ -150,7 +150,7 @@
                     <div class="col-md-6">
                         <div class="card mb-5">
                             <div class="card-body">
-                                <h2 class="card-title h3">Datos de Contacto</h2>
+                                <h2 class="card-title h3">Datos de contacto</h2>
                                 <p class="mb-3">Completa con tus datos.</p>
 
                                 <div class="mb-3">
@@ -212,7 +212,7 @@
                     <div class="col-md-6">
                         <div class="card mb-5">
                             <div class="card-body">
-                                <h2 class="card-title h3">Redes Sociales</h2>
+                                <h2 class="card-title h3">Redes sociales</h2>
 
                                 <div class="mb-3">
                                     <label for="linkedin"
@@ -263,7 +263,7 @@
                     <div class="col-md-6">
                         <div class="card mb-5">
                             <div class="card-body">
-                                <h2 class="card-title h3">Datos Profesionales</h2>
+                                <h2 class="card-title h3">Datos profesionales</h2>
                                 <p class="mb-3">Completa con tus datos.</p>
 
                                 <div class="mb-3">
@@ -317,7 +317,7 @@
                     <div class="col-md-6">
                         <div class="card mb-5">
                             <div class="card-body">
-                                <h2 class="card-title h3">Info Extra</h2>
+                                <h2 class="card-title h3">Info extra</h2>
 
                                 <div class="mb-3">
                                     <div class="pt-2">

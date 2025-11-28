@@ -94,7 +94,7 @@
 
                 <div class="text-center">
                     <p class="form-text mb-2">¿Aún no tenés cuenta?</p>
-                    <p class="form-text mb-0">Podés registrarte como <a href="{{route('register-host.create')}}" class="text-decoration-underline">Anfitrión</a> o como <a href="{{route('register-volunteer.create')}}" class="text-decoration-underline">Voluntario</a></p>
+                    <p class="form-text mb-0">Podés registrarte como <a href="{{route('register-host.create')}}" class="text-decoration-underline">anfitrión</a> o como <a href="{{route('register-volunteer.create')}}" class="text-decoration-underline">voluntario</a></p>
                 </div>
             </div>
         </div>

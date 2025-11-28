@@ -15,14 +15,14 @@
                      width="300"
                      height="61">
             </div>
-            <h1 class="hero-title fw-semibold">Cambiá el Mundo,<br>Una Acción a la Vez</h1>
+            <h1 class="hero-title fw-semibold">Cambiá el mundo,<br>Una acción a la vez</h1>
             <p class="hero-subtitle">
                 Uníte a <span class="fw-semibold ff-nunito fs-3">Volunt<span class="fw-light">eco</span></span>, la
                 comunidad de voluntarios y anfitriones comprometidos con el planeta.
                 Tu aventura empieza acá.
             </p>
             <a href="{{ route('home') }}"
-               class="btn btn-lg btn-light fw-medium">Explorar Ahora</a>
+               class="btn btn-lg btn-light fw-medium">Explorar ahora</a>
         </div>
         <div class="scroll-indicator"
              id="scrollArrow">
@@ -45,7 +45,7 @@
                 <div class="col-12 col-md-4">
                     <div class="stat-item">
                         <div class="stat-number">120+</div>
-                        <div class="stat-label">Proyectos Activos</div>
+                        <div class="stat-label">Proyectos activos</div>
                     </div>
                 </div>
                 <div class="col-12 col-md-4">
@@ -107,7 +107,7 @@ Creamos un espacio confiable, curado y regulado para que cada experiencia sea po
                             </svg>
 
                         </div>
-                        <h3 class="feature-title">Proyectos Nacionales</h3>
+                        <h3 class="feature-title">Proyectos nacionales</h3>
                         <p class="feature-text">Accedé o publicá proyectos de voluntariado ecológico en toda la República
                             Argentina.</p>
                     </div>
@@ -149,7 +149,7 @@ Creamos un espacio confiable, curado y regulado para que cada experiencia sea po
                             </svg>
 
                         </div>
-                        <h3 class="feature-title">Impacto Real</h3>
+                        <h3 class="feature-title">Impacto real</h3>
                         <p class="feature-text">Tu trabajo genera un impacto medible. Recibe certificados y reportes de
                             tu contribución al medio ambiente.</p>
                     </div>
@@ -162,7 +162,7 @@ Creamos un espacio confiable, curado y regulado para que cada experiencia sea po
     <section class="how-section bg-body-tertiary">
         <div class="container">
             <div class="text-center">
-                <h2 class="section-title">¿Cómo <span class="fw-light">Funciona</span>?</h2>
+                <h2 class="section-title">¿Cómo <span class="fw-light">funciona</span>?</h2>
                 <p class="section-subtitle">Comenzá tu aventura en 4 simples pasos</p>
             </div>
 
@@ -171,7 +171,7 @@ Creamos un espacio confiable, curado y regulado para que cada experiencia sea po
                     <div class="step-item d-flex align-items-start gap-4">
                         <div class="step-number"><span>1</span></div>
                         <div class="step-content">
-                            <h3 class="step-title">Creá tu Perfil</h3>
+                            <h3 class="step-title">Creá tu perfil</h3>
                             <p class="step-text text-muted">Registrate gratis como voluntario o anfitrión, solo toma unos
                                 minutos.</p>
                         </div>
@@ -198,7 +198,7 @@ Creamos un espacio confiable, curado y regulado para que cada experiencia sea po
                     <div class="step-item d-flex align-items-start gap-4">
                         <div class="step-number"><span>4</span></div>
                         <div class="step-content">
-                            <h3 class="step-title">Viví la Experiencia</h3>
+                            <h3 class="step-title">Viví la experiencia</h3>
                             <p class="step-text text-muted">Entre todos ayudamos a crear un mundo mejor.</p>
                         </div>
                     </div>
@@ -220,7 +220,7 @@ Creamos un espacio confiable, curado y regulado para que cada experiencia sea po
                             />
                         </svg>
                     </i>
-                    <span class="d-block fs-4">Ser Anfitrión</span>
+                    <span class="d-block fs-4">Ser anfitrión</span>
                 </a>
                 <a href="{{route('register-volunteer.create')}}" class="btn btn-lg btn-primary d-flex align-items-center">
                     <i class="btn-icon align-middle me-3">
@@ -235,7 +235,7 @@ Creamos un espacio confiable, curado y regulado para que cada experiencia sea po
                         <path fill="currentColor" d="M6.5,8C7.3,8,8,7.3,8,6.5C8,5.7,7.3,5,6.5,5C5.6,5,5,5.7,5,6.5C5,7.3,5.6,8,6.5,8z"/>
                         </svg>
                     </i>
-                    <span class="d-block fs-4">Ser Voluntario</span>
+                    <span class="d-block fs-4">Ser voluntario</span>
                 </a>
             </div>
         </div>

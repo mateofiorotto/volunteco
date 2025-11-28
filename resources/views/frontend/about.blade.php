@@ -9,7 +9,7 @@
         <div class="hero-overlay"></div>
         <div class="hero-content container">
             <div class="text-center">
-                <h1 class="hero-title">Sobre <span class="fw-light">Nosotros</span></h1>
+                <h1 class="hero-title">Sobre <span class="fw-light">nosotros</span></h1>
                 <p class="hero-subtitle">Conectando voluntarios con el cambio ambiental</p>
             </div>
         </div>
@@ -21,7 +21,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="text-center mb-5">
-                        <h2 class="section-title text-primary mb-4">Somos <span class="text-volunteco">Volunt<span>eco</span></span></h2>
+                        <h2 class="section-title text-primary mb-4">Somos <span class="fw-semibold">Volunt<span class="fw-light">eco</span></span></h2>
                         <p class="section-subtitle">
                             <span class="text-volunteco">Volunt<span>eco</span></span> es una plataforma pensada para quienes gustan de compartir experiencias de vida y
                             conocimiento profesional a través de actividades de voluntariado, incentivadas por la ecología y
@@ -32,7 +32,7 @@
             </div>
             <div class="row g-4 mb-5 align-items-center">
                 <div class="col-md-5 mx-auto order-md-last order-first">
-                    <div class="d-flex align-items-start mb-3">
+                    <div class="d-flex align-items-start mb-4">
                         <div class="flex-shrink-0 me-3">
                             <div class="icono text-white bg-primary rounded-circle p-3">
                                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +48,7 @@
                                 </svg>
                             </div>
                         </div>
-                        <div>
+                        <div class="pt-3">
                             <h3>Nuestro objetivo</h3>
                             <p class="text-muted">
                                 Desarrollar una web a nivel nacional donde ONGs, organizaciones de investigación,
@@ -71,7 +71,7 @@
                             </svg>
                             </div>
                         </div>
-                        <div>
+                        <div class="pt-3">
                             <h3>Nuestro rol</h3>
                             <p class="text-muted mb-0">
                                 Actuamos como nexo entre organizaciones que necesitan colaboración y personas
@@ -148,7 +148,7 @@
     <section class="py-5">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="text-primary section-title mb-3">Nuestros <span class="fw-light">Valores</span></h2>
+                <h2 class="text-primary section-title mb-3">Nuestros <span class="fw-light">valores</span></h2>
                 <p class="section-subtitle">Los pilares que guían nuestro trabajo</p>
             </div>
 

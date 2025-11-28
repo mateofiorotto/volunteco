@@ -5,12 +5,12 @@
         <div class="container py-5">
 
             <div class="mb-5">
-                <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex gap-5 justify-content-between align-items-center">
                     <div>
-                        <h1 class="title-h1 h3">Registrate como <span>Anfitrión</span></h1>
+                        <h1 class="title-h1 h3">Registrate como <span>anfitrión</span></h1>
                         <p>Completá todos los datos requeridos.<br />Luego de enviada tu solicitud, nuestros operadores revisarán tu perfil y serás notificado cuando esté aprobado para que puedas empezar a publicar tus proyectos.</p>
                     </div>
-                    <a href="{{ route('login') }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Ir al login</a>
+                    <a href="{{ route('login') }}" class="btn btn-link text-nowrap"><i class="bi bi-chevron-left me-1"></i> Ir al login</a>
                 </div>
             </div>
 
@@ -133,7 +133,7 @@
                     <div class="col-md-6">
                         <div class="card mb-5">
                             <div class="card-body">
-                                <h2 class="card-title h3">Datos de Acceso</h2>
+                                <h2 class="card-title h3">Datos de acceso</h2>
                                 <p>Completá con los datos que te servirán para acceder al sistema.</p>
                                 <div class="mb-3">
                                     <label for="email"
@@ -189,7 +189,7 @@
                     <div class="col-md-6">
                         <div class="card mb-5">
                             <div class="card-body">
-                                <h2 class="card-title h3">Redes Sociales</h2>
+                                <h2 class="card-title h3">Redes sociales</h2>
                                 <p>Completá al menos una de las redes sociales. *</p>
                                 <div class="mb-3">
                                     <label for="linkedin"
@@ -236,7 +236,7 @@
                     <div class="col-md-6">
                         <div class="card mb-5">
                             <div class="card-body">
-                                <h2 class="card-title h3">Info Extra</h2>
+                                <h2 class="card-title h3">Info extra</h2>
                                 <div class="mb-3">
                                     <label for="avatar"
                                            class="form-label">Logo</label>

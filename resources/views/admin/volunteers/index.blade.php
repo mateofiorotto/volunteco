@@ -4,7 +4,7 @@
     <section>
         <div class="container py-5">
             <div class="d-flex justify-content-between align-items-center mb-5">
-                <h1 class="title-h1 h3">Listado de <span>Voluntarios</span></h1>
+                <h1 class="title-h1 h3">Listado de <span>voluntarios</span></h1>
                 <a href="{{ url()->previous() }}"
                    class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
             </div>
@@ -51,7 +51,7 @@
                                     <td class="text-center">{{ $volunteer->projects->count() }}</td>
                                     <td>
                                         <a href="{{ route('admin.volunteer.profile', $volunteer->id) }}"
-                                           class="btn btn-sm btn-azul">Ver Perfil</a>
+                                           class="btn btn-sm btn-azul">Ver perfil</a>
                                     </td>
                                 </tr>
                             @empty

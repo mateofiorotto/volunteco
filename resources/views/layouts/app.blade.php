@@ -60,11 +60,11 @@
                         <ul class="d-flex flex-row align-items-center justify-content-center gap-5 list-unstyled mb-0">
                             <li>
                                 <a class="nav-link {{ request()->routeIs('register-host.create') ? 'active' : '' }}"
-                                   href="{{ route('register-host.create') }}">¿Querés ser Anfitrión?</a>
+                                   href="{{ route('register-host.create') }}">¿Querés ser anfitrión?</a>
                             </li>
                             <li>
                                 <a class="nav-link {{ request()->routeIs('register-volunteer.create') ? 'active' : '' }}"
-                                   href="{{ route('register-volunteer.create') }}">¿Querés ser Voluntario?</a>
+                                   href="{{ route('register-volunteer.create') }}">¿Querés ser voluntario?</a>
                             </li>
                         </ul>
                     </div>

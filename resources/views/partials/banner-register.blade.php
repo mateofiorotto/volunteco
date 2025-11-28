@@ -19,7 +19,7 @@
                             />
                         </svg>
                     </i>
-                    <span class="d-block fs-4">Ser Anfitrión</span>
+                    <span class="d-block fs-4">Ser anfitrión</span>
                 </a>
                 <a href="{{route('register-volunteer.create')}}" class="btn btn-lg btn-light d-flex align-items-center">
                     <i class="btn-icon align-middle me-3">
@@ -34,7 +34,7 @@
                         <path fill="currentColor" d="M6.5,8C7.3,8,8,7.3,8,6.5C8,5.7,7.3,5,6.5,5C5.6,5,5,5.7,5,6.5C5,7.3,5.6,8,6.5,8z"/>
                         </svg>
                     </i>
-                    <span class="d-block fs-4">Ser Voluntario</span>
+                    <span class="d-block fs-4">Ser voluntario</span>
                 </a>
             </div>
         </div>

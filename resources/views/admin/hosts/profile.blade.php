@@ -4,7 +4,7 @@
     <section>
         <div class="container py-5">
             <div class="d-flex justify-content-between align-items-center mb-5">
-                <h1 class="title-h1 h3 mb-0">Perfil de <span>Anfitrión</span></h1>
+                <h1 class="title-h1 h3 mb-0">Perfil de <span>anfitrión</span></h1>
                 <a href="{{ url()->previous() }}"
                    class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
             </div>
@@ -70,7 +70,7 @@
                                 </div>
                                 <div>
                                     <div class="card mb-3">
-                                        <div class="card-header">Redes Sociales</div>
+                                        <div class="card-header">Redes sociales</div>
                                         <div class="card-body">
                                             <ul class="list-unstyled mb-0">
                                                 @if ($host->linkedin)
@@ -140,7 +140,7 @@
                                                 @csrf
                                                 @method('POST')
                                                 <button class="btn btn-outline-primary"
-                                                        type="submit">Enviar Recordatorio</button>
+                                                        type="submit">Enviar recordatorio</button>
                                             </form>
                                         </div>
                                     @else
@@ -166,7 +166,7 @@
                                                     que podamos aceptar su perfil.</div>
                                             </div>
                                             <button class="btn btn-outline-primary ms-auto"
-                                                    type="submit">Enviar Email y Desactivar</button>
+                                                    type="submit">Enviar email y desactivar</button>
                                         </form>
                                     @endif
                                 </div>
@@ -214,7 +214,7 @@
                                         @csrf
                                         @method('PUT')
                                         <button class="btn btn-outline-secondary"
-                                                type="submit">Enviar a Pendiente</button>
+                                                type="submit">Enviar a pendiente</button>
                                     </form>
 
                                     <form method="POST"
@@ -246,7 +246,7 @@
                                             <div class="form-text">Indicá los motivos por los que eliminamos su perfil.</div>
                                         </div>
                                         <button class="btn btn-danger ms-auto"
-                                                type="submit">Eliminar Definitivamente</button>
+                                                type="submit">Eliminar definitivamente</button>
                                     </form>
                                 </div>
                                 {{-- Si el perfil esta activo --}}
@@ -272,7 +272,7 @@
                                             <p class="form-text">Indicá los motivos por los que desactivamos su perfil.</p>
                                         </div>
                                         <button class="btn btn-outline-danger ms-auto"
-                                                type="submit">Enviar Email y Desactivar</button>
+                                                type="submit">Enviar email y desactivar</button>
                                     </form>
                                 </div>
                             @endif
