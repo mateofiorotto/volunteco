@@ -18,16 +18,17 @@
     <!-- Donation Section -->
     <section class="py-5">
         <div class="container">
-            <div class="row align-items-center g-5">
-                <!-- Donation Info -->
-                <div class="col-lg-6">
+            <div class="text-center row mb-5">
+                <div class="col-md-7 mx-auto">
                     <h2 class="section-title text-primary">Colaborá <span class="fw-light">con nosotros</span></h2>
-                    <p class="section-subtitle text-muted mb-4">
-                        Cada aporte hace la diferencia. Tu donación nos ayuda a mantener la plataforma
-                        activa y a seguir conectando voluntarios con proyectos ecológicos en toda Argentina.
-                    </p>
+                    <p>Cada aporte hace la diferencia. Tu donación nos ayuda a mantener la plataforma activa y a seguir conectando voluntarios con proyectos ecológicos en toda Argentina.</p>
+                </div>
+            </div>
 
-                    <div class="border rounded-3 p-4 mb-4">
+            <div class="row justify-content-between align-items-start">
+                <!-- Donation Info -->
+                <div class="col-md-5">
+                    <div class="border rounded-3 p-4 mb-5">
                         <h3 class="h5 mb-3">Datos bancarios</h3>
 
                         <div class="mb-3">
@@ -94,7 +95,7 @@
                 </div>
 
                 <!-- Image -->
-                <div class="col-lg-6">
+                <div class="col-md-5 offset-1">
                     <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&h=1000&fit=crop"
                          alt="Voluntarios cuidando el medio ambiente"
                          class="img-fluid rounded-3">

@@ -30,9 +30,7 @@
                     </div>
                 @endif
 
-                <form method="POST"
-                      novalidate
-                      action="{{ route('login') }}">
+                <form method="POST" class="mb-5" novalidate action="{{ route('login') }}">
                     @csrf
 
                     <div class="mb-3">
@@ -82,18 +80,22 @@
                         </div>
                         @if (Route::has('password.request'))
                             <a href="{{ route('password.request') }}"
-                               class="small mb-4 ">
+                               class="small mb-4 text-decoration-underline">
                                 ¿Olvidaste tu contraseña?
                             </a>
                         @endif
                     </div>
 
-                    <div class="text-center">
-                        <button type="submit"
-                                class="btn btn-primary btn-lg">Ingresar</button>
+                    <div class="text-center mb-3">
+                        <button type="submit" class="btn btn-primary btn-lg">Ingresar</button>
                     </div>
 
                 </form>
+
+                <div class="text-center">
+                    <p class="form-text mb-2">¿Aún no tenés cuenta?</p>
+                    <p class="form-text mb-0">Podés registrarte como <a href="{{route('register-host.create')}}" class="text-decoration-underline">Anfitrión</a> o como <a href="{{route('register-volunteer.create')}}" class="text-decoration-underline">Voluntario</a></p>
+                </div>
             </div>
         </div>
     </section>

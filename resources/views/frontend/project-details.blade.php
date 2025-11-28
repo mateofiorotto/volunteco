@@ -175,47 +175,49 @@
                         </div>
                     </div>
                     {{-- Botones de acción para voluntarios --}}
-                    @if (Auth::check() && Auth::user()->hasRole('volunteer'))
-                        <div class="card mt-3">
-                            <div class="card-body">
-                                @if ($volunteerStatus)
-                                    @if ($volunteerStatus === 'pendiente')
-                                        <div class="alert alert-warning mb-3">
-                                            <strong>Solicitud Pendiente</strong><br>
-                                            Tu solicitud está siendo revisada por el anfitrión.
-                                        </div>
-                                    @elseif($volunteerStatus === 'aceptado')
-                                        <div class="alert alert-success mb-3">
-                                            <strong>Solicitud Aceptada</strong><br>
-                                            ¡Felicitaciones! Has sido aceptado en este proyecto.
-                                        </div>
-                                    @elseif($volunteerStatus === 'rechazado')
-                                        <div class="alert alert-danger mb-0">
-                                            <strong>Solicitud Rechazada</strong><br>
-                                            Lamentablemente tu solicitud no fue aceptada para este proyecto.
-                                        </div>
-                                    @endif
-
-                                    @if ($volunteerStatus !== 'rechazado')
-                                        <button type="button"
-                                                class="btn btn-danger"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#desistirModal">
-                                            Desistir del proyecto
-                                        </button>
-                                    @endif
-                                @else
-                                    <p class="mb-3">¿Te interesa participar en este proyecto?</p>
-                                    <form method="POST"
-                                          action="{{ route('volunteer.apply-project', $project->id) }}">
-                                        @csrf
-                                        <button class="btn btn-primary"
-                                                type="submit">Aplicar al proyecto</button>
-                                    </form>
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            @if (Auth::check() && Auth::user()->hasRole('volunteer'))
+                            @if ($volunteerStatus)
+                                @if ($volunteerStatus === 'pendiente')
+                                    <div class="alert alert-warning mb-3">
+                                        <strong>Solicitud Pendiente</strong><br>
+                                        Tu solicitud está siendo revisada por el anfitrión.
+                                    </div>
+                                @elseif($volunteerStatus === 'aceptado')
+                                    <div class="alert alert-success mb-3">
+                                        <strong>Solicitud Aceptada</strong><br>
+                                        ¡Felicitaciones! Has sido aceptado en este proyecto.
+                                    </div>
+                                @elseif($volunteerStatus === 'rechazado')
+                                    <div class="alert alert-danger mb-0">
+                                        <strong>Solicitud Rechazada</strong><br>
+                                        Lamentablemente tu solicitud no fue aceptada para este proyecto.
+                                    </div>
                                 @endif
-                            </div>
+
+                                @if ($volunteerStatus !== 'rechazado')
+                                    <button type="button"
+                                            class="btn btn-danger"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#desistirModal">
+                                        Desistir del proyecto
+                                    </button>
+                                @endif
+                            @else
+                                <p class="mb-3">¿Te interesa participar en este proyecto?</p>
+                                <form method="POST"
+                                        action="{{ route('volunteer.apply-project', $project->id) }}">
+                                    @csrf
+                                    <button class="btn btn-primary" type="submit">Aplicar al proyecto</button>
+                                </form>
+                            @endif
+                            @else
+                            <p class="mb-3">¿Te interesa participar en este proyecto?</p>
+                            <a href="{{route('login')}}" class="btn btn-primary">Ingresá como voluntario</a>
+                            @endif
                         </div>
-                    @endif
+                    </div>
                 </div>
             </div>
         </div>

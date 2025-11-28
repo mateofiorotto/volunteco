@@ -4,10 +4,13 @@
     <section>
         <div class="container py-5">
 
-            <div class="row mb-5">
-                <div class="col-md-7">
-                    <h1 class="title-h1 h3">Registrate como <span>Voluntario</span></h1>
-                    <p>Completá todos los datos requeridos para poder crear tu cuenta.</p>
+            <div class="mb-5">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1 class="title-h1 h3">Registrate como <span>Voluntario</span></h1>
+                        <p>Completá todos los datos requeridos para poder crear tu cuenta.</p>
+                    </div>
+                    <a href="{{ route('login') }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Ir al login</a>
                 </div>
             </div>
 

@@ -4,12 +4,13 @@
     <section>
         <div class="container py-5">
 
-            <div class="row mb-5">
-                <div class="col-md-7">
-                    <h1 class="title-h1 h3">Registrate como <span>Anfitrión</span></h1>
-                    <p>Completá todos los datos requeridos.<br />Luego de enviada tu solicitud, nuestros operadores
-                        revisarán tu perfil y serás notificado cuando esté aprobado para que puedas empezar a publicar tus
-                        proyectos.</p>
+            <div class="mb-5">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1 class="title-h1 h3">Registrate como <span>Anfitrión</span></h1>
+                        <p>Completá todos los datos requeridos.<br />Luego de enviada tu solicitud, nuestros operadores revisarán tu perfil y serás notificado cuando esté aprobado para que puedas empezar a publicar tus proyectos.</p>
+                    </div>
+                    <a href="{{ route('login') }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Ir al login</a>
                 </div>
             </div>
 
