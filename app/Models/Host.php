@@ -60,5 +60,33 @@ class Host extends Model
         return $this->belongsTo(Location::class);
     }
 
+    // Método para chequear si el voluntario esta aceptado en algun proyecto del host
+    public function hasVolunteer($volunteerId)
+    {
+        return $this->projects()
+            ->whereHas('volunteers', function ($query) use ($volunteerId) {
+                $query->where('volunteer_id', $volunteerId)
+                    ->whereIn('project_volunteer.status', ['aceptado']);
+            })
+            ->exists();
+    }
+
+    // Método para obtener el o los proyectos donde esta aceptado el voluntario
+    public function projectsWithVolunteer($volunteerId)
+    {
+        return $this->projects()
+            ->whereHas('volunteers', function ($query) use ($volunteerId) {
+                $query->where('volunteer_id', $volunteerId)
+                    ->whereIn('project_volunteer.status', ['aceptado', 'pendiente']);
+            })
+            ->with(['volunteers' => function ($query) use ($volunteerId) {
+                $query->where('volunteer_id', $volunteerId)
+                    ->whereIn('project_volunteer.status', ['aceptado', 'pendiente']);
+            }])
+            ->get();
+    }
+
+
+
 
 }

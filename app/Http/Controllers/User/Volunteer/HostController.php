@@ -15,13 +15,16 @@ class HostController extends Controller
     //
     public function profile($id)
     {
-        $user = Auth::user()->volunteer->id;
         $host = Host::with(['user', 'projects.volunteers'])->findOrFail($id);
+
+        $volunteer = Auth::user()->volunteer;
+
+        $isAceptedByHost = $volunteer->isHostAcepted($id);
 
         if (Gate::denies('view', $host)) {
             return redirect()->route('volunteer.projects.applied')->with('error', 'No tienes permiso para ver el perfil del usuario solicitado.');
         }
 
-        return view('user.volunteer.hosts.profile', compact('host'));
+        return view('user.volunteer.hosts.profile', compact('host','isAceptedByHost'));
     }
 }

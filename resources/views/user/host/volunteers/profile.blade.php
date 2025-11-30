@@ -71,7 +71,7 @@
                 <div class="card mb-4">
                     <div class="card-header">Datos de contacto</div>
                     <div class="card-body">
-                        @if ($hasAccepted)
+                        @if($hasAccepted)
                             <ul class="list-unstyled mb-0">
                                 <li><span class="text-muted small">Teléfono: </span>{{ $volunteer->phone }}</li>
                                 <li><span class="text-muted small">Email: </span>{{ $volunteer->user->email }}</li>
@@ -120,6 +120,58 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header">Proyectos donde tienes aceptado este voluntario</div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Título</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Lugar</th>
+                                    <th scope="col">Tu solicitud de aplicación</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($projects as $project)
+                                    <tr class="align-middle {{ $project->enabled === 0 ? 'table-danger' : '' }}">
+                                        <td>
+                                            {{ $project->title }}
+                                            @if ($project->enabled === 0)
+                                                <span class="badge text-bg-danger">Deshabilitado</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <span class="small text-muted">Inicia: </span>
+                                                {{ $project->start_date->format('d/m/Y') }}
+                                            </div>
+                                            <div>
+                                                <span class="small text-muted">Finaliza:
+                                                </span>{{ $project->end_date->format('d/m/Y') }}
+                                            </div>
+                                        </td>
+                                        <td>{{ $project->location->name }} - {{ $project->location->province->name }}</td>
+                                        <td class="text-center">
+                                            <span class="badge text-capitalize {{ $project->volunteers->first()->pivot->status == 'pendiente' ? 'bg-warning text-bg-warning' : 'bg-danger' }}"> {{ $project->volunteers->first()->pivot->status }}</span>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('host.my-projects.show', $project->id) }}" class="btn btn-azul btn-sm @if ($project->enabled === 0) disabled @endif">Ver</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

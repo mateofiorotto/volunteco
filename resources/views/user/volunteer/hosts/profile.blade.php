@@ -45,6 +45,8 @@
                 </div>
             </div>
             <div class="col-md-5">
+
+                @if($isAceptedByHost)
                 <div class="card mb-4">
                     <div class="card-header">Contacto</div>
                     <div class="card-body">
@@ -56,6 +58,7 @@
                         </ul>
                     </div>
                 </div>
+                @endif
 
                 <div class="card mb-4">
                     <div class="card-header">Redes sociales</div>
@@ -137,8 +140,11 @@
                                                 $currentVolunteer = auth()->user()->volunteer;
                                                 $myApplication = $project->volunteers->firstWhere('id', $currentVolunteer->id);
                                             @endphp
-                                            @if($myApplication)
+                                            @if($myApplication && $myApplication->pivot->status !== 'aceptado')
                                                 <span class="badge text-capitalize {{ $myApplication->pivot->status == 'pendiente' ? 'bg-warning text-bg-warning' : 'bg-danger' }}"> {{ $myApplication->pivot->status }}</span>
+                                            @endif
+                                            @if($myApplication && $myApplication->pivot->status == 'aceptado')
+                                            <span class="badge text-capitalize bg-transparent text-body">{{$myApplication->pivot->status}}</span>
                                             @endif
                                         </td>
                                         <td><a href="{{ route('project', $project->id) }}"

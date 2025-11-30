@@ -77,4 +77,13 @@ class Volunteer extends Model
 
     protected $appends = ['full_name'];
 
+    // Metodo para chequear si el voluntario esta aceptado en algun proyecto del host
+    public function isHostAcepted($hostId)
+    {
+        return $this->projects()
+            ->where('projects.host_id', $hostId)
+            ->wherePivotIn('status', ['aceptado'])
+            ->exists();
+    }
+
 }

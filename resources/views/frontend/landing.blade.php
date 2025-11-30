@@ -245,12 +245,12 @@ Creamos un espacio confiable, curado y regulado para que cada experiencia sea po
     <section class="cta-section">
         <div class="container">
             <div class="cta-content">
-                <h2 class="cta-title">Tu Aventura Te Está Esperando</h2>
+                <h2 class="cta-title">Tu aventura te está esperando</h2>
                 <p class="cta-subtitle fs-4 fw-light mb-5">Uníte a la comunidad de <span
                           class="fw-semibold ff-nunito text-marca">Volunt<span class="fw-light">eco</span></span> y dejá
                     tu huella</p>
                 <a href="{{ route('home') }}"
-                   class="btn btn-lg fw-medium btn-light">Comenzar Ahora</a>
+                   class="btn btn-lg fw-medium btn-light">Comenzar ahora</a>
             </div>
         </div>
     </section>

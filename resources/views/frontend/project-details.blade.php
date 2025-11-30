@@ -137,7 +137,7 @@
                                     </ul>
 
                                     @if (Auth::check() && Auth::user()->hasRole('volunteer'))
-                                        @if ($volunteerStatus === 'aceptado' || $volunteerStatus === 'pendiente')
+                                        @if ($volunteerStatus === 'aceptado' || $volunteerStatus === 'pendiente' || $isAceptedByHost)
                                             <div class="social-media d-flex gap-3">
                                                 @if ($project->host->linkedin)
                                                     <a href="{{ $project->host->linkedin }}"
@@ -157,16 +157,20 @@
                                                        class="fs-5"><i class="bi bi-facebook"></i></a>
                                                 @endif
                                             </div>
-                                        @endif
-                                        @if ($volunteerStatus === 'aceptado')
                                             <hr />
+                                        @endif
+
+                                        @if ($isAceptedByHost)
                                             <ul class="list-unstyled">
                                                 <li>Contacto: {{ $project->host->person_full_name }}</li>
                                                 <li>Teléfono: {{ $project->host->phone }}</li>
                                                 <li>Email: <a href="mailto:{{ $project->host->user->email }}"
                                                        target="_blank">{{ $project->host->user->email }}</a></li>
                                             </ul>
-                                            <a href="{{ route('volunteer.hosts.profile', $project->host->id) }}"
+                                        @endif
+
+                                        @if ($volunteerStatus === 'aceptado' || $volunteerStatus === 'pendiente' || $isAceptedByHost)
+                                        <a href="{{ route('volunteer.hosts.profile', $project->host->id) }}"
                                                class="btn-azul btn-sm btn mb-3">Ver perfil</a>
                                         @endif
                                     @endif

@@ -14,7 +14,7 @@
     <section class="py-5">
         <div class="container">
             <!-- Filtros -->
-            <div class="filters-section">
+            <div class="filters-section d-none">
                 <div class="row g-3 align-items-end">
                     <div class="col-md-6">
                         <label class="filter-title">Buscar proyectos</label>

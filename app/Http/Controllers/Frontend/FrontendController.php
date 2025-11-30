@@ -43,6 +43,8 @@ class FrontendController extends Controller
 
         $volunteerStatus = null;
 
+        $isAceptedByHost = $volunteer->isHostAcepted($project->host->id);
+
         if ($volunteer) {
             // Obtenemos el estado del voluntario en este proyecto
             $pivotRecord = $project->volunteers()
@@ -54,7 +56,7 @@ class FrontendController extends Controller
             }
         }
 
-        return view('frontend.project-details', compact('project', 'volunteerStatus'));
+        return view('frontend.project-details', compact('project', 'volunteerStatus', 'isAceptedByHost'));
     }
 
     public function about()
