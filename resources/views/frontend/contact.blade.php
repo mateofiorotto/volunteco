@@ -10,7 +10,7 @@
         <div class="hero-content container">
             <div class="text-center">
                 <h1 class="hero-title">Envía<span class="fw-light"> tu mensaje</span></h1>
-                <p class="hero-subtitle">Estamos para ayudarte y responder tus consultas</p>
+                <p class="hero-subtitle">Estamos para ayudarte y responder tus consultas.</p>
             </div>
         </div>
     </section>
@@ -24,7 +24,7 @@
                         <h2 class="section-title text-primary text-center mb-4">Envianos <span class="fw-light">tu
                                 mensaje</span></h2>
                         <p class="text-center section-subtitle mb-5">Completá el formulario y nos pondremos en contacto a la
-                            brevedad</p>
+                            brevedad.</p>
 
                         {{-- Alerta de éxito --}}
                         @if (session('success'))

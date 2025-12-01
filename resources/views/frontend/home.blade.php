@@ -9,7 +9,7 @@
         <div class="hero-overlay"></div>
         <div class="hero-content container">
             <h1 class="hero-title">Conectá con <span class="fw-light">la naturaleza</span></h1>
-            <p class="hero-subtitle">Uníte a proyectos de voluntariado ecológico alrededor de Argentina.</p>
+            <p class="hero-subtitle">Unite a proyectos de voluntariado ecológico alrededor de Argentina.</p>
             <div>
                 <a href="{{ route('projects') }}" class="btn btn-primary btn-lg">Explorar proyectos</a>
             </div>
@@ -20,7 +20,7 @@
     <section class="py-5">
         <div class="container">
             <h2 class="section-title text-center text-primary">Últimos <span class="fw-light">proyectos</span></h2>
-            <p class="section-subtitle text-center">Descubrí oportunidades increíbles para hacer la diferencia</p>
+            <p class="section-subtitle text-center">Descubrí oportunidades increíbles para hacer la diferencia.</p>
 
             <!-- Lista de proyectos -->
             <div class="projects-list mb-5">
@@ -173,7 +173,7 @@
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="section-title text-primary">Nos <span class="fw-light">apoyan</span></h2>
-                <p class="section-subtitle">Organizaciones comprometidas con el medio ambiente</p>
+                <p class="section-subtitle">Organizaciones comprometidas con el medio ambiente.</p>
             </div>
 
             <div class="d-md-flex align-items-center justify-content-center gap-5 mb-5">

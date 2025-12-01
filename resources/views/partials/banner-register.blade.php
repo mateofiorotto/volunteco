@@ -3,7 +3,7 @@
     <div class="container py-5">
         <div class="text-center">
             <h2 class="section-title mb-4 text-white">Registrate <span class="fw-light">ahora mismo</span></h2>
-            <p class="section-subtitle mb-5 text-white">Uníte a nuestra comunidad</p>
+            <p class="section-subtitle mb-5 text-white">Unite a nuestra comunidad.</p>
             <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-5">
                 <a href="{{route('register-host.create')}}" class="btn btn-lg btn-light d-flex align-items-center">
                     <i class="btn-icon align-middle me-3">

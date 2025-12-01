@@ -6,7 +6,7 @@
         <div class="container">
             <div class="projects-hero-content text-center">
                 <h1>Proyectos de <span class="fw-light">voluntariado</span></h1>
-                <p>Encontrá un proyecto que te guste y formá parte del cambio</p>
+                <p>Encontrá un proyecto que te guste y formá parte del cambio.</p>
             </div>
         </div>
     </section>

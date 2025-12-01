@@ -50,8 +50,9 @@ class HostsController extends Controller
 
          return Host::whereHas('user', function ($query) use ($status) {
             $query->where('status', $status);
-        })
+            })
             ->with('user')
+            ->orderBy('created_at', 'desc')
             ->paginate(6, ['*'], $pageName);
     }
 

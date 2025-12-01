@@ -1,6 +1,6 @@
 @extends('layouts.blank')
 
-@section('title', 'Uníte a Volunteco')
+@section('title', 'Unite a Volunteco')
 
 @section('content')
 
@@ -17,7 +17,7 @@
             </div>
             <h1 class="hero-title fw-semibold">Cambiá el mundo,<br>Una acción a la vez</h1>
             <p class="hero-subtitle">
-                Uníte a <span class="fw-semibold ff-nunito fs-3">Volunt<span class="fw-light">eco</span></span>, la
+                Unite a <span class="fw-semibold ff-nunito fs-3">Volunt<span class="fw-light">eco</span></span>, la
                 comunidad de voluntarios y anfitriones comprometidos con el planeta.
                 Tu aventura empieza acá.
             </p>
@@ -70,8 +70,8 @@
 
             <div class="row g-4 align-items-center">
                 <div class="col-md-5 mx-auto order-md-last order-first">
-                    <h2 class="section-title">¿Qué es <span class="fw-semibold ff-nunito text-primary">Volunt<span class="fw-light">eco</span></span></h2>
-                    <p class="section-subtitle">La plataforma que une compromiso ambiental con proyectos locales</p>
+                    <h2 class="section-title">¿Qué es <span class="fw-semibold ff-nunito text-primary">Volunt<span class="fw-light">eco</span></span>?</h2>
+                    <p class="section-subtitle">La plataforma que une compromiso ambiental con proyectos locales.</p>
                     <p><span class="fw-semibold ff-nunito text-primary text-volunteco">Volunt<span class="fw-light">eco</span></span> nace para facilitar el encuentro entre voluntarios y anfitriones que necesitan apoyo en tareas ecológicas.
 Creamos un espacio confiable, curado y regulado para que cada experiencia sea positiva, significativa y segura.</p>
                 </div>
@@ -88,7 +88,7 @@ Creamos un espacio confiable, curado y regulado para que cada experiencia sea po
         <div class="container pb-5">
             <div class="text-center">
                 <h2 class="section-title">Elegí <span class="fw-semibold ff-nunito text-primary">Volunt<span class="fw-light">eco</span></span></h2>
-                <p class="section-subtitle">Tu plataforma de confianza para voluntariado ecológico</p>
+                <p class="section-subtitle">Tu plataforma de confianza para voluntariado ecológico.</p>
             </div>
 
             <div class="row g-4">
@@ -246,7 +246,7 @@ Creamos un espacio confiable, curado y regulado para que cada experiencia sea po
         <div class="container">
             <div class="cta-content">
                 <h2 class="cta-title">Tu aventura te está esperando</h2>
-                <p class="cta-subtitle fs-4 fw-light mb-5">Uníte a la comunidad de <span
+                <p class="cta-subtitle fs-4 fw-light mb-5">Unite a la comunidad de <span
                           class="fw-semibold ff-nunito text-marca">Volunt<span class="fw-light">eco</span></span> y dejá
                     tu huella</p>
                 <a href="{{ route('home') }}"

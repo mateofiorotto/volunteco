@@ -10,7 +10,7 @@
         <div class="hero-content container">
             <div class="text-center">
                 <h1 class="hero-title">¿Cómo <span class="fw-light">funciona</span>?</h1>
-                <p class="hero-subtitle">Sin complicaciones y totalmente confiable</p>
+                <p class="hero-subtitle">Sin complicaciones y totalmente confiable.</p>
             </div>
         </div>
     </section>
@@ -18,7 +18,7 @@
         <div class="container">
             <div class="text-center">
                 <h2 class="section-title text-primary">Simples <span class="fw-light">pasos</span></h2>
-                <p class="section-subtitle">Comenzá tu aventura como anfitrión o voluntario</p>
+                <p class="section-subtitle">Comenzá tu aventura como anfitrión o voluntario.</p>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8">

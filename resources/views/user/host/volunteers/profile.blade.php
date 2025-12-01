@@ -159,7 +159,13 @@
                                         </td>
                                         <td>{{ $project->location->name }} - {{ $project->location->province->name }}</td>
                                         <td class="text-center">
-                                            <span class="badge text-capitalize {{ $project->volunteers->first()->pivot->status == 'pendiente' ? 'bg-warning text-bg-warning' : 'bg-danger' }}"> {{ $project->volunteers->first()->pivot->status }}</span>
+                                            @if($project->volunteers->first()->pivot->status == 'aceptado')
+                                            <span class="badge text-capitalize text-body">{{ $project->volunteers->first()->pivot->status }}</span>
+                                            @else
+                                            <span class="badge text-capitalize {{ $project->volunteers->first()->pivot->status == 'pendiente' ? 'bg-warning text-bg-warning' : 'bg-danger' }}">
+                                                {{ $project->volunteers->first()->pivot->status }}
+                                            </span>
+                                            @endif
                                         </td>
                                         <td>
                                             <a href="{{ route('host.my-projects.show', $project->id) }}" class="btn btn-azul btn-sm @if ($project->enabled === 0) disabled @endif">Ver</a>
