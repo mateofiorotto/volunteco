@@ -209,15 +209,14 @@
                                                     <button type="submit"
                                                             class="btn btn-sm btn-primary {{$volunteer->user->status !== 'activo' ? 'disabled' : ''}} {{ $project->enabled == false ? 'disabled' : '' }}">Aceptar</button>
                                                 </form>
-                                            @else
-                                                <form method="POST"
-                                                        action="{{ route('host.my-projects.reject-volunteer', [$project->id, $volunteer->id]) }}">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <button type="submit"
-                                                            class="btn btn-sm btn-outline-danger {{$volunteer->user->status !== 'activo' ? 'disabled' : ''}}" >Rechazar</button>
-                                                </form>
                                             @endif
+                                            <form method="POST"
+                                                    action="{{ route('host.my-projects.reject-volunteer', [$project->id, $volunteer->id]) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-outline-danger {{$volunteer->user->status !== 'activo' ? 'disabled' : ''}}" >Rechazar</button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>

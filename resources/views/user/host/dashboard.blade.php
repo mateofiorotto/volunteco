@@ -70,7 +70,7 @@
                             @php
                                 $volunteer = $lastAppliedVolunteer->volunteers->first(); // obtenemos el voluntario
                             @endphp
-                            <p class="h5 text-primary fw-semibold">Alguien se postuló a tu proyecto!</p>
+                            <p class="h5 text-primary fw-semibold">¡Alguien se postuló a tu proyecto!</p>
                             <p><strong>{{ $volunteer->name }}</strong> aplicó el {{ \Carbon\Carbon::parse($volunteer->pivot->applied_at)->format('d/m/Y') }}
                             y está pendiente de aceptación en el proyecto: <strong>{{ $lastAppliedVolunteer->title }}</strong>
                             </p>
