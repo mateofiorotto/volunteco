@@ -56,6 +56,12 @@ class ProjectTypesController extends Controller
     public function destroy($id)
     {
         $projectType = ProjectType::findOrFail($id);
+
+        if ($projectType->projects()->count() > 0) {
+            return redirect()->route('admin.project-types.index')
+                ->with('error', 'No se puede eliminar el tipo de proyecto porque está siendo utilizado por uno o más proyectos.');
+        }
+
         $projectType->delete();
 
         return redirect()->route('admin.project-types.index')

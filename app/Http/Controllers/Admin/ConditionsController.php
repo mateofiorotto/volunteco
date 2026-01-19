@@ -57,6 +57,12 @@ class ConditionsController extends Controller
     public function destroy($id)
     {
         $condition = Condition::findOrFail($id);
+
+        if ($condition->projects()->count() > 0) {
+            return redirect()->route('admin.conditions.index')
+                ->with('error', 'No se puede eliminar la condición porque está siendo utilizada por uno o más proyectos.');
+        }
+
         $condition->delete();
 
         return redirect()->route('admin.conditions.index')
