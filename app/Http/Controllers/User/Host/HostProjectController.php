@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Storage;
 
 class HostProjectController extends Controller
 {
-
     /**
      * Mostrar lista de proyectos propios del anfitrion
      */
@@ -56,8 +55,15 @@ class HostProjectController extends Controller
     {
         $provinces = Province::with('locations')->get();
 
-        $projectTypes = ProjectType::all();
-        $conditions = Condition::all();
+        //solo traer tipos de proyecto habilitados
+        $projectTypes = ProjectType::where('enabled', true)
+            ->orderBy('name', 'asc')
+            ->get();
+
+        //solo traer condiciones habilitadas
+        $conditions = Condition::where('enabled', true)
+            ->orderBy('name', 'asc')
+            ->get();
 
         return view('user.host.projects.create', compact('projectTypes', 'conditions', 'provinces'));
     }
@@ -88,7 +94,7 @@ class HostProjectController extends Controller
 
         //manejo de la imagen
         $validated['image'] = $request->hasFile('image')
-            ? $request->file('image')->store('projects','public') :
+            ? $request->file('image')->store('projects', 'public') :
             null;
 
         //crear el proyecto
@@ -119,8 +125,15 @@ class HostProjectController extends Controller
             abort(403, 'Acceso denegado o proyecto inexistente.');
         }
 
-        $projectTypes = ProjectType::all();
-        $conditions = Condition::all();
+        //solo traer tipos de proyecto habilitados
+        $projectTypes = ProjectType::where('enabled', true)
+            ->orderBy('name', 'asc')
+            ->get();
+
+        //solo traer condiciones habilitadas
+        $conditions = Condition::where('enabled', true)
+            ->orderBy('name', 'asc')
+            ->get();
 
         return view('user.host.projects.edit', compact('project', 'projectTypes', 'conditions', 'provinces'));
     }
@@ -154,7 +167,7 @@ class HostProjectController extends Controller
 
         //manejo de la imagen
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('projects','public');
+            $path = $request->file('image')->store('projects', 'public');
             $validated['image'] = $path;
         }
 
