@@ -10,7 +10,7 @@ class ProjectTypesController extends Controller
 {
     public function index()
     {
-        $projectTypes = ProjectType::orderBy('created_at', 'desc')->paginate(6);
+        $projectTypes = ProjectType::orderBy('created_at', 'desc')->paginate(10);
 
         return view('admin.project-types.index', compact('projectTypes'));
     }

@@ -25,14 +25,6 @@
                        href="{{ route('admin.dashboard') }}">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/condiciones*') ? 'active' : '' }}"
-                       href="{{ route('admin.conditions.index') }}">Condiciones</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/tipos-proyectos*') ? 'active' : '' }}"
-                       href="{{ route('admin.project-types.index') }}">Tipos de Proyecto</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link {{ request()->is('admin/anfitriones*') ? 'active' : '' }}"
                        href="{{ route('admin.hosts.index') }}">Anfitriones</a>
                 </li>
@@ -40,9 +32,31 @@
                     <a class="nav-link {{ request()->is('admin/voluntarios*') ? 'active' : '' }}"
                        href="{{ route('admin.volunteers.index') }}">Voluntarios</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/proyectos*') ? 'active' : '' }}"
-                       href="{{ route('admin.projects.index') }}">Proyectos</a>
+                <li class="nav-item dropdown dropdown-center">
+                    <a class="nav-link dropdown-toggle {{ request()->is('admin/proyectos*') ? 'active' : '' }}"
+                       href="#"
+                       role="button"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Proyectos
+                    </a>
+                    <ul class="dropdown-menu py-0">
+                        <li>
+                            <a class="nav-link {{ request()->is('admin/proyectos*') ? 'active' : '' }}" href="{{ route('admin.projects.index') }}">Proyectos</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider mb-0">
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('admin/tipos-proyectos*') ? 'active' : '' }}"
+                            href="{{ route('admin.project-types.index') }}">Tipos de proyecto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('admin/condiciones*') ? 'active' : '' }}"
+                            href="{{ route('admin.conditions.index') }}">Condiciones</a>
+                        </li>
+                    </ul>
+
                 </li>
             @endif
             @if (Auth::user()->hasRole('host'))

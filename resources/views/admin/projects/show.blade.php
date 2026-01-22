@@ -209,7 +209,7 @@
                                         <a href="{{ route('admin.volunteer.profile', $volunteer->id) }}"
                                             class="btn btn-sm btn-azul"
                                             title="Ver perfil del voluntario">
-                                            Ver Perfil
+                                            Ver perfil
                                         </a>
                                     </td>
                                     </tr>
