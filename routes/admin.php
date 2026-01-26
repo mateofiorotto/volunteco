@@ -5,8 +5,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HostsController;
 use App\Http\Controllers\Admin\ProjectsController;
 use App\Http\Controllers\Admin\VolunteersController;
-use App\Http\Controllers\Admin\ConditionsController;
 use App\Http\Controllers\Admin\ProjectTypesController;
+use App\Http\Controllers\Admin\ConditionsController;
 
 Route::middleware(['checkEnabled', 'auth', 'CheckRole:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
@@ -35,14 +35,20 @@ Route::middleware(['checkEnabled', 'auth', 'CheckRole:admin'])->prefix('admin')-
     Route::delete('/proyectos/{project}/eliminar', [ProjectsController::class, 'delete'])->name('projects.delete');
 
     // rutas para condiciones
+    // Rutas para condiciones
     Route::get('/condiciones', [ConditionsController::class, 'index'])->name('conditions.index');
+    Route::get('/condiciones/crear', [ConditionsController::class, 'create'])->name('conditions.create');
     Route::post('/condiciones', [ConditionsController::class, 'store'])->name('conditions.store');
+    Route::get('/condiciones/{id}/editar', [ConditionsController::class, 'edit'])->name('conditions.edit');
     Route::put('/condiciones/{id}', [ConditionsController::class, 'update'])->name('conditions.update');
+    Route::get('/condiciones/{id}/eliminar', [ConditionsController::class, 'delete'])->name('conditions.delete');
     Route::delete('/condiciones/{id}', [ConditionsController::class, 'destroy'])->name('conditions.destroy');
-
     // rutas para tipo de proyectos
     Route::get('/tipos-de-proyectos', [ProjectTypesController::class, 'index'])->name('project-types.index');
+    Route::get('/tipos-de-proyectos/crear', [ProjectTypesController::class, 'create'])->name('project-types.create');
     Route::post('/tipos-de-proyectos', [ProjectTypesController::class, 'store'])->name('project-types.store');
+    Route::get('/tipos-de-proyectos/{id}/editar', [ProjectTypesController::class, 'edit'])->name('project-types.edit');
     Route::put('/tipos-de-proyectos/{id}', [ProjectTypesController::class, 'update'])->name('project-types.update');
+    Route::get('/tipos-de-proyectos/{id}/eliminar', [ProjectTypesController::class, 'delete'])->name('project-types.delete');
     Route::delete('/tipos-de-proyectos/{id}', [ProjectTypesController::class, 'destroy'])->name('project-types.destroy');
 });

@@ -41,10 +41,9 @@
                                     <td>{{ $project->host->name }}</td>
                                     <td>
                                         @if (!$project->enabled)
-                                            <span class="text-capitalize badge text-bg-danger">desactivado</span>
+                                            <span class="text-capitalize badge text-bg-danger">inactivo</span>
                                         @else
-                                            <span
-                                                  class="text-capitalize badge bg-transparent text-body">activo</span>
+                                            <span class="text-capitalize badge bg-transparent text-body">activo</span>
                                         @endif
                                     </td>
                                     <td class="text-center">{{ $project->volunteers->count() }}</td>
