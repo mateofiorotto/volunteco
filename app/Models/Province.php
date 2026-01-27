@@ -14,5 +14,10 @@ class Province extends Model
         return $this->hasMany(Location::class);
     }
 
-    // agregar relacion con hosts, voluntarios y proyectos
+    public function projects()
+    {
+        return $this->hasManyThrough(Project::class, Location::class);
+    }
+
+    // agregar relacion con hosts, voluntarios
 }

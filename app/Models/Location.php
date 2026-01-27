@@ -14,4 +14,10 @@ class Location extends Model
         return $this->belongsTo(Province::class);
     }
 
+    // Una localidad tiene muchos proyectos
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
 }
