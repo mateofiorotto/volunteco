@@ -15,6 +15,11 @@ class ProjectTypesController extends Controller
         return view('admin.project-types.index', compact('projectTypes'));
     }
 
+    public function create()
+    {
+        return view('admin.project-types.create');
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -31,6 +36,13 @@ class ProjectTypesController extends Controller
 
         return redirect()->route('admin.project-types.index')
             ->with('success', 'Tipo de proyecto agregado correctamente');
+    }
+
+    public function edit($id)
+    {
+        $projectType = ProjectType::findOrFail($id);
+
+        return view('admin.project-types.edit', compact('projectType'));
     }
 
     public function update(Request $request, $id)
@@ -51,6 +63,13 @@ class ProjectTypesController extends Controller
 
         return redirect()->route('admin.project-types.index')
             ->with('success', 'Tipo de proyecto actualizado correctamente');
+    }
+
+    public function delete($id)
+    {
+        $projectType = ProjectType::findOrFail($id);
+
+        return view('admin.project-types.delete', compact('projectType'));
     }
 
     public function destroy($id)

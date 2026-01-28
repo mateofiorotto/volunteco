@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\Volunteer;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Province;
+use App\Models\ProjectType;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
@@ -23,16 +26,80 @@ class FrontendController extends Controller
     /**
      * Devolver listado de proyectos con paginación
      */
-    public function projects()
+    public function projects(Request $request)
     {
-        //proyectos activos y con anfitriones activos
-        $projects = Project::where('enabled', true)
-            ->with('location.province')
-            ->latest()
-            ->paginate(6);
+        $search = $request->search;
+        $provinceId = $request->province_id;
+        $projectTypeId = $request->project_type_id;
 
-        return view('frontend.projects', compact('projects'));
+        // Listado de proyectos
+        $projectsQuery = Project::where('enabled', true)
+            ->with(['location.province', 'projectType']);
+
+        // buscador por palabra clave
+        if ($search) {
+            $projectsQuery->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+
+        // por provincia
+        if ($provinceId) {
+            $projectsQuery->whereHas('location', function ($q) use ($provinceId) {
+                $q->where('province_id', $provinceId);
+            });
+        }
+
+        // por tipo de proyecto
+        if ($projectTypeId) {
+            $projectsQuery->where('project_type_id', $projectTypeId);
+        }
+
+        $projects = $projectsQuery
+            ->latest()
+            ->paginate(12)
+            ->withQueryString();
+
+        // Listado de provincias sincronizadas con los filtros activos
+        $provinces = Province::whereHas('locations.projects', function ($q) use ($search, $projectTypeId) {
+            $q->where('enabled', true);
+
+            if ($search) {
+                $q->where(function ($qq) use ($search) {
+                    $qq->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
+                });
+            }
+
+            if ($projectTypeId) {
+                $q->where('project_type_id', $projectTypeId);
+            }
+        })->orderBy('name')->get();
+
+        // Listado de proyectos con contador sincronizado
+        $projectTypes = ProjectType::withCount([
+            'projects as projects_count' => function ($q) use ($search, $provinceId) {
+                $q->where('enabled', true);
+
+                if ($search) {
+                    $q->where(function ($qq) use ($search) {
+                        $qq->where('title', 'like', "%{$search}%")
+                        ->orWhere('description', 'like', "%{$search}%");
+                    });
+                }
+
+                if ($provinceId) {
+                    $q->whereHas('location', function ($l) use ($provinceId) {
+                        $l->where('province_id', $provinceId);
+                    });
+                }
+            }
+        ])->having('projects_count', '>', 0)->orderBy('name')->get();
+
+        return view('frontend.projects', compact('projects', 'provinces', 'projectTypes'));
     }
+
 
     public function projectById($id)
     {
