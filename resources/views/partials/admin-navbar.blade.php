@@ -32,6 +32,9 @@
                     <a class="nav-link {{ request()->is('admin/voluntarios*') ? 'active' : '' }}"
                        href="{{ route('admin.volunteers.index') }}">Voluntarios</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('admin/productos*') ? 'active' : '' }}"
+                       href="{{ route('admin.products.index') }}">Productos</a>
                 <li class="nav-item dropdown dropdown-center">
                     <a class="nav-link dropdown-toggle {{ request()->is('admin/proyectos*') ? 'active' : '' }}"
                        href="#"
@@ -42,18 +45,19 @@
                     </a>
                     <ul class="dropdown-menu py-0">
                         <li>
-                            <a class="nav-link {{ request()->is('admin/proyectos*') ? 'active' : '' }}" href="{{ route('admin.projects.index') }}">Proyectos</a>
+                            <a class="nav-link {{ request()->is('admin/proyectos*') ? 'active' : '' }}"
+                               href="{{ route('admin.projects.index') }}">Proyectos</a>
                         </li>
                         <li>
                             <hr class="dropdown-divider mb-0">
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('admin/tipos-proyectos*') ? 'active' : '' }}"
-                            href="{{ route('admin.project-types.index') }}">Tipos de proyecto</a>
+                               href="{{ route('admin.project-types.index') }}">Tipos de proyecto</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('admin/condiciones*') ? 'active' : '' }}"
-                            href="{{ route('admin.conditions.index') }}">Condiciones</a>
+                               href="{{ route('admin.conditions.index') }}">Condiciones</a>
                         </li>
                     </ul>
 

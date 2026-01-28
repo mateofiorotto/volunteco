@@ -1,0 +1,146 @@
+@extends('layouts.admin')
+
+@section('content')
+    <section>
+        <div class="container py-5">
+            <div class="mb-4">
+                <a href="{{ route('admin.products.show', $product->id) }}"
+                   class="btn btn-link text-decoration-none"><i class="bi bi-chevron-left me-1"></i> Volver
+                </a>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h1 class="h4 mb-0">Editar producto</h1>
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ route('admin.products.update', $product->id) }}"
+                                  method="POST"
+                                  enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+
+                                <div class="mb-3">
+                                    <label for="key"
+                                           class="form-label">
+                                        Key (separado-con-guion) <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text"
+                                           class="form-control @error('key') is-invalid @enderror"
+                                           id="key"
+                                           name="key"
+                                           value="{{ old('key', $product->key) }}"
+                                           placeholder="producto-ejemplo"
+                                           required>
+                                    <small class="text-muted">Identificador único del producto. Usar solo letras minúsculas,
+                                        números y guiones</small>
+                                    @error('key')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="name"
+                                           class="form-label">
+                                        Nombre del producto <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text"
+                                           class="form-control @error('name') is-invalid @enderror"
+                                           id="name"
+                                           name="name"
+                                           value="{{ old('name', $product->name) }}"
+                                           placeholder="Nombre del producto"
+                                           required>
+                                    @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="description"
+                                           class="form-label">
+                                        Descripción <span class="text-danger">*</span>
+                                    </label>
+                                    <textarea class="form-control @error('description') is-invalid @enderror"
+                                              id="description"
+                                              name="description"
+                                              rows="4"
+                                              placeholder="Descripción del producto"
+                                              required>{{ old('description', $product->description) }}</textarea>
+                                    @error('description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="price"
+                                           class="form-label">
+                                        Precio <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number"
+                                               class="form-control @error('price') is-invalid @enderror"
+                                               id="price"
+                                               name="price"
+                                               value="{{ old('price', $product->price) }}"
+                                               step="0.01"
+                                               min="0"
+                                               placeholder="0.00"
+                                               required>
+                                        @error('price')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="imagen"
+                                           class="form-label">Imagen del producto</label>
+
+                                    @if ($product->imagen)
+                                        <div class="mb-3">
+                                            <p class="text-muted small mb-2">Imagen actual:</p>
+                                            <img src="{{ asset('storage/' . $product->imagen) }}"
+                                                 alt="{{ $product->name }}"
+                                                 class="img-thumbnail rounded"
+                                                 style="max-width: 200px;">
+                                        </div>
+                                    @endif
+
+                                    <input type="file"
+                                           class="form-control @error('imagen') is-invalid @enderror"
+                                           id="imagen"
+                                           name="imagen"
+                                           accept="image/jpeg,image/png,image/jpg,image/gif">
+                                    <small class="text-muted">
+                                        Formatos permitidos: JPG, PNG, GIF. Tamaño máximo: 2MB
+                                        @if ($product->imagen)
+                                            <br>Dejar vacío para mantener la imagen actual.
+                                        @endif
+                                    </small>
+                                    @error('imagen')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="d-flex gap-2">
+                                    <a href="{{ route('admin.products.show', $product->id) }}"
+                                       class="btn btn-outline-primary">
+                                        Cancelar
+                                    </a>
+                                    <button type="submit"
+                                            class="btn btn-primary">
+                                        Actualizar producto
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection

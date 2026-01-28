@@ -9,28 +9,40 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
 {
-     public function index()
+    public function index()
     {
-        $products = Product::all();
-    
-        //devolver vista
+        $products = Product::paginate(10);
+
+        return view('admin.products.index', compact('products'));
+    }
+
+    public function create()
+    {
+        return view('admin.products.create');
     }
 
     public function show($id)
     {
         $product = Product::findOrFail($id);
-        
-        //devolver vista
+
+        return view('admin.products.show', compact('product'));
+    }
+
+    public function edit($id)
+    {
+        $product = Product::findOrFail($id);
+
+        return view('admin.products.edit', compact('product'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'sometimes|required|string|max:255',
-            'key' => 'sometimes|required|string|max:255',
-            'description' => 'sometimes|required|string',
-            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'price' => 'sometimes|required|numeric|min:0'
+            'name' => 'required|string|max:255',
+            'key' => 'required|string|max:255|unique:products,key',
+            'description' => 'required|string',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'price' => 'required|numeric|min:0'
         ]);
 
         if ($request->hasFile('imagen')) {
@@ -39,6 +51,10 @@ class ProductsController extends Controller
         }
 
         $product = Product::create($validated);
+
+        return redirect()
+            ->route('admin.products.show', $product->id)
+            ->with('success', 'Producto creado exitosamente');
     }
 
     public function update(Request $request, $id)
@@ -46,11 +62,11 @@ class ProductsController extends Controller
         $product = Product::findOrFail($id);
 
         $validated = $request->validate([
-            'name' => 'sometimes|required|string|max:255',
-            'key' => 'sometimes|required|string|max:255',
-            'description' => 'sometimes|required|string',
-            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'price' => 'sometimes|required|numeric|min:0'
+            'name' => 'required|string|max:255',
+            'key' => 'required|string|max:255|unique:products,key,' . $id,
+            'description' => 'required|string',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'price' => 'required|numeric|min:0'
         ]);
 
         if ($request->hasFile('imagen')) {
@@ -58,13 +74,16 @@ class ProductsController extends Controller
             if ($product->imagen) {
                 Storage::disk('public')->delete($product->imagen);
             }
-            
+
             $imagePath = $request->file('imagen')->store('products', 'public');
             $validated['imagen'] = $imagePath;
         }
 
         $product->update($validated);
 
+        return redirect()
+            ->route('admin.products.show', $product->id)
+            ->with('success', 'Producto actualizado exitosamente');
     }
 
     public function destroy($id)
@@ -78,8 +97,8 @@ class ProductsController extends Controller
 
         $product->delete();
 
-        return response()->json([
-            'message' => 'Producto eliminado exitosamente'
-        ]);
+        return redirect()
+            ->route('admin.products.index')
+            ->with('success', 'Producto eliminado exitosamente');
     }
 }

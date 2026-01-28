@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProjectsController;
 use App\Http\Controllers\Admin\VolunteersController;
 use App\Http\Controllers\Admin\ProjectTypesController;
 use App\Http\Controllers\Admin\ConditionsController;
+use App\Http\Controllers\Admin\ProductsController;
 
 Route::middleware(['checkEnabled', 'auth', 'CheckRole:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
@@ -51,4 +52,13 @@ Route::middleware(['checkEnabled', 'auth', 'CheckRole:admin'])->prefix('admin')-
     Route::put('/tipos-de-proyectos/{id}', [ProjectTypesController::class, 'update'])->name('project-types.update');
     Route::get('/tipos-de-proyectos/{id}/eliminar', [ProjectTypesController::class, 'delete'])->name('project-types.delete');
     Route::delete('/tipos-de-proyectos/{id}', [ProjectTypesController::class, 'destroy'])->name('project-types.destroy');
+
+    // RUTAS PARA PRODUCTOS
+    Route::get('/productos', [ProductsController::class, 'index'])->name('products.index');
+    Route::get('/productos/crear', [ProductsController::class, 'create'])->name('products.create');
+    Route::post('/productos', [ProductsController::class, 'store'])->name('products.store');
+    Route::get('/productos/{id}', [ProductsController::class, 'show'])->name('products.show');
+    Route::get('/productos/{id}/editar', [ProductsController::class, 'edit'])->name('products.edit');
+    Route::put('/productos/{id}', [ProductsController::class, 'update'])->name('products.update');
+    Route::delete('/productos/{id}', [ProductsController::class, 'destroy'])->name('products.destroy');
 });
