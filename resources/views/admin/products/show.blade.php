@@ -53,14 +53,16 @@
                                                         <li><span class="text-muted small">ID: </span>#{{ $product->id }}
                                                         </li>
                                                         <li><span class="text-muted small">Key:
-                                                            </span><code>{{ $product->key }}</code></li>
-                                                        <li><span class="text-muted small">Precio: </span><span
-                                                                  class="h5 text-primary">${{ number_format($product->price, 2) }}</span>
+                                                            </span>{{ $product->key }}</li>
+                                                        <li><span class="text-muted small">Precio: </span>
+                                                            ${{ number_format($product->price, 2) }}
                                                         </li>
                                                     </ul>
                                                 </div>
                                                 <div class="col">
                                                     <ul class="list-unstyled">
+                                                        <li><span class="text-muted small">Stock:
+                                                            </span>{{ $product->stock }}</li>
                                                         @if ($product->created_at)
                                                             <li><span class="text-muted small">Creado:
                                                                 </span>{{ $product->created_at->format('d/m/Y') }}</li>

@@ -40,6 +40,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Key</th>
+                                <th scope="col">Stock</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Precio</th>
                                 <th scope="col">Acciones</th>
@@ -50,6 +51,7 @@
                                 <tr>
                                     <th scope="row">{{ $product->id }}</th>
                                     <td>{{ $product->key }}</td>
+                                    <td>{{ $product->stock }}</td>
                                     <td>{{ $product->name }}</td>
                                     <td>${{ number_format($product->price, 2) }}</td>
                                     <td>

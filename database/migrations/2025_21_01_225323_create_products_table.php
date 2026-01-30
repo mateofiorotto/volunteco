@@ -14,6 +14,7 @@ return new class () extends Migration {
             $table->id();
             $table->string('name')->unique();
             $table->string('key')->unique();
+            $table->integer('stock')->default(0);
             $table->text('description');
             $table->string('image');
             $table->decimal('price', 10, 2);

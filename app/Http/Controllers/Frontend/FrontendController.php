@@ -9,6 +9,7 @@ use App\Models\Province;
 use App\Models\ProjectType;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class FrontendController extends Controller
 {
@@ -146,6 +147,15 @@ class FrontendController extends Controller
     public function donate()
     {
         return view('frontend.donate');
+    }
+
+    public function merchandising()
+    {
+        //paginar
+        $products = Product::where('stock', '>', 0)
+            ->latest()
+            ->paginate(6);
+        return view('frontend.merchandising', compact('products'));
     }
 
 
