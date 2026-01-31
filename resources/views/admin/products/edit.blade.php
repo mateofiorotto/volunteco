@@ -25,14 +25,14 @@
                                 <div class="mb-3">
                                     <label for="key"
                                            class="form-label">
-                                        Key (separado-con-guion) <span class="text-danger">*</span>
+                                        Key (separado_con_guion) <span class="text-danger">*</span>
                                     </label>
                                     <input type="text"
                                            class="form-control @error('key') is-invalid @enderror"
                                            id="key"
                                            name="key"
                                            value="{{ old('key', $product->key) }}"
-                                           placeholder="producto-ejemplo"
+                                           placeholder="ejemplo_de_key"
                                            required>
                                     <small class="text-muted">Identificador único del producto. Usar solo letras minúsculas,
                                         números y guiones</small>
@@ -121,15 +121,12 @@
                                     <label for="imagen"
                                            class="form-label">Imagen del producto</label>
 
-                                    @if ($product->imagen)
-                                        <div class="mb-3">
-                                            <p class="text-muted small mb-2">Imagen actual:</p>
-                                            <img src="{{ asset('storage/' . $product->imagen) }}"
-                                                 alt="{{ $product->name }}"
-                                                 class="img-thumbnail rounded"
-                                                 style="max-width: 200px;">
-                                        </div>
-                                    @endif
+                                    <div class="mb-3">
+                                        <p class="text-muted small mb-2">Imagen actual:</p>
+                                        <img src="{{ asset('storage/' . ($product->image ?? 'thumbnail-producto.jpg')) }}"
+                                             alt="{{ $product->name }}"
+                                             class="img-fluid w-50 d-block m-auto my-3">
+                                    </div>
 
                                     <input type="file"
                                            class="form-control @error('imagen') is-invalid @enderror"

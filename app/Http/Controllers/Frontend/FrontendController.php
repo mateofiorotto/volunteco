@@ -151,11 +151,26 @@ class FrontendController extends Controller
 
     public function merchandising()
     {
-        //paginar
         $products = Product::where('stock', '>', 0)
             ->latest()
             ->paginate(6);
         return view('frontend.merchandising', compact('products'));
+    }
+
+    public function product($id)
+    {
+        $product = Product::where('id', $id)
+            ->where('stock', '>', 0)
+            ->firstOrFail();
+
+        //productos relacionados (aleatorios, excluyendo el actual)
+        $relatedProducts = Product::where('id', '!=', $product->id)
+            ->where('stock', '>', 0)
+            ->inRandomOrder()
+            ->take(3)
+            ->get();
+
+        return view('frontend.product', compact('product', 'relatedProducts'));
     }
 
 

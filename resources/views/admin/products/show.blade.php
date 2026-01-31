@@ -27,20 +27,10 @@
                             <div class="col-12">
                                 <div class="card mb-3">
                                     <div class="d-flex g-0">
-                                        <div class="avatar p-3">
-                                            @if ($product->imagen)
-                                                <img src="{{ asset('storage/' . $product->imagen) }}"
-                                                     alt="Imagen del producto {{ $product->name }}"
-                                                     class="object-fit-cover rounded"
-                                                     width="120"
-                                                     height="120">
-                                            @else
-                                                <div class="bg-light d-flex align-items-center justify-content-center rounded"
-                                                     style="width: 120px; height: 120px;">
-                                                    <i class="bi bi-box-seam text-muted"
-                                                       style="font-size: 3rem;"></i>
-                                                </div>
-                                            @endif
+                                        <div class="p-3">
+                                            <img src="{{ asset('storage/' . ($product->image ?? 'thumbnail-producto.jpg')) }}"
+                                                 alt="{{ $product->name }}"
+                                                 class="img-fluid">
                                         </div>
                                         <div class="card-body flex-fill">
                                             <div class="d-flex justify-content-between align-items-center mb-2">

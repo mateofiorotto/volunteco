@@ -24,14 +24,14 @@
                                 <div class="mb-3">
                                     <label for="key"
                                            class="form-label">
-                                        Key (separado-con-guion) <span class="text-danger">*</span>
+                                        Key (separado_con_guion) <span class="text-danger">*</span>
                                     </label>
                                     <input type="text"
                                            class="form-control @error('key') is-invalid @enderror"
                                            id="key"
                                            name="key"
                                            value="{{ old('key') }}"
-                                           placeholder="producto-ejemplo"
+                                           placeholder="ejemplo_de_key"
                                            required>
                                     <small class="text-muted">Identificador único del producto. Usar solo letras minúsculas,
                                         números y guiones</small>

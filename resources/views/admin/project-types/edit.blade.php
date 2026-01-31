@@ -24,7 +24,7 @@
                                 <div class="mb-3">
                                     <label for="key"
                                            class="form-label">
-                                        Key (separado-con-guion) <span class="text-danger">*</span>
+                                        Key (separado_con_guion) <span class="text-danger">*</span>
                                     </label>
                                     <input type="text"
                                            class="form-control @error('key') is-invalid @enderror"
