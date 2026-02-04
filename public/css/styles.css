@@ -439,8 +439,8 @@ small {
     font-size: 1.2rem;
 }
 
-.testimonials-section {
-    background: #66800a;
+.testimonials-section, .donations-banner-section {
+    background: #66800a !important;
 }
 
 .sponsors-section {
@@ -1007,3 +1007,19 @@ code {
     background-position: center center;
     filter: blur(1px);
 }
+
+/*Banner de Donaciones*/
+
+.donation-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.donation-progress-wrapper .progress-bar {
+    font-weight: 600;
+    font-size: 1.3em;
+    border-radius: 12px;
+}
+
