@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'Productos')
+@section('title', 'Tienda solidaria')
 
 @section('content')
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="hero-background"></div>
         <div class="hero-overlay"></div>
-        <div class="hero-content container">
-            <h1 class="hero-title">Nuestros <span class="fw-light">productos</span></h1>
-            <p class="hero-subtitle">Descubrí nuestra selección de productos orgánicos y sustentables.</p>
+        <div class="hero-content container container-lg px-lg-5">
+            <h1 class="hero-title">Tienda <span class="fw-light">solidaria</span></h1>
+            <p class="hero-subtitle px-lg-4">Cada compra contribuye a mantener activa y eficiente nuestra web.</p>
         </div>
     </section>
 
@@ -36,7 +36,7 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="card product-card h-100">
                                 <div class="position-relative">
-                                    <img src="{{ asset('storage/' . ($product->image ?? 'thumbnail-producto.jpg')) }}"
+                                    <img src="{{ asset('storage/' . ($product->image ?? 'thumbnail-proyecto.jpg')) }}"
                                          class="card-img-top object-fit-cover"
                                          alt="{{ $product->name }}">
                                 </div>
@@ -51,7 +51,7 @@
                                         <div class="d-flex align-items-center justify-content-between mb-3">
                                             <div>
                                                 <p class="h5 mb-0 text-primary fw-bold">
-                                                    {{ number_format($product->price, 2) }} ARS
+                                                    ${{ number_format($product->price, 2) }}
                                                 </p>
                                             </div>
                                         </div>

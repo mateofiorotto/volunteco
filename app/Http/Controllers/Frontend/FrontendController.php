@@ -149,12 +149,12 @@ class FrontendController extends Controller
         return view('frontend.donate');
     }
 
-    public function merchandising()
+    public function shop()
     {
         $products = Product::where('stock', '>', 0)
             ->latest()
             ->paginate(6);
-        return view('frontend.merchandising', compact('products'));
+        return view('frontend.shop', compact('products'));
     }
 
     public function product($id)
