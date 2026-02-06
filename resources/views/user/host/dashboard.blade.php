@@ -23,20 +23,13 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="card h-100 {{ $project->enabled === 0 ? 'border-danger' : '' }}">
                                     <img src="{{ asset('storage/' . ($project->image ?? 'thumbnail-proyecto.jpg')) }}"
-                                                class="card-img-top"
-                                                alt="{{ $project->title }}"
-                                                style="height: 200px; object-fit: cover;">
+                                                class="card-img-top card-projects-dashboard"
+                                                alt="{{ $project->title }}">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-start mb-3 gap-2">
                                             <h3 class="card-title mb-0 h4">
                                                 {{ $project->title }}
                                             </h3>
-                                            <!-- @if($project->enabled != 1)
-                                            <span
-                                                    class="badge text-capitalize bg-danger">
-                                                    desactivado
-                                            </span>
-                                            @endif -->
                                         </div>
 
                                         <p class="card-text small mb-3">

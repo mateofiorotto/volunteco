@@ -3,7 +3,7 @@
 @section('title', 'Donar')
 
 @section('content')
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero-section">
         <div class="hero-background-donations"></div>
         <div class="hero-overlay"></div>
@@ -15,20 +15,21 @@
         </div>
     </section>
 
-    <!-- Donation Section -->
+    <!-- Donaciones -->
     <section class="py-5">
         <div class="container">
             <div class="text-center row mb-5">
                 <div class="col-md-7 mx-auto">
                     <h2 class="section-title text-primary">Colaborá <span class="fw-light">con nosotros</span></h2>
-                    <p>Cada aporte hace la diferencia. Tu donación nos ayuda a mantener la plataforma activa y a seguir conectando voluntarios con proyectos ecológicos en toda Argentina.</p>
+                    <p>Cada aporte hace la diferencia. Tu donación nos ayuda a mantener la plataforma activa y a seguir
+                        conectando voluntarios con proyectos ecológicos en toda Argentina.</p>
                 </div>
             </div>
 
             <div class="row justify-content-between align-items-start">
                 <!-- Donation Info -->
-                <div class="col-md-5">
-                    <div class="border rounded-3 p-4 mb-5">
+                <div class="col-lg-5 col-12">
+                    <div class="border rounded-3 p-4 mb-4">
                         <h3 class="h5 mb-3">Datos bancarios</h3>
 
                         <div class="mb-3">
@@ -83,7 +84,7 @@
                         </div>
                     </div>
 
-                    <!-- QR falso -->
+                    <!-- QR -->
                     <div class="text-center border rounded-3 p-4">
                         <p class="text-muted small mb-3">O escaneá el código QR</p>
                         <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=0000003100010234567890"
@@ -94,21 +95,51 @@
                     </div>
                 </div>
 
-                <!-- Image -->
-                <div class="col-md-5 offset-1">
+                <!-- Imagen -->
+                <div class="col-lg-5 col-12 mt-5 mt-lg-0">
                     <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&h=1000&fit=crop"
                          alt="Voluntarios cuidando el medio ambiente"
-                         class="img-fluid rounded-3">
+                         class="img-fluid d-block m-auto rounded-3">
+                </div>
+            </div>
+
+            <!-- Banner de Seguridad -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="bg-primary p-4 text-light rounded-3"
+                         role="alert">
+                        <div class="row align-items-center">
+                            <div class="col-md-1 text-center">
+                                <i class="bi bi-shield-check display-4"></i>
+                            </div>
+                            <div class="col-md-11">
+                                <h3 class="alert-heading mb-2">
+                                    <i class="bi bi-check-circle-fill me-2"></i>
+                                    Tu donación es segura
+                                </h3>
+                                <p class="mb-2">Todas las transferencias bancarias están protegidas por el sistema de
+                                    seguridad bancaria de Argentina y cumplen con los estándares de protección de
+                                    datos.</p>
+                                <hr class="my-2">
+                                <p class="mb-0 small">
+                                    <i class="bi bi-lock-fill me-1"></i>
+                                    <strong>Conexión encriptada SSL/TLS</strong> - Tus datos están protegidos.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
     <section class="bg-body-tertiary">
         <div class="container">
-            <!-- Impact Section -->
-            <div class="row mt-5 pt-5 pb-3">
+            <!-- Impacto -->
+            <div class="row mt-5 pb-3">
                 <div class="col-12">
-                    <h3 class="text-center mb-5 text-primary section-title">Tu ayuda <span class="fw-light">impacta</span></h3>
+                    <h3 class="text-center mb-5 text-primary section-title">Tu ayuda <span class="fw-light">impacta</span>
+                    </h3>
                 </div>
                 <div class="col-md-4 text-center mb-4">
                     <div class="bg-azul text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
@@ -129,7 +160,8 @@
                 <div class="col-md-4 text-center mb-4">
                     <div class="bg-azul text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
                          style="width: 80px; height: 80px;">
-                        <i class="bi bi-people" style="font-size: 35px;"></i>
+                        <i class="bi bi-people"
+                           style="font-size: 35px;"></i>
                     </div>
                     <h4 class="mb-2 text-primary">Apoyo a organizaciones</h4>
                     <p class="text-muted">Ayudamos a difundir proyectos locales</p>
@@ -137,7 +169,8 @@
                 <div class="col-md-4 text-center mb-4">
                     <div class="bg-azul text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
                          style="width: 80px; height: 80px;">
-                        <i class="bi bi-tree" style="font-size: 35px;"></i>
+                        <i class="bi bi-tree"
+                           style="font-size: 35px;"></i>
                     </div>
                     <h4 class="mb-2 text-primary">Impacto ambiental</h4>
                     <p class="text-muted">Más voluntarios, más acciones positivas</p>
@@ -155,12 +188,16 @@
                 button.addEventListener('click', function() {
                     const textToCopy = this.getAttribute('data-copy');
                     navigator.clipboard.writeText(textToCopy).then(() => {
-                        // Feedback visual opcional
-                        const originalTitle = this.getAttribute('title');
-                        this.setAttribute('title', '¡Copiado!');
+                        // Feedback visual
+                        const originalHTML = this.innerHTML;
+                        this.innerHTML = '<i class="bi bi-check2"></i>';
+                        this.classList.remove('btn-outline-primary');
+                        this.classList.add('btn-success');
 
                         setTimeout(() => {
-                            this.setAttribute('title', originalTitle);
+                            this.innerHTML = originalHTML;
+                            this.classList.remove('btn-success');
+                            this.classList.add('btn-outline-primary');
                         }, 2000);
                     });
                 });

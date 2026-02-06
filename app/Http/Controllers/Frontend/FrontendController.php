@@ -13,6 +13,10 @@ use App\Models\Product;
 
 class FrontendController extends Controller
 {
+    /**
+     * Devuelve la vista de inicio con 3 proyectos recientes
+     *
+     */
     public function home()
     {
         $projects = Project::where('enabled', true)
@@ -25,7 +29,7 @@ class FrontendController extends Controller
     }
 
     /**
-     * Devolver listado de proyectos con paginación
+     * Devuelve el listado de proyectos con paginación
      */
     public function projects(Request $request)
     {
@@ -102,6 +106,11 @@ class FrontendController extends Controller
     }
 
 
+    /**
+     * Devuelve la vista de detalles de un proyecto por su id
+     * 
+     * @param int $id
+     */
     public function projectById($id)
     {
         $project = Project::where('id', $id)->where('enabled', true)->with('volunteers')->firstOrFail();
@@ -129,26 +138,43 @@ class FrontendController extends Controller
         return view('frontend.project-details', compact('project', 'volunteerStatus', 'isAceptedByHost'));
     }
 
+    /**
+     * Devuelve la vista "sobre nosotros"
+     * 
+     */
     public function about()
     {
         return view('frontend.about');
     }
 
+
+    /**
+     * Devuelve la vista de contacto
+     */
     public function contact()
     {
         return view('frontend.contact');
     }
 
+    /**
+     * Devuelve la vista de cómo funciona
+     */
     public function howItWorks()
     {
         return view('frontend.how-it-works');
     }
 
+    /**
+     * Devuelve la vista de donar
+     */
     public function donate()
     {
         return view('frontend.donate');
     }
 
+    /**
+     * Devuelve la vista de la tienda con productos en stock y paginación
+     */
     public function shop()
     {
         $products = Product::where('stock', '>', 0)
@@ -157,6 +183,10 @@ class FrontendController extends Controller
         return view('frontend.shop', compact('products'));
     }
 
+    /**
+     * Devuelve la vista de un producto por su id y productos relacionados aleatorios
+     * * @param int $id
+     */
     public function product($id)
     {
         $product = Product::where('id', $id)
