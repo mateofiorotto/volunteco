@@ -9,7 +9,7 @@
         <div class="hero-overlay"></div>
         <div class="hero-content container">
             <div class="text-center">
-                <h1 class="hero-title">Aportá <span class="fw-light">tu ayuda</span></h1>
+                <h1 class="hero-title">Aportá tu <span class="fw-light">ayuda</span></h1>
                 <p class="hero-subtitle">Tu donación ayuda a proteger el medio ambiente.</p>
             </div>
         </div>
@@ -20,7 +20,7 @@
         <div class="container">
             <div class="text-center row mb-5">
                 <div class="col-md-7 mx-auto">
-                    <h2 class="section-title text-primary">Colaborá <span class="fw-light">con nosotros</span></h2>
+                    <h2 class="section-title text-primary">Colaborá con<span class="fw-light"> nosotros</span></h2>
                     <p>Cada aporte hace la diferencia. Tu donación nos ayuda a mantener la plataforma activa y a seguir conectando voluntarios con proyectos ecológicos en toda Argentina.</p>
                 </div>
             </div>
@@ -147,7 +147,7 @@
     </section>
 @endsection
 
-@section('scripts')
+@push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Funcionalidad de copiar al portapapeles
@@ -167,4 +167,4 @@
             });
         });
     </script>
-@endsection
+@endpush

@@ -9,7 +9,7 @@
         <div class="hero-overlay"></div>
         <div class="hero-content container">
             <div class="text-center">
-                <h1 class="hero-title">Envía<span class="fw-light"> tu mensaje</span></h1>
+                <h1 class="hero-title">Envía tu <span class="fw-light">mensaje</span></h1>
                 <p class="hero-subtitle">Estamos para ayudarte y responder tus consultas.</p>
             </div>
         </div>
@@ -21,10 +21,8 @@
             <div class="row justify-content-center">
                 <div class="col-lg-10 col-xl-9">
                     <div class="border rounded-3 p-5 px-md-5 px-3">
-                        <h2 class="section-title text-primary text-center mb-4">Envianos <span class="fw-light">tu
-                                mensaje</span></h2>
-                        <p class="text-center section-subtitle mb-5">Completá el formulario y nos pondremos en contacto a la
-                            brevedad.</p>
+                        <h2 class="section-title text-primary text-center mb-4">Envianos tu <span class="fw-light">mensaje</span></h2>
+                        <p class="text-center section-subtitle mb-5">Completá el formulario y nos pondremos en contacto a la brevedad.</p>
 
                         {{-- Alerta de éxito --}}
                         @if (session('success'))
@@ -131,7 +129,7 @@
     <section class="contact-footer py-5">
         <div class="container">
             <div class="text-center">
-                <h2 class="section-title text-white">Gracias <span class="fw-light">por confiar</span></h2>
+                <h2 class="section-title text-white">Gracias por <span class="fw-light">confiar</span></h2>
             </div>
         </div>
     </section>

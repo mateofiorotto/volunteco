@@ -331,7 +331,7 @@ small {
     position: relative;
     min-height: 679px;
     width: 100%;
-    aspect-ratio: 19 / 9;
+    aspect-ratio: 19 / 8;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -1023,3 +1023,18 @@ code {
     border-radius: 12px;
 }
 
+/*Tienda*/
+.product-quantity {
+    max-width: 100px;
+}
+
+.cart-message {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.cart-message.show {
+    opacity: 1;
+    visibility: visible;
+}

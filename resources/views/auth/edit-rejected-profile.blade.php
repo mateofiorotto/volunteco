@@ -234,7 +234,7 @@
     </section>
 @endsection
 
-@section('scripts')
+@push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const provinceSelect = document.getElementById('province_id');
@@ -261,4 +261,4 @@
             });
         });
     </script>
-@endsection
+@endpush

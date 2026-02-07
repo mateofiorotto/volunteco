@@ -7,7 +7,7 @@
             <div class="mb-5">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h1 class="title-h1 h3">Registrate <span>como voluntario</span></h1>
+                        <h1 class="title-h1 h3">Registrate como <span>voluntario</span></h1>
                         <p>Completá todos los datos requeridos para poder crear tu cuenta.</p>
                     </div>
                     <a href="{{ route('login') }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Ir al login</a>
@@ -209,196 +209,197 @@
                                         @enderror
                                     </div>
 
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="card mb-5">
-                                <div class="card-body">
-                                    <h2 class="card-title h3">Redes sociales</h2>
-                                    <p>Completá al menos una de las redes sociales.</p>
-                                    <div class="mb-3">
-                                        <label for="linkedin"
-                                               class="form-label">LinkedIn</label>
-                                        <input type="url"
-                                               id="linkedin"
-                                               name="linkedin"
-                                               placeholder="https://linkedin.com/in/usuario"
-                                               class="form-control @error('linkedin') is-invalid @enderror"
-                                               value="{{ old('linkedin') }}" />
-                                        @error('linkedin')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="facebook"
-                                               class="form-label">Facebook</label>
-                                        <input type="url"
-                                               id="facebook"
-                                               name="facebook"
-                                               placeholder="https://facebook.com/usuario"
-                                               class="form-control @error('facebook') is-invalid @enderror"
-                                               value="{{ old('facebook') }}" />
-                                        @error('facebook')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="instagram"
-                                               class="form-label">Instagram</label>
-                                        <input type="url"
-                                               id="instagram"
-                                               name="instagram"
-                                               placeholder="https://instagram.com/usuario"
-                                               class="form-control @error('instagram') is-invalid @enderror"
-                                               value="{{ old('instagram') }}" />
-                                        @error('instagram')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    @if ($errors->has('linkedin') || $errors->has('facebook') || $errors->has('instagram'))
-                                        <div class="invalid-feedback d-block">
-                                            {{ $errors->first('linkedin') ?? ($errors->first('facebook') ?? $errors->first('instagram')) }}
-                                        </div>
-                                    @endif
-                                </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="card mb-5">
-                                <div class="card-body">
-                                    <h2 class="card-title h3">Datos profesionales</h2>
-                                    <p>Completá con tus datos.</p>
-                                    <div class="mb-3">
-                                        <label for="educational_level"
-                                               class="form-label">Nivel Educativo *</label>
-                                        <select name="educational_level"
-                                                id="educational_level"
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card mb-5">
+                            <div class="card-body">
+                                <h2 class="card-title h3">Redes sociales</h2>
+                                <p>Completá al menos una de las redes sociales.</p>
+                                <div class="mb-3">
+                                    <label for="linkedin"
+                                            class="form-label">LinkedIn</label>
+                                    <input type="url"
+                                            id="linkedin"
+                                            name="linkedin"
+                                            placeholder="https://linkedin.com/in/usuario"
+                                            class="form-control @error('linkedin') is-invalid @enderror"
+                                            value="{{ old('linkedin') }}" />
+                                    @error('linkedin')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="facebook"
+                                            class="form-label">Facebook</label>
+                                    <input type="url"
+                                            id="facebook"
+                                            name="facebook"
+                                            placeholder="https://facebook.com/usuario"
+                                            class="form-control @error('facebook') is-invalid @enderror"
+                                            value="{{ old('facebook') }}" />
+                                    @error('facebook')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="instagram"
+                                            class="form-label">Instagram</label>
+                                    <input type="url"
+                                            id="instagram"
+                                            name="instagram"
+                                            placeholder="https://instagram.com/usuario"
+                                            class="form-control @error('instagram') is-invalid @enderror"
+                                            value="{{ old('instagram') }}" />
+                                    @error('instagram')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                @if ($errors->has('linkedin') || $errors->has('facebook') || $errors->has('instagram'))
+                                    <div class="invalid-feedback d-block">
+                                        {{ $errors->first('linkedin') ?? ($errors->first('facebook') ?? $errors->first('instagram')) }}
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card mb-5">
+                            <div class="card-body">
+                                <h2 class="card-title h3">Datos profesionales</h2>
+                                <p>Completá con tus datos.</p>
+                                <div class="mb-3">
+                                    <label for="educational_level"
+                                            class="form-label">Nivel Educativo *</label>
+                                    <select name="educational_level"
+                                            id="educational_level"
+                                            required
+                                            class="form-select @error('educational_level') is-invalid @enderror">
+                                        <option value=""
+                                                disabled
+                                                {{ old('educational_level') ? '' : 'selected' }}>Selecciona un nivel
+                                            educativo</option>
+                                        <option value="Secundario"
+                                                {{ old('educational_level') == 'Secundario' ? 'selected' : '' }}>Secundario
+                                        </option>
+                                        <option value="Postgrado"
+                                                {{ old('educational_level') == 'Postgrado' ? 'selected' : '' }}>Postgrado
+                                        </option>
+                                        <option value="Terciario"
+                                                {{ old('educational_level') == 'Terciario' ? 'selected' : '' }}>Terciario
+                                        </option>
+                                        <option value="Universitario"
+                                                {{ old('educational_level') == 'Universitario' ? 'selected' : '' }}>
+                                            Universitario</option>
+                                    </select>
+                                    @error('educational_level')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="profession"
+                                            class="form-label">Profesión</label>
+                                    <input type="text"
+                                            id="profession"
+                                            name="profession"
+                                            placeholder="Ingeniero"
+                                            class="form-control @error('profession') is-invalid @enderror"
+                                            value="{{ old('profession') }}" />
+                                    @error('profession')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card mb-5">
+                            <div class="card-body">
+                                <h2 class="card-title h3">Info extra</h2>
+                                <div class="mb-3">
+                                    <label for="avatar"
+                                            class="form-label">Foto de perfil</label>
+                                    <input type="file"
+                                            id="avatar"
+                                            name="avatar"
+                                            accept="image/*"
+                                            class="form-control @error('avatar') is-invalid @enderror" />
+                                    @error('avatar')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <div class="form-text">La imagen debe tener un tamaño entre 100px y 300px de ancho y de
+                                        alto y no debe pesar más de 500kb</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="biography"
+                                            class="form-label">Biografía *</label>
+                                    <textarea id="biography"
+                                                name="biography"
                                                 required
-                                                class="form-select @error('educational_level') is-invalid @enderror">
-                                            <option value=""
-                                                    disabled
-                                                    {{ old('educational_level') ? '' : 'selected' }}>Selecciona un nivel
-                                                educativo</option>
-                                            <option value="Secundario"
-                                                    {{ old('educational_level') == 'Secundario' ? 'selected' : '' }}>Secundario
-                                            </option>
-                                            <option value="Postgrado"
-                                                    {{ old('educational_level') == 'Postgrado' ? 'selected' : '' }}>Postgrado
-                                            </option>
-                                            <option value="Terciario"
-                                                    {{ old('educational_level') == 'Terciario' ? 'selected' : '' }}>Terciario
-                                            </option>
-                                            <option value="Universitario"
-                                                    {{ old('educational_level') == 'Universitario' ? 'selected' : '' }}>
-                                                Universitario</option>
-                                        </select>
-                                        @error('educational_level')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="profession"
-                                               class="form-label">Profesión</label>
-                                        <input type="text"
-                                               id="profession"
-                                               name="profession"
-                                               placeholder="Ingeniero"
-                                               class="form-control @error('profession') is-invalid @enderror"
-                                               value="{{ old('profession') }}" />
-                                        @error('profession')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
+                                                placeholder="Contanos sobre vos..."
+                                                rows="4"
+                                                class="form-control @error('biography') is-invalid @enderror">{{ old('biography') }}</textarea>
+                                    @error('biography')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <div class="form-text">Tené en cuenta que esta es tu carta de presentación.</div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-md-6">
-                            <div class="card mb-5">
-                                <div class="card-body">
-                                    <h2 class="card-title h3">Info extra</h2>
-                                    <div class="mb-3">
-                                        <label for="avatar"
-                                               class="form-label">Foto de perfil</label>
-                                        <input type="file"
-                                               id="avatar"
-                                               name="avatar"
-                                               accept="image/*"
-                                               class="form-control @error('avatar') is-invalid @enderror" />
-                                        @error('avatar')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                        <div class="form-text">La imagen debe tener un tamaño entre 100px y 300px de ancho y de
-                                            alto y no debe pesar más de 500kb</div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="biography"
-                                               class="form-label">Biografía *</label>
-                                        <textarea id="biography"
-                                                  name="biography"
-                                                  required
-                                                  placeholder="Contanos sobre vos..."
-                                                  rows="4"
-                                                  class="form-control @error('biography') is-invalid @enderror">{{ old('biography') }}</textarea>
-                                        @error('biography')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                        <div class="form-text">Tené en cuenta que esta es tu carta de presentación.</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
 
-                    <div class="d-flex gap-3 justify-content-center">
-                        <a href="{{ url()->previous() }}"
-                           class="btn btn-outline-primary btn-lg px-5">Volver</a>
-                        <button type="submit"
-                                class="btn btn-primary btn-lg px-5">Enviar</button>
-                    </div>
+                </div>
 
-                </form>
+                <div class="d-flex gap-3 justify-content-center">
+                    <a href="{{ url()->previous() }}"
+                        class="btn btn-outline-primary btn-lg px-5">Volver</a>
+                    <button type="submit"
+                            class="btn btn-primary btn-lg px-5">Enviar</button>
+                </div>
 
-            </div>
-        </section>
-    @endsection
 
-    @section('scripts')
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const provinceSelect = document.getElementById('province_id');
-                const locationSelect = document.getElementById('location_id');
+            </form>
 
-                provinceSelect.addEventListener('change', function() {
-                    const provinceId = this.value;
+        </div>
+    </section>
+@endsection
 
-                    // Limpiar localidades
-                    locationSelect.innerHTML = '<option value="">Seleccione una localidad</option>';
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const provinceSelect = document.getElementById('province_id');
+            const locationSelect = document.getElementById('location_id');
 
-                    if (!provinceId) return;
+            provinceSelect.addEventListener('change', function() {
+                const provinceId = this.value;
 
-                    fetch(`/locations/${provinceId}`)
-                        .then(response => response.json())
-                        .then(locations => {
-                            locations.forEach(location => {
-                                const option = document.createElement('option');
-                                option.value = location.id;
-                                option.textContent = location.name;
-                                locationSelect.appendChild(option);
-                            });
-                        })
-                        .catch(error => console.error('Error al cargar localidades:', error));
-                });
+                // Limpiar localidades
+                locationSelect.innerHTML = '<option value="">Seleccione una localidad</option>';
+
+                if (!provinceId) return;
+
+                fetch(`/locations/${provinceId}`)
+                    .then(response => response.json())
+                    .then(locations => {
+                        locations.forEach(location => {
+                            const option = document.createElement('option');
+                            option.value = location.id;
+                            option.textContent = location.name;
+                            locationSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error al cargar localidades:', error));
             });
-        </script>
-    @endsection
+        });
+    </script>
+@endpush

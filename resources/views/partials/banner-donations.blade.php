@@ -16,7 +16,7 @@
                                     <i class="bi bi-heart-fill text-danger fs-3 me-3"></i>
                                     <h3 class="h4 mb-0 text-primary fw-bold">Súmate con tu aporte</h3>
                                 </div>
-                                
+
                                 <!-- Barra de progreso -->
                                 <div class="donation-progress-wrapper mb-3">
                                     <div class="d-flex justify-content-between mb-2">
@@ -28,11 +28,11 @@
                                         </span>
                                     </div>
                                     <div class="progress" style="height: 25px;">
-                                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" 
-                                             role="progressbar" 
+                                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                             role="progressbar"
                                              style="width: 42.5%"
-                                             aria-valuenow="42.5" 
-                                             aria-valuemin="0" 
+                                             aria-valuenow="42.5"
+                                             aria-valuemin="0"
                                              aria-valuemax="100">
                                             42.5%
                                         </div>
@@ -45,7 +45,7 @@
                                 </p>
                             </div>
                         </div>
-                        
+
                         <div class="col-lg-4 text-center">
                             <a href="{{ route('donate') }}" class="btn btn-warning btn-lg px-4 py-3 w-100 shadow-sm">
                                 <i class="bi bi-heart-fill me-2"></i>

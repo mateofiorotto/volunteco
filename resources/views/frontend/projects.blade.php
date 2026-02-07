@@ -5,7 +5,7 @@
     <section class="projects-hero bg-primary">
         <div class="container">
             <div class="projects-hero-content text-center">
-                <h1>Proyectos <span class="fw-light">de voluntariado</span></h1>
+                <h1>Proyectos de <span class="fw-light">voluntariado</span></h1>
                 <p>Encontrá un proyecto que te guste y formá parte del cambio.</p>
             </div>
         </div>
@@ -135,8 +135,8 @@
                                             </div>
 
                                             <a href="{{ route('project', $project->id) }}"
-                                               class="btn btn-azul w-100">
-                                                Ver detalles
+                                               class="btn btn-azul w-100 stretched-link">
+                                                Ver más
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      fill="none"
                                                      viewBox="0 0 24 24"

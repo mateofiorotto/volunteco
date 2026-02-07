@@ -261,7 +261,7 @@
         </div>
     </div>
 @endsection
-@section('scripts')
+@push('scripts')
     <script>
         // Cierro el modal manualmente cuando envio el form
         document.getElementById('withdrawBtn').addEventListener('submit', function() {
@@ -270,4 +270,4 @@
             modalInstance.hide();
         });
     </script>
-@endsection
+@endpush

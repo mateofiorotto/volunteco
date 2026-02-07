@@ -173,5 +173,14 @@ class FrontendController extends Controller
         return view('frontend.product', compact('product', 'relatedProducts'));
     }
 
+    public function cart()
+    {
+        $products = Product::where('stock', '>', 0)
+            ->latest()
+            ->paginate(6);
+        return view('frontend.cart', compact('products'));
+
+    }
+
 
 }

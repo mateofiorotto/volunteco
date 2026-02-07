@@ -4,12 +4,12 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="hero-background"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content container container-lg px-lg-5">
-            <h1 class="hero-title">Tienda <span class="fw-light">solidaria</span></h1>
-            <p class="hero-subtitle px-lg-4">Cada compra contribuye a mantener activa y eficiente nuestra web.</p>
+    <section class="projects-hero bg-primary">
+        <div class="container">
+            <div class="projects-hero-content text-center">
+                <h1 class="hero-title">Tienda <span class="fw-light">solidaria</span></h1>
+                <p class="hero-subtitle mw-100 px-lg-4">Cada compra contribuye a mantener activa y eficiente nuestra web.</p>
+            </div>
         </div>
     </section>
 
@@ -51,14 +51,14 @@
                                         <div class="d-flex align-items-center justify-content-between mb-3">
                                             <div>
                                                 <p class="h5 mb-0 text-primary fw-bold">
-                                                    ${{ number_format($product->price, 2) }}
+                                                    $ {{ number_format($product->price, 2, ',', '.') }}
                                                 </p>
                                             </div>
                                         </div>
 
                                         <a href="{{ route('product', $product->id) }}"
-                                           class="btn btn-azul w-100">
-                                            Ver detalles
+                                           class="btn btn-azul w-100 stretched-link">
+                                            Ver más
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                  fill="none"
                                                  viewBox="0 0 24 24"
