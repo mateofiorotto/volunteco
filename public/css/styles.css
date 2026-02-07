@@ -1038,3 +1038,13 @@ code {
     opacity: 1;
     visibility: visible;
 }
+
+.width-banner-donation {
+    width: 42.5% !important;
+}
+
+/*Card proyectos*/
+.card-projects-dashboard {
+    height: 200px;
+    object-fit: cover;
+}

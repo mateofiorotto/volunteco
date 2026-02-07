@@ -3,7 +3,8 @@
     <div class="container">
         <div class="text-center mb-5">
             <h2 class="section-title text-white">Ayudanos a seguir <span class="fw-light">creciendo</span></h2>
-            <p class="section-subtitle text-white">Tu donación nos permite continuar conectando voluntarios con proyectos ecológicos.</p>
+            <p class="section-subtitle text-white">Tu donación nos permite continuar conectando voluntarios con proyectos
+                ecológicos.</p>
         </div>
 
         <div class="row justify-content-center">
@@ -27,10 +28,10 @@
                                             Meta: $10,000.00
                                         </span>
                                     </div>
-                                    <div class="progress" style="height: 25px;">
-                                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                    <div class="progress"
+                                         style="height: 25px;">
+                                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated width-banner-donation"
                                              role="progressbar"
-                                             style="width: 42.5%"
                                              aria-valuenow="42.5"
                                              aria-valuemin="0"
                                              aria-valuemax="100">
@@ -41,13 +42,15 @@
 
                                 <p class="small text-muted mb-0">
                                     <i class="bi bi-people-fill me-1"></i>
-                                    Cada aporte cuenta para seguir conectando voluntarios con proyectos ecológicos en toda Argentina.
+                                    Cada aporte cuenta para seguir conectando voluntarios con proyectos ecológicos en
+                                    toda Argentina.
                                 </p>
                             </div>
                         </div>
 
                         <div class="col-lg-4 text-center">
-                            <a href="{{ route('donate') }}" class="btn btn-warning btn-lg px-4 py-3 w-100 shadow-sm">
+                            <a href="{{ route('donate') }}"
+                               class="btn btn-warning btn-lg px-4 py-3 w-100 shadow-sm">
                                 <i class="bi bi-heart-fill me-2"></i>
                                 Donar ahora
                             </a>

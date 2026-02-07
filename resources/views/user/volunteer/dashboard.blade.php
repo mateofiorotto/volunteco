@@ -97,9 +97,8 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="card h-100 shadow-sm">
                                 <img src="{{ asset('storage/' . ($project->image ?? 'thumbnail-proyecto.jpg')) }}"
-                                        class="card-img-top"
-                                        alt="{{ $project->title }}"
-                                        style="height: 200px; object-fit: cover;">
+                                        class="card-img-top card-projects-dashboard"
+                                        alt="{{ $project->title }}">
 
                                 <div class="card-body">
                                     <h3 class="card-title h4">{{ $project->title }}</h3>
