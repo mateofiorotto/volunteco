@@ -31,10 +31,9 @@ function getTotalQuantity() {
 }
 
 function updateCartCount() {
-    const count = document.getElementById('cart-count');
-    if (count) {
-        count.textContent = getTotalQuantity();
-    }
+    document.querySelectorAll('.cart-count').forEach(el => {
+        el.textContent = getTotalQuantity();
+    });
 }
 
 function showCartMessage() {

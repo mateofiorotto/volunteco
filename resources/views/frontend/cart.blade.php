@@ -17,7 +17,7 @@
         <div class="container">
             <div class="card border-azul">
                 <div class="card-header text-bg-azul">
-                    <h2 class="h5 mb-0">Carrito <span class="small fw-light">(Total: 17)</span></h2>
+                    <h2 class="h5 mb-0">Carrito <span class="small fw-light">(Total: <span class="cart-count">0</span>)</span></h2>
                 </div>
                 <div class="card-body">
                     <table class="table">
