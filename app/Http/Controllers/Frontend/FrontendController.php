@@ -9,7 +9,6 @@ use App\Models\Province;
 use App\Models\ProjectType;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Models\Product;
 
 class FrontendController extends Controller
 {
@@ -108,7 +107,7 @@ class FrontendController extends Controller
 
     /**
      * Devuelve la vista de detalles de un proyecto por su id
-     * 
+     *
      * @param int $id
      */
     public function projectById($id)
@@ -140,7 +139,7 @@ class FrontendController extends Controller
 
     /**
      * Devuelve la vista "sobre nosotros"
-     * 
+     *
      */
     public function about()
     {
@@ -171,46 +170,5 @@ class FrontendController extends Controller
     {
         return view('frontend.donate');
     }
-
-    /**
-     * Devuelve la vista de la tienda con productos en stock y paginación
-     */
-    public function shop()
-    {
-        $products = Product::where('stock', '>', 0)
-            ->latest()
-            ->paginate(6);
-        return view('frontend.shop', compact('products'));
-    }
-
-    /**
-     * Devuelve la vista de un producto por su id y productos relacionados aleatorios
-     * * @param int $id
-     */
-    public function product($id)
-    {
-        $product = Product::where('id', $id)
-            ->where('stock', '>', 0)
-            ->firstOrFail();
-
-        //productos relacionados (aleatorios, excluyendo el actual)
-        $relatedProducts = Product::where('id', '!=', $product->id)
-            ->where('stock', '>', 0)
-            ->inRandomOrder()
-            ->take(3)
-            ->get();
-
-        return view('frontend.product', compact('product', 'relatedProducts'));
-    }
-
-    public function cart()
-    {
-        $products = Product::where('stock', '>', 0)
-            ->latest()
-            ->paginate(6);
-        return view('frontend.cart', compact('products'));
-
-    }
-
 
 }

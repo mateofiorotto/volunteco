@@ -32,9 +32,6 @@
                     <a class="nav-link {{ request()->is('admin/voluntarios*') ? 'active' : '' }}"
                        href="{{ route('admin.volunteers.index') }}">Voluntarios</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('admin/productos*') ? 'active' : '' }}"
-                       href="{{ route('admin.products.index') }}">Productos</a>
                 <li class="nav-item dropdown dropdown-center">
                     <a class="nav-link dropdown-toggle {{ request()->is('admin/proyectos*') ? 'active' : '' }}"
                        href="#"

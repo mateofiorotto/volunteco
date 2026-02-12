@@ -12,8 +12,5 @@ Route::get('/nosotros', [FrontendController::class, 'about'])->name('about');
 Route::get('/contacto', [FrontendController::class, 'contact'])->name('contact');
 Route::get('/como-funciona', [FrontendController::class, 'howItWorks'])->name('howItWorks');
 Route::get('/donar', [FrontendController::class, 'donate'])->name('donate');
-Route::get('/tienda', [FrontendController::class, 'shop'])->name('shop');
-Route::get('/producto/{id}', [FrontendController::class, 'product'])->name('product');
-Route::get('/carrito', [FrontendController::class, 'cart'])->name('cart');
 
 Route::get('/landing', function () { return view('frontend.landing');})->name('landing');
