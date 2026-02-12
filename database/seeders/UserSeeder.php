@@ -41,7 +41,7 @@ class UserSeeder extends Seeder
         $hostsData = [
             [
                 'email' => 'contact@verdevida.com',
-                'name' => 'Verde Vida',
+                'name' => 'Verde vida',
                 'person_full_name' => 'María Fernández',
                 'cuit' => '20345678911',
                 'social' => 'https://linkedin.com/in/mariafernandez',
@@ -89,7 +89,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'email' => 'contact@naturalezaactiva.com',
-                'name' => 'Naturaleza Activa',
+                'name' => 'Naturaleza activa',
                 'person_full_name' => 'Valentina Torres',
                 'cuit' => '20345678917',
                 'social' => 'https://linkedin.com/in/valentinatorres',
@@ -105,7 +105,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'email' => 'contact@aventuraverde.com',
-                'name' => 'Aventura Verde',
+                'name' => 'Aventura verde',
                 'person_full_name' => 'Camila Rojas',
                 'cuit' => '20345678919',
                 'social' => 'https://instagram.com/aventuraverde',
@@ -288,10 +288,6 @@ class UserSeeder extends Seeder
                 'user_id' => $volUser->id,
             ]);
         }
-
-
-
-
 
     }
 }

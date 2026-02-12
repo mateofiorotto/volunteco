@@ -63,4 +63,21 @@ class Project extends Model
         return $this->belongsTo(Location::class);
     }
 
+    public function scopeEnabled($query)
+    {
+        return $query->where('enabled', true);
+    }
+
+    public function scopeWithActiveHost($query)
+    {
+        return $query->whereHas('host.user', function ($q) {
+            $q->where('status', 'activo');
+        });
+    }
+    public function scopePublic($query)
+    {
+        return $query->enabled()->withActiveHost();
+    }
+
+
 }

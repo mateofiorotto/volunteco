@@ -25,7 +25,7 @@ class DashboardController extends Controller
             ->get();
 
         //ultimos 3 proyectos publicados en general
-        $latestProjects = Project::where('enabled', true)
+        $latestProjects = Project::public()
             ->whereDoesntHave('volunteers', function ($q) {
                 $q->where('volunteer_id', Auth::user()->volunteer->id);
             })

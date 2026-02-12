@@ -15,7 +15,12 @@ class HostController extends Controller
     //
     public function profile($id)
     {
-        $host = Host::with(['user', 'projects.volunteers'])->findOrFail($id);
+        $host = Host::with(['user', 'projects' => function ($query) {
+            $query->public()
+              ->with('volunteers')
+              ->latest();
+            }
+        ])->findOrFail($id);
 
         $volunteer = Auth::user()->volunteer;
 

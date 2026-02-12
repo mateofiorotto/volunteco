@@ -19,7 +19,7 @@ class DashboardController extends Controller
 
         $host = Host::with([
             'projects' => function ($query) {
-                $query->latest()->take(5);
+                $query->latest()->take(3);
             }
         ])->where('user_id', Auth::id())
         ->firstOrFail();

@@ -80,7 +80,7 @@
                     {{ $projects->links() }}
                 </div>
             @else
-                <div class="alert alert-info">
+                <div class="alert alert-info d-inline-block">
                     <p class="mb-0">No has aplicado a ningún proyecto aún</p>
                 </div>
             @endif

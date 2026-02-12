@@ -26,7 +26,7 @@ class ProjectTypeSeeder extends Seeder
             ],
             [
                 'key' => 'construccion_de_invernadero',
-                'name' => 'Construcción de Invernadero',
+                'name' => 'Construcción de invernadero',
                 'enabled' => true,
                 'created_at' => Carbon::now()->subDays(rand(1, 365)),
                 'updated_at' => Carbon::now()

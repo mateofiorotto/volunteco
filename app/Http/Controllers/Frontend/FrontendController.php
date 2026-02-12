@@ -18,7 +18,7 @@ class FrontendController extends Controller
      */
     public function home()
     {
-        $projects = Project::where('enabled', true)
+        $projects = Project::public()
             ->with('location.province')
             ->take(3)
             ->latest()
@@ -36,38 +36,30 @@ class FrontendController extends Controller
         $provinceId = $request->province_id;
         $projectTypeId = $request->project_type_id;
 
-        // Listado de proyectos
-        $projectsQuery = Project::where('enabled', true)
-            ->with(['location.province', 'projectType']);
-
-        // buscador por palabra clave
-        if ($search) {
-            $projectsQuery->where(function ($q) use ($search) {
-                $q->where('title', 'like', "%{$search}%")
-                ->orWhere('description', 'like', "%{$search}%");
-            });
-        }
-
-        // por provincia
-        if ($provinceId) {
-            $projectsQuery->whereHas('location', function ($q) use ($provinceId) {
-                $q->where('province_id', $provinceId);
-            });
-        }
-
-        // por tipo de proyecto
-        if ($projectTypeId) {
-            $projectsQuery->where('project_type_id', $projectTypeId);
-        }
-
-        $projects = $projectsQuery
+        $projects = Project::query()
+            ->public()
+            ->with(['location.province', 'projectType'])
+            ->when($search, function ($q) use ($search) {
+                $q->where(function ($qq) use ($search) {
+                    $qq->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
+                });
+            })
+            ->when($provinceId, function ($q) use ($provinceId) {
+                $q->whereHas('location', function ($l) use ($provinceId) {
+                    $l->where('province_id', $provinceId);
+                });
+            })
+            ->when($projectTypeId, function ($q) use ($projectTypeId) {
+                $q->where('project_type_id', $projectTypeId);
+            })
             ->latest()
             ->paginate(12)
             ->withQueryString();
 
         // Listado de provincias sincronizadas con los filtros activos
         $provinces = Province::whereHas('locations.projects', function ($q) use ($search, $projectTypeId) {
-            $q->where('enabled', true);
+            $q->public();
 
             if ($search) {
                 $q->where(function ($qq) use ($search) {
@@ -84,7 +76,7 @@ class FrontendController extends Controller
         // Listado de proyectos con contador sincronizado
         $projectTypes = ProjectType::withCount([
             'projects as projects_count' => function ($q) use ($search, $provinceId) {
-                $q->where('enabled', true);
+                $q->public();
 
                 if ($search) {
                     $q->where(function ($qq) use ($search) {
@@ -112,7 +104,7 @@ class FrontendController extends Controller
      */
     public function projectById($id)
     {
-        $project = Project::where('id', $id)->where('enabled', true)->with('volunteers')->firstOrFail();
+        $project = Project::where('id', $id)->public()->with('volunteers')->firstOrFail();
 
         //obtener el voluntario asociado al usuario autenticado
         $volunteer = Volunteer::where('user_id', Auth::id())->first();
