@@ -86,4 +86,16 @@ class Volunteer extends Model
             ->exists();
     }
 
+    /**
+     * Chequea si el voluntario está en la nómina de algún proyecto del host
+     * Esto incluye proyectos donde está aceptado o pendiente
+     */
+    public function isInHostRoster($hostId)
+    {
+        return $this->projects()
+            ->where('projects.host_id', $hostId)
+            ->wherePivotIn('status', ['aceptado', 'pendiente'])
+            ->exists();
+    }
+
 }

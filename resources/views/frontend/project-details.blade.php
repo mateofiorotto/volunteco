@@ -113,161 +113,20 @@
 
                 {{-- Sidebar --}}
                 <div class="col-md-4 col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex gap-3">
-                                @if (!empty($project->host->avatar))
-                                    <div class="avatar">
-                                        <img src="{{ asset('storage/' . $project->host->avatar) }}"
-                                             alt="Foto de {{ $project->host->name }}"
-                                             class="img-fluid object-fit-contain rounded-circle"
-                                             width="80"
-                                             height="80">
-                                    </div>
-                                @endif
-                                <div class="flex-fill">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <h2 class="small text-muted">Anfitrión</h2>
-                                    </div>
-                                    <h3 class="card-title h4">{{ $project->host->name }}</h3>
-                                    <ul class="list-unstyled mb-3">
-                                        <li>{{ $project->host->location->province->name ?? 'Sin ubicación' }}</li>
-                                        <li><span class="text-muted small">En la comunidad desde</span>
-                                            {{ $project->created_at->format('Y') }}</li>
-                                    </ul>
+                    <x-host.profile-sidebar
+                        :project="$project"
+                        :isAceptedByHost="$isAceptedByHost"
+                        :isInHostRoster="$isInHostRoster"
+                    />
 
-                                    @if (Auth::check() && Auth::user()->hasRole('volunteer'))
-                                        @if ($volunteerStatus === 'aceptado' || $volunteerStatus === 'pendiente' || $isAceptedByHost)
-                                            <div class="social-media d-flex gap-3">
-                                                @if ($project->host->linkedin)
-                                                    <a href="{{ $project->host->linkedin }}"
-                                                       target="_blank"
-                                                       class="fs-5"><i class="bi bi-linkedin"></i></a>
-                                                @endif
-
-                                                @if ($project->host->instagram)
-                                                    <a href="{{ $project->host->instagram }}"
-                                                       target="_blank"
-                                                       class="fs-5"><i class="bi bi-instagram"></i></a>
-                                                @endif
-
-                                                @if ($project->host->facebook)
-                                                    <a href="{{ $project->host->facebook }}"
-                                                       target="_blank"
-                                                       class="fs-5"><i class="bi bi-facebook"></i></a>
-                                                @endif
-                                            </div>
-                                            <hr />
-                                        @endif
-
-                                        @if ($isAceptedByHost)
-                                            <ul class="list-unstyled">
-                                                <li>Contacto: {{ $project->host->person_full_name }}</li>
-                                                <li>Teléfono: {{ $project->host->phone }}</li>
-                                                <li>Email: <a href="mailto:{{ $project->host->user->email }}"
-                                                       target="_blank">{{ $project->host->user->email }}</a></li>
-                                            </ul>
-                                        @endif
-
-                                        @if ($volunteerStatus === 'aceptado' || $volunteerStatus === 'pendiente' || $isAceptedByHost)
-                                        <a href="{{ route('volunteer.hosts.profile', $project->host->id) }}"
-                                               class="btn-azul btn-sm btn mb-3">Ver perfil</a>
-                                        @endif
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     {{-- Botones de acción para voluntarios --}}
-                    <div class="card mt-3">
-                        <div class="card-body">
-                            @if (Auth::check() && Auth::user()->hasRole('volunteer'))
-                            @if ($volunteerStatus)
-                                @if ($volunteerStatus === 'pendiente')
-                                    <div class="alert alert-warning mb-3">
-                                        <strong>Solicitud Pendiente</strong><br>
-                                        Tu solicitud está siendo revisada por el anfitrión.
-                                    </div>
-                                @elseif($volunteerStatus === 'aceptado')
-                                    <div class="alert alert-success mb-3">
-                                        <strong>Solicitud Aceptada</strong><br>
-                                        ¡Felicitaciones! Has sido aceptado en este proyecto.
-                                    </div>
-                                @elseif($volunteerStatus === 'rechazado')
-                                    <div class="alert alert-danger mb-0">
-                                        <strong>Solicitud Rechazada</strong><br>
-                                        Lamentablemente tu solicitud no fue aceptada para este proyecto.
-                                    </div>
-                                @endif
-
-                                @if ($volunteerStatus !== 'rechazado')
-                                    <button type="button"
-                                            class="btn btn-danger"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#desistirModal">
-                                        Desistir del proyecto
-                                    </button>
-                                @endif
-                            @else
-                                <p class="mb-3">¿Te interesa participar en este proyecto?</p>
-                                <form method="POST"
-                                        action="{{ route('volunteer.apply-project', $project->id) }}">
-                                    @csrf
-                                    <button class="btn btn-primary" type="submit">Aplicar al proyecto</button>
-                                </form>
-                            @endif
-                            @else
-                            <p class="mb-3">¿Te interesa participar en este proyecto?</p>
-                            <a href="{{route('login')}}" class="btn btn-primary">Ingresá como voluntario</a>
-                            @endif
-                        </div>
-                    </div>
+                    <x-volunteer.project-actions
+                        :project="$project"
+                        :volunteerStatus="$volunteerStatus"
+                    />
                 </div>
+
             </div>
         </div>
     </section>
 @endsection
-
-@section('modals')
-    <div class="modal fade"
-         id="desistirModal"
-         tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title h5">Desistir del proyecto</h2>
-                    <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>¿Desea cancelar su aplicación a este proyecto?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button"
-                            class="btn btn-outline-primary"
-                            data-bs-dismiss="modal">No</button>
-                    <form method="POST"
-                          id="withdrawBtn"
-                          action="{{ route('volunteer.withdraw-project', $project->id) }}">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger"
-                                type="submit">Sí, cancelo</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection
-@push('scripts')
-    <script>
-        // Cierro el modal manualmente cuando envio el form
-        document.getElementById('withdrawBtn').addEventListener('submit', function() {
-            const modalEl = document.getElementById('desistirModal');
-            const modalInstance = bootstrap.Modal.getOrCreateInstance(modalEl);
-            modalInstance.hide();
-        });
-    </script>
-@endpush

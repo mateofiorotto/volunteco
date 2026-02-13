@@ -85,8 +85,4 @@ class Host extends Model
             }])
             ->get();
     }
-
-
-
-
 }
