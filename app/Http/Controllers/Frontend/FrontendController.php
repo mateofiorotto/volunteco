@@ -9,6 +9,7 @@ use App\Models\Province;
 use App\Models\ProjectType;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\VolunteerEvaluation;
 
 class FrontendController extends Controller
 {
@@ -108,12 +109,10 @@ class FrontendController extends Controller
 
         //obtener el voluntario asociado al usuario autenticado
         $volunteer = Volunteer::where('user_id', Auth::id())->first();
-
         $volunteerStatus = null;
-
         $isAceptedByHost = null;
-
         $isInHostRoster = null;
+        $evaluation = null;
 
         if ($volunteer) {
             // Obtenemos el estado del voluntario en este proyecto
@@ -126,9 +125,14 @@ class FrontendController extends Controller
             $isAceptedByHost = $volunteer->isHostAcepted($project->host->id);
 
             $isInHostRoster = $volunteer->isInHostRoster($project->host->id);
+
+            $evaluation = VolunteerEvaluation::where('project_id', $project->id)
+                ->where('volunteer_id', $volunteer->id)
+                ->first();
+
         }
 
-        return view('frontend.project-details', compact('project', 'volunteerStatus', 'isAceptedByHost','isInHostRoster'));
+        return view('frontend.project-details', compact('project', 'volunteerStatus', 'isAceptedByHost','isInHostRoster', 'volunteer', 'evaluation'));
     }
 
     /**

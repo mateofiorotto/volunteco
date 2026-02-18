@@ -42,17 +42,12 @@
                                         <p>{{ $volunteer->location->name }} - {{ $volunteer->location->province->name }}</p>
                                     </div>
                                 @endif
-                                <ul class="list-unstyled">
-                                    @if ($volunteer->birthdate)
-                                        <li><span class="text-muted small">Edad: </span>{{ $volunteer->birthdate->age }}
-                                            años</li>
-                                    @endif
-                                </ul>
                                 <ul class="list-unstyled mb-0">
-                                    <li><span class="text-muted small">Profesión: </span><span
-                                            class="text-capitalize">{{ $volunteer->profession }}</span></li>
-                                    <li><span class="text-muted small">Nivel educativo: </span><span
-                                            class="text-capitalize">{{ $volunteer->educational_level }}</span></li>
+                                    @if ($volunteer->birthdate)
+                                        <li><span class="text-muted">{{ $volunteer->birthdate->age }} años</span></li>
+                                    @endif
+                                    <li><span class="text-capitalize text-muted">{{ $volunteer->profession }}</span></li>
+                                    <li>Nivel educativo: <span class="text-muted text-capitalize">{{ $volunteer->educational_level }}</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -62,7 +57,7 @@
                 <div class="card mb-4">
                     <div class="card-header">Biografía</div>
                     <div class="card-body">
-                        <p class="mb-0">{{ $volunteer->biography }}</p>
+                        <p class="mb-0 text-muted small">{{ $volunteer->biography }}</p>
                     </div>
                 </div>
             </div>
@@ -73,8 +68,8 @@
                     <div class="card-body">
                         @if($hasAccepted)
                             <ul class="list-unstyled mb-0">
-                                <li><span class="text-muted small">Teléfono: </span>{{ $volunteer->phone }}</li>
-                                <li><span class="text-muted small">Email: </span>{{ $volunteer->user->email }}</li>
+                                <li>Teléfono: <span class="text-muted">{{ $volunteer->phone }}</span></li>
+                                <li>Email: <span class="text-muted">{{ $volunteer->user->email }}</span></li>
                             </ul>
                         @else
                             <p class="mb-0">Debe aceptar al voluntario para ver sus datos de contacto</p>
@@ -134,7 +129,7 @@
                                     <th scope="col">Título</th>
                                     <th scope="col">Fecha</th>
                                     <th scope="col">Lugar</th>
-                                    <th scope="col">Tu solicitud de aplicación</th>
+                                    <th scope="col">Su solicitud de aplicación</th>
                                     <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
@@ -148,14 +143,8 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <div>
-                                                <span class="small text-muted">Inicia: </span>
-                                                {{ $project->start_date->format('d/m/Y') }}
-                                            </div>
-                                            <div>
-                                                <span class="small text-muted">Finaliza:
-                                                </span>{{ $project->end_date->format('d/m/Y') }}
-                                            </div>
+                                            <div>Inicia: <span class="small text-muted">{{ $project->start_date->format('d/m/Y') }}</span></div>
+                                            <div>Finaliza: <span class="small text-muted">{{ $project->end_date->format('d/m/Y') }}</span></div>
                                         </td>
                                         <td>{{ $project->location->name }} - {{ $project->location->province->name }}</td>
                                         <td class="text-center">

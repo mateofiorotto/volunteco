@@ -179,7 +179,7 @@ class UserSeeder extends Seeder
                 'social' => 'https://instagram.com/luciamartinez',
                 'biography' => 'Con experiencia en gestión de proyectos ecológicos y conservación de espacios verdes, busca contribuir activamente en iniciativas sostenibles.',
                 'educational_level' => 'Universitario',
-                'profession' => 'Ingeniera Ambiental',
+                'profession' => 'Ingeniera ambiental',
                 'birthdate' => '1992-11-05',
             ],
             [
@@ -223,7 +223,7 @@ class UserSeeder extends Seeder
                 'social' => 'https://linkedin.com/in/valentinatorres',
                 'biography' => 'Con experiencia en voluntariados internacionales enfocados en la protección de la biodiversidad y educación ambiental.',
                 'educational_level' => 'Universitario',
-                'profession' => 'Ingeniera Forestal',
+                'profession' => 'Ingeniera forestal',
                 'birthdate' => '1991-05-10',
             ],
             [
@@ -256,7 +256,7 @@ class UserSeeder extends Seeder
                 'social' => 'https://linkedin.com/in/fernandoperez',
                 'biography' => 'Apasionado por la sostenibilidad urbana y proyectos de voluntariado ecológico, con experiencia en gestión de residuos y educación comunitaria.',
                 'educational_level' => 'Universitario',
-                'profession' => 'Ingeniero Ambiental',
+                'profession' => 'Ingeniero ambiental',
                 'birthdate' => '1990-08-25',
             ],
         ];

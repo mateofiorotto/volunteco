@@ -98,4 +98,10 @@ class Volunteer extends Model
             ->exists();
     }
 
+    // Relación con la evalución del host en el desempeño del proyecto
+    public function evaluations()
+    {
+        return $this->hasMany(VolunteerEvaluation::class);
+    }
+
 }

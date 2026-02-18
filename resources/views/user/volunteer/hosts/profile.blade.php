@@ -36,7 +36,7 @@
                                 <!-- Descripción -->
                                 <div>
                                     <h3 class="card-title h5">Descripción</h3>
-                                    <p class="text-muted mb-0">{{ $host->description }}</p>
+                                    <p class="text-muted mb-0 small">{{ $host->description }}</p>
                                 </div>
                             </div>
 
@@ -51,10 +51,9 @@
                     <div class="card-header">Contacto</div>
                     <div class="card-body">
                         <ul class="list-unstyled mb-0">
-                            <li><span class="text-muted small">Persona de contacto: </span>{{ $host->person_full_name }}
-                            </li>
-                            <li><span class="text-muted small">Teléfono: </span>{{ $host->phone }}</li>
-                            <li><span class="text-muted small">Email: </span>{{ $host->user->email }}</li>
+                            <li>Persona de contacto: <span class="text-muted">{{ $host->person_full_name }}</span></li>
+                            <li>Teléfono: <span class="text-muted">{{ $host->phone }}</span></li>
+                            <li>Email: <span class="text-muted"> <a href="mailto:{{ $host->user->email }}" target="_blank">{{ $host->user->email }}</a></span></li>
                         </ul>
                     </div>
                 </div>
@@ -125,14 +124,8 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <div>
-                                                <span class="small text-muted">Inicia: </span>
-                                                {{ $project->start_date->format('d/m/Y') }}
-                                            </div>
-                                            <div>
-                                                <span class="small text-muted">Finaliza:
-                                                </span>{{ $project->end_date->format('d/m/Y') }}
-                                            </div>
+                                            <div>Inicia: <span class="small text-muted">{{ $project->start_date->format('d/m/Y') }}</span></div>
+                                            <div>Finaliza: <span class="small text-muted">{{ $project->end_date->format('d/m/Y') }}</span></div>
                                         </td>
                                         <td>{{ $project->location->name }} - {{ $project->location->province->name }}</td>
                                         <td class="text-center">

@@ -185,6 +185,9 @@ h6 {
 }
 .badge {
     --bs-badge-font-weight: 500;
+    --bs-badge-border-radius: var(--bs-border-radius-pill);
+    --bs-badge-padding-x: 1rem;
+    --bs-badge-padding-y: 0.5rem;
 }
 .text-bg-secondary {
     color: var(--bs-body-color) !important;

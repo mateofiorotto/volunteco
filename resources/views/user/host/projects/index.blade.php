@@ -65,14 +65,8 @@
                                 </td>
                                 <td>{{ $project->title }}</td>
                                 <td>
-                                    <div>
-                                        <span class="small text-muted">Inicia: </span>
-                                        {{ $project->start_date->format('d/m/Y') }}
-                                    </div>
-                                    <div>
-                                        <span class="small text-muted">Finaliza:
-                                        </span>{{ $project->end_date->format('d/m/Y') }}
-                                    </div>
+                                    <div>Inicia: <span class="small text-muted">{{ $project->start_date->format('d/m/Y') }}</span></div>
+                                    <div>Finaliza: <span class="small text-muted">{{ $project->end_date->format('d/m/Y') }}</span></div>
                                 </td>
                                 <td>
                                     @if ($project->enabled != 1)

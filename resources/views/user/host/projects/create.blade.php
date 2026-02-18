@@ -22,7 +22,8 @@
 
         <form method="POST"
               action="{{ route('host.my-projects.store') }}"
-              enctype="multipart/form-data">
+              enctype="multipart/form-data"
+              novalidate >
             @csrf
 
             <div class="row">
@@ -41,7 +42,7 @@
                                        value="{{ old('title') }}"
                                        placeholder="Ej: Reforestación en la Reserva Natural"
                                        required
-                                       class="form-control @error('title') is-invalid @enderror }}" />
+                                       class="form-control @error('title') is-invalid @enderror" />
                                 @error('title')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -247,7 +248,7 @@
                     Cancelar
                 </a>
                 <button type="submit"
-                        class="btn btn-primary btn-lg px-5 text-capitalize">
+                        class="btn btn-primary btn-lg px-5">
                     Crear
                 </button>
             </div>

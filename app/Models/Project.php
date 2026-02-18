@@ -50,11 +50,19 @@ class Project extends Model
         return $this->belongsTo(Host::class, 'host_id');
     }
 
+    // voluntarios de un proyecto
     public function volunteers()
     {
         return $this->belongsToMany(Volunteer::class, 'project_volunteer')
             ->withPivot('status', 'applied_at', 'accepted_at')
             ->withTimestamps();
+    }
+
+    // voluntarios aceptados de un proyecto
+    public function acceptedVolunteers()
+    {
+        return $this->belongsToMany(Volunteer::class, 'project_volunteer')
+            ->wherePivot('status', 'aceptado');
     }
 
     // localidad del anfitrión
@@ -74,9 +82,46 @@ class Project extends Model
             $q->where('status', 'activo');
         });
     }
+
+    // Projectos activos con host habilitados
     public function scopePublic($query)
     {
         return $query->enabled()->withActiveHost();
+    }
+
+    // Relación con la evalucion del host al voluntario
+    public function evaluations()
+    {
+        return $this->hasMany(VolunteerEvaluation::class);
+    }
+
+    // valida que el voluntario este evaluado
+    public function hasEvaluationForVolunteer($volunteerId)
+    {
+        return $this->evaluations()
+            ->where('volunteer_id', $volunteerId)
+            ->exists();
+    }
+
+    // Carga los voluntarios del proyecto y que estan evaluados
+    public function registeredVolunteers()
+    {
+        // Cargar voluntarios con usuario y evaluaciones
+        $this->load([
+            'volunteers.user',
+            'evaluations'
+        ]);
+
+        // Mapeo voluntarios, agrego atributo dinámico y ordeno
+        return $this->volunteers
+            ->map(function ($volunteer) {
+
+                $evaluation = $this->evaluations->firstWhere('volunteer_id', $volunteer->id);
+                $volunteer->evaluation = $evaluation;
+                $volunteer->is_evaluated = (bool) $evaluation;
+                return $volunteer;
+            })
+            ->sortBy(fn($v) => $v->name);
     }
 
 

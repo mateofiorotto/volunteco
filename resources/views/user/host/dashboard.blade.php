@@ -69,7 +69,7 @@
                             </p>
                             <a href="{{route('host.my-projects.show', $lastAppliedVolunteer->id)}}" class="btn btn-outline-primary">Ir al proyecto</a>
                         @else
-                            <p>No hay voluntarios pendientes de revisión.</p>
+                            <p class="mb-0">No hay voluntarios pendientes de revisión.</p>
                         @endif
                     </div>
                 </div>

@@ -38,12 +38,10 @@ class HostProjectController extends Controller
     public function show($id)
     {
 
-        $project = Project::with(['projectType', 'conditions', 'volunteers.user'])->findOrFail($id);
+        $project = Project::with(['projectType', 'conditions', 'location.province'])->findOrFail($id);
 
         //voluntarios registrados
-        $registeredVolunteers = $project->volunteers->sortByDesc(function ($v) {
-            return $v->pivot->applied_at;
-        });
+        $registeredVolunteers = $project->registeredVolunteers();
 
         return view('user.host.projects.show', compact('project', 'registeredVolunteers'));
     }
@@ -80,7 +78,7 @@ class HostProjectController extends Controller
             'description' => 'required|string|min:50|max:2000',
             'project_type_id' => 'required|exists:project_types,id',
             'location_id' => ['required', 'exists:locations,id'],
-            'start_date' => 'required|date|before_or_equal:end_date',
+            'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
             'work_hours_per_day' => 'required|in:2 Horas,4 Horas,6 Horas,8 Horas',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:300|dimensions:max_width=860,max_height=480',
@@ -244,70 +242,4 @@ class HostProjectController extends Controller
             ->with('success', 'Proyecto eliminado exitosamente');
     }
 
-    /**
-     * Aceptar voluntario en un proyecto
-     */
-    public function acceptVolunteer($projectId, $volunteerId)
-    {
-        $host = Auth::user()->host;
-
-        $project = Project::where('id', $projectId)
-            ->where('host_id', $host->id)
-            ->first();
-
-        if (!$project) {
-            abort(403, 'Acceso denegado o proyecto inexistente.');
-        }
-
-        $volunteer = $project->volunteers()
-            ->with('user')
-            ->where('volunteers.id', $volunteerId)
-            ->first();
-
-        if (!$volunteer) {
-            abort(404, 'Voluntario no encontrado.');
-        }
-
-        $project->volunteers()->updateExistingPivot($volunteerId, [
-            'status' => 'aceptado',
-            'accepted_at' => now(),
-        ]);
-
-        Mail::to($volunteer->user->email)->send(
-            new VolunteerAccepted($volunteer->full_name, $project->title)
-        );
-
-        return redirect()->back()->with('success', 'Voluntario aceptado exitosamente.');
-    }
-
-    /**
-     * Rechazar un voluntario de un proyecto
-     */
-    public function rejectVolunteer($projectId, $volunteerId)
-    {
-        $host = Auth::user()->host;
-
-        $project = Project::where('id', $projectId)
-            ->where('host_id', $host->id)
-            ->first();
-
-        if (!$project) {
-            abort(403, 'Acceso denegado o proyecto inexistente.');
-        }
-
-        //validar que exista el voluntario en este proyecto
-        $volunteer = $project->volunteers()
-            ->where('volunteers.id', $volunteerId)
-            ->first();
-
-        if (!$volunteer) {
-            abort(404, 'Voluntario no encontrado en este proyecto.');
-        }
-
-        $project->volunteers()->updateExistingPivot($volunteerId, [
-            'status' => 'rechazado',
-        ]);
-
-        return redirect()->back()->with('success', 'Voluntario rechazado exitosamente.');
-    }
 }

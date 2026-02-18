@@ -3,6 +3,7 @@
 use App\Http\Controllers\User\Host\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\Host\HostProjectController;
+use App\Http\Controllers\User\Host\HostProjectVolunteerController;
 use App\Http\Controllers\User\Host\ProfileController;
 use App\Http\Controllers\User\Host\VolunteerController;
 
@@ -29,8 +30,11 @@ Route::middleware(['auth', 'CheckRole:host', 'checkEnabled'])->prefix('usuario/a
     Route::delete('/mis-proyectos/{id}/eliminar', [HostProjectController::class, 'destroy'])->name('my-projects.destroy');
 
     //manejar anfitriones inscriptos (aceptar o rechazar)
-    Route::put('/mis-proyectos/{projectId}/anfitriones/{volunteerId}/aceptar', [HostProjectController::class, 'acceptVolunteer'])->name('my-projects.accept-volunteer');
-    Route::put('/mis-proyectos/{projectId}/anfitriones/{volunteerId}/rechazar', [HostProjectController::class, 'rejectVolunteer'])->name('my-projects.reject-volunteer');
+    Route::put('/mis-proyectos/{project}/voluntario/{volunteer}/aceptar', [HostProjectVolunteerController::class, 'acceptVolunteer'])->name('my-projects.accept-volunteer');
+    Route::put('/mis-proyectos/{project}/voluntario/{volunteer}/rechazar', [HostProjectVolunteerController::class, 'rejectVolunteer'])->name('my-projects.reject-volunteer');
+    Route::get('/mis-proyectos/{project}/voluntario/{volunteer}', [HostProjectVolunteerController::class, 'evaluationVolunteer'])->name('my-projects.evaluation-volunteer');
+    Route::post('/mis-proyectos/{project}/voluntario/{volunteer}/evaluar', [HostProjectVolunteerController::class, 'evaluateVolunteer'])->name('my-projects.evaluate-volunteer');
+    Route::get('/mis-proyectos/{project}/voluntario/{volunteer}/evaluacion', [HostProjectVolunteerController::class, 'evaluatedVolunteer'])->name('my-projects.evaluated-volunteer');
 
     //edicion de perfil
     Route::get('/mi-perfil', [ProfileController::class, 'myProfile'])->name('my-profile.profile');
