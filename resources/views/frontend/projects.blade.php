@@ -11,7 +11,7 @@
         </div>
     </section>
 
-    <section class="py-5">
+    <section class="py-5 bg-body-tertiary">
         <div class="container">
             <!-- Filtros -->
             <div class="filters-section">

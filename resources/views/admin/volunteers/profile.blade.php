@@ -54,14 +54,9 @@
                                                 </div>
                                                 <div class="col">
                                                     <ul class="list-unstyled mb-0">
-                                                        <li><span class="text-muted small">Profesión: </span><span
-                                                                  class="text-capitalize">{{ $volunteer->profession ?? 'Sin profesión' }}</span>
-                                                        </li>
-                                                        <li><span class="text-muted small">Nivel educativo: </span><span
-                                                                  class="text-capitalize">{{ $volunteer->educational_level }}</span>
-                                                        </li>
-                                                        <li><span class="text-muted small">Fecha de registro:
-                                                            </span>{{ $volunteer->created_at->format('d/m/Y') }}</li>
+                                                        <li>Profesión: <span class="text-muted small text-capitalize">{{ $volunteer->profession ?? 'Sin profesión' }}</span></li>
+                                                        <li>Nivel educativo: <span class="text-muted small text-capitalize">{{ $volunteer->educational_level }}</span></li>
+                                                        <li>Fecha de registro: <span class="text-muted small">{{ $volunteer->created_at->format('d/m/Y') }}</span></li>
                                                     </ul>
                                                 </div>
                                             </div>

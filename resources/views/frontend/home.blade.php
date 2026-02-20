@@ -18,7 +18,7 @@
     </section>
 
     <!-- Últimos Proyectos -->
-    <section class="py-5">
+    <section class="py-5 bg-body-tertiary">
         <div class="container">
             <h2 class="section-title text-center text-primary">Últimos <span class="fw-light">proyectos</span></h2>
             <p class="section-subtitle text-center">Descubrí oportunidades increíbles para hacer la diferencia.</p>

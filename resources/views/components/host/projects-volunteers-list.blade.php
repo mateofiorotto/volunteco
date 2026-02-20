@@ -1,3 +1,8 @@
+<div class="d-flex justify-content-end gap-2 p-2">
+    <div class="text-muted small"><span class="d-inline-block rounded-circle border-1 border border-primary" style="width: 10px; height: 10px;"></span> Aceptado</div>
+    <div class="text-muted small"><span class="d-inline-block rounded-circle bg-warning" style="width: 10px; height: 10px;"></span> Pendiente</div>
+    <div class="text-muted small"><span class="d-inline-block rounded-circle bg-danger" style="width: 10px; height: 10px;"></span> Rechazado</div>
+</div>
 <div id="volunteers-list">
     <div class="card p-0 border-primary">
         <div class="card-header text-bg-primary">
@@ -13,14 +18,17 @@
                 <thead>
                     <tr>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Estado</th>
                         <th scope="col">Evaluación en este proyecto</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($registeredVolunteers ?? [] as $volunteer)
-                        <tr class="{{$volunteer->user?->status !== 'activo' ? 'table-danger' : ''}} align-middle">
+
+                        <tr @class([
+                                'table-warning' => $volunteer->pivot->status === 'pendiente',
+                                'table-danger'  => $volunteer->pivot->status === 'rechazado',
+                            ]) class="align-middle">
                             <td>
                                 <div class="d-flex align-items-center">
                                     <img src="{{ asset('storage/' . ($volunteer->avatar ?? 'perfil-volunteer.svg')) }}"
@@ -28,30 +36,14 @@
                                         class="rounded-circle me-2"
                                         width="40"
                                         height="40">
-                                    {{ $volunteer->full_name }}
+                                        <a href="{{ route('host.volunteers.profile', $volunteer->id) }}">{{ $volunteer->full_name }}</a>
                                 </div>
-                            </td>
-                            <td>
-                                @if($volunteer->user->status == 'activo')
-                                    @if ($volunteer->pivot->status !== 'aceptado')
-                                        <span
-                                            class="text-capitalize badge {{ $volunteer->pivot->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
-                                            {{ $volunteer->pivot->status }}
-                                        </span>
-                                    @else
-                                        <span class="text-capitalize badge text-body">
-                                            {{ $volunteer->pivot->status }}
-                                        </span>
-                                    @endif
-                                @else
-                                    <span class="text-capitalize badge text-bg-danger }}">{{ $volunteer->user->status }}</span>
-                                @endif
                             </td>
                             <td>
                                 @if ($volunteer->pivot->status == 'aceptado')
                                     @if($volunteer->is_evaluated)
                                     <div class="d-flex gap-4 align-items-center">
-                                        <p class="fw-semibold mb-0">{{ $volunteer->evaluation->performance_label }}</p>
+                                        <p class="mb-0"><span>{{ $volunteer->evaluation->average_score }} - {{ $volunteer->evaluation->performance_label }}</span></p>
                                         <a href="{{ route('host.my-projects.evaluated-volunteer', [$project->id, $volunteer->id]) }}"
                                                 class="btn btn-sm btn-outline-primary"
                                                 title="ver">Ver detalle</a>
@@ -63,7 +55,7 @@
                                     @endif
                                 @endif
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 <div class="d-flex gap-3">
                                     @if($volunteer->user->status == 'activo')
                                     <a href="{{ route('host.volunteers.profile', $volunteer->id) }}"

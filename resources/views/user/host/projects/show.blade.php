@@ -89,7 +89,7 @@
 
                             <ul class="list-unstyled mb-0">
                                 @foreach ($project->conditions as $condition)
-                                    <li class="mb-2 d-flex gap-2 align-items-start">
+                                    <li class="d-flex gap-2 align-items-center">
                                         <i class="bi bi-check2"></i>
                                         <span class="text-muted small">{{ $condition->name }}</span>
                                     </li>
@@ -147,7 +147,7 @@
                                     </label>
                                 </div>
                                 <button type="submit"
-                                        class="btn-outline-primary btn btn-sm">Confirmar</button>
+                                        class="btn-primary btn btn-sm">Confirmar</button>
                             </form>
                         </div>
                     </div>

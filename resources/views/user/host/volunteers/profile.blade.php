@@ -46,7 +46,7 @@
                                     @if ($volunteer->birthdate)
                                         <li><span class="text-muted">{{ $volunteer->birthdate->age }} años</span></li>
                                     @endif
-                                    <li><span class="text-capitalize text-muted">{{ $volunteer->profession }}</span></li>
+                                    <li>Profesión: <span class="text-capitalize text-muted">{{ $volunteer->profession }}</span></li>
                                     <li>Nivel educativo: <span class="text-muted text-capitalize">{{ $volunteer->educational_level }}</span></li>
                                 </ul>
                             </div>
@@ -122,7 +122,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header">Proyectos donde tienes aceptado este voluntario</div>
-                    <div class="card-body">
+                    <div class="card-body p-0">
                         <table class="table">
                             <thead>
                                 <tr>

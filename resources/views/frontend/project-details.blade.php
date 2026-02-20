@@ -40,9 +40,13 @@
                         </div>
 
                         <div class="card-body">
-                            <span class="badge bg-primary mb-2">{{ $project->projectType->name }}</span>
-                            <h2 class="card-title h3">{{ $project->title }}</h2>
-                            <p class="card-text text-muted">{{ $project->description }}</p>
+                            <div class="d-flex flex-md-row-reverse gap-5 mb-3">
+                                <div><span class="badge bg-primary mb-2">{{ $project->projectType->name }}</span></div>
+                                <div>
+                                    <h2 class="card-title h3">{{ $project->title }}</h2>
+                                    <p class="card-text text-muted">{{ $project->description }}</p>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <div class="d-flex gap-2 align-items-start">
@@ -71,7 +75,7 @@
                                     <div class="d-flex gap-2 align-items-start">
                                         <i class="bi bi-calendar4 fs-5 text-primary"></i>
                                         <div class="pt-1">
-                                            <h4 class="h6 fw-semibold mb-1">Fecha de inicio</h4>
+                                            <h4 class="h6 fw-semibold mb-1">Inicia</h4>
                                             <p class="mb-0 text-muted small">
                                                 {{ \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') }}</p>
                                         </div>
@@ -81,7 +85,7 @@
                                     <div class="d-flex gap-2 align-items-start">
                                         <i class="bi bi-calendar4 fs-5 text-primary"></i>
                                         <div class="pt-1">
-                                            <h4 class="h6 fw-semibold mb-1">Fecha de finalización</h4>
+                                            <h4 class="h6 fw-semibold mb-1">Finaliza</h4>
                                             <p class="mb-0 text-muted small">
                                                 {{ \Carbon\Carbon::parse($project->end_date)->format('d/m/Y') }}
                                             </p>
@@ -94,12 +98,12 @@
                                 <div class="d-flex gap-2 align-items-start">
                                     <i class="bi bi-clipboard2-check fs-5 text-primary"></i>
                                     <div class="pt-1">
-                                        <h4 class="h6 fw-semibold">Condiciones y Requisitos</h4>
+                                        <h4 class="h6 fw-semibold">Condiciones y requisitos</h4>
                                         <ul class="list-unstyled mb-0">
                                             @foreach ($project->conditions as $condition)
-                                                <li class="d-flex gap-2 align-items-center text-muted small">
+                                                <li class="d-flex gap-2 align-items-center ">
                                                     <i class="bi bi-check2 fs-5 text-primary"></i>
-                                                    <span>{{ $condition->name }}</span>
+                                                    <span class="text-muted small">{{ $condition->name }}</span>
                                                 </li>
                                             @endforeach
                                         </ul>
@@ -127,7 +131,7 @@
                             <h3 class="card-title h5">Evaluación del anfitrión</h3>
                             <p class="small">Esta evaluación destaca tus fortalezas y refleja tu compromiso durante la experiencia.<br>Tomala como una herramienta para seguir creciendo.</p>
                             <ul class="list-unstyled mb-0">
-                                <li class="mb-2">Nivel: <span class="text-muted">{{$evaluation->performance_label}}</span></li>
+                                <li class="mb-2">Desempeño: <span class="text-muted">{{$evaluation->performance_label}}</span></li>
                                 <li class="mb-2">Fortalezas destacadas:<br><span class="text-muted p-3 fst-italic">"{{$evaluation->strengths}}"</span></li>
                                 <li>Aspectos a mejorar:<br><span class="text-muted p-3 fst-italic">"{{$evaluation->improvements}}"</span></li>
                             </ul>

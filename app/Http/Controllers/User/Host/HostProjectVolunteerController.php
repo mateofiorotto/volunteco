@@ -98,8 +98,8 @@ class HostProjectVolunteerController extends Controller
         }
 
         $levels = [
-            1 => 'Muy bajo',
-            2 => 'Bajo',
+            1 => 'Bajo',
+            2 => 'Aceptable',
             3 => 'Bueno',
             4 => 'Muy bueno',
             5 => 'Excelente',
@@ -138,8 +138,8 @@ class HostProjectVolunteerController extends Controller
         }
 
         $levels = [
-            1 => 'Muy bajo',
-            2 => 'Bajo',
+            1 => 'Bajo',
+            2 => 'Aceptable',
             3 => 'Bueno',
             4 => 'Muy bueno',
             5 => 'Excelente',

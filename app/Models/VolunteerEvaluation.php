@@ -49,7 +49,7 @@ class VolunteerEvaluation extends Model
 
         return match (true) {
             $avg >= 1.0 && $avg <= 1.9 => 'Necesita mejorar',
-            $avg >= 2.0 && $avg <= 2.9 => 'En crecimiento',
+            $avg >= 2.0 && $avg <= 2.9 => 'Aceptable',
             $avg >= 3.0 && $avg <= 3.9 => 'Bueno',
             $avg >= 4.0 && $avg <= 4.5 => 'Muy bueno',
             $avg >= 4.6 && $avg <= 5.0 => 'Excelente',
