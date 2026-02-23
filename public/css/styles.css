@@ -40,7 +40,7 @@
     --bs-secondary: #ec5228;
     --bs-secondary-rgb: 236, 82, 40;
     --bs-secondary-bg-subtle: #ffc7b7;
-    --bs-secondary-border-subtle:  #ffc7b7;
+    --bs-secondary-border-subtle: #ffc7b7;
     --bs-success: var(--bs-primary);
     --bs-success-rgb: var(--bs-primary-rgb);
     --bs-warning: #f6c445;
@@ -74,9 +74,10 @@ h6 {
 .text-muted {
     color: var(--bs-gray-700) !important;
 }
-.link-primary:focus, .link-primary:hover {
+.link-primary:focus,
+.link-primary:hover {
     color: RGBA(var(--bs-primary-rgb), 0.75) !important;
-    -webkit-text-decoration-color: RGBA(var(--bs-primary-rgb), 0.75)!important;
+    -webkit-text-decoration-color: RGBA(var(--bs-primary-rgb), 0.75) !important;
     text-decoration-color: RGBA(var(--bs-primary-rgb), 0.75) !important;
 }
 .form-control {
@@ -87,9 +88,10 @@ h6 {
     --bs-btn-hover-border-color: var(--bs-body-color);
     --bs-btn-hover-color: #fff;
 }
-.btn-group-lg>.btn, .btn-lg {
+.btn-group-lg > .btn,
+.btn-lg {
     --bs-btn-padding-y: 0.75rem;
-    --bs-btn-padding-x: 1.50rem;
+    --bs-btn-padding-x: 1.5rem;
     --bs-btn-font-size: 1.25rem;
     --bs-btn-border-radius: var(--bs-border-radius-lg);
 }
@@ -181,7 +183,10 @@ h6 {
     text-decoration: none;
 }
 .bg-azul {
-    background-color: rgba(var(--bs-azul-color-rgb), var(--bs-bg-opacity, 1)) !important;
+    background-color: rgba(
+        var(--bs-azul-color-rgb),
+        var(--bs-bg-opacity, 1)
+    ) !important;
 }
 .badge {
     --bs-badge-font-weight: 500;
@@ -238,7 +243,13 @@ h6 {
     left: auto;
     right: -50%;
 }
-.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+.container,
+.container-fluid,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl,
+.container-xxl {
     --bs-gutter-x: 2.5rem;
 }
 .row {
@@ -280,7 +291,7 @@ h6 {
 .text-volunteco {
     font-size: 115%;
     color: var(--bs-primary);
-    font-family: 'Nunito';
+    font-family: "Nunito";
     font-weight: 600;
 }
 .text-volunteco span {
@@ -442,7 +453,8 @@ small {
     font-size: 1.2rem;
 }
 
-.testimonials-section, .donations-banner-section {
+.testimonials-section,
+.donations-banner-section {
     background: #66800a !important;
 }
 
@@ -467,9 +479,9 @@ small {
     width: 70%;
 }
 .hero-section::after {
-    content: '';
+    content: "";
     display: block;
-    background-image: url('/images/background.png');
+    background-image: url("/images/background.png");
     position: absolute;
     background-repeat: no-repeat;
     background-size: cover;
@@ -484,9 +496,9 @@ small {
     position: relative;
 }
 .cta-section::after {
-    content: '';
+    content: "";
     display: block;
-    background-image: url('/images/background-2.png');
+    background-image: url("/images/background-2.png");
     position: absolute;
     background-repeat: no-repeat;
     background-size: cover;
@@ -494,14 +506,13 @@ small {
     opacity: 0.1;
     z-index: 1;
     width: 100%;
-    height:94%;
+    height: 94%;
     top: 0;
-
 }
 .landing-hero::after {
-    content: '';
+    content: "";
     display: block;
-    background-image: url('/images/background.png');
+    background-image: url("/images/background.png");
     position: absolute;
     background-repeat: no-repeat;
     background-size: cover;
@@ -512,11 +523,10 @@ small {
     bottom: 0;
 }
 
-@media (max-width: 767px){
+@media (max-width: 767px) {
     .landing-hero .hero-title {
         font-size: 2.5rem;
     }
-
 }
 .hero-bg-image {
     position: absolute;
@@ -524,8 +534,9 @@ small {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(30, 30, 30, 0.85), rgba(30, 30, 30, 0.85)),
-        url('/images/landing-hero.jpg') center / cover no-repeat;
+    background:
+        linear-gradient(rgba(30, 30, 30, 0.85), rgba(30, 30, 30, 0.85)),
+        url("/images/landing-hero.jpg") center / cover no-repeat;
     z-index: 1;
 }
 
@@ -563,10 +574,10 @@ small {
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
 }
 @media (min-width: 768px) {
-.hero-subtitle {
-    margin-bottom: 3rem;
-    line-height: 1.6;
-}
+    .hero-subtitle {
+        margin-bottom: 3rem;
+        line-height: 1.6;
+    }
 }
 
 .btn-landing {
@@ -596,7 +607,6 @@ small {
 }
 
 @keyframes bounce {
-
     0%,
     20%,
     50%,
@@ -636,21 +646,21 @@ small {
 .stat-number {
     font-size: 3rem;
     font-weight: 600;
-    font-family: 'Nunito', sans-serif;
+    font-family: "Nunito", sans-serif;
     margin-bottom: 10px;
     line-height: 1;
 }
-@media (min-width: 768px){
-.stat-number {
-    font-size: 4rem;
-}
+@media (min-width: 768px) {
+    .stat-number {
+        font-size: 4rem;
+    }
 }
 
 .stat-label {
     font-size: 1.25rem;
     font-weight: 500;
     letter-spacing: 0.01em;
-    font-family: 'Nunito', sans-serif;
+    font-family: "Nunito", sans-serif;
 }
 
 /* Features Section */
@@ -720,7 +730,7 @@ small {
 }
 
 .step-number {
-    content: '';
+    content: "";
     display: block;
     border: 1px solid var(--bs-secondary);
     padding: 6px;
@@ -740,12 +750,16 @@ small {
     border-radius: 50%;
     font-size: 1.8rem;
     font-weight: 700;
-    font-family: 'Nunito', sans-serif;
+    font-family: "Nunito", sans-serif;
     position: relative;
 }
-.step-number + .step-content { padding-top: 13px;}
+.step-number + .step-content {
+    padding-top: 13px;
+}
 @media (min-width: 768px) {
-    .step-number + .step-content { padding-top: 19px;}
+    .step-number + .step-content {
+        padding-top: 19px;
+    }
 }
 
 .step-title {
@@ -756,12 +770,14 @@ small {
 
 /* CTA Section */
 .cta-section {
-    background-image: linear-gradient(rgba(30, 30, 30, 0.85), rgba(30, 30, 30, 0.85)), /* color overlay */
-    url('/images/madre-e-hija-preparandose-para-plantar-un-arbol-en-el-bosque.jpg');
+    background-image:
+        linear-gradient(rgba(30, 30, 30, 0.85), rgba(30, 30, 30, 0.85)),
+        /* color overlay */
+            url("/images/madre-e-hija-preparandose-para-plantar-un-arbol-en-el-bosque.jpg");
     background-color: var(--bs-primary);
     background-size: cover;
     background-position: center center;
-    background-repeat:  no-repeat;
+    background-repeat: no-repeat;
     padding: 100px 0;
     color: white;
     text-align: center;
@@ -779,14 +795,13 @@ small {
     margin-bottom: 20px;
 }
 @media (min-width: 768px) {
-.cta-title {
-    font-size: 3.5rem;
-    margin-bottom: 20px;
-}
-
+    .cta-title {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+    }
 }
 .cta-section .text-marca {
-    font-size: 1.6rem!important;
+    font-size: 1.6rem !important;
 }
 
 .btn-landing-white {
@@ -798,7 +813,6 @@ small {
     background: var(--bs-light);
     color: var(--bs-primary-dark);
 }
-
 
 /**proyectos**/
 .projects-hero {
@@ -934,7 +948,7 @@ small {
     background-color: var(--bs-primary-dark);
     background-size: cover, cover;
     background-position: center center;
-    background-repeat:  no-repeat;
+    background-repeat: no-repeat;
     padding: 100px 0;
     color: white;
     text-align: center;
@@ -968,12 +982,13 @@ code {
 }
 
 .contact-footer {
-    background-image: linear-gradient(rgba(30, 30, 30, 0.85), rgba(30, 30, 30, 0.85)),
-    url('/images/eco-contacto-footer.jpg');
+    background-image:
+        linear-gradient(rgba(30, 30, 30, 0.85), rgba(30, 30, 30, 0.85)),
+        url("/images/eco-contacto-footer.jpg");
     background-color: var(--bs-primary);
     background-size: cover;
     background-position: center center;
-    background-repeat:  no-repeat;
+    background-repeat: no-repeat;
     padding: 100px 0;
     color: white;
     text-align: center;
@@ -1030,7 +1045,9 @@ code {
 .cart-message {
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
+    transition:
+        opacity 0.4s ease,
+        visibility 0.4s ease;
 }
 
 .cart-message.show {
@@ -1046,4 +1063,49 @@ code {
 .card-projects-dashboard {
     height: 200px;
     object-fit: cover;
+}
+
+/*404*/
+.error-hero-section {
+    position: relative;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-number {
+    font-size: clamp(6rem, 20vw, 12rem);
+    font-weight: 800;
+    line-height: 1;
+    color: white;
+    margin-bottom: 0;
+    letter-spacing: -4px;
+    animation: pulse-number 3s ease-in-out infinite;
+}
+
+@keyframes pulse-number {
+    0%,
+    100% {
+        -webkit-text-stroke-color: rgba(255, 255, 255, 0.3);
+    }
+    50% {
+        -webkit-text-stroke-color: rgba(255, 255, 255, 0.6);
+    }
+}
+
+.error-hero-section .hero-title {
+    margin-top: -1rem;
+}
+
+.hero-error-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/how-it-works.jpg");
+    background-size: cover;
+    background-position: center bottom;
+    filter: blur(1px);
 }
