@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Host;
 use App\Models\Project;
+use App\Models\ProjectVolunteer;
 
 class DashboardController extends Controller
 {
@@ -32,10 +33,10 @@ class DashboardController extends Controller
             })
             ->where('enabled', true) // solo los proyectos activos
             ->whereHas('volunteers', function ($q) {
-                $q->where('project_volunteer.status', 'pendiente'); // que tengan voluntario en estado pendiente
+                $q->where('project_volunteer.status', ProjectVolunteer::STATUS_PENDING); // que tengan voluntario en estado pendiente
             })
             ->with(['volunteers' => function ($q) {
-                $q->where('project_volunteer.status', 'pendiente') // Carga los voluntarios pendientes
+                $q->where('project_volunteer.status', ProjectVolunteer::STATUS_PENDING) // Carga los voluntarios pendientes
                 ->orderBy('project_volunteer.applied_at', 'desc') // y los ordena del mas nuevo al mas viejo
                 ->limit(1); // Trae solo el último
             }])

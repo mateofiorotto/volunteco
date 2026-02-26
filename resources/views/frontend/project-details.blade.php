@@ -30,7 +30,7 @@
 
                 <!-- Detalles del proyecto -->
                 <div class="col-md-8 col-12 mb-4">
-                    <div class="card">
+                    <div class="card flex-row mb-4">
                         <div class="ratio ratio-16x9">
                             <img src="{{ asset('storage/' . ($project->image ?? 'thumbnail-proyecto.jpg')) }}"
                                  class="card-img-top object-fit-cover"
@@ -40,13 +40,28 @@
                         </div>
 
                         <div class="card-body">
-                            <div class="d-flex flex-md-row-reverse gap-5 mb-3">
-                                <div><span class="badge bg-primary mb-2">{{ $project->projectType->name }}</span></div>
+                            <div class="mb-3">
+                                <h2 class="card-title h3">{{ $project->title }}</h2>
+                                <div><span class="badge bg-primary mb-3">{{ $project->projectType->name }}</span></div>
                                 <div>
-                                    <h2 class="card-title h3">{{ $project->title }}</h2>
-                                    <p class="card-text text-muted">{{ $project->description }}</p>
+                                    <div class="d-flex gap-1 align-items-center">
+                                        <i class="bi bi-geo-alt fs-5 text-primary"></i>
+                                        <p class="mb-0 text-muted small">
+                                            {{ $project->location_id ? $project->location->name . ' - ' . $project->location->province->name : '' }}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="mb-3">
+                                <p class="card-text text-muted">{{ $project->description }}</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">Condiciones</div>
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <div class="d-flex gap-2 align-items-start">
@@ -110,7 +125,6 @@
                                     </div>
                                 </div>
                             @endif
-
                         </div>
                     </div>
                 </div>
@@ -123,29 +137,29 @@
                         :isInHostRoster="$isInHostRoster"
                     />
 
+                    @if (Auth::check() && Auth::user()->hasRole('volunteer'))
                     {{-- Evaluación del host sobre su desempeño en este proyecto --}}
-                    @if($isAceptedByHost)
-                    <hr>
-                    <div class="card mt-3">
-                        <div class="card-body">
-                            <h3 class="card-title h5">Evaluación del anfitrión</h3>
-                            <p class="small">Esta evaluación destaca tus fortalezas y refleja tu compromiso durante la experiencia.<br>Tomala como una herramienta para seguir creciendo.</p>
-                            <ul class="list-unstyled mb-0">
-                                <li class="mb-2">Desempeño: <span class="text-muted">{{$evaluation->performance_label}}</span></li>
-                                <li class="mb-2">Fortalezas destacadas:<br><span class="text-muted p-3 fst-italic">"{{$evaluation->strengths}}"</span></li>
-                                <li>Aspectos a mejorar:<br><span class="text-muted p-3 fst-italic">"{{$evaluation->improvements}}"</span></li>
-                            </ul>
+                        @if($isAceptedByHost && $evaluation)
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h3 class="card-title h5">Evaluación del anfitrión</h3>
+                                <p class="small">Esta evaluación destaca tus fortalezas y refleja tu compromiso durante la experiencia.<br>Tomala como una herramienta para seguir creciendo.</p>
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2">Desempeño: <span class="text-primary">{{$evaluation?->performance_label}}</span></li>
+                                    <li class="mb-2">Fortalezas destacadas:<br><span class="text-primary p-3 fst-italic">"{{$evaluation?->strengths}}"</span></li>
+                                    <li>Aspectos a mejorar:<br><span class="text-primary p-3 fst-italic">"{{$evaluation?->improvements}}"</span></li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    @endif
+                        @endif
 
                     {{-- Botones de acción para voluntarios --}}
                     <x-volunteer.project-actions
                         :project="$project"
                         :volunteerStatus="$volunteerStatus"
                     />
+                    @endif
                 </div>
-
             </div>
         </div>
     </section>

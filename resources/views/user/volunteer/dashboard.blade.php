@@ -9,7 +9,9 @@
         <!-- Últimos Proyectos Aplicados -->
         <div class="mb-5">
             <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="d-flex flex-fill justify-content-between">
                 <h2 class="h4 mb-0">Mis <span class="fw-light">últimos proyectos</span></h2>
+                </div>
                 <a href="{{ route('volunteer.projects.applied') }}"
                    class="btn btn-sm btn-primary">
                     Ver todos
@@ -28,34 +30,41 @@
                         <div class="col-md-6 col-lg-3">
                             <div class="card h-100 {{ $project->enabled === 0 ? 'border-danger' : '' }}">
                                 <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-start mb-3 gap-2">
+                                    <div class="d-flex justify-content-between align-items-start gap-2">
                                         <h3 class="card-title mb-0 h4">
                                             {{ $project->title }}
                                         </h3>
                                         <span
-                                              class="badge text-capitalize
+                                              class="badge p-2 text-capitalize
                                             @if ($project->pivot->status === 'aceptado') bg-primary
                                             @elseif($project->pivot->status === 'rechazado') bg-danger
                                             @else bg-warning text-dark @endif">
                                             {{ $project->pivot->status }}
                                         </span>
                                     </div>
+                                    <p class="small text-muted">{{$project->host->name}}</p>
 
-                                    <p class="card-text small mb-3">
+                                    <p class="card-text small">
                                         {{ Str::limit($project->description, 100) }}
                                     </p>
 
-                                    @if ($project->pivot->status === 'aceptado')
+                                    @if ($project->pivot->status !== 'aceptado')
+                                        @if ($project->pivot->status === 'pendiente')
                                         <p class="mb-3 small">
-                                            <i class="bi bi-check-circle me-1"></i>
-                                            Aceptado:
-                                            {{ \Carbon\Carbon::parse($project->pivot->accepted_at)->format('d/m/Y') }}
+                                            <i class="bi bi-circle-fill text-warning me-1"></i>
+                                            Aplicado: <span>{{ \Carbon\Carbon::parse($project->pivot->applied_at)->format('d/m/Y') }}</span>
                                         </p>
+                                        @else
+                                        <p class="mb-3 small">
+                                            <i class="bi bi-dash-circle-fill text-danger me-1"></i>
+                                            Aplicado: <span>{{ \Carbon\Carbon::parse($project->pivot->applied_at)->format('d/m/Y') }}</span>
+                                        </p>
+                                        @endif
                                     @else
-                                    <p class="mb-3 small">
-                                        <i class="bi bi-calendar me-1"></i>
-                                        Aplicado: {{ \Carbon\Carbon::parse($project->pivot->applied_at)->format('d/m/Y') }}
-                                    </p>
+                                        <p class="mb-3 small">
+                                            <i class="bi bi-check-circle-fill text-primary me-1"></i>
+                                            Aceptado: <span class="text-muted">{{ \Carbon\Carbon::parse($project->pivot->accepted_at)->format('d/m/Y') }}</span>
+                                        </p>
                                     @endif
 
                                     @if ($project->enabled === 0)

@@ -9,6 +9,7 @@ use App\Models\Project;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VolunteerAccepted;
 use App\Models\VolunteerEvaluation;
+use App\Models\ProjectVolunteer;
 
 class HostProjectVolunteerController extends Controller
 {
@@ -35,8 +36,9 @@ class HostProjectVolunteerController extends Controller
         }
 
         $project->volunteers()->updateExistingPivot($volunteerId, [
-            'status' => 'aceptado',
+            'status' => ProjectVolunteer::STATUS_ACCEPTED,
             'accepted_at' => now(),
+            'rejected_at' => null,
         ]);
 
         Mail::to($volunteer->user->email)->send(
@@ -69,10 +71,68 @@ class HostProjectVolunteerController extends Controller
         }
 
         $project->volunteers()->updateExistingPivot($volunteerId, [
-            'status' => 'rechazado',
+            'status' => ProjectVolunteer::STATUS_REJECTED,
+            'rejected_at' => now(),
         ]);
 
-        return redirect()->back()->with('success', 'Voluntario rechazado exitosamente.');
+        return redirect()->back()->with('success', 'El voluntario ha sido rechazado.');
+    }
+
+    // Cancela un voluntario aceptado de un proyecto
+    public function cancelVolunteer($projectId, $volunteerId)
+    {
+        $host = Auth::user()->host;
+
+        $project = Project::where('id', $projectId)
+            ->where('host_id', $host->id)
+            ->firstOrFail();
+
+        $volunteer = $project->volunteers()
+            ->withPivot('status')
+            ->where('volunteers.id', $volunteerId)
+            ->firstOrFail();
+
+        // Cancelar solo si estaba aceptado
+        if (!$volunteer->pivot->isAccepted()) {
+            return redirect()->back()
+                ->with('error', 'Solo puedes cancelar voluntarios aceptados.');
+        }
+
+        $project->volunteers()->updateExistingPivot($volunteerId, [
+            'status' => ProjectVolunteer::STATUS_CANCELED,
+            'canceled_at' => now(),
+        ]);
+
+        return redirect()->back()
+            ->with('success', 'El voluntario fue cancelado correctamente.');
+    }
+
+    public function completeVolunteer($projectId, $volunteerId)
+    {
+        $host = Auth::user()->host;
+
+        $project = Project::where('id', $projectId)
+            ->where('host_id', $host->id)
+            ->firstOrFail();
+
+        $volunteer = $project->volunteers()
+            ->withPivot('status')
+            ->where('volunteers.id', $volunteerId)
+            ->firstOrFail();
+
+        // Solo puede completar si está aceptado
+        if (!$volunteer->pivot->isAccepted()) {
+            return redirect()->back()
+                ->with('error', 'Solo puedes marcar como completado a voluntarios aceptados.');
+        }
+
+        $project->volunteers()->updateExistingPivot($volunteerId, [
+            'status' => ProjectVolunteer::STATUS_COMPLETED,
+            'completed_at' => now(),
+        ]);
+
+        return redirect()->back()
+            ->with('success', 'El voluntario fue marcado como completado.');
     }
 
     // Resumen de la evaluación
@@ -123,10 +183,10 @@ class HostProjectVolunteerController extends Controller
             ->where('volunteers.id', $volunteerId)
             ->firstOrFail();
 
-        if ($volunteer->pivot->status !== 'aceptado') {
+        if (!$volunteer->pivot->isFinished()) {
             return redirect()
                 ->route('host.my-projects.show', $projectId)
-                ->with('error', 'Solo puedes evaluar voluntarios aceptados.');
+                ->with('error', 'Solo puedes evaluar voluntarios que ya no esten activos.');
         }
 
         $evaluation = $project->evaluations()
@@ -162,13 +222,15 @@ class HostProjectVolunteerController extends Controller
             abort(403);
         }
 
-        $isAccepted = $project->volunteers()
+        $volunteer = $project->volunteers()
+            ->withPivot('status')
             ->where('volunteers.id', $volunteerId)
-            ->wherePivot('status', 'aceptado')
-            ->exists();
+            ->firstOrFail();
 
-        if (!$isAccepted) {
-            return redirect()->route('host.my-projects.show', $projectId)->with('error', 'Solo puedes evaluar voluntarios aceptados.');
+        if (!$volunteer->pivot->isFinished()) {
+            return redirect()
+                ->route('host.my-projects.show', $projectId)
+                ->with('error', 'Solo puedes evaluar voluntarios que ya no esten activos.');
         }
 
         if ($project->hasEvaluationForVolunteer($volunteerId)) {

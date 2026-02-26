@@ -121,7 +121,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
-                    <div class="card-header">Proyectos donde tienes aceptado este voluntario</div>
+                    <div class="card-header">Proyectos donde tienes a este voluntario</div>
                     <div class="card-body p-0">
                         <table class="table">
                             <thead>
@@ -129,7 +129,8 @@
                                     <th scope="col">Título</th>
                                     <th scope="col">Fecha</th>
                                     <th scope="col">Lugar</th>
-                                    <th scope="col">Su solicitud de aplicación</th>
+                                    <th scope="col">Solicitud de aplicación</th>
+                                    <th scope="col">Evaluación</th>
                                     <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
@@ -157,14 +158,17 @@
                                             @endif
                                         </td>
                                         <td>
+                                            @if($project->evaluations->isNotEmpty())
+                                            <p class="mb-0">Nivel: <span class="text-muted small">{{ $project->evaluations->first()->performance_label }} ({{ $project->evaluations->first()->average_score }})</span></p>
+                                            @endif
+                                        </td>
+                                        <td>
                                             <a href="{{ route('host.my-projects.show', $project->id) }}" class="btn btn-azul btn-sm @if ($project->enabled === 0) disabled @endif">Ver</a>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        <div>
-                        </div>
                     </div>
                 </div>
             </div>

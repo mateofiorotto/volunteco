@@ -66,7 +66,7 @@ class Host extends Model
         return $this->projects()
             ->whereHas('volunteers', function ($query) use ($volunteerId) {
                 $query->where('volunteer_id', $volunteerId)
-                    ->whereIn('project_volunteer.status', ['aceptado']);
+                    ->whereIn('project_volunteer.status', [ProjectVolunteer::STATUS_ACCEPTED]);
             })
             ->exists();
     }
@@ -76,13 +76,15 @@ class Host extends Model
     {
         return $this->projects()
             ->whereHas('volunteers', function ($query) use ($volunteerId) {
-                $query->where('volunteer_id', $volunteerId)
-                    ->whereIn('project_volunteer.status', ['aceptado', 'pendiente']);
+                $query->where('volunteer_id', $volunteerId);
             })
             ->with(['volunteers' => function ($query) use ($volunteerId) {
-                $query->where('volunteer_id', $volunteerId)
-                    ->whereIn('project_volunteer.status', ['aceptado', 'pendiente']);
-            }])
+                $query->where('volunteer_id', $volunteerId);
+            },
+            'evaluations' => function ($query) use ($volunteerId) {
+                $query->where('volunteer_id', $volunteerId);
+            }
+            ])
             ->get();
     }
 }

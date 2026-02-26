@@ -10,7 +10,6 @@ class VolunteerEvaluation extends Model
     protected $fillable = [
         'project_id',
         'volunteer_id',
-        'host_id',
         'attitude_score',
         'skills_score',
         'responsibility_score',
@@ -28,18 +27,17 @@ class VolunteerEvaluation extends Model
         return $this->belongsTo(Volunteer::class);
     }
 
-    public function host()
-    {
-        return $this->belongsTo(Host::class);
-    }
-
+    // Obtengo el promedio de los valores ponderados
     public function getAverageScoreAttribute()
     {
         return round(
-            ($this->attitude_score +
-             $this->skills_score +
-             $this->responsibility_score) / 3,
-            2
+            // Valores ponderados
+            (
+                ($this->attitude_score * 0.40) +
+                ($this->skills_score * 0.20) +
+                ($this->responsibility_score * 0.40)
+            ),
+            1
         );
     }
 

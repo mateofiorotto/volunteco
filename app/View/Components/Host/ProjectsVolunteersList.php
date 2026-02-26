@@ -11,6 +11,11 @@ class ProjectsVolunteersList extends Component
 {
     public $registeredVolunteers;
     public $project;
+    public $pending;
+    public $rejected;
+    public $accepted;
+    public $finished;
+    public $inProject;
 
     /**
      * Create a new component instance.
@@ -20,6 +25,28 @@ class ProjectsVolunteersList extends Component
         //
         $this->registeredVolunteers = $registeredVolunteers;
         $this->project = $project;
+
+        $this->pending = $registeredVolunteers->filter(function ($volunteer) {
+            return $volunteer->pivot->isPending();
+        });
+
+        $this->rejected = $registeredVolunteers->filter(function ($volunteer) {
+            return $volunteer->pivot->isRejected();
+        });
+
+        $this->accepted = $registeredVolunteers->filter(function ($volunteer) {
+            return $volunteer->pivot->isAccepted();
+        });
+
+        $this->finished = $registeredVolunteers->filter(function ($volunteer){
+            return $volunteer->pivot->isFinished();
+        });
+
+        $this->inProject = $registeredVolunteers->filter(function ($volunteer) {
+            return $volunteer->pivot->isAccepted()
+                || $volunteer->pivot->isFinished();
+        });
+
     }
 
     /**

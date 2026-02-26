@@ -55,7 +55,7 @@
                     </thead>
                     <tbody>
                         @foreach ($projects as $project)
-                            <tr class="{{ $project->enabled !== 1 ? 'table-danger' : '' }}">
+                            <tr class="{{ $project->enabled !== 1 ? 'table-danger' : '' }} align-middle">
                                 <td>
                                     <img src="{{ asset('storage/' . ($project->image ?? 'thumbnail-proyecto.jpg')) }}"
                                          alt="Imagen del proyecto {{ $project->title }}"

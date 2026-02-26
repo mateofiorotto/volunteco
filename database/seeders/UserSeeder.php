@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
 
         $hostsData = [
             [
-                'email' => 'contact@verdevida.com',
+                'email' => 'contacto@verdevida.com',
                 'name' => 'Verde vida',
                 'person_full_name' => 'María Fernández',
                 'cuit' => '20345678911',
@@ -48,7 +48,7 @@ class UserSeeder extends Seeder
                 'phone' => '1123456789',
             ],
             [
-                'email' => 'contact@ecoenergia.com',
+                'email' => 'contacto@ecoenergia.com',
                 'name' => 'EcoEnergía',
                 'person_full_name' => 'Carlos Gómez',
                 'cuit' => '20345678912',
@@ -56,7 +56,7 @@ class UserSeeder extends Seeder
                 'phone' => '1123456790',
             ],
             [
-                'email' => 'contact@reforestando.com',
+                'email' => 'contacto@reforestando.com',
                 'name' => 'Reforestando',
                 'person_full_name' => 'Lucía Martínez',
                 'cuit' => '20345678913',
@@ -64,7 +64,7 @@ class UserSeeder extends Seeder
                 'phone' => '1123456791',
             ],
             [
-                'email' => 'contact@sustentable.com',
+                'email' => 'contacto@sustentable.com',
                 'name' => 'Sustentable S.A.',
                 'person_full_name' => 'Diego Ramírez',
                 'cuit' => '20345678914',
@@ -72,7 +72,7 @@ class UserSeeder extends Seeder
                 'phone' => '1123456792',
             ],
             [
-                'email' => 'contact@bioplaneta.com',
+                'email' => 'contacto@bioplaneta.com',
                 'name' => 'BioPlaneta',
                 'person_full_name' => 'Sofía López',
                 'cuit' => '20345678915',
@@ -80,7 +80,7 @@ class UserSeeder extends Seeder
                 'phone' => '1123456793',
             ],
             [
-                'email' => 'contact@ecohogar.com',
+                'email' => 'contacto@ecohogar.com',
                 'name' => 'EcoHogar',
                 'person_full_name' => 'Martín Díaz',
                 'cuit' => '20345678916',
@@ -88,7 +88,7 @@ class UserSeeder extends Seeder
                 'phone' => '1123456794',
             ],
             [
-                'email' => 'contact@naturalezaactiva.com',
+                'email' => 'contacto@naturalezaactiva.com',
                 'name' => 'Naturaleza activa',
                 'person_full_name' => 'Valentina Torres',
                 'cuit' => '20345678917',
@@ -96,7 +96,7 @@ class UserSeeder extends Seeder
                 'phone' => '1123456795',
             ],
             [
-                'email' => 'contact@bioexperiencias.com',
+                'email' => 'contacto@bioexperiencias.com',
                 'name' => 'BioExperiencias',
                 'person_full_name' => 'Julián Castro',
                 'cuit' => '20345678918',
@@ -104,7 +104,7 @@ class UserSeeder extends Seeder
                 'phone' => '1123456796',
             ],
             [
-                'email' => 'contact@aventuraverde.com',
+                'email' => 'contacto@aventuraverde.com',
                 'name' => 'Aventura verde',
                 'person_full_name' => 'Camila Rojas',
                 'cuit' => '20345678919',
@@ -112,7 +112,7 @@ class UserSeeder extends Seeder
                 'phone' => '1123456797',
             ],
             [
-                'email' => 'contact@innovaeco.com',
+                'email' => 'contacto@innovaeco.com',
                 'name' => 'InnovaEco',
                 'person_full_name' => 'Fernando Pérez',
                 'cuit' => '20345678920',
@@ -263,7 +263,7 @@ class UserSeeder extends Seeder
 
         foreach ($volunteersData as $volData) {
             $volUser = User::create([
-                'email' => strtolower($volData['name'] . '.' . $volData['lastname']) . '@example.com',
+                'email' => strtolower($volData['name'] . '.' . $volData['lastname']) . '@email.com',
                 'password' => Hash::make('12345678'),
                 'status' => $statuses[array_rand($statuses)],
                 'role_id' => $volunteerRole->id, // Asumiendo que tienes un rol específico para voluntarios

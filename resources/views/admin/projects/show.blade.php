@@ -191,18 +191,25 @@
                                             {{ $volunteer->full_name }}
                                         </div>
                                     </td>
-                                    <td class="align-middle">
-                                        <span class="text-muted small">Usuario:</span> <span class="badge text-capitalize {{ $volunteer->user->status !== 'activo' ? ($volunteer->user->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger') : 'text-body' }}">{{ $volunteer->user->status }}</span>
-                                    </td>
+                                    <td class="align-middle"><span class="badge text-capitalize {{ $volunteer->user->status !== 'activo' ? ($volunteer->user->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger') : 'text-body' }}">{{ $volunteer->user->status }}</span></td>
                                     <td class="align-middle">
                                         <div class="d-flex align-items-center">
-                                            <span class="text-muted small me-2">Estado: </span>
-                                            <span class="badge text-capitalize {{ $volunteer->pivot->status === 'aceptado' ? 'text-bg-success' : ($volunteer->pivot->status === 'rechazado' ? 'text-bg-danger' : 'text-bg-warning') }}">{{ $volunteer->pivot->status }}</span>
+                                            <span
+                                              @class([
+                                                    'badge',
+                                                    'text-capitalize',
+                                                    'text-bg-success' => $volunteer->pivot->isAccepted(),
+                                                    'text-bg-danger'  => $volunteer->pivot->isRejected(),
+                                                    'text-bg-warning' => $volunteer->pivot->isPending(),
+                                                ])
+                                            >
+                                                {{ $volunteer->pivot->status }}
+                                            </span>
                                         </div>
                                     </td>
                                     <td class="align-middle">
                                         <div class="d-flex align-items-center">
-                                            <span class="text-muted small">Aplicó: </span> {{ \Carbon\Carbon::parse($volunteer->pivot->applied_at)->format('d/m/Y') }}
+                                            <p class="mb-0">Aplicó: <span class="text-muted small ms-1">{{ \Carbon\Carbon::parse($volunteer->pivot->applied_at)->format('d/m/Y') }}</span></p>
                                         </div>
                                     </td>
                                     <td>

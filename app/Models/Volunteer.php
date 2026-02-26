@@ -56,6 +56,7 @@ class Volunteer extends Model
     public function projects()
     {
         return $this->belongsToMany(Project::class, 'project_volunteer')
+            ->using(ProjectVolunteer::class)
             ->withPivot('status', 'applied_at', 'accepted_at')
             ->withTimestamps();
     }
@@ -65,6 +66,13 @@ class Volunteer extends Model
     {
         return $this->belongsTo(Location::class);
     }
+
+    // Relación con la evalución del host en el desempeño del proyecto
+    public function evaluations()
+    {
+        return $this->hasMany(VolunteerEvaluation::class);
+    }
+
 
     // Accessor para nombre completo
     // https://laravel.com/docs/12.x/eloquent-mutators
@@ -98,10 +106,35 @@ class Volunteer extends Model
             ->exists();
     }
 
-    // Relación con la evalución del host en el desempeño del proyecto
-    public function evaluations()
+    // Promedio global de evaluaciones
+    public function getGlobalAverageScoreAttribute()
     {
-        return $this->hasMany(VolunteerEvaluation::class);
+        if ($this->evaluations->isEmpty()) {
+            return null;
+        }
+
+        return round(
+            $this->evaluations()
+                ->selectRaw('AVG((attitude_score * 0.40) + (skills_score * 0.20) + (responsibility_score * 0.40)) as avg_score')
+                ->value('avg_score'),
+            1
+        );
     }
+
+    public function getGlobalPerformanceLabelAttribute()
+    {
+        $avg = $this->global_average_score;
+
+        if (!$avg) return null;
+
+        return match (true) {
+            $avg <= 1.9 => 'Necesita mejorar',
+            $avg <= 2.9 => 'Aceptable',
+            $avg <= 3.9 => 'Bueno',
+            $avg <= 4.5 => 'Muy bueno',
+            default => 'Excelente',
+        };
+    }
+
 
 }

@@ -32,6 +32,8 @@ Route::middleware(['auth', 'CheckRole:host', 'checkEnabled'])->prefix('usuario/a
     //manejar anfitriones inscriptos (aceptar o rechazar)
     Route::put('/mis-proyectos/{project}/voluntario/{volunteer}/aceptar', [HostProjectVolunteerController::class, 'acceptVolunteer'])->name('my-projects.accept-volunteer');
     Route::put('/mis-proyectos/{project}/voluntario/{volunteer}/rechazar', [HostProjectVolunteerController::class, 'rejectVolunteer'])->name('my-projects.reject-volunteer');
+    Route::put('/mis-proyectos/{project}/voluntario/{volunteer}/cancelar', [HostProjectVolunteerController::class, 'cancelVolunteer'])->name('my-projects.cancel-volunteer');
+    Route::put('/mis-proyectos/{project}/voluntario/{volunteer}/completar', [HostProjectVolunteerController::class, 'completeVolunteer'])->name('my-projects.complete-volunteer');
     Route::get('/mis-proyectos/{project}/voluntario/{volunteer}', [HostProjectVolunteerController::class, 'evaluationVolunteer'])->name('my-projects.evaluation-volunteer');
     Route::post('/mis-proyectos/{project}/voluntario/{volunteer}/evaluar', [HostProjectVolunteerController::class, 'evaluateVolunteer'])->name('my-projects.evaluate-volunteer');
     Route::get('/mis-proyectos/{project}/voluntario/{volunteer}/evaluacion', [HostProjectVolunteerController::class, 'evaluatedVolunteer'])->name('my-projects.evaluated-volunteer');

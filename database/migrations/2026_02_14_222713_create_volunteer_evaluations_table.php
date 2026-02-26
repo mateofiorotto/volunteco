@@ -17,7 +17,6 @@ return new class extends Migration
 
             $table->foreignId('project_id')->constrained()->cascadeOnDelete();
             $table->foreignId('volunteer_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('host_id')->constrained()->cascadeOnDelete();
 
             $table->unsignedTinyInteger('attitude_score');
             $table->unsignedTinyInteger('skills_score');

@@ -13,7 +13,7 @@ class VolunteerController extends Controller
     //
     public function profile($id)
     {
-        $volunteer = Volunteer::with(['user'])->findOrFail($id);
+        $volunteer = Volunteer::with(['user','evaluations'])->findOrFail($id);
 
         $host = Auth::user()->host;
 
@@ -25,6 +25,10 @@ class VolunteerController extends Controller
          */
         if (Gate::denies('view', $volunteer)) {
             return redirect()->route('host.my-projects.index')->with('error', 'No tienes permiso para ver el perfil del usuario solicitado.');
+        }
+
+        if (!$volunteer->user || $volunteer->user->status !== 'activo') {
+            return redirect()->back()->with('error', 'El usuario no está activo.');
         }
 
         /**

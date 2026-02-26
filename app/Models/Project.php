@@ -54,6 +54,7 @@ class Project extends Model
     public function volunteers()
     {
         return $this->belongsToMany(Volunteer::class, 'project_volunteer')
+            ->using(ProjectVolunteer::class)
             ->withPivot('status', 'applied_at', 'accepted_at')
             ->withTimestamps();
     }
@@ -62,7 +63,7 @@ class Project extends Model
     public function acceptedVolunteers()
     {
         return $this->belongsToMany(Volunteer::class, 'project_volunteer')
-            ->wherePivot('status', 'aceptado');
+            ->wherePivot('status', ProjectVolunteer::STATUS_ACCEPTED);
     }
 
     // localidad del anfitrión

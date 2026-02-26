@@ -105,21 +105,28 @@ class FrontendController extends Controller
      */
     public function projectById($id)
     {
-        $project = Project::where('id', $id)->public()->with('volunteers')->firstOrFail();
+
+        $project = Project::with([
+            'host',
+            'location.province'
+        ])->public()->findOrFail($id);
 
         //obtener el voluntario asociado al usuario autenticado
-        $volunteer = Volunteer::where('user_id', Auth::id())->first();
-        $volunteerStatus = null;
+        $volunteer = Auth::user()?->volunteer;
+
         $isAceptedByHost = null;
         $isInHostRoster = null;
+
+        $volunteerStatus = null;
         $evaluation = null;
 
         if ($volunteer) {
-            // Obtenemos el estado del voluntario en este proyecto
+            // Obtenermos el voluntario en este proyecto
             $pivotRecord = $project->volunteers()
                 ->where('volunteer_id', $volunteer->id)
                 ->first();
 
+            // Obtenemos el estado del voluntario en este proyecto
             $volunteerStatus = $pivotRecord ? $pivotRecord->pivot->status : null;
 
             $isAceptedByHost = $volunteer->isHostAcepted($project->host->id);

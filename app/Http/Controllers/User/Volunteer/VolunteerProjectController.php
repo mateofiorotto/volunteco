@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Project;
 use App\Models\Volunteer;
+use App\Models\ProjectVolunteer;
 
 class VolunteerProjectController extends Controller
 {
@@ -38,9 +39,11 @@ class VolunteerProjectController extends Controller
             return redirect()->back()->with('error', 'Ya has aplicado a este proyecto');
         }
 
-        $volunteer->projects()->attach($project->id, [
-            'status' => 'pendiente',
-            'applied_at' => now(),
+        $volunteer->projects()->syncWithoutDetaching([
+            $project->id => [
+                'status' => ProjectVolunteer::STATUS_PENDING,
+                'applied_at' => now(),
+            ]
         ]);
 
         return redirect()->back()->with('success', 'Has aplicado al proyecto exitosamente. El anfitrión revisará tu solicitud.');
