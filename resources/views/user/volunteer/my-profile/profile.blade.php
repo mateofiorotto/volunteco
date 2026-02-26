@@ -45,19 +45,17 @@
                                 @endif
                                 <ul class="list-unstyled">
                                     @if ($volunteer->dni)
-                                        <li><span class="text-muted small">DNI:
-                                            </span>{{ number_format($volunteer->dni, 0, ',', '.') }}</li>
+                                        <li>DNI: <span class="text-muted small">{{ number_format($volunteer->dni, 0, ',', '.') }}</span></li>
                                     @endif
                                     @if ($volunteer->birthdate)
-                                        <li><span class="text-muted small">Fecha de nacimiento:
-                                            </span>{{ $volunteer->birthdate->format('d/m/Y') }}</li>
+                                        <li>Fecha de nacimiento: <span class="text-muted small">{{ $volunteer->birthdate->format('d/m/Y') }}</span></li>
                                     @endif
                                 </ul>
                                 <ul class="list-unstyled mb-0">
-                                    <li><span class="text-muted small">Profesión: </span><span
-                                            class="text-capitalize">{{ $volunteer->profession }}</span></li>
-                                    <li><span class="text-muted small">Nivel educativo: </span><span
-                                            class="text-capitalize">{{ $volunteer->educational_level }}</span></li>
+                                    <li>Profesión: <span
+                                            class="text-capitalize small text-muted">{{ $volunteer->profession }}</span></li>
+                                    <li>Nivel educativo: <span
+                                            class="text-capitalize small text-muted">{{ $volunteer->educational_level }}</span></li>
                                 </ul>
 
                             </div>
@@ -78,8 +76,8 @@
                     <div class="card-header">Datos de contacto</div>
                     <div class="card-body">
                         <ul class="list-unstyled mb-0">
-                            <li><span class="text-muted small">Teléfono: </span>{{ $volunteer->phone }}</li>
-                            <li><span class="text-muted small">Email: </span>{{ $volunteer->user->email }}</li>
+                            <li>Teléfono: <span class="text-muted small">{{ $volunteer->phone }}</span></li>
+                            <li>Email: <span class="text-muted small">{{ $volunteer->user->email }}</span></li>
                         </ul>
                     </div>
                 </div>
@@ -127,7 +125,9 @@
                 <div class="card mb-4">
                     <div class="card-header">Insignias</div>
                     <div class="card-body">
-
+                        @if($volunteer->evaluations->isNotEmpty())
+                        <p>Nivel: <span class="small text-muted">{{$volunteer->global_performance_label}}</span></p>
+                        @endif
                     </div>
                 </div>
 
