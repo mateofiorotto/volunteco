@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Project;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\VolunteerAccepted;
+use App\Mail\VolunteerAcceptedMail;
 use App\Models\VolunteerEvaluation;
 use App\Models\ProjectVolunteer;
+use App\Mail\VolunteerRejectedMail;
 
 class HostProjectVolunteerController extends Controller
 {
@@ -42,41 +43,52 @@ class HostProjectVolunteerController extends Controller
         ]);
 
         Mail::to($volunteer->user->email)->send(
-            new VolunteerAccepted($volunteer->full_name, $project->title)
+            new VolunteerAcceptedMail($volunteer->full_name, $project->title)
         );
 
         return redirect()->back()->with('success', 'Voluntario aceptado exitosamente.');
     }
 
     // Rechazar un voluntario de un proyecto
-    public function rejectVolunteer($projectId, $volunteerId)
-    {
-        $host = Auth::user()->host;
+    public function rejectVolunteer(Request $request, $projectId, $volunteerId)
+{
+    $request->validate([
+        'rejection_reason' => 'required|string',
+    ]);
 
-        $project = Project::where('id', $projectId)
-            ->where('host_id', $host->id)
-            ->first();
+    $host = Auth::user()->host;
 
-        if (!$project) {
-            abort(403, 'Acceso denegado o proyecto inexistente.');
-        }
+    $project = Project::where('id', $projectId)
+        ->where('host_id', $host->id)
+        ->first();
 
-        //validar que exista el voluntario en este proyecto
-        $volunteer = $project->volunteers()
-            ->where('volunteers.id', $volunteerId)
-            ->first();
-
-        if (!$volunteer) {
-            abort(404, 'Voluntario no encontrado en este proyecto.');
-        }
-
-        $project->volunteers()->updateExistingPivot($volunteerId, [
-            'status' => ProjectVolunteer::STATUS_REJECTED,
-            'rejected_at' => now(),
-        ]);
-
-        return redirect()->back()->with('success', 'El voluntario ha sido rechazado.');
+    if (!$project) {
+        abort(403, 'Acceso denegado o proyecto inexistente.');
     }
+
+    $volunteer = $project->volunteers()
+        ->where('volunteers.id', $volunteerId)
+        ->first();
+
+    if (!$volunteer) {
+        abort(404, 'Voluntario no encontrado en este proyecto.');
+    }
+
+    $project->volunteers()->updateExistingPivot($volunteerId, [
+        'status' => ProjectVolunteer::STATUS_REJECTED,
+        'rejected_at' => now(),
+    ]);
+
+    Mail::to($volunteer->user->email)->send(
+        new VolunteerRejectedMail(
+            $volunteer->full_name,
+            $project->title,
+            $request->rejection_reason
+        )
+    );
+
+    return redirect()->back()->with('success', 'El voluntario ha sido rechazado y notificado por email.');
+}
 
     // Cancela un voluntario aceptado de un proyecto
     public function cancelVolunteer($projectId, $volunteerId)
