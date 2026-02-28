@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Support\Str;
 
 class ProjectVolunteer extends Pivot
 {
@@ -43,6 +44,11 @@ class ProjectVolunteer extends Pivot
     public function isFinished()
     {
         return $this->isCompleted() || $this->isCanceled();
+    }
+
+    public function getStatusClassAttribute()
+    {
+        return Str::slug($this->status, '_');
     }
 
 }

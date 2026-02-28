@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Project;
 use App\Models\Volunteer;
+use App\Models\ProjectVolunteer;
 
 class DashboardController extends Controller
 {
@@ -18,8 +19,7 @@ class DashboardController extends Controller
         $volunteer = Auth::user()->volunteer;
 
         //ultimos 6 proyectos a los que aplicó el voluntario
-        $appliedProjects = $volunteer->projects()
-            ->withPivot('status', 'applied_at', 'accepted_at')
+        $activeProjects = $volunteer->activeProjects()
             ->orderByPivot('applied_at', 'desc')
             ->take(6)
             ->get();
@@ -33,6 +33,6 @@ class DashboardController extends Controller
             ->take(3)
             ->get();
 
-        return view('user.volunteer.dashboard', compact('appliedProjects', 'latestProjects'));
+        return view('user.volunteer.dashboard', compact('activeProjects', 'latestProjects'));
     }
 }

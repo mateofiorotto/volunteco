@@ -25,10 +25,49 @@
                 </div>
             </div>
 
-            <div class="row justify-content-between align-items-start">
-                <!-- Donation Info -->
+            <div class="row mb-5">
+                <div class="col-8 mx-auto">
+                    <div class="border-secondary border-2 border rounded-3 p-5">
+                    <div class="donation-content">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="bi bi-heart-fill text-danger fs-3 me-3"></i>
+                            <h3 class="mb-0 text-primary fw-semibold">Objetivo: <span class="fw-light">Mantener nuestra plataforma</span></h3>
+                        </div>
+                        <p>
+                            Cada aporte nos acerca a cubrir los gastos de mantenimiento y soporte técnico, asegurando que nuestra plataforma siga activa.
+                        </p>
+
+                        <!-- Barra de progreso -->
+                        <div class="donation-progress-wrapper mb-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="fw-semibold text-primary small">
+                                    Recaudado: $72.000
+                                </span>
+                                <span class="text-muted fw-semibold small">
+                                    Objetivo: $120.000
+                                </span>
+                            </div>
+                            <div class="progress" style="height: 25px;">
+                                <div class="fw-semibold progress-bar bg-success progress-bar-striped progress-bar-animated width-banner-donation"
+                                        role="progressbar"
+                                        style="width: 60%"
+                                        >
+                                    60%
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="small text-muted mb-0">
+                            Nos faltan <span class="fw-semibold text-primary">$48.000</span> para alcanzar nuestra meta. ¡Tu contribución hace la diferencia!
+                        </p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row flex-lg-row-reverse justify-content-evenly align-items-start py-5">
                 <div class="col-lg-5 col-12">
-                    <div class="border rounded-3 p-4 mb-4">
+                    <div class="border border-primary rounded-3 p-4 mb-4">
                         <h3 class="h5 mb-3">Datos bancarios</h3>
 
                         <div class="mb-3">
@@ -84,7 +123,7 @@
                     </div>
 
                     <!-- QR -->
-                    <div class="text-center border rounded-3 p-4">
+                    <div class="text-center p-4">
                         <p class="text-muted small mb-3">O escaneá el código QR</p>
                         <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=0000003100010234567890"
                              alt="QR Code"
@@ -103,17 +142,16 @@
             </div>
 
             <!-- Banner de Seguridad -->
-            <div class="row mt-5">
-                <div class="col-12">
-                    <div class="bg-primary p-4 text-light rounded-3"
-                         role="alert">
-                        <div class="row align-items-center">
-                            <div class="col-md-1 text-center">
+            <div class="row py-5">
+                <div class="col-7 mx-auto">
+                    <div class="bg-primary p-4 text-light rounded-3" role="alert">
+                        <div class="d-flex align-items-center gap-4">
+                            <div class="text-center">
                                 <i class="bi bi-shield-check display-4"></i>
                             </div>
-                            <div class="col-md-11">
+                            <div class="flex-fill">
                                 <h3 class="alert-heading mb-2">
-                                    <i class="bi bi-check-circle-fill me-2"></i>
+                                    <i class="bi bi-check-circle-fill fs-4 me-2"></i>
                                     Tu donación es segura
                                 </h3>
                                 <p class="mb-2">Todas las transferencias bancarias están protegidas por el sistema de
@@ -135,7 +173,7 @@
     <section class="bg-body-tertiary">
         <div class="container">
             <!-- Impacto -->
-            <div class="row mt-5 pb-3">
+            <div class="row py-5 pb-3">
                 <div class="col-12">
                     <h3 class="text-center mb-5 text-primary section-title">Tu ayuda <span class="fw-light">impacta</span>
                     </h3>

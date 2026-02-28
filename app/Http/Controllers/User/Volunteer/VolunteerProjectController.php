@@ -19,7 +19,7 @@ class VolunteerProjectController extends Controller
     {
         $volunteer = Auth::user()->volunteer;
 
-        $projects = $volunteer->projects()->paginate(10);
+        $projects = $volunteer->projects()->orderByPivot('updated_at', 'desc')->paginate(10);
 
         return view('user.volunteer.projects.applied', compact('projects'));
     }
@@ -69,5 +69,35 @@ class VolunteerProjectController extends Controller
         $volunteer->projects()->detach($project->id);
 
         return redirect()->back()->with('success', 'Has desistido del proyecto');
+    }
+
+    /**
+     * Cancelar de un proyecto
+     */
+    public function cancelFromProject(Project $project)
+    {
+        $volunteer = Auth::user()->volunteer;
+
+        $application = $volunteer->projects()
+            ->where('project_id', $project->id)
+            ->first();
+
+        if (!$application) {
+            return redirect()->back()->with('error', 'No has aplicado a este proyecto');
+        }
+
+        dd($application);
+
+        if (!$application->pivot->isAccepted()) {
+            return redirect()->back()
+                ->with('error', 'Solo puedes cancelar en projectos que este aceptado.');
+        }
+
+        $project->volunteers()->updateExistingPivot($volunteer->id, [
+            'status' => ProjectVolunteer::STATUS_CANCELED,
+            'canceled_at' => now(),
+        ]);
+
+        return redirect()->back()->with('success', 'Has cancelado tu participación en este proyecto');
     }
 }

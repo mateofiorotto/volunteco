@@ -43,7 +43,7 @@
                     </thead>
                     <tbody>
                         @foreach ($projects as $project)
-                            <tr class="align-middle {{ $project->enabled === 0 ? 'table-danger' : '' }}">
+                            <tr class="align-middle {{ $project->enabled === 0 ? 'table-danger' : '' }} {{$project->pivot->isCanceled() || $project->pivot->isCompleted() ? 'table-active' : ''}}">
                                 <td>
                                     {{ $project->title }}
                                     @if ($project->enabled === 0)
@@ -57,11 +57,7 @@
                                 <td>{{ $project->location->name }} - {{ $project->location->province->name }}</td>
                                 <td>{{ $project->host->name }}</td>
                                 <td>
-                                    @if ($project->pivot->status !== 'aceptado')
-                                        <span class="badge text-capitalize {{ $project->pivot->status == 'pendiente' ? 'bg-warning text-bg-warning' : 'bg-danger' }}">{{ $project->pivot->status }}</span>
-                                    @else
-                                        <span class="badge bg-primary text-capitalize">{{ $project->pivot->status }}</span>
-                                    @endif
+                                    <span class="badge text-capitalize badge-{{ $project->pivot->status_class }}">{{ $project->pivot->status }}</span>
                                 </td>
                                 <td><a href="{{ route('project', $project->id) }}"
                                        class="btn btn-azul btn-sm @if ($project->enabled === 0) disabled @endif">Ver</a>

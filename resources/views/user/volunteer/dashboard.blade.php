@@ -10,7 +10,7 @@
         <div class="mb-5">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div class="d-flex flex-fill justify-content-between">
-                <h2 class="h4 mb-0">Mis <span class="fw-light">últimos proyectos</span></h2>
+                <h2 class="h4 mb-0">Mis últimos <span class="fw-light">proyectos aplicados</span></h2>
                 </div>
                 <a href="{{ route('volunteer.projects.applied') }}"
                    class="btn btn-sm btn-primary">
@@ -19,14 +19,14 @@
             </div>
 
 
-            @if ($appliedProjects->isEmpty())
+            @if ($activeProjects->isEmpty())
                 <div class="alert alert-info d-inline-block">
                     <i class="bi bi-info-circle me-2"></i>
                     Aún no has aplicado a ningún proyecto.
                 </div>
             @else
                 <div class="row g-4">
-                    @foreach ($appliedProjects as $project)
+                    @foreach ($activeProjects as $project)
                         <div class="col-md-6 col-lg-3">
                             <div class="card h-100 {{ $project->enabled === 0 ? 'border-danger' : '' }}">
                                 <div class="card-body">
@@ -34,13 +34,6 @@
                                         <h3 class="card-title mb-0 h4">
                                             {{ $project->title }}
                                         </h3>
-                                        <span
-                                              class="badge p-2 text-capitalize
-                                            @if ($project->pivot->status === 'aceptado') bg-primary
-                                            @elseif($project->pivot->status === 'rechazado') bg-danger
-                                            @else bg-warning text-dark @endif">
-                                            {{ $project->pivot->status }}
-                                        </span>
                                     </div>
                                     <p class="small text-muted">{{$project->host->name}}</p>
 
@@ -48,24 +41,42 @@
                                         {{ Str::limit($project->description, 100) }}
                                     </p>
 
-                                    @if ($project->pivot->status !== 'aceptado')
-                                        @if ($project->pivot->status === 'pendiente')
-                                        <p class="mb-3 small">
-                                            <i class="bi bi-circle-fill text-warning me-1"></i>
-                                            Aplicado: <span>{{ \Carbon\Carbon::parse($project->pivot->applied_at)->format('d/m/Y') }}</span>
-                                        </p>
-                                        @else
-                                        <p class="mb-3 small">
-                                            <i class="bi bi-dash-circle-fill text-danger me-1"></i>
-                                            Aplicado: <span>{{ \Carbon\Carbon::parse($project->pivot->applied_at)->format('d/m/Y') }}</span>
-                                        </p>
-                                        @endif
-                                    @else
-                                        <p class="mb-3 small">
-                                            <i class="bi bi-check-circle-fill text-primary me-1"></i>
-                                            Aceptado: <span class="text-muted">{{ \Carbon\Carbon::parse($project->pivot->accepted_at)->format('d/m/Y') }}</span>
-                                        </p>
+                                    <div class="mb-3">
+                                        <span class="badge p-2 text-capitalize badge-{{ $project->pivot->status }}">
+                                            {{ $project->pivot->status }}
+                                        </span>
+                                    </div>
+
+                                    @if ($project->pivot->isPending())
+                                    <p class="mb-3 small">
+                                        <i class="bi bi-circle-fill text-warning me-1"></i>
+                                        Aplicado: <span>{{ \Carbon\Carbon::parse($project->pivot->applied_at)->format('d/m/Y') }}</span>
+                                    </p>
                                     @endif
+                                    @if ($project->pivot->isRejected())
+                                    <p class="mb-3 small">
+                                        <i class="bi bi-dash-circle-fill text-secondary me-1"></i>
+                                        Rechazado: <span>{{ \Carbon\Carbon::parse($project->pivot->rejected_at)->format('d/m/Y') }}</span>
+                                    </p>
+                                    @endif
+                                    @if ($project->pivot->isAccepted())
+                                    <p class="mb-3 small">
+                                        <i class="bi bi-check-circle-fill text-primary me-1"></i>
+                                        Aceptado: <span>{{ \Carbon\Carbon::parse($project->pivot->accepted_at)->format('d/m/Y') }}</span>
+                                    </p>
+                                    @endif
+                                    <!-- @if ($project->pivot->status === 'completado')
+                                    <p class="mb-3 small">
+                                        <i class="bi bi-check-circle-fill text-azul me-1"></i>
+                                        Finalizaste: <span class="text-muted">{{ \Carbon\Carbon::parse($project->pivot->completed_at)->format('d/m/Y') }}</span>
+                                    </p>
+                                    @endif
+                                    @if ($project->pivot->status === 'cancelado')
+                                    <p class="mb-3 small">
+                                        <i class="bi bi-x-circle-fill text-danger me-1"></i>
+                                        Cancelado: <span class="text-muted">{{ \Carbon\Carbon::parse($project->pivot->canceled_at)->format('d/m/Y') }}</span>
+                                    </p>
+                                    @endif -->
 
                                     @if ($project->enabled === 0)
                                         <p class="text-muted small">Este proyecto se encuentra <span class="text-danger fw-semibold">deshabilitado</span></p>
@@ -83,6 +94,7 @@
                     @endforeach
                 </div>
             @endif
+
         </div>
 
         <!-- Últimos Proyectos Publicados -->

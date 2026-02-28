@@ -34,19 +34,22 @@
     --bs-focus-ring-color: rgba(102, 128, 10, 0.25);
     --bs-primary: #66800a;
     --bs-primary-rgb: 102, 128, 10;
-    --bs-primary-bg-subtle: #b0ce88;
+    --bs-primary-bg-subtle: #d7f1b5;
     --bs-primary-dark: #223f05;
     --bs-primary-dark-rgb: 34, 63, 5;
+    --bs-primary-text-emphasis: #223f05;
+    --bs-primary-border-subtle: #d7f1b5;
     --bs-secondary: #ec5228;
     --bs-secondary-rgb: 236, 82, 40;
     --bs-secondary-bg-subtle: #ffc7b7;
     --bs-secondary-border-subtle: #ffc7b7;
+    --bs-secondary-text-emphasis: #cd2c00;
     --bs-success: var(--bs-primary);
     --bs-success-rgb: var(--bs-primary-rgb);
     --bs-warning: #f6c445;
     --bs-warning-rgb: 246, 196, 69;
-    --bs-danger: var(--bs-secondary);
-    --bs-danger-rgb: var(--bs-secondary-rgb);
+    --bs-danger: #dd091d;
+    --bs-danger-rgb: 221, 9, 29;
     --bs-light: #fefae0;
     --bs-light-rgb: 254, 250, 224;
     --bs-dark: var(--bs-body-color);
@@ -194,6 +197,26 @@ h6 {
     --bs-badge-padding-x: 1rem;
     --bs-badge-padding-y: 0.5rem;
 }
+.badge-completado {
+    border: 1px solid var(--bs-azul-color);
+    color: var(--bs-azul-color);
+}
+.badge-pendiente {
+    background-color: var(--bs-warning);
+    color: var(--bs-body-color);
+}
+.badge-rechazado {
+    border: 1px solid var(--bs-secondary);
+    color: var(--bs-secondary);
+}
+.badge-aceptado {
+    border: 1px solid var(--bs-primary);
+    color: var(--bs-primary);
+}
+.badge-cancelado {
+    border: 1px solid var(--bs-danger);
+    color: var(--bs-danger);
+}
 .text-bg-secondary {
     color: var(--bs-body-color) !important;
 }
@@ -286,6 +309,9 @@ h6 {
 .form-check-input:checked {
     background-color: var(--bs-primary);
     border-color: var(--bs-primary);
+}
+.table {
+    --bs-table-active-bg: rgb(100 100 100 / 10%);
 }
 /*customs*/
 .text-volunteco {
@@ -1031,12 +1057,6 @@ code {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.donation-progress-wrapper .progress-bar {
-    font-weight: 600;
-    font-size: 1.3em;
-    border-radius: 12px;
-}
-
 /*Tienda*/
 .product-quantity {
     max-width: 100px;
@@ -1053,10 +1073,6 @@ code {
 .cart-message.show {
     opacity: 1;
     visibility: visible;
-}
-
-.width-banner-donation {
-    width: 42.5% !important;
 }
 
 /*Card proyectos*/

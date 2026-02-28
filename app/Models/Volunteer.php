@@ -136,5 +136,24 @@ class Volunteer extends Model
         };
     }
 
+    // Scope para proyectos finalizados (completados o cancelados)
+    public function finishedProjects()
+    {
+        return $this->projects()->wherePivotIn('status', [
+            ProjectVolunteer::STATUS_COMPLETED,
+            ProjectVolunteer::STATUS_CANCELED,
+        ]);
+    }
+
+    // Scope para proyectos pendientes, aceptados o rechazados
+    public function activeProjects()
+    {
+        return $this->projects()->wherePivotIn('status', [
+            ProjectVolunteer::STATUS_PENDING,
+            ProjectVolunteer::STATUS_ACCEPTED,
+            ProjectVolunteer::STATUS_REJECTED,
+        ]);
+    }
+
 
 }

@@ -235,7 +235,7 @@
             </div>
 
             <div class="text-center small">
-                <a href="{{ route('donate') }}"
+                <a href="{{ route('contact') }}"
                    class="btn btn-warning">Quiero ser sponsor</a>
             </div>
         </div>

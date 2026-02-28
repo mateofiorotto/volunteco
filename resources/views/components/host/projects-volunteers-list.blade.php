@@ -1,12 +1,12 @@
 <div id="volunteers-list">
-    <div class="d-flex justify-content-end gap-2 p-2 ms-auto">
+    <!-- <div class="d-flex justify-content-end gap-2 p-2 ms-auto">
         <div class="text-muted small"><span class="d-inline-block rounded-circle bg-primary"
                   style="width: 10px; height: 10px;"></span> Aceptado</div>
         <div class="text-muted small"><span class="d-inline-block rounded-circle bg-warning"
                   style="width: 10px; height: 10px;"></span> Pendiente</div>
         <div class="text-muted small"><span class="d-inline-block rounded-circle bg-danger"
                   style="width: 10px; height: 10px;"></span> Rechazado</div>
-    </div>
+    </div> -->
 
     <div class="row">
         @if ($pending->isNotEmpty())
@@ -87,7 +87,7 @@
                                                                             aria-label="Cerrar"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <p class="text-muted small mb-3">
+                                                                    <p class="mb-3">
                                                                         Estás por rechazar a
                                                                         <strong>{{ $volunteer->full_name }}</strong>.
                                                                         Se le enviará un email notificando el rechazo.
@@ -228,7 +228,7 @@
                     </thead>
                     <tbody>
                         @foreach ($inProject ?? [] as $volunteer)
-                            <tr class="align-middle">
+                            <tr class="align-middle {{$volunteer->pivot->isCanceled() || $volunteer->pivot->isCompleted() ? 'table-active' : ''}}">
                                 <td>
                                     <div class="d-flex align-items-center gap-2">
                                         <img src="{{ asset('storage/' . ($volunteer->avatar ?? 'perfil-volunteer.svg')) }}"
@@ -276,7 +276,7 @@
                                     <div class="row justify-content-center align-items-center">
                                         <div class="col-6 text-center">
                                             @if ($volunteer->pivot->isCanceled())
-                                                <span class="badge text-bg-danger">
+                                                <span class="text-danger small">
                                                     Cancelado
                                                 </span>
                                             @else
@@ -294,7 +294,7 @@
                                         </div>
                                         <div class="col-6 text-center">
                                             @if ($volunteer->pivot->isCompleted())
-                                                <span class="badge text-bg-success">
+                                                <span class="text-azul small">
                                                     Completado
                                                 </span>
                                             @else
