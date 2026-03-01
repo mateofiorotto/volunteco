@@ -47,12 +47,17 @@ Volunteco es una web acerca de voluntariados de carácter ecológico donde parti
 - **Paginación**: Se implementará principalmente en el listado de proyectos (tanto para dashboard y frontend), en el listado de usuarios y de aplicantes a proyectos.
 - **API de localidad**: Se implementará para que sea mas sencillo seleccionar una ubicación a la hora de crear proyectos o registrarse y también evitar errores.
 - **SoftDeletes**
+- **Donaciones con metas**: Se implementaran donaciones con metas a modo de banner en la home.
+- **Tienda de productos de marca y merchandising**: Se implementara venta de artículos de la marca en una Tiendanube como forma de monetización adicional.
+- **Gamificación**: Los voluntarios y anfitriones tendrán insignias en su perfil, las que podrán obtener por medio de un sistema basado en evaluaciones y puntuaciones por parte de los anfitriones. El objetivo es aportar un mayor dinamismo a la plataforma.
 
 ### Funcionalidades para administradores
 
 - **Administración de perfiles**: Los administradores pueden revisar los perfiles de anfitriones y voluntarios. Se pueden deshabilitar, re-habilitar y eliminar.
 - **Verificación de perfiles de anfitriones**: Los administradores pueden los perfiles de los anfitriones que se registren para comprobar que tienen un proyecto con suficiente respaldo o son una organización seria. En caso de ser rechazados se les envia un mail con una descripción de datos a cambiar y un link con un formulario para cambiar esos datos.
 - **Listado de TODOS los proyectos en el dashboard**: En el administrador se mostraran todos los proyectos de todos los administradores y se podran eliminar en caso de que incumplan alguna norma de la web.
+- **Manejo de tipos de proyectos**
+- **Manejo de condiciones**
 
 ### Funcionalidades para anfitriones
 
@@ -63,16 +68,8 @@ Volunteco es una web acerca de voluntariados de carácter ecológico donde parti
 ### Funcionalidades para voluntarios
 
 - **Aplicación y seguimiento a proyectos**: Los voluntarios tienen la posibilidad de ver el listado de proyectos, ver el detalle y aplicar a los mismos. También tienen la posibilidad de desistir del proyecto solo si no fueron rechazados.
+- **Busqueda por buscador y filtros de proyectos en el listado**: Se podrán filtrar y buscar proyectos mediante una barra de busqueda y un menú.
 
-### Funcionalidades a implementar próximamente (tesis, no definitivas)
-
-- **Busqueda por buscador y filtros de proyectos en el listado (para voluntarios)**: Se podrán filtrar y buscar proyectos mediante una barra de busqueda y un menú.
-- **Gamificación**: Los voluntarios y anfitriones tendrán insignias en su perfil, las que podrán obtener por medio de un sistema basado en evaluaciones y puntuaciones por parte de sus anfitriones. El objetivo es aportar un mayor dinamismo a la plataforma y de la mano de anteriores funcionalidades, poder aportar seguridad mediante insignias o nivel numerico.
-- **Donaciones con metas**: Se implementaran donaciones con metas que pueden ser cambiadas por administradores.
-- **Tienda de productos de marca y merchandising**: Se implementara venta de artículos de la marca en la web.
-- **MercadoPago**: Se implementara como pasarela de pago para solventar el tema de las donaciones y la venta de los productos de la tienda.
-- **Manejo de tipos de proyectos**
-- **Manejo de condiciones**
 
 © 2025 Hermina Bento y Mateo Fiorotto
 [^1]: Página Web para el proyecto final de la carrera de Diseño y Programación web en Escuela Da Vinci.
