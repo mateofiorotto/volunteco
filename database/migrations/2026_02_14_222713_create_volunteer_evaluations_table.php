@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('attitude_score');
             $table->unsignedTinyInteger('skills_score');
             $table->unsignedTinyInteger('responsibility_score');
+            $table->decimal('average_score', 3, 1);
 
             $table->text('strengths');
             $table->text('improvements')->nullable();

@@ -5,7 +5,7 @@
                 <div class="col-12 col-md-5">
                     {{ $host->name ?? 'Sin nombre' }}
                     @if (!$host->user->disabled_at && $host->user->status === 'pendiente')
-                        <span class="badge text-bg-primary text-uppercase">nuevo</span>
+                        <span class="badge text-bg-primary">Nuevo</span>
                     @endif
                 </div>
                 <div class="col-12 col-md-5">

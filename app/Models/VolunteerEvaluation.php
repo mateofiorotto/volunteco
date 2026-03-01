@@ -13,9 +13,25 @@ class VolunteerEvaluation extends Model
         'attitude_score',
         'skills_score',
         'responsibility_score',
+        'average_score',
         'strengths',
         'improvements',
     ];
+
+    // evento que calcula el promedio ponderado
+    protected static function booted()
+    {
+        static::saving(function ($evaluation) {
+            $evaluation->average_score = round(
+                (
+                    ($evaluation->attitude_score * 0.40) +
+                    ($evaluation->skills_score * 0.20) +
+                    ($evaluation->responsibility_score * 0.40)
+                ),
+                2
+            );
+        });
+    }
 
     public function project()
     {
@@ -25,20 +41,6 @@ class VolunteerEvaluation extends Model
     public function volunteer()
     {
         return $this->belongsTo(Volunteer::class);
-    }
-
-    // Obtengo el promedio de los valores ponderados
-    public function getAverageScoreAttribute()
-    {
-        return round(
-            // Valores ponderados
-            (
-                ($this->attitude_score * 0.40) +
-                ($this->skills_score * 0.20) +
-                ($this->responsibility_score * 0.40)
-            ),
-            1
-        );
     }
 
     public function getPerformanceLabelAttribute()

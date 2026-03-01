@@ -11,6 +11,7 @@ use App\Mail\VolunteerAcceptedMail;
 use App\Models\VolunteerEvaluation;
 use App\Models\ProjectVolunteer;
 use App\Mail\VolunteerRejectedMail;
+use App\Services\Reputation\VolunteerReputationService;
 
 class HostProjectVolunteerController extends Controller
 {
@@ -115,6 +116,9 @@ class HostProjectVolunteerController extends Controller
             'canceled_at' => now(),
         ]);
 
+        // Actualiza la reputación
+        app(VolunteerReputationService::class)->recalculate($volunteer);
+
         return redirect()->back()
             ->with('success', 'El voluntario fue cancelado correctamente.');
     }
@@ -142,6 +146,9 @@ class HostProjectVolunteerController extends Controller
             'status' => ProjectVolunteer::STATUS_COMPLETED,
             'completed_at' => now(),
         ]);
+
+        // Actualiza la reputación
+        app(VolunteerReputationService::class)->recalculate($volunteer);
 
         return redirect()->back()
             ->with('success', 'El voluntario fue marcado como completado.');

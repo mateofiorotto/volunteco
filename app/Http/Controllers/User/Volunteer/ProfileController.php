@@ -21,7 +21,7 @@ class ProfileController extends Controller
     {
         $userId = Auth::id();
 
-        $volunteer = Volunteer::with('location.province')
+        $volunteer = Volunteer::with('location.province','reputation')
             ->where('user_id', $userId)
             ->firstOrFail();
 

@@ -73,6 +73,11 @@ class Volunteer extends Model
         return $this->hasMany(VolunteerEvaluation::class);
     }
 
+    public function reputation()
+    {
+        return $this->hasOne(VolunteerReputation::class, 'volunteer_id');
+    }
+
 
     // Accessor para nombre completo
     // https://laravel.com/docs/12.x/eloquent-mutators
@@ -102,30 +107,27 @@ class Volunteer extends Model
     {
         return $this->projects()
             ->where('projects.host_id', $hostId)
-            ->wherePivotIn('status', ['aceptado', 'pendiente'])
+            ->wherePivotIn('status', ['aceptado', 'pendiente', 'completado', 'cancelado'])
             ->exists();
     }
 
     // Promedio global de evaluaciones
+    // TODO: SACAR ESTO DE ACA Y PASAR A GUARDARLO EN LA BASE
     public function getGlobalAverageScoreAttribute()
     {
-        if ($this->evaluations->isEmpty()) {
-            return null;
-        }
+        $avg = $this->evaluations()->avg('average_score');
 
-        return round(
-            $this->evaluations()
-                ->selectRaw('AVG((attitude_score * 0.40) + (skills_score * 0.20) + (responsibility_score * 0.40)) as avg_score')
-                ->value('avg_score'),
-            1
-        );
+        return $avg ? round($avg, 1) : null;
     }
 
     public function getGlobalPerformanceLabelAttribute()
     {
         $avg = $this->global_average_score;
 
-        if (!$avg) return null;
+        if (is_null($avg)) {
+            return null;
+        }
+
 
         return match (true) {
             $avg <= 1.9 => 'Necesita mejorar',
