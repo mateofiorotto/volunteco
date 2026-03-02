@@ -1,23 +1,23 @@
 <?php
 
-namespace App\View\Components\Admin;
+namespace App\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use App\Models\Volunteer;
 
-class HostsList extends Component
+class VolunteerReputationCard extends Component
 {
-    public $hosts;
+    public Volunteer $volunteer;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($hosts)
+    public function __construct(Volunteer $volunteer)
     {
         //
-        $this->hosts = $hosts;
-
+        $this->volunteer = $volunteer;
     }
 
     /**
@@ -25,6 +25,6 @@ class HostsList extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.admin.hosts-list');
+        return view('components.volunteer-reputation-card');
     }
 }

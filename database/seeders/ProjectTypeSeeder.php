@@ -15,22 +15,44 @@ class ProjectTypeSeeder extends Seeder
      */
     public function run(): void
     {
+
         //crear un usuario. ID 1
         DB::table('project_types')->insert([
             [
-                'key' => 'reforestacion', // separado_con_guion
-                'name' => 'Reforestación',
+                'key' => 'restauracion',
+                'name' => 'Restauración',
                 'enabled' => true,
                 'created_at' => Carbon::now()->subDays(rand(1, 365)),
                 'updated_at' => Carbon::now()
             ],
             [
-                'key' => 'construccion_de_invernadero',
-                'name' => 'Construcción de invernadero',
+                'key' => 'residuos',
+                'name' => 'Residuos',
                 'enabled' => true,
                 'created_at' => Carbon::now()->subDays(rand(1, 365)),
                 'updated_at' => Carbon::now()
-            ]
+            ],
+            [
+                'key' => 'biodiversidad',
+                'name' => 'Biodiversidad',
+                'enabled' => true,
+                'created_at' => Carbon::now()->subDays(rand(1, 365)),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'key' => 'agricultura',
+                'name' => 'Agricultura',
+                'enabled' => true,
+                'created_at' => Carbon::now()->subDays(rand(1, 365)),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'key' => 'educacion',
+                'name' => 'Educación',
+                'enabled' => true,
+                'created_at' => Carbon::now()->subDays(rand(1, 365)),
+                'updated_at' => Carbon::now()
+            ],
         ]);
     }
 }

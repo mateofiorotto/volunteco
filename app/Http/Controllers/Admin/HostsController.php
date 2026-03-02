@@ -52,6 +52,7 @@ class HostsController extends Controller
             $query->where('status', $status);
             })
             ->with('user')
+            ->withCount('projects')
             ->orderBy('created_at', 'desc')
             ->paginate(6, ['*'], $pageName);
     }

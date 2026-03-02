@@ -125,18 +125,7 @@
                 <div class="card mb-4">
                     <div class="card-header">Insignias</div>
                     <div class="card-body">
-                        @if($volunteer->evaluations->isNotEmpty())
-                        <p>Nivel: <span class="small text-muted">{{$volunteer->global_performance_label}}</span></p>
-                        @endif
-
-                        @if($volunteer->reputation)
-                            <div class="reputation-box">
-                                <h4>{{ $volunteer->reputation->average_rating }} ⭐</h4>
-                                <p>Nivel: {{ ucfirst($volunteer->reputation->trust_level) }}</p>
-                                <p>{{ $volunteer->reputation->completed_projects }} proyectos completados</p>
-                                <p>Confiabilidad: {{ $volunteer->reputation->completion_rate }}%</p>
-                            </div>
-                        @endif
+                        <x-volunteer-reputation-card :volunteer="$volunteer" />
                     </div>
                 </div>
 

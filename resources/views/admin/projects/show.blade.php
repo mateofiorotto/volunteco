@@ -47,28 +47,21 @@
                                             <div class="row gap-5">
                                                 <div class="col">
                                                     <ul class="list-unstyled">
-                                                        <li><span class="text-muted small">Anfitrión:
-                                                            </span>{{ $project->host->name }}</li>
-                                                        <li><span class="text-muted small">Email: </span><a
+                                                        <li>Anfitrión: <span class="text-muted small">{{ $project->host->name }}</span></li>
+                                                        <li>Email: <a
                                                                href="mailto:{{ $project->host->user->email }}"
-                                                               target="_blank">{{ $project->host->user->email }}</a></li>
-                                                        <li><span class="text-muted small">Tipo:
-                                                            </span>{{ $project->projectType->name ?? 'Sin tipo' }}</li>
+                                                               target="_blank" class="small">{{ $project->host->user->email }}</a></li>
+                                                        <li>Tipo: <span class="text-muted small">{{ $project->projectType->name ?? 'Sin tipo' }}</span></li>
                                                     </ul>
                                                 </div>
                                                 <div class="col">
                                                     <ul class="list-unstyled">
-                                                        <li><span class="text-muted small">Inicio:
-                                                            </span>{{ $project->start_date->format('d/m/Y') }}</li>
-                                                        <li><span class="text-muted small">Fin:
-                                                            </span>{{ $project->end_date->format('d/m/Y') }}</li>
-                                                        <li><span class="text-muted small">Horas por día:
-                                                            </span>{{ $project->work_hours_per_day }}</li>
-                                                        <li><span class="text-muted small">Ubicación:
-                                                            </span>{{ $project->location->name }} -
-                                                            {{ $project->location->province->name }}</li>
-                                                        <li><span class="text-muted small">Creado:
-                                                            </span>{{ $project->created_at->format('d/m/Y') }}</li>
+                                                        <li>Inicio: <span class="text-muted small">{{ $project->start_date->format('d/m/Y') }}</span></li>
+                                                        <li>Fin: <span class="text-muted small">{{ $project->end_date->format('d/m/Y') }}</span></li>
+                                                        <li>Horas por día: <span class="text-muted small">{{ $project->work_hours_per_day }}</span></li>
+                                                        <li>Ubicación: <span class="text-muted small">{{ $project->location->name }} -
+                                                            {{ $project->location->province->name }}</span></li>
+                                                        <li>Creado: <span class="text-muted small">{{ $project->created_at->format('d/m/Y') }}</span></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -77,16 +70,16 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="card mb-3">
+                                <div class="card">
                                     <div class="card-header">Descripción del proyecto</div>
-                                    <div class="card-body">
+                                    <div class="card-body text-muted small">
                                         {{ $project->description }}
                                     </div>
                                 </div>
                             </div>
                             @if ($project->conditions->count() > 0)
                                 <div class="col-12">
-                                    <div class="card mb-3">
+                                    <div class="card mt-3 mb-3">
                                         <div class="card-header">Condiciones y requisitos</div>
                                         <div class="card-body">
                                             <ul class="mb-0">
@@ -141,7 +134,7 @@
                     <div class="card">
                         <div class="card-header">Información del anfitrión</div>
                         <div class="card-body">
-                            <h6 class="card-subtitle mb-2">{{ $project->host->name }}</h6>
+                            <h6 class="card-subtitle h5 mb-2">{{ $project->host->name }}</h6>
                             <ul class="list-unstyled small">
                                 <li><i class="bi bi-envelope me-2"></i><a href="mailto:{{ $project->host->user->email }}" target="_blank"> {{ $project->host->user->email }}</a></li>
                                 @if ($project->host->phone)

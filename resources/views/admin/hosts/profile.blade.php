@@ -27,7 +27,7 @@
                                                 <div class="small text-muted">Anfitrión</div>
                                                 @if ($host->user->status !== 'activo')
                                                     <span
-                                                          class="text-uppercase fw-semibold badge {{ $host->user->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
+                                                          class="text-capitalize fw-semibold badge {{ $host->user->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
                                                         {{ $host->user->status }}
                                                     </span>
                                                 @endif
@@ -40,18 +40,15 @@
                                                                target="_blank">{{ $host->user->email }}</a></li>
                                                         <li><a href="tel:{{ $host->phone }}"
                                                                target="_blank">{{ $host->phone }}</a></li>
-                                                        <li>{{ $host->location->name ?? 'Sin ubicación' }} -
+                                                        <li class="text-muted small">{{ $host->location->name ?? 'Sin ubicación' }} -
                                                             {{ $host->location->province->name }}</li>
                                                     </ul>
                                                 </div>
                                                 <div class="col">
                                                     <ul class="list-unstyled mb-0">
-                                                        <li><span class="text-muted small">CUIT:</span>
-                                                            {{ $host->cuit }}</li>
-                                                        <li><span class="text-muted small">Contacto:</span>
-                                                            {{ $host->person_full_name }}</li>
-                                                        <li><span class="text-muted small">Fecha de registro:</span>
-                                                            {{ $host->created_at->format('d/m/Y') }}</li>
+                                                        <li>CUIT: <span class="text-muted small">{{ $host->cuit }}</span></li>
+                                                        <li>Contacto: <span class="text-muted small">{{ $host->person_full_name }}</span></li>
+                                                        <li>Fecha de registro: <span class="text-muted small">{{ $host->created_at->format('d/m/Y') }}</span></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -63,7 +60,7 @@
                                 <div class="flex-fill">
                                     <div class="card mb-3">
                                         <div class="card-header">Descripción</div>
-                                        <div class="card-body">
+                                        <div class="card-body text-muted small">
                                             {{ $host->description }}
                                         </div>
                                     </div>
@@ -309,12 +306,13 @@
                                         <td>{{ $project->title }}</td>
                                         <td>
                                             <div>
-                                                <span class="small text-muted">Inicia: </span>
+                                                Inicia: <span class="text-muted small">
                                                 {{ $project->start_date->format('d/m/Y') }}
+                                                </span>
                                             </div>
                                             <div>
-                                                <span class="small text-muted">Finaliza:
-                                                </span>{{ $project->end_date->format('d/m/Y') }}
+                                                Finaliza:
+                                                <span class="text-muted small">{{ $project->end_date->format('d/m/Y') }}</span>
                                             </div>
                                         </td>
                                         <td>

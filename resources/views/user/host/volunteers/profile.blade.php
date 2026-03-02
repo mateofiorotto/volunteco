@@ -115,6 +115,13 @@
                     </div>
                 </div>
 
+                <div class="card mb-4">
+                    <div class="card-header">Reputación</div>
+                    <div class="card-body">
+                        <x-volunteer-reputation-card :volunteer="$volunteer" />
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -149,13 +156,23 @@
                                         </td>
                                         <td>{{ $project->location->name }} - {{ $project->location->province->name }}</td>
                                         <td class="text-center">
-                                            @if($project->volunteers->first()->pivot->status == 'aceptado')
-                                            <span class="badge text-capitalize text-body">{{ $project->volunteers->first()->pivot->status }}</span>
-                                            @else
-                                            <span class="badge text-capitalize {{ $project->volunteers->first()->pivot->status == 'pendiente' ? 'bg-warning text-bg-warning' : 'bg-danger' }}">
-                                                {{ $project->volunteers->first()->pivot->status }}
+                                            @php
+                                                $status = $project->volunteers->first()->pivot->status ?? 'pendiente';
+
+                                                $statusClasses = [
+                                                    'aceptado' => 'text-body small',           // badge normal
+                                                    'completado' => 'text-azul small',        // verde
+                                                    'rechazado' => 'bg-secondary badge ',          // rojo
+                                                    'cancelado' => 'bg-danger badge ',          // rojo
+                                                    'pendiente' => 'text-bg-warning badge', // amarillo
+                                                ];
+
+                                                $badgeClass = $statusClasses[$status] ?? 'text-body';
+                                            @endphp
+
+                                            <span class="text-capitalize {{ $badgeClass }}">
+                                                {{ $status }}
                                             </span>
-                                            @endif
                                         </td>
                                         <td>
                                             @if($project->evaluations->isNotEmpty())

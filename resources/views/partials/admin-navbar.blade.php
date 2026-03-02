@@ -46,7 +46,7 @@
                                href="{{ route('admin.projects.index') }}">Proyectos</a>
                         </li>
                         <li>
-                            <hr class="dropdown-divider mb-0">
+                            <hr class="dropdown-divider m-0">
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('admin/tipos-proyectos*') ? 'active' : '' }}"
@@ -95,7 +95,7 @@
                         <li><a class="dropdown-item"
                                href="{{ route('volunteer.my-profile.profile') }}">Mi Perfil</a></li>
                         <li>
-                            <hr class="dropdown-divider mb-0">
+                            <hr class="dropdown-divider m-0">
                         </li>
                         <li class="p-0">
                             <form method="POST"
@@ -120,7 +120,7 @@
                         <li><a class="dropdown-item"
                                href="{{ route('host.my-profile.profile') }}">Mi Perfil</a></li>
                         <li>
-                            <hr class="dropdown-divider mb-0">
+                            <hr class="dropdown-divider m-0">
                         </li>
                         <li class="p-0">
                             <form method="POST"

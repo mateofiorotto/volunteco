@@ -111,7 +111,7 @@
                         <li><a class="dropdown-item"
                                href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                         <li>
-                            <hr class="dropdown-divider mb-0">
+                            <hr class="dropdown-divider m-0">
                         </li>
                         <li class="p-0">
                             <form method="POST"
@@ -142,7 +142,7 @@
                         <li><a class="dropdown-item"
                                href="{{ route('host.my-profile.profile') }}">Mi perfil</a></li>
                         <li>
-                            <hr class="dropdown-divider mb-0">
+                            <hr class="dropdown-divider m-0">
                         </li>
                         <li class="p-0">
                             <form method="POST"
@@ -173,7 +173,7 @@
                         <li><a class="dropdown-item"
                                href="{{ route('volunteer.my-profile.profile') }}">Mi perfil</a></li>
                         <li>
-                            <hr class="dropdown-divider mb-0">
+                            <hr class="dropdown-divider m-0">
                         </li>
                         <li class="p-0">
                             <form method="POST"

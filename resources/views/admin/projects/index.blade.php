@@ -21,7 +21,7 @@
             @endif
 
             <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-10 mx-auto">
                     <table class="table">
                         <thead>
                             <tr>

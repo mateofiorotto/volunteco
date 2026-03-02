@@ -21,15 +21,15 @@
             @endif
 
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-10 mx-auto">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col">Proyectos</th>
+                                <th scope="col" class="text-center">Estado</th>
+                                <th scope="col" class="text-center">Proyectos</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
@@ -37,9 +37,9 @@
                             @forelse($volunteers as $volunteer)
                                 <tr>
                                     <th scope="row">{{ $volunteer->id }}</th>
-                                    <td>{{ $volunteer->full_name }}</td>
-                                    <td>{{ $volunteer->user->email }}</td>
-                                    <td>
+                                    <td><a href="{{ route('admin.volunteer.profile', $volunteer->id) }}" target="_blank">{{ $volunteer->full_name }}</a></td>
+                                    <td><a href="mailto:{{ $volunteer->user->email }}" target="_blank">{{ $volunteer->user->email }}</a></td>
+                                    <td class="text-center">
                                         @if ($volunteer->user->status !== 'activo')
                                             <span
                                                   class="text-capitalize badge {{ $volunteer->user->status === 'pendiente' ? 'text-bg-warning' : 'bg-danger' }}">{{ $volunteer->user->status }}</span>

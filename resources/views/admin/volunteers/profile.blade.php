@@ -27,7 +27,7 @@
                                                 <div class="small text-muted">Voluntario</div>
                                                 @if ($volunteer->user->status !== 'activo')
                                                     <span
-                                                          class="text-uppercase fw-semibold badge {{ $volunteer->user->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
+                                                          class="text-capitalize fw-semibold badge {{ $volunteer->user->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
                                                         {{ $volunteer->user->status }}
                                                     </span>
                                                 @endif
@@ -40,16 +40,14 @@
                                                                target="_blank">{{ $volunteer->user->email }}</a></li>
                                                         <li><a href="tel:{{ $volunteer->phone }}"
                                                                target="_blank">{{ $volunteer->phone }}</a></li>
-                                                        <li>{{ $volunteer->location->name ?? 'Sin ubicación' }} -
+                                                        <li class="text-muted small">{{ $volunteer->location->name ?? 'Sin ubicación' }} -
                                                             {{ $volunteer->location->province->name }}</li>
                                                     </ul>
                                                     <ul class="list-unstyled">
-                                                        <li><span class="text-muted small">DNI:
-                                                            </span>{{ number_format($volunteer->dni, 0, ',', '.') }}</li>
-                                                        <li class="text-nowrap"><span class="text-muted small">Fecha de
-                                                                nacimiento:
-                                                            </span>{{ $volunteer->birthdate->format('d/m/Y') }}
-                                                            ({{ $volunteer->birthdate->age }} años)</li>
+                                                        <li>DNI: <span class="text-muted small">{{ number_format($volunteer->dni, 0, ',', '.') }}</span></li>
+                                                        <li class="text-nowrap">Fecha de
+                                                                nacimiento: <span class="text-muted small">{{ $volunteer->birthdate->format('d/m/Y') }}
+                                                            ({{ $volunteer->birthdate->age }} años)</span></li>
                                                     </ul>
                                                 </div>
                                                 <div class="col">
@@ -69,7 +67,7 @@
                                 <div class="flex-fill">
                                     <div class="card mb-3">
                                         <div class="card-header">Biografía</div>
-                                        <div class="card-body">
+                                        <div class="card-body text-muted small">
                                             {{ $volunteer->biography }}
                                         </div>
                                     </div>
@@ -115,6 +113,7 @@
                                             @endif
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -165,6 +164,14 @@
                             @endif
                         </div>
                     </div>
+
+                    <div class="card mb-3">
+                        <div class="card-header">Reputación</div>
+                        <div class="card-body">
+                            <x-volunteer-reputation-card :volunteer="$volunteer" />
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
