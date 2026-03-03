@@ -9,6 +9,8 @@ use App\Models\Province;
 use App\Models\ProjectType;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactMessageMail;
 use App\Models\VolunteerEvaluation;
 
 class FrontendController extends Controller
@@ -159,6 +161,36 @@ class FrontendController extends Controller
     {
         return view('frontend.contact');
     }
+
+    /**
+ * Procesa el formulario de contacto
+ */
+public function sendContact(Request $request)
+{
+    $validated = $request->validate([
+        'name'    => ['required', 'string', 'min:2', 'max:100'],
+        'email'   => ['required', 'email', 'max:150'],
+        'subject' => ['required', 'string', 'min:3', 'max:150'],
+        'message' => ['required', 'string', 'min:10', 'max:2000'],
+    ], [
+        'name.required'    => 'El nombre es obligatorio.',
+        'name.min'         => 'El nombre debe tener al menos 2 caracteres.',
+        'name.max'         => 'El nombre no puede superar los 100 caracteres.',
+        'email.required'   => 'El correo electrónico es obligatorio.',
+        'email.email'      => 'Ingresá un correo electrónico válido.',
+        'email.max'        => 'El correo no puede superar los 150 caracteres.',
+        'subject.required' => 'El asunto es obligatorio.',
+        'subject.min'      => 'El asunto debe tener al menos 3 caracteres.',
+        'subject.max'      => 'El asunto no puede superar los 150 caracteres.',
+        'message.required' => 'El mensaje es obligatorio.',
+        'message.min'      => 'El mensaje debe tener al menos 10 caracteres.',
+        'message.max'      => 'El mensaje no puede superar los 2000 caracteres.',
+    ]);
+
+    Mail::to("volunteco@gmail.com")->send(new ContactMessageMail($validated));
+
+    return redirect()->route('contact')->with('success', 'Tu mensaje fue enviado correctamente. ¡Nos pondremos en contacto a la brevedad!');
+}
 
     /**
      * Devuelve la vista de cómo funciona

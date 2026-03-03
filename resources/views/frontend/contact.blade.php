@@ -48,9 +48,9 @@
                             </div>
                         @endif
 
-                        <form method="GET"
+                        <form method="POST"
                               novalidate
-                              action="#">
+                              action="{{ route('contact.send') }}">
                             @csrf
 
                             <div class="row">
