@@ -10,6 +10,7 @@ Route::get('/proyectos/{id}', [FrontendController::class, 'projectById'])->name(
 
 Route::get('/nosotros', [FrontendController::class, 'about'])->name('about');
 Route::get('/contacto', [FrontendController::class, 'contact'])->name('contact');
+Route::post('/contacto', [FrontendController::class, 'sendContact'])->name('contact.send');
 Route::get('/como-funciona', [FrontendController::class, 'howItWorks'])->name('howItWorks');
 Route::get('/donar', [FrontendController::class, 'donate'])->name('donate');
 
