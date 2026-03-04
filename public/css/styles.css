@@ -251,6 +251,10 @@ h6 {
     --bs-dropdown-link-active-bg: var(--bs-primary);
     --bs-dropdown-link-disabled-color: var(--bs-tertiary-color);
     --bs-dropdown-header-color: #6c757d;
+
+}
+.navbar-nav .dropdown-menu .nav-link {
+    --bs-nav-link-padding-x: 0.5rem;
 }
 .card {
     --bs-card-cap-bg: rgba(var(--bs-primary-rgb), 0.1);

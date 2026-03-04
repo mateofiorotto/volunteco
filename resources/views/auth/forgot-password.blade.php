@@ -3,9 +3,9 @@
 @section('content')
     <section>
         <div class="container-sm py-5">
-            <div class="border rounded-3 p-5">
+            <div class="border rounded-3 p-md-5 p-4">
                 <h1 class="h2 text-center mb-3">¿Olvidaste tu contraseña?</h1>
-                <p class="text-muted text-center mb-4">
+                <p class="text-muted mb-4">
                     Ingresá tu dirección de email y te enviaremos un enlace para restablecer tu contraseña.
                 </p>
 

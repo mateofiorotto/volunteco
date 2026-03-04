@@ -12,11 +12,11 @@
     @auth
         <!-- esto es solo en modo desarrollo sacar despues en produccion -->
         <div class="d-flex align-items-center">
-            <p class="mb-0">Hola {{ Auth::user()->role->name }}</p>
+            <p class="mb-0 py-2">Hola {{ Auth::user()->role->name }}</p>
         </div>
         <a href="{{ route('home') }}"
            class="btn btn-outline-primary ms-auto me-4">Ir al sitio web</a>
-        <ul class="navbar-nav mb-2 mb-lg-0 align-items-center">
+        <ul class="navbar-nav mb-2 mb-lg-0 align-items-md-center">
 
             <!-- Usuario autenticado -->
             @if (Auth::user()->hasRole('admin'))
@@ -87,9 +87,11 @@
                        role="button"
                        data-bs-toggle="dropdown"
                        aria-expanded="false">
-                        <img src="{{ asset('storage/perfil-volunteer.svg') }}"
+                        <img src="{{ Auth::user()->volunteer->avatar ? asset('storage/' . Auth::user()->volunteer->avatar) : asset('storage/perfil-volunteer.svg') }}"
                              width="40"
-                             height="40" />
+                             height="40"
+                             alt="{{Auth::user()->volunteer->full_name}}"
+                             class="rounded-pill" />
                     </a>
                     <ul class="dropdown-menu pb-0">
                         <li><a class="dropdown-item"
@@ -112,7 +114,7 @@
                        role="button"
                        data-bs-toggle="dropdown"
                        aria-expanded="false">
-                        <img src="{{ asset('storage/perfil-host.svg') }}"
+                        <img src="{{ Auth::user()->host->avatar ? asset('storage/' . Auth::user()->host->avatar) : asset('storage/perfil-host.svg') }}"
                              width="40"
                              height="40" />
                     </a>

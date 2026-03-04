@@ -2,15 +2,15 @@
 
 @section('content')
     <section>
-        <div class="container py-5">
+        <div class="container py-md-5 py-4">
 
-            <div class="mb-5">
-                <div class="d-flex justify-content-between align-items-center">
+            <div class="mb-md-5 mb-3">
+                <div class="d-flex flex-md-row-reverse flex-column gap-md-5 gap-3 justify-content-between">
+                    <a href="{{ route('login') }}" class="btn btn-link text-nowrap ms-auto"><i class="bi bi-chevron-left me-1"></i> Ir al login</a>
                     <div>
                         <h1 class="title-h1 h3">Registrate como <span>voluntario</span></h1>
                         <p>Completá todos los datos requeridos para poder crear tu cuenta.</p>
                     </div>
-                    <a href="{{ route('login') }}" class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Ir al login</a>
                 </div>
             </div>
 
