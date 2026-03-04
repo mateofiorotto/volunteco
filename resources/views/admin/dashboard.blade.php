@@ -33,7 +33,7 @@
                                         <tr>
                                             <th scope="row">{{ $host->id }}</th>
                                             <td>{{ $host->name }}</td>
-                                            <td><a href="mailto:{{ $host->user->email }}"
+                                            <td class="truncate-text"><a href="mailto:{{ $host->user->email }}"
                                                    target="_blank">{{ $host->user->email }}</a></td>
                                             <td>
                                                 @if ($host->user->status !== 'activo')

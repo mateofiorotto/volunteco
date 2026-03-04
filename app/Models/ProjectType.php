@@ -9,6 +9,7 @@ class ProjectType extends Model
     protected $fillable = [
         'key', // construccion_de_granjas
         'name', // "Construccion de granjas", "Reforestacion", etc..
+        'color', // #000000
         'enabled'
     ];
 

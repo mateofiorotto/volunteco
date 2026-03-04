@@ -48,7 +48,7 @@
                         </div>
 
 
-                        <div class="col-md-3 offset-1 text-center">
+                        <div class="col-md-3 offset-md-1 text-center">
                             <a href="{{ route('donate') }}"
                                class="btn btn-warning btn-lg px-4 py-3 w-100 shadow-sm">
                                 <i class="bi bi-heart-fill me-2"></i>

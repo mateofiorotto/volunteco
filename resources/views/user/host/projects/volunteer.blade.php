@@ -192,12 +192,19 @@
                         <div class="flex-fill">
                             <h3 class="card-title h4 mb-0">{{ $volunteer->full_name }}</h3>
                             <!-- Info Grid -->
-                            <ul class="list-unstyled mb-0">
+                            <ul class="list-unstyled mb-4">
                                 @if ($volunteer->birthdate)
-                                    <li class="text-muted">{{ $volunteer->birthdate->age }} años</li>
+                                    <li class="text-muted small">{{ $volunteer->birthdate->age }} años</li>
                                 @endif
-                                <li class="text-capitalize text-muted">{{ $volunteer->profession }}</li>
+                                <li class="text-capitalize text-muted small">{{ $volunteer->profession }}</li>
                             </ul>
+
+                            <div class="mb-0">
+                                <div class="h5 card-title">Reputación</div>
+                                <x-volunteer-reputation-card :volunteer="$volunteer" />
+                            </div>
+
+
                         </div>
                     </div>
                     <hr>

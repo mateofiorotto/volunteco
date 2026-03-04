@@ -2,6 +2,23 @@
 
 @section('title', 'Bienvenidos')
 
+
+@php
+    $projectTypesId = $projects->pluck('projectType')->unique('id');
+@endphp
+
+@push('styles')
+<style>
+@foreach($projectTypesId as $type)
+    .badge-{{ $type->key }} {
+        border: 2px solid {{ $type->color }};
+        color: {{ $type->color }}!important;
+        background-color: #ffffff;
+        /* background-color: {{ $type->color }}; */
+    }
+@endforeach
+</style>
+
 @section('content')
     <!-- Hero Section -->
     <section class="hero-section">
@@ -52,7 +69,7 @@
                                              width="414"
                                              height="232">
                                         <div class="project-badge-overlay">
-                                            <span class="badge bg-primary">{{ $project->projectType->name }}</span>
+                                            <span class="badge badge-{{ $project->projectType->key }}">{{ $project->projectType->name }}</span>
                                         </div>
                                     </div>
                                     <div class="card-body d-flex flex-column">

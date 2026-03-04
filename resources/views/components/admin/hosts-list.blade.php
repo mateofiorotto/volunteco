@@ -1,3 +1,4 @@
+
 <ul class="list-group list-group-flush">
     @foreach ($hosts as $host)
         <li class="list-group-item">

@@ -1,5 +1,17 @@
 @extends('layouts.admin')
 
+@push('styles')
+<style>
+@foreach($projectTypes as $type)
+    .badge-{{ $type->key }} {
+        border: 2px solid {{ $type->color }};
+        color: {{ $type->color }}!important;
+        background-color: #ffffff;
+        /* background-color: {{ $type->color }}; */
+    }
+@endforeach
+</style>
+
 @section('content')
     <section>
         <div class="container py-5">
@@ -34,55 +46,60 @@
 
             <!-- Tabla de tipos de proyectos -->
             <div class="row">
-                <div class="col-md-8">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Key</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col"
-                                    class="text-end">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($projectTypes as $projectType)
+                <div class="col-md-10 mx-auto">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>{{ $projectType->id }}</td>
-                                    <td>{{ $projectType->key }}</td>
-                                    <td>{{ $projectType->name }}</td>
-                                    <td>
-                                        @if ($projectType->enabled)
-                                            <span class="badge bg-transparent text-body">Activo</span>
-                                        @else
-                                            <span class="badge bg-danger">Inactivo</span>
-                                        @endif
-                                    </td>
-                                    <td class="text-end d-flex gap-3 justify-content-end">
-                                        <a href="{{ route('admin.project-types.edit', $projectType->id) }}"
-                                           class="btn btn-sm btn-outline-primary">
-                                            Editar
-                                        </a>
-                                        <a href="{{ route('admin.project-types.delete', $projectType->id) }}"
-                                           class="btn btn-sm btn-danger">
-                                            Eliminar
-                                        </a>
-                                    </td>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Key</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Color</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Acciones</th>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="5"
-                                        class="text-center">
-                                        No hay tipos de proyectos registrados
-                                    </td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                    @if ($projectTypes->hasPages())
-                        {{ $projectTypes->links() }}
-                    @endif
+                            </thead>
+                            <tbody>
+                                @forelse($projectTypes as $projectType)
+                                    <tr class="align-middle">
+                                        <td>{{ $projectType->id }}</td>
+                                        <td>{{ $projectType->key }}</td>
+                                        <td>{{ $projectType->name }}</td>
+                                        <td><div class="badge-{{$projectType->key}} badge">{{ $projectType->color }}</div></td>
+                                        <td>
+                                            @if ($projectType->enabled)
+                                                <span class="small">Activo</span>
+                                            @else
+                                                <span class="small text-danger">Inactivo</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <div class="d-flex gap-3">
+                                                <a href="{{ route('admin.project-types.edit', $projectType->id) }}"
+                                                class="btn btn-sm btn-outline-primary">
+                                                    Editar
+                                                </a>
+                                                <a href="{{ route('admin.project-types.delete', $projectType->id) }}"
+                                                class="btn btn-sm btn-danger">
+                                                    Eliminar
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="6"
+                                            class="text-center">
+                                            No hay tipos de proyectos registrados
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                        @if ($projectTypes->hasPages())
+                            {{ $projectTypes->links() }}
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

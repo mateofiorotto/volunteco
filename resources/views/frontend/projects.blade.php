@@ -1,5 +1,19 @@
 @extends('layouts.app')
 
+@php
+    $projectTypesId = $projects->pluck('projectType')->unique('id');
+@endphp
+
+@push('styles')
+<style>
+@foreach($projectTypesId as $type)
+    .badge-{{ $type->key }} {
+        background-color: {{ $type->color }};
+    }
+@endforeach
+</style>
+@endpush
+
 @section('content')
     <!-- Hero Section -->
     <section class="projects-hero bg-primary">
@@ -106,7 +120,7 @@
                                     <div>
                                         <img src="{{ asset('storage/' . ($project->image ?? 'thumbnail-proyecto.jpg')) }}" class="card-img-top object-fit-cover" alt="{{ $project->title }}" width="414" height="232">
                                         <div class="project-badge-overlay">
-                                            <span class="badge bg-primary">{{ $project->projectType->name }}</span>
+                                            <span class="badge badge-{{ $project->projectType->key }}">{{ $project->projectType->name }}</span>
                                         </div>
                                     </div>
                                     <div class="card-body d-flex flex-column">

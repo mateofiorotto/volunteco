@@ -22,7 +22,7 @@
             @endif
 
             <div class="row">
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-6 mb-3">
                     <div class="card mb-5 border-warning">
                         <div class="card-header text-bg-warning">
                             <h2 class="h5 mb-0">Anfitriones <span class="fw-light">pendientes de verificación</span></h2>
@@ -44,7 +44,7 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-6 mb-3">
                     <div class="card border-danger">
                         <div class="card-header text-bg-danger">
                             <h2 class="h5 mb-0">Anfitriones <span class="fw-light">deshabilitados/rechazados</span></h2>
@@ -73,10 +73,46 @@
                         </div>
                         @if ($hostsVerified->isEmpty())
                             <div class="card-body">
-                                <p class="mb-0">No hay anfitriones activos</p>
+                                <p class="mb-0 small">No hay anfitriones activos</p>
                             </div>
                         @else
-                            <x-admin.hosts-list :hosts="$hostsVerified" />
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Proyectos</th>
+                                            <th scope="col" class="text-center">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($hostsVerified as $host)
+                                        <tr>
+                                            <td>
+                                                {{ $host->name ?? 'Sin nombre' }}
+                                                @if (!$host->user->disabled_at && $host->user->status === 'pendiente')
+                                                    <span class="badge text-bg-primary">Nuevo</span>
+                                                @endif
+                                            </td>
+                                            <td><a href="mailto:{{$host->user->email}}" target="_blank">{{$host->user->email}}</a></td>
+                                            <td>
+                                                @if($host->user->status === 'activo')
+                                                <div>{{$host->projects_count}}</div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('admin.hosts.profile', $host->id) }}"
+                                                    class="btn btn-sm btn-azul"
+                                                    title="ver">
+                                                    Ver
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                             @if ($hostsVerified->hasPages())
                                 <div class="card-footer">
                                      {{ $hostsVerified->links() }}

@@ -78,6 +78,14 @@ class Volunteer extends Model
         return $this->hasOne(VolunteerReputation::class, 'volunteer_id');
     }
 
+    protected static function booted()
+    {
+        static::created(function ($volunteer) {
+            $volunteer->reputation()->create([
+            ]);
+        });
+    }
+
 
     // Accessor para nombre completo
     // https://laravel.com/docs/12.x/eloquent-mutators

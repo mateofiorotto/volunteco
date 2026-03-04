@@ -201,20 +201,26 @@
                                         <td>{{ $project->title }}</td>
                                         <td>
                                             <div>
-                                                <span class="small text-muted">Inicia: </span>
-                                                {{ $project->start_date->format('d/m/Y') }}
+                                                Inicia: <span class="small text-muted">
+                                                {{ $project->start_date->format('d/m/Y') }}</span>
                                             </div>
                                             <div>
-                                                <span class="small text-muted">Finaliza:
-                                                </span>{{ $project->end_date->format('d/m/Y') }}
+                                                Finaliza: <span class="small text-muted">
+                                                {{ $project->end_date->format('d/m/Y') }}</span>
                                             </div>
                                         </td>
                                         <td>
-                                            @if ($project->enabled != 1)
-                                                <span class="badge bg-danger">Deshabilitado</span>
-                                            @else
-                                                <span class="badge bg-transparent text-body">Activo</span>
-                                            @endif
+                                            @if($project->pivot->status === 'completado')
+                                          <span class="badge bg-transparent text-azul">{{$project->pivot->status}}</span>
+                                          @elseif($project->pivot->status === 'pendiente')
+                                          <span class="badge text-bg-warning">{{$project->pivot->status}}</span>
+                                          @elseif($project->pivot->status === 'rechazado')
+                                          <span class="badge text-bg-secondary">{{$project->pivot->status}}</span>
+                                          @elseif($project->pivot->status === 'cancelado')
+                                          <span class="badge bg-transparent text-danger">{{$project->pivot->status}}</span>
+                                          @else
+                                          <span class="badge bg-primary">{{$project->pivot->status}}</span>
+                                          @endif
                                         </td>
                                         <td>
                                             <p class="mb-0 small">{{$project->host->name}}</p>

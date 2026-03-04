@@ -28,6 +28,7 @@ return new class extends Migration
 
             // Score calculado
             $table->decimal('trust_score', 5, 2)->default(0); // 0 - 100
+            // inicial, explorador, nómada, legendario
             $table->enum('trust_level',['inicial', 'activo', 'destacado', 'embajador'])->default('inicial');
 
             $table->timestamps();

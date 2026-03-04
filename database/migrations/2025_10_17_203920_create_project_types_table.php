@@ -14,6 +14,7 @@ return new class () extends Migration {
             $table->id();
             $table->string('key')->unique(); // construccion_de_granjas, separados_por_guiones
             $table->string('name')->unique(); // "Construccion de granjas", "Reforestacion", etc..
+            $table->string('color', 7)->nullable()->default('#66800a');
             $table->boolean('enabled')->default(true);
             $table->timestamps();
         });

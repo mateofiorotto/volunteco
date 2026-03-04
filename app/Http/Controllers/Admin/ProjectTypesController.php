@@ -10,7 +10,7 @@ class ProjectTypesController extends Controller
 {
     public function index()
     {
-        $projectTypes = ProjectType::orderBy('created_at', 'desc')->paginate(6);
+        $projectTypes = ProjectType::orderBy('name', 'asc')->paginate(6);
 
         return view('admin.project-types.index', compact('projectTypes'));
     }
@@ -25,12 +25,14 @@ class ProjectTypesController extends Controller
         $validated = $request->validate([
             'key' => 'required|string|min:3|max:255|unique:project_types,key',
             'name' => 'required|string|min:3|max:255|unique:project_types,name',
+            'color' => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
             'enabled' => 'nullable|boolean',
         ]);
 
         ProjectType::create([
             'key' => $validated['key'],
             'name' => $validated['name'],
+            'color' => $validated['color'],
             'enabled' => $request->has('enabled') ? true : false,
         ]);
 
@@ -52,12 +54,14 @@ class ProjectTypesController extends Controller
         $request->validate([
             'key' => 'required|string|min:3|max:255|unique:project_types,key,' . $id,
             'name' => 'required|string|min:3|max:255|unique:project_types,name,' . $id,
+            'color' => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
             'enabled' => 'boolean',
         ]);
 
         $projectType->update([
             'key' => $request->key,
             'name' => $request->name,
+            'color' => $request->color,
             'enabled' => $request->has('enabled') ? true : false,
         ]);
 

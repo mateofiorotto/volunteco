@@ -25,9 +25,9 @@
                 </div>
             </div>
 
-            <div class="row mb-5">
-                <div class="col-8 mx-auto">
-                    <div class="border-secondary border-2 border rounded-3 p-5">
+            <div class="row mb-md-5 mb-3">
+                <div class="col-md-8 mx-auto">
+                    <div class="border-secondary border-2 border rounded-3 p-md-5 p-4">
                     <div class="donation-content">
                         <div class="d-flex align-items-center mb-3">
                             <i class="bi bi-heart-fill text-danger fs-3 me-3"></i>
@@ -65,7 +65,7 @@
                 </div>
             </div>
 
-            <div class="row flex-lg-row-reverse justify-content-evenly align-items-start py-5">
+            <div class="row flex-lg-row-reverse justify-content-evenly align-items-start py-md-5 py-3">
                 <div class="col-lg-5 col-12">
                     <div class="border border-primary rounded-3 p-4 mb-4">
                         <h3 class="h5 mb-3">Datos bancarios</h3>
@@ -142,10 +142,10 @@
             </div>
 
             <!-- Banner de Seguridad -->
-            <div class="row py-5">
-                <div class="col-7 mx-auto">
+            <div class="row py-md-5 py-3">
+                <div class="col-md-7 mx-auto">
                     <div class="bg-primary p-4 text-light rounded-3" role="alert">
-                        <div class="d-flex align-items-center gap-4">
+                        <div class="d-flex flex-md-row flex-column align-items-center gap-4">
                             <div class="text-center">
                                 <i class="bi bi-shield-check display-4"></i>
                             </div>

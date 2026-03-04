@@ -54,6 +54,12 @@
                                     @enderror
                                 </div>
 
+                                <div class="mb-3">
+                                    <label for="color" class="form-label">Color <span class="text-danger">*</span></label>
+                                    <input type="color" class="form-control form-control-color" id="color" name="color" value="{{ old('color', $projectType->color ?? '#66800a') }}" title="Elige un color">
+                                </div>
+
+
                                 <div class="mb-4">
                                     <div class="form-check">
                                         <input class="form-check-input"
