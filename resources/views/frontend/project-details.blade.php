@@ -2,6 +2,16 @@
 
 @section('title', $project->title)
 
+@push('styles')
+<style>
+    .badge-{{ $project->projectType->key }} {
+        border: 2px solid {{ $project->projectType->color }};
+        color: {{ $project->projectType->color }}!important;
+        background-color: #ffffff;
+    }
+</style>
+@endpush
+
 @section('content')
     <section>
         <div class="container pt-5 pb-5">
@@ -26,11 +36,11 @@
                 </div>
             @endif
 
-            <div class="row mb-5">
+            <div class="row">
 
                 <!-- Detalles del proyecto -->
                 <div class="col-md-8 col-12 mb-4">
-                    <div class="card flex-row mb-4">
+                    <div class="card flex-md-row mb-4">
                         <div class="ratio ratio-16x9">
                             <img src="{{ asset('storage/' . ($project->image ?? 'thumbnail-proyecto.jpg')) }}"
                                  class="card-img-top object-fit-cover"
@@ -41,8 +51,10 @@
 
                         <div class="card-body">
                             <div class="mb-3">
+                                <div class="text-end">
+                                    <span class="badge badge-{{ $project->projectType->key }} mb-3">{{ $project->projectType->name }}</span>
+                                </div>
                                 <h2 class="card-title h3">{{ $project->title }}</h2>
-                                <div><span class="badge bg-primary mb-3">{{ $project->projectType->name }}</span></div>
                                 <div>
                                     <div class="d-flex gap-1 align-items-center">
                                         <i class="bi bi-geo-alt fs-5 text-primary"></i>

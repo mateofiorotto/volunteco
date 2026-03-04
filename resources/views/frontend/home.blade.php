@@ -14,14 +14,14 @@
         border: 2px solid {{ $type->color }};
         color: {{ $type->color }}!important;
         background-color: #ffffff;
-        /* background-color: {{ $type->color }}; */
     }
 @endforeach
 </style>
+@endpush
 
 @section('content')
     <!-- Hero Section -->
-    <section class="hero-section">
+    <section class="hero-section hero-home">
         <div class="hero-background"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content container">
@@ -99,7 +99,7 @@
                                             </div>
 
                                             <a href="{{ route('project', $project->id) }}"
-                                               class="btn btn-azul w-100">
+                                               class="btn btn-azul w-100 stretched-link">
                                                 Ver más
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      fill="none"
@@ -236,14 +236,14 @@
                          class="sponsor-logo object-fit-contain d-block">
                 </div>
                 <div class="text-center mb-5 mb-lg-0 px-3">
-                    <img src="{{ asset('images/sponsors/CeIBA_largo2-768x224.png') }}"
+                    <img src="{{ asset('images/sponsors/CeIBA.png') }}"
                          width="130"
                          height="130"
                          alt="Ceiba"
                          class="sponsor-logo object-fit-contain">
                 </div>
                 <div class="text-center mb-5 mb-lg-0 px-3">
-                    <img src="{{ asset('images/sponsors/logo-1-1.png') }}"
+                    <img src="{{ asset('images/sponsors/guiraoga.png') }}"
                          width="130"
                          height="130"
                          alt="Guiráoga"

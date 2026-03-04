@@ -15,14 +15,14 @@
                     <h2 class="small text-muted">Anfitrión</h2>
                 </div>
                 <h3 class="card-title h4">{{ $project->host->name }}</h3>
-                <ul class="list-unstyled mb-3">
+                <ul class="list-unstyled mb-0">
                     <li>{{ $project->host->location->province->name ?? 'Sin ubicación' }}</li>
                     <li><span class="text-muted small">En la comunidad desde {{ $project->created_at->format('Y') }}</span></li>
                 </ul>
 
                 @if (Auth::check() && Auth::user()->hasRole('volunteer'))
                     @if ($isInHostRoster)
-                        <div class="social-media d-flex gap-3">
+                        <div class="social-media d-flex gap-3 mt-3">
                             @if ($project->host->linkedin)
                                 <a href="{{ $project->host->linkedin }}"
                                     target="_blank"
@@ -45,7 +45,7 @@
                     @endif
 
                     @if ($isAceptedByHost)
-                        <ul class="list-unstyled">
+                        <ul class="list-unstyled mb-0">
                             <li>Contacto: <span class="text-muted">{{ $project->host->person_full_name }}</span></li>
                             <li>Teléfono: <span class="text-muted">{{ $project->host->phone }}</span></li>
                             <li>Email: <a href="mailto:{{ $project->host->user->email }}"

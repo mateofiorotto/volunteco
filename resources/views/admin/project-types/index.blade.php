@@ -11,6 +11,7 @@
     }
 @endforeach
 </style>
+@endpush
 
 @section('content')
     <section>

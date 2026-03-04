@@ -274,6 +274,7 @@ h6 {
 .container-xl,
 .container-xxl {
     --bs-gutter-x: 2.5rem;
+    max-width: 1320px;
 }
 .row {
     --bs-gutter-x: 2.5rem;
@@ -382,6 +383,9 @@ small {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.hero-home {
+    min-height: 414px;
 }
 @media screen and (min-width: 768px) {
     .hero-section {
@@ -577,10 +581,13 @@ small {
     height: 48%;
     bottom: 0;
 }
+.landing-hero .hero-title {
+    font-size: 2.5rem;
+}
 
-@media (max-width: 767px) {
+@media (min-width: 768px) {
     .landing-hero .hero-title {
-        font-size: 2.5rem;
+        font-size: 4rem;
     }
 }
 .hero-bg-image {
@@ -615,10 +622,12 @@ small {
     font-size: 3.5rem;
     margin-bottom: 1.5rem;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    line-height: 1.1;
 }
 @media (min-width: 768px) {
     .hero-title {
         font-size: 4rem;
+        line-height: 1.2;
     }
 }
 .hero-subtitle {
@@ -959,7 +968,7 @@ small {
 .project-badge-overlay {
     position: absolute;
     top: 15px;
-    left: 15px;
+    right: 15px;
     z-index: 1;
 }
 

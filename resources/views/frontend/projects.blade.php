@@ -8,11 +8,14 @@
 <style>
 @foreach($projectTypesId as $type)
     .badge-{{ $type->key }} {
-        background-color: {{ $type->color }};
+        border: 2px solid {{ $type->color }};
+        color: {{ $type->color }}!important;
+        background-color: #ffffff;
     }
 @endforeach
 </style>
 @endpush
+
 
 @section('content')
     <!-- Hero Section -->
@@ -25,7 +28,7 @@
         </div>
     </section>
 
-    <section class="py-5 bg-body-tertiary">
+    <section class="py-md-5 py-3 bg-body-tertiary">
         <div class="container">
             <!-- Filtros -->
             <div class="filters-section">
