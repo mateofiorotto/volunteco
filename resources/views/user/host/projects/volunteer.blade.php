@@ -179,7 +179,7 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex gap-3 align-items-center mb-2">
+                    <div class="d-flex gap-3 mb-2">
                         @if($volunteer->avatar)
                         <div class="avatar">
                             <img src="{{ asset('storage/' . ($volunteer->avatar ?? 'perfil-volunteer.svg')) }}"
@@ -198,18 +198,19 @@
                                 @endif
                                 <li class="text-capitalize text-muted small">{{ $volunteer->profession }}</li>
                             </ul>
-
-                            <div class="mb-0">
-                                <div class="h5 card-title">Reputación</div>
-                                <x-volunteer-reputation-card :volunteer="$volunteer" />
-                            </div>
-
-
                         </div>
                     </div>
                     <hr>
+                    <div class="mb-0">
+                        <div class="h5 card-title">Prestigio</div>
+                        <x-volunteer-reputation-card :volunteer="$volunteer" />
+                    </div>
+                    <hr>
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                        <h3 class="card-title h5 mb-0">{{ $project->title }}</h3>
+                        <div>
+                            <div class="small mb-2 text-body-secondary">Proyecto</div>
+                            <h3 class="card-title h5 mb-0">{{ $project->title }}</h3>
+                        </div>
                         @if ($project->enabled === 0)
                             <span class="badge text-bg-danger">
                                 Deshabilitado

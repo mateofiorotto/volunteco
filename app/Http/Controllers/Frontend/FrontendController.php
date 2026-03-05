@@ -22,7 +22,7 @@ class FrontendController extends Controller
     public function home()
     {
         $projects = Project::public()
-            ->with('location.province')
+            ->with('location.province','volunteers')
             ->take(3)
             ->latest()
             ->get();
@@ -38,10 +38,11 @@ class FrontendController extends Controller
         $search = $request->search;
         $provinceId = $request->province_id;
         $projectTypeId = $request->project_type_id;
+        $volunteerId = Auth::check() ? Auth::user()->volunteer?->id : null;
 
         $projects = Project::query()
             ->public()
-            ->with(['location.province', 'projectType'])
+            ->with(['location.province', 'projectType', 'volunteers'])
             ->when($search, function ($q) use ($search) {
                 $q->where(function ($qq) use ($search) {
                     $qq->where('title', 'like', "%{$search}%")

@@ -110,6 +110,7 @@ class Project extends Model
         // Cargar voluntarios con usuario y evaluaciones
         $this->load([
             'volunteers.user',
+            'volunteers.reputation',
             'evaluations'
         ]);
 

@@ -1,5 +1,15 @@
 @extends('layouts.admin')
 
+@push('styles')
+<style>
+@media (max-width: 992px) {
+    .project-table .responsive-table {
+        --table-header-width: 106px;
+    }
+}
+</style>
+@endpush
+
 @section('content')
     <section class="container py-5">
 
@@ -24,7 +34,7 @@
             <div class="col-md-7">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <div class="d-flex gap-5 align-items-start">
+                        <div class="d-flex flex-column flex-md-row gap-md-5 gap-3 align-items-start">
                             <!-- Foto de perfil -->
                             <div class="avatar">
                                 <img src="{{ asset('storage/' . ($volunteer->avatar ?? 'perfil-volunteer.svg')) }}"
@@ -116,7 +126,7 @@
                 </div>
 
                 <div class="card mb-4">
-                    <div class="card-header">Reputación</div>
+                    <div class="card-header">Prestigio</div>
                     <div class="card-body">
                         <x-volunteer-reputation-card :volunteer="$volunteer" />
                     </div>
@@ -127,65 +137,59 @@
 
         <div class="row">
             <div class="col-12">
+                <div class="d-flex justify-content-end py-2 gap-2 flex-wrap">
+                    <div class="small"><i class="bi bi-circle-fill dot-aceptado"></i> Aceptado</div>
+                    <div class="small"><i class="bi bi-circle-fill dot-pendiente"></i> Pendiente</div>
+                    <div class="small"><i class="bi bi-circle-fill dot-rechazado"></i> Rechazado</div>
+                    <div class="small"><i class="bi bi-circle-fill dot-completado"></i> Completado</div>
+                    <div class="small"><i class="bi bi-circle-fill dot-cancelado"></i> Cancelado</div>
+                </div>
+
                 <div class="card mb-4">
                     <div class="card-header">Proyectos donde tienes a este voluntario</div>
                     <div class="card-body p-0">
-                        <table class="table">
+                        <div class="table-responsive project-table">
+                        <table class="table responsive-table">
                             <thead>
                                 <tr>
                                     <th scope="col">Título</th>
                                     <th scope="col">Fecha</th>
                                     <th scope="col">Lugar</th>
-                                    <th scope="col">Solicitud de aplicación</th>
+                                    <th scope="col" class="text-center">Solicitud de aplicación</th>
                                     <th scope="col">Evaluación</th>
-                                    <th scope="col">Acciones</th>
+                                    <th scope="col" class="text-center">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($projects as $project)
                                     <tr class="align-middle {{ $project->enabled === 0 ? 'table-danger' : '' }}">
-                                        <td>
+                                        <td data-label="Título: ">
                                             {{ $project->title }}
-                                            @if ($project->enabled === 0)
-                                                <span class="badge text-bg-danger">Deshabilitado</span>
-                                            @endif
+                                            <div class="d-lg-none dot-{{$project->volunteers->first()->pivot->status}}"><i class="bi bi-circle-fill"></i></div>
                                         </td>
-                                        <td>
+                                        <td data-label="Fecha: ">
                                             <div>Inicia: <span class="small text-muted">{{ $project->start_date->format('d/m/Y') }}</span></div>
                                             <div>Finaliza: <span class="small text-muted">{{ $project->end_date->format('d/m/Y') }}</span></div>
                                         </td>
-                                        <td>{{ $project->location->name }} - {{ $project->location->province->name }}</td>
-                                        <td class="text-center">
-                                            @php
-                                                $status = $project->volunteers->first()->pivot->status ?? 'pendiente';
-
-                                                $statusClasses = [
-                                                    'aceptado' => 'text-body small',           // badge normal
-                                                    'completado' => 'text-azul small',        // verde
-                                                    'rechazado' => 'bg-secondary badge ',          // rojo
-                                                    'cancelado' => 'bg-danger badge ',          // rojo
-                                                    'pendiente' => 'text-bg-warning badge', // amarillo
-                                                ];
-
-                                                $badgeClass = $statusClasses[$status] ?? 'text-body';
-                                            @endphp
-
-                                            <span class="text-capitalize {{ $badgeClass }}">
-                                                {{ $status }}
-                                            </span>
+                                        <td data-label="Lugar: ">{{ $project->location->name }} - {{ $project->location->province->name }}</td>
+                                        <td class="text-center hidden-mb">
+                                            <div class="dot-{{$project->volunteers->first()->pivot->status}}"><i class="bi bi-circle-fill"></i></div>
                                         </td>
-                                        <td>
+                                        <td data-label="Evaluación: ">
                                             @if($project->evaluations->isNotEmpty())
-                                            <p class="mb-0">Nivel: <span class="text-muted small">{{ $project->evaluations->first()->performance_label }} ({{ $project->evaluations->first()->average_score }})</span></p>
+                                                <p class="mb-0">Nivel: <span class="text-muted small">{{ $project->evaluations->first()->performance_label }} ({{ $project->evaluations->first()->average_score }})</span></p>
+                                            @else
+                                                <p class="mb-0">Voluntariado en curso</p>
                                             @endif
                                         </td>
-                                        <td>
+                                        <td class="text-lg-center" >
                                             <a href="{{ route('host.my-projects.show', $project->id) }}" class="btn btn-azul btn-sm @if ($project->enabled === 0) disabled @endif">Ver</a>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
             </div>

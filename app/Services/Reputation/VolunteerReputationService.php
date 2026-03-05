@@ -66,19 +66,19 @@ class VolunteerReputationService
 
     private function determineLevel($trustScore, $completedProjects, $completionRate): string
     {
-        if ($completedProjects < 2) {
+        if ($completedProjects < 1) {
             return 'inicial';
         }
 
-        if ($trustScore >= 85 && $completedProjects >= 12 && $completionRate >= 90) {
+        if ($trustScore >= 60 && $completedProjects >= 6 && $completionRate >= 75) {
             return 'embajador';
         }
 
-        if ($trustScore >= 70 && $completedProjects >= 6) {
+        if ($trustScore >= 40 && $completedProjects >= 4) {
             return 'destacado';
         }
 
-        if ($trustScore >= 50 && $completedProjects >= 2) {
+        if ($trustScore >= 20 && $completedProjects >= 1) {
             return 'activo';
         }
 

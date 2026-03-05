@@ -36,21 +36,20 @@
             @if ($projects->isEmpty())
                 <p>No hay proyectos publicados actualmente.</p>
             @else
-                <table class="table">
+            <div class="table-responsive">
+                <div class="d-flex justify-content-end py-2 gap-2 flex-wrap">
+                    <div class="small"><i class="bi bi-circle-fill dot-activo"></i> Activo</div>
+                    <div class="small"><i class="bi bi-circle-fill dot-desactivado"></i> Desactivado</div>
+                </div>
+                <table class="table responsive-table">
                     <thead>
                         <tr>
-                            <th scope="col"
-                                class="fw-semibold">Imagen</th>
-                            <th scope="col"
-                                class="fw-semibold">Título</th>
-                            <th scope="col"
-                                class="fw-semibold">Fechas</th>
-                            <th scope="col"
-                                class="fw-semibold">Estado</th>
-                            <th scope="col"
-                                class="fw-semibold">Voluntarios</th>
-                            <th scope="col"
-                                class="fw-semibold">Acciones</th>
+                            <th scope="col" >Imagen</th>
+                            <th scope="col">Título</th>
+                            <th scope="col">Fechas</th>
+                            <th scope="col" class="text-center">Estado</th>
+                            <th scope="col">Voluntarios</th>
+                            <th scope="col" class="text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,12 +67,8 @@
                                     <div>Inicia: <span class="small text-muted">{{ $project->start_date->format('d/m/Y') }}</span></div>
                                     <div>Finaliza: <span class="small text-muted">{{ $project->end_date->format('d/m/Y') }}</span></div>
                                 </td>
-                                <td>
-                                    @if ($project->enabled != 1)
-                                        <span class="badge bg-danger">Deshabilitado</span>
-                                    @else
-                                        <span class="badge bg-transparent text-body">Activo</span>
-                                    @endif
+                                <td class="text-center">
+                                    <div class="dot-{{$project->enabled == true ? 'activo' : 'desactivado'}}"><i class="bi bi-circle-fill"></i></div>
                                 </td>
                                 <td>
                                     @if ($project->volunteers->isEmpty())
@@ -82,7 +77,7 @@
                                         <p class="mb-0 small">Hay {{ $project->volunteers->count() }} voluntarios</p>
                                     @endif
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <a href="{{ route('host.my-projects.show', $project->id) }}"
                                        class="btn btn-sm btn-azul"
                                        title="ver">Ver</a>
@@ -91,6 +86,7 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
 
                 @if ($projects->hasPages())
                     <div class="d-flex justify-content-center mt-4">

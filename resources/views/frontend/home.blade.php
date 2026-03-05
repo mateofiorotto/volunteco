@@ -75,9 +75,28 @@
                                     <div class="card-body d-flex flex-column">
                                         <h3 class="card-title h5">{{ $project->title }}</h3>
 
-                                        <p class="card-text mb-3 small text-muted">
-                                            {{ Str::limit($project->description, 100) }}</p>
+                                        <p class="card-text mb-3 small text-muted">{{ Str::limit($project->description, 90) }}</p>
 
+                                            @php
+                                            $authVolunteer = null;
+
+                                            if(auth()->check() && auth()->user()->hasRole('volunteer')) {
+                                                $authVolunteer = $project->volunteers
+                                                    ->firstWhere('user_id', auth()->id());
+                                            }
+                                            @endphp
+
+                                            @if($authVolunteer)
+                                                <div class="text-end d-flex justify-content-end align-items-center">
+                                                    <div class="dot-{{$authVolunteer->pivot->status}} small me-2">
+                                                        <i class="bi bi-circle-fill"></i>
+                                                    </div>
+
+                                                    <p class="text-capitalize small mb-0">
+                                                        {{ $authVolunteer->pivot->status }}
+                                                    </p>
+                                                </div>
+                                            @endif
                                         <div class="mt-auto">
                                             <div class="d-flex align-items-center mb-3 text-muted small">
                                                 <svg xmlns="http://www.w3.org/2000/svg"

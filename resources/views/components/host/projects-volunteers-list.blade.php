@@ -20,8 +20,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Nombre y apellido</th>
-                                    <th scope="col"
-                                        class="text-center">Acciones</th>
+                                    <th scope="col">Prestigio</th>
+                                    <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,20 +40,37 @@
                                                 @else
                                                     <span class="text-muted">{{ $volunteer->full_name }}</span>
                                                 @endif
+                                                @if ($volunteer->user->status == 'activo')
+                                                    <a href="{{ route('host.volunteers.profile', $volunteer->id) }}"
+                                                    class="btn btn-sm btn-outline-primary"
+                                                    title="ver">Ver perfil</a>
+                                                @else
+                                                    <span
+                                                        class="text-capitalize badge text-bg-danger }}">{{ $volunteer->user->status }}</span>
+                                                @endif
+
                                             </div>
                                         </td>
+                                        <td>
+                                            @if($volunteer->reputation->trust_level === 'activo')
+                                            <div class="d-block py-2">
+                                                <img src="{{ asset('images/insignias/nivel-activo.svg') }}" width="60" height="60" alt="{{ ucfirst($volunteer->reputation->trust_level) }}<"/>
+                                            </div>
+                                            @endif
+                                            @if($volunteer->reputation->trust_level === 'destacado')
+                                            <div class="d-block py-2">
+                                                <img src="{{ asset('images/insignias/nivel-destacado.svg') }}" width="60" height="60" alt="{{ ucfirst($volunteer->reputation->trust_level) }}<"/>
+                                            </div>
+                                            @endif
+                                            @if($volunteer->reputation->trust_level === 'embajador')
+                                            <div class="d-block py-2">
+                                                <img src="{{ asset('images/insignias/nivel-embajador.svg') }}" width="60" height="60" alt="{{ ucfirst($volunteer->reputation->trust_level) }}<"/>
+                                            </div>
+                                            @endif
+
+                                        </td>
                                         <td class="align-middle">
-                                            <div class="d-flex justify-content-center gap-3">
-                                                <div class="text-center">
-                                                    @if ($volunteer->user->status == 'activo')
-                                                        <a href="{{ route('host.volunteers.profile', $volunteer->id) }}"
-                                                           class="btn btn-sm btn-outline-primary"
-                                                           title="ver">Ver perfil</a>
-                                                    @else
-                                                        <span
-                                                              class="text-capitalize badge text-bg-danger }}">{{ $volunteer->user->status }}</span>
-                                                    @endif
-                                                </div>
+                                            <div class="d-flex gap-3">
                                                 <div class="text-center">
                                                     <button type="button"
                                                             class="btn btn-sm btn-outline-secondary {{ $volunteer->user->status !== 'activo' ? 'disabled' : '' }} {{ $project->enabled == false ? 'disabled' : '' }}"
@@ -202,6 +219,14 @@
         @endif
     </div>
 
+    <div class="d-flex justify-content-end py-2 gap-2 flex-wrap">
+        <div class="small"><i class="bi bi-circle-fill dot-aceptado"></i> Aceptado</div>
+        <div class="small"><i class="bi bi-circle-fill dot-pendiente"></i> Pendiente</div>
+        <div class="small"><i class="bi bi-circle-fill dot-rechazado"></i> Rechazado</div>
+        <div class="small"><i class="bi bi-circle-fill dot-completado"></i> Completado</div>
+        <div class="small"><i class="bi bi-circle-fill dot-cancelado"></i> Cancelado</div>
+    </div>
+
     <div class="card p-0 border-primary">
         <div class="card-header text-bg-primary">
             <div class="d-flex justify-content-between">
@@ -221,9 +246,8 @@
                         <tr>
                             <th scope="col">Nombre y apellido</th>
                             <th scope="col">Evaluación en este proyecto</th>
-                            <th scope="col"
-                                class="text-center"
-                                width="440">Acciones</th>
+                            <th scope="col" class="text-center">Estado en este proyecto</th>
+                            <th scope="col" width="440">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -270,46 +294,35 @@
                                                class="btn btn-sm btn-warning"
                                                title="ver">Evaluar</a>
                                         @endif
+                                    @else
+                                        Voluntariado en curso
                                     @endif
                                 </td>
+                                <td class="text-center">
+                                    <div class="dot-{{$volunteer->pivot->status}}"><i class="bi bi-circle-fill"></i></div>
+                                </td>
                                 <td class="align-middle">
-                                    <div class="row justify-content-center align-items-center">
-                                        <div class="col-6 text-center">
-                                            @if ($volunteer->pivot->isCanceled())
-                                                <span class="text-danger small">
-                                                    Cancelado
-                                                </span>
-                                            @else
-                                                @if (!$volunteer->pivot->isCompleted())
-                                                    <form method="POST"
-                                                          action="{{ route('host.my-projects.cancel-volunteer', [$project->id, $volunteer->id]) }}">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button type="submit"
-                                                                class="btn btn-sm btn-danger {{ $volunteer->user->status !== 'activo' ? 'disabled' : '' }} {{ $project->enabled == false ? 'disabled' : '' }}">Cancelar
-                                                            voluntariado</button>
-                                                    </form>
-                                                @endif
-                                            @endif
+                                    <div class="d-flex flex-column gap-3">
+                                        @if (!$volunteer->pivot->isCanceled() && !$volunteer->pivot->isCompleted())
+                                        <div class="d-flex gap-3">
+                                            <form method="POST"
+                                                    action="{{ route('host.my-projects.complete-volunteer', [$project->id, $volunteer->id]) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-azul {{ $volunteer->user->status !== 'activo' ? 'disabled' : '' }} {{ $project->enabled == false ? 'disabled' : '' }}">Completó
+                                                    el voluntariado</button>
+                                            </form>
+                                            <form method="POST"
+                                                    action="{{ route('host.my-projects.cancel-volunteer', [$project->id, $volunteer->id]) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-danger {{ $volunteer->user->status !== 'activo' ? 'disabled' : '' }} {{ $project->enabled == false ? 'disabled' : '' }}">Cancelar
+                                                    voluntariado</button>
+                                            </form>
                                         </div>
-                                        <div class="col-6 text-center">
-                                            @if ($volunteer->pivot->isCompleted())
-                                                <span class="text-azul small">
-                                                    Completado
-                                                </span>
-                                            @else
-                                                @if (!$volunteer->pivot->isCanceled())
-                                                    <form method="POST"
-                                                          action="{{ route('host.my-projects.complete-volunteer', [$project->id, $volunteer->id]) }}">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button type="submit"
-                                                                class="btn btn-sm btn-azul {{ $volunteer->user->status !== 'activo' ? 'disabled' : '' }} {{ $project->enabled == false ? 'disabled' : '' }}">Completó
-                                                            el voluntariado</button>
-                                                    </form>
-                                                @endif
-                                            @endif
-                                        </div>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

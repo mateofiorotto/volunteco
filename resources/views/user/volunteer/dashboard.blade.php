@@ -22,11 +22,102 @@
             @if ($activeProjects->isEmpty())
                 <div class="alert alert-info d-inline-block">
                     <i class="bi bi-info-circle me-2"></i>
-                    Aún no has aplicado a ningún proyecto.
+                    Aún no hay proyectos activos.
                 </div>
             @else
                 <div class="row g-4">
                     @foreach ($activeProjects as $project)
+                        <div class="col-md-6 col-lg-3">
+                            <div class="card h-100 {{ $project->enabled === 0 ? 'border-danger' : '' }}">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start gap-2">
+                                        <h3 class="card-title mb-0 h4">
+                                            {{ $project->title }}
+                                        </h3>
+                                    </div>
+                                    <p class="small text-muted">{{$project->host->name}}</p>
+
+                                    <p class="card-text small">
+                                        {{ Str::limit($project->description, 100) }}
+                                    </p>
+
+                                    <div class="mb-3">
+                                        <span class="badge p-2 text-capitalize badge-{{ $project->pivot->status }}">
+                                            {{ $project->pivot->status }}
+                                        </span>
+                                    </div>
+
+                                    @if ($project->pivot->isPending())
+                                    <p class="mb-3 small">
+                                        <i class="bi bi-circle-fill text-warning me-1"></i>
+                                        Aplicado: <span>{{ \Carbon\Carbon::parse($project->pivot->applied_at)->format('d/m/Y') }}</span>
+                                    </p>
+                                    @endif
+                                    @if ($project->pivot->isRejected())
+                                    <p class="mb-3 small">
+                                        <i class="bi bi-dash-circle-fill text-secondary me-1"></i>
+                                        Rechazado: <span>{{ \Carbon\Carbon::parse($project->pivot->rejected_at)->format('d/m/Y') }}</span>
+                                    </p>
+                                    @endif
+                                    @if ($project->pivot->isAccepted())
+                                    <p class="mb-3 small">
+                                        <i class="bi bi-check-circle-fill text-primary me-1"></i>
+                                        Aceptado: <span>{{ \Carbon\Carbon::parse($project->pivot->accepted_at)->format('d/m/Y') }}</span>
+                                    </p>
+                                    @endif
+                                    <!-- @if ($project->pivot->status === 'completado')
+                                    <p class="mb-3 small">
+                                        <i class="bi bi-check-circle-fill text-azul me-1"></i>
+                                        Finalizaste: <span class="text-muted">{{ \Carbon\Carbon::parse($project->pivot->completed_at)->format('d/m/Y') }}</span>
+                                    </p>
+                                    @endif
+                                    @if ($project->pivot->status === 'cancelado')
+                                    <p class="mb-3 small">
+                                        <i class="bi bi-x-circle-fill text-danger me-1"></i>
+                                        Cancelado: <span class="text-muted">{{ \Carbon\Carbon::parse($project->pivot->canceled_at)->format('d/m/Y') }}</span>
+                                    </p>
+                                    @endif -->
+
+                                    @if ($project->enabled === 0)
+                                        <p class="text-muted small">Este proyecto se encuentra <span class="text-danger fw-semibold">deshabilitado</span></p>
+                                    @endif
+
+                                    @if ($project->enabled === 1)
+                                    <a href="{{ route('project', $project->id) }}"
+                                       class="btn btn-sm btn-azul">
+                                        Ver detalles
+                                    </a>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
+        </div>
+
+        <!-- Últimos Proyectos Aplicados -->
+        <div class="mb-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="d-flex flex-fill justify-content-between">
+                <h2 class="h4 mb-0">Mis últimos <span class="fw-light">finalizados</span></h2>
+                </div>
+                <a href="{{ route('volunteer.projects.applied') }}"
+                   class="btn btn-sm btn-primary">
+                    Ver todos
+                </a>
+            </div>
+
+
+            @if ($finishProjects->isEmpty())
+                <div class="alert alert-info d-inline-block">
+                    <i class="bi bi-info-circle me-2"></i>
+                    Aún no hay proyectos finalizados.
+                </div>
+            @else
+                <div class="row g-4">
+                    @foreach ($finishProjects as $project)
                         <div class="col-md-6 col-lg-3">
                             <div class="card h-100 {{ $project->enabled === 0 ? 'border-danger' : '' }}">
                                 <div class="card-body">

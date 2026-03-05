@@ -113,7 +113,7 @@
                                                 <td class="text-center hidden-mb">
                                                     <div class="dot-{{$project->enabled == true ? 'activo' : 'desactivado'}}"><i class="bi bi-circle-fill"></i></div>
                                                 </td>
-                                                <td data-label="Voluntarios:" class="text-xl-center">{{ $project->volunteers->count() === 0 ? 'Sin voluntarios' : $project->volunteers->count() }}</td>
+                                                <td data-label="Voluntarios:" class="text-xl-center">{{ $project->volunteers->count() }}</td>
                                                 <td class="text-xl-center"><a
                                                     href="{{ route('admin.projects.show', $project->id) }}"
                                                     class="btn btn-sm btn-azul"

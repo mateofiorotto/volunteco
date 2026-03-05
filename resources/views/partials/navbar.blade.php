@@ -131,10 +131,11 @@
                        role="button"
                        data-bs-toggle="dropdown"
                        aria-expanded="false">
-                        <img src="{{ asset('storage/perfil-host.svg') }}"
+                        <img src="{{ Auth::user()->host->avatar ? asset('storage/' . Auth::user()->host->avatar) : asset('storage/perfil-host.svg') }}"
                              width="40"
                              height="40"
-                             alt="Avatar anfitrión" />
+                             class="rounded-pill object-fit-contain"
+                             />
                     </a>
                     <ul class="dropdown-menu pb-0">
                         <li><a class="dropdown-item"
@@ -162,10 +163,11 @@
                        role="button"
                        data-bs-toggle="dropdown"
                        aria-expanded="false">
-                        <img src="{{ asset('storage/perfil-volunteer.svg') }}"
+                        <img src="{{ Auth::user()->volunteer->avatar ? asset('storage/' . Auth::user()->volunteer->avatar) : asset('storage/perfil-volunteer.svg') }}"
                              width="40"
                              height="40"
-                             alt="Avatar voluntario" />
+                             alt="{{Auth::user()->volunteer->full_name}}"
+                             class="rounded-pill object-fit-contain" />
                     </a>
                     <ul class="dropdown-menu pb-0">
                         <li><a class="dropdown-item"

@@ -101,52 +101,61 @@
 
         <div class="row">
             <div class="col-12">
+                <div class="d-flex justify-content-end py-2 gap-2 flex-wrap">
+                    <div class="small"><i class="bi bi-circle-fill dot-aceptado"></i> Aceptado</div>
+                    <div class="small"><i class="bi bi-circle-fill dot-pendiente"></i> Pendiente</div>
+                    <div class="small"><i class="bi bi-circle-fill dot-rechazado"></i> Rechazado</div>
+                    <div class="small"><i class="bi bi-circle-fill dot-completado"></i> Completado</div>
+                    <div class="small"><i class="bi bi-circle-fill dot-cancelado"></i> Cancelado</div>
+                </div>
+
                 <div class="card mb-4">
                     <div class="card-header">Otros proyectos del anfitrión</div>
                     <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Título</th>
-                                    <th scope="col">Fecha</th>
-                                    <th scope="col">Lugar</th>
-                                    <th scope="col">Tu solicitud de aplicación</th>
-                                    <th scope="col">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($host->projects as $project)
-                                    <tr class="align-middle {{ $project->enabled === 0 ? 'table-danger' : '' }}">
-                                        <td>
-                                            {{ $project->title }}
-                                            @if ($project->enabled === 0)
-                                                <span class="badge text-bg-danger">Deshabilitado</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <div>Inicia: <span class="small text-muted">{{ $project->start_date->format('d/m/Y') }}</span></div>
-                                            <div>Finaliza: <span class="small text-muted">{{ $project->end_date->format('d/m/Y') }}</span></div>
-                                        </td>
-                                        <td>{{ $project->location->name }} - {{ $project->location->province->name }}</td>
-                                        <td class="text-center">
-                                            @php
-                                                $currentVolunteer = auth()->user()->volunteer;
-                                                $myApplication = $project->volunteers->firstWhere('id', $currentVolunteer->id);
-                                            @endphp
-                                            @if($myApplication && $myApplication->pivot->status !== 'aceptado')
-                                                <span class="badge text-capitalize {{ $myApplication->pivot->status == 'pendiente' ? 'bg-warning text-bg-warning' : 'bg-danger' }}"> {{ $myApplication->pivot->status }}</span>
-                                            @endif
-                                            @if($myApplication && $myApplication->pivot->status == 'aceptado')
-                                            <span class="badge text-capitalize bg-transparent text-body">{{$myApplication->pivot->status}}</span>
-                                            @endif
-                                        </td>
-                                        <td><a href="{{ route('project', $project->id) }}"
-                                            class="btn btn-azul btn-sm @if ($project->enabled === 0) disabled @endif">Ver</a>
-                                        </td>
+                        <div class="table-responsive">
+                            <table class="table responsive-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Título</th>
+                                        <th scope="col">Fecha</th>
+                                        <th scope="col">Lugar</th>
+                                        <th scope="col">Tu solicitud de aplicación</th>
+                                        <th scope="col">Acciones</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($host->projects as $project)
+                                        <tr class="align-middle {{ $project->enabled === 0 ? 'table-danger' : '' }}">
+                                            <td>
+                                                {{ $project->title }}
+                                                @if ($project->enabled === 0)
+                                                    <span class="badge text-bg-danger">Deshabilitado</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <div>Inicia: <span class="small text-muted">{{ $project->start_date->format('d/m/Y') }}</span></div>
+                                                <div>Finaliza: <span class="small text-muted">{{ $project->end_date->format('d/m/Y') }}</span></div>
+                                            </td>
+                                            <td>{{ $project->location->name }} - {{ $project->location->province->name }}</td>
+                                            <td class="text-center">
+                                                @php
+                                                    $currentVolunteer = auth()->user()->volunteer;
+                                                    $myApplication = $project->volunteers->firstWhere('id', $currentVolunteer->id);
+                                                @endphp
+
+                                                @if($myApplication)
+                                                <div class="dot-{{$myApplication->pivot->status}}"><i class="bi bi-circle-fill"></i></div>
+                                                @endif
+
+                                            </td>
+                                            <td><a href="{{ route('project', $project->id) }}"
+                                                class="btn btn-azul btn-sm @if ($project->enabled === 0) disabled @endif">Ver</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                         <div>
                         </div>
                     </div>

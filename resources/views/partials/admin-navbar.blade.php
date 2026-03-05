@@ -91,7 +91,7 @@
                              width="40"
                              height="40"
                              alt="{{Auth::user()->volunteer->full_name}}"
-                             class="rounded-pill" />
+                             class="rounded-pill object-fit-contain" />
                     </a>
                     <ul class="dropdown-menu pb-0">
                         <li><a class="dropdown-item"
@@ -116,7 +116,9 @@
                        aria-expanded="false">
                         <img src="{{ Auth::user()->host->avatar ? asset('storage/' . Auth::user()->host->avatar) : asset('storage/perfil-host.svg') }}"
                              width="40"
-                             height="40" />
+                             height="40"
+                             class="rounded-pill object-fit-contain"
+                             />
                     </a>
                     <ul class="dropdown-menu pb-0">
                         <li><a class="dropdown-item"

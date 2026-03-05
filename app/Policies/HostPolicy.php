@@ -32,7 +32,7 @@ class HostPolicy
         // El voluntario solo podrá ver un anfitrión que lo haya aceptado en algun proyecto
         return $volunteer->projects()
             ->where('host_id', $host->id)
-            ->wherePivotIn('status', ['aceptado', 'pendiente'])
+            ->wherePivotIn('status', ['aceptado', 'pendiente','completado'])
             ->exists();
     }
 

@@ -24,6 +24,11 @@ class DashboardController extends Controller
             ->take(6)
             ->get();
 
+        $finishProjects = $volunteer->finishedProjects()
+            ->orderByPivot('updated_at', 'desc')
+            ->take(6)
+            ->get();
+
         //ultimos 3 proyectos publicados en general
         $latestProjects = Project::public()
             ->whereDoesntHave('volunteers', function ($q) {
@@ -33,6 +38,6 @@ class DashboardController extends Controller
             ->take(3)
             ->get();
 
-        return view('user.volunteer.dashboard', compact('activeProjects', 'latestProjects'));
+        return view('user.volunteer.dashboard', compact('activeProjects', 'latestProjects','finishProjects'));
     }
 }

@@ -29,7 +29,17 @@
             @endif
 
             @if ($projects->isNotEmpty())
-                <table class="table">
+                <div class="d-flex justify-content-end py-2 gap-2 flex-wrap mb-3">
+                    <div class="small"><i class="bi bi-circle-fill dot-aceptado"></i> Aceptado</div>
+                    <div class="small"><i class="bi bi-circle-fill dot-pendiente"></i> Pendiente</div>
+                    <div class="small"><i class="bi bi-circle-fill dot-rechazado"></i> Rechazado</div>
+                    <div class="small"><i class="bi bi-circle-fill dot-completado"></i> Completado</div>
+                    <div class="small"><i class="bi bi-circle-fill dot-cancelado"></i> Cancelado</div>
+                </div>
+
+
+                <div class="table-responsive">
+                <table class="table responsive-table">
                     <caption><small>Lista de proyectos donde has aplicado</small></caption>
                     <thead>
                         <tr>
@@ -56,8 +66,8 @@
                                 </td>
                                 <td>{{ $project->location->name }} - {{ $project->location->province->name }}</td>
                                 <td>{{ $project->host->name }}</td>
-                                <td>
-                                    <span class="badge text-capitalize badge-{{ $project->pivot->status_class }}">{{ $project->pivot->status }}</span>
+                                <td class="text-center">
+                                    <div class="dot-{{$project->pivot->status}}"><i class="bi bi-circle-fill"></i></div>
                                 </td>
                                 <td><a href="{{ route('project', $project->id) }}"
                                        class="btn btn-azul btn-sm @if ($project->enabled === 0) disabled @endif">Ver</a>
@@ -66,6 +76,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                </div>
                 <div>
                     {{ $projects->links() }}
                 </div>
