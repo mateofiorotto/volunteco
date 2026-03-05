@@ -132,7 +132,7 @@ class HostsController extends Controller
         $user = User::with('host')->findOrFail($id);
 
         $fieldsToChange = $request->validate([
-            'description' => 'required|string|max:500|min:10',
+            'description' => 'required|string|min:10|max:500',
         ]);
 
         //generar token para que pueda cambiar sus datos de forma segura

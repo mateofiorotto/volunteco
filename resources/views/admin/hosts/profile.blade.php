@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
 @push('styles')
-<style>
-@media (max-width: 992px) {
-    .project-table .responsive-table {
-        --table-header-width: 106px;
-    }
-}
-</style>
+    <style>
+        @media (max-width: 992px) {
+            .project-table .responsive-table {
+                --table-header-width: 106px;
+            }
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -24,17 +24,17 @@
                         <div class="d-flex flex-column flex-md-row g-0">
                             <div class="avatar avatar-host p-3">
                                 <img src="{{ asset('storage/' . ($host->avatar ?? 'perfil-host.svg')) }}"
-                                        alt="Foto de perfil"
-                                        class="object-fit-contain rounded-circle"
-                                        width="80"
-                                        height="80">
+                                     alt="Foto de perfil"
+                                     class="object-fit-contain rounded-circle"
+                                     width="80"
+                                     height="80">
                             </div>
                             <div class="card-body flex-fill">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <div class="small text-muted">Anfitrión</div>
                                     @if ($host->user->status !== 'activo')
                                         <span
-                                                class="text-capitalize badge {{ $host->user->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
+                                              class="text-capitalize badge {{ $host->user->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
                                             {{ $host->user->status }}
                                         </span>
                                     @endif
@@ -44,9 +44,9 @@
                                     <div class="col">
                                         <ul class="list-unstyled">
                                             <li><a href="mailto:{{ $host->user->email }}"
-                                                    target="_blank">{{ $host->user->email }}</a></li>
+                                                   target="_blank">{{ $host->user->email }}</a></li>
                                             <li><a href="tel:{{ $host->phone }}"
-                                                    target="_blank">{{ $host->phone }}</a></li>
+                                                   target="_blank">{{ $host->phone }}</a></li>
                                             <li class="text-muted small">{{ $host->location->name ?? 'Sin ubicación' }} -
                                                 {{ $host->location->province->name }}</li>
                                         </ul>
@@ -54,8 +54,11 @@
                                     <div class="col">
                                         <ul class="list-unstyled mb-0">
                                             <li>CUIT: <span class="text-muted small">{{ $host->cuit }}</span></li>
-                                            <li>Contacto: <span class="text-muted small">{{ $host->person_full_name }}</span></li>
-                                            <li>Fecha de registro: <span class="text-muted small">{{ $host->created_at->format('d/m/Y') }}</span></li>
+                                            <li>Contacto: <span
+                                                      class="text-muted small">{{ $host->person_full_name }}</span></li>
+                                            <li>Fecha de registro: <span
+                                                      class="text-muted small">{{ $host->created_at->format('d/m/Y') }}</span>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -79,27 +82,27 @@
                                         @if ($host->linkedin)
                                             <li class="text-truncate">
                                                 <a href="{{ $host->linkedin }}"
-                                                    target="_blank"
-                                                    class="text-nowrap"><i
-                                                        class="bi bi-linkedin fs-5 me-2 text-azul align-middle"></i>
+                                                   target="_blank"
+                                                   class="text-nowrap"><i
+                                                       class="bi bi-linkedin fs-5 me-2 text-azul align-middle"></i>
                                                     {{ $host->linkedin }}</a>
                                             </li>
                                         @endif
                                         @if ($host->instagram)
                                             <li>
                                                 <a href="{{ $host->instagram }}"
-                                                    target="_blank"
-                                                    class="text-nowrap"><i
-                                                        class="bi bi-instagram fs-5 me-2 text-azul align-middle"></i>
+                                                   target="_blank"
+                                                   class="text-nowrap"><i
+                                                       class="bi bi-instagram fs-5 me-2 text-azul align-middle"></i>
                                                     {{ $host->instagram }}</a>
                                             </li>
                                         @endif
                                         @if ($host->facebook)
                                             <li>
                                                 <a href="{{ $host->facebook }}"
-                                                    target="_blank"
-                                                    class="text-nowrap"><i
-                                                        class="bi bi-facebook fs-5 me-2 text-azul align-middle"></i>
+                                                   target="_blank"
+                                                   class="text-nowrap"><i
+                                                       class="bi bi-facebook fs-5 me-2 text-azul align-middle"></i>
                                                     {{ $host->facebook }}</a>
                                             </li>
                                         @endif
@@ -153,15 +156,15 @@
 
                                             <div class="mb-3">
                                                 {{-- enviar mail manualmente con los datos a cambiar y link para reactivar --}}
-                                                <label class="form-label"
-                                                       for="description">Mensaje:</label>
+                                                <label for="description"
+                                                       class="form-label">Mensaje:</label>
                                                 <textarea required
-                                                          id="description"
                                                           name="description"
-                                                          class="form-control @error('description') 'is-invalid' @enderror"
+                                                          id="description"
+                                                          class="form-control @error('description') is-invalid @enderror"
                                                           rows="3">{{ old('description') }}</textarea>
                                                 @error('description')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    <div class="invalid-feedback">{{ $errors->first('description') }}</div>
                                                 @enderror
                                                 <div class="form-text">Indicá los motivos que debe corregir o completar para
                                                     que podamos aceptar su perfil.</div>
@@ -244,7 +247,8 @@
                                             @error('delete_reasons')
                                                 <div class="invalid-feedback">{{ $errors->first('delete_reasons') }}</div>
                                             @enderror
-                                            <div class="form-text">Indicá los motivos por los que eliminamos su perfil.</div>
+                                            <div class="form-text">Indicá los motivos por los que eliminamos su perfil.
+                                            </div>
                                         </div>
                                         <button class="btn btn-danger ms-auto"
                                                 type="submit">Eliminar definitivamente</button>
@@ -265,11 +269,11 @@
                                             <textarea required
                                                       name="description"
                                                       id="description"
-                                                      class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
+                                                      class="form-control @error('description') is-invalid @enderror"
                                                       rows="3">{{ old('description') }}</textarea>
-                                            @if ($errors->has('description'))
+                                            @error('description')
                                                 <div class="invalid-feedback">{{ $errors->first('description') }}</div>
-                                            @endif
+                                            @enderror
                                             <p class="form-text">Indicá los motivos por los que desactivamos su perfil.</p>
                                         </div>
                                         <button class="btn btn-outline-danger ms-auto"
@@ -292,55 +296,66 @@
                 <div class="card">
                     <div class="card-header">Proyectos del anfitrión</div>
                     @if ($host->projects->isNotEmpty())
-                    <div class="card-body">
-                        <div class="table-responsive project-table">
-                            <table class="table responsive-table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Título</th>
-                                        <th scope="col">Fechas</th>
-                                        <th scope="col" class="text-center">Estado</th>
-                                        <th scope="col" class="text-center">Voluntarios</th>
-                                        <th scope="col" class="text-center">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($host->projects as $project)
+                        <div class="card-body">
+                            <div class="table-responsive project-table">
+                                <table class="table responsive-table">
+                                    <thead>
                                         <tr>
-                                            <th scope="row">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div><span class="d-lg-none"># </span>{{ $project->id }}</div>
-                                                    <div class="d-lg-none dot-{{$project->enabled == true ? 'activo' : 'desactivado'}}"><i class="bi bi-circle-fill"></i></div>
-                                                </div>
-                                            </th>
-                                            <td data-label="Título: ">{{ $project->title }}</td>
-                                            <td data-label="fechas: ">
-                                                <div>
-                                                    Inicia: <span class="text-muted small">
-                                                    {{ $project->start_date->format('d/m/Y') }}
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    Finaliza:
-                                                    <span class="text-muted small">{{ $project->end_date->format('d/m/Y') }}</span>
-                                                </div>
-                                            </td>
-                                            <td class="text-center hidden-mb">
-                                                <div class="dot-{{$project->enabled == true ? 'activo' : 'desactivado'}}"><i class="bi bi-circle-fill"></i></div>
-                                            </td>
-                                            <td data-label="Voluntarios: " class="text-lg-center">{{ $project->volunteers->count() }}</td>
-                                            <td class="text-md-center">
-                                                <a href="{{ route('admin.projects.show', $project->id) }}"
-                                                class="btn btn-sm btn-azul"
-                                                title="ver">Ver</a>
-                                            </td>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Título</th>
+                                            <th scope="col">Fechas</th>
+                                            <th scope="col"
+                                                class="text-center">Estado</th>
+                                            <th scope="col"
+                                                class="text-center">Voluntarios</th>
+                                            <th scope="col"
+                                                class="text-center">Acciones</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($host->projects as $project)
+                                            <tr>
+                                                <th scope="row">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div><span class="d-lg-none"># </span>{{ $project->id }}</div>
+                                                        <div
+                                                             class="d-lg-none dot-{{ $project->enabled == true ? 'activo' : 'desactivado' }}">
+                                                            <i class="bi bi-circle-fill"></i>
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <td data-label="Título: ">{{ $project->title }}</td>
+                                                <td data-label="fechas: ">
+                                                    <div>
+                                                        Inicia: <span class="text-muted small">
+                                                            {{ $project->start_date->format('d/m/Y') }}
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        Finaliza:
+                                                        <span
+                                                              class="text-muted small">{{ $project->end_date->format('d/m/Y') }}</span>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center hidden-mb">
+                                                    <div
+                                                         class="dot-{{ $project->enabled == true ? 'activo' : 'desactivado' }}">
+                                                        <i class="bi bi-circle-fill"></i>
+                                                    </div>
+                                                </td>
+                                                <td data-label="Voluntarios: "
+                                                    class="text-lg-center">{{ $project->volunteers->count() }}</td>
+                                                <td class="text-md-center">
+                                                    <a href="{{ route('admin.projects.show', $project->id) }}"
+                                                       class="btn btn-sm btn-azul"
+                                                       title="ver">Ver</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
                     @else
                         <div class="card-body">
                             <p class="mb-0">Este anfitrión no tiene proyectos cargados</p>
