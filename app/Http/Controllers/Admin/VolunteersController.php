@@ -19,7 +19,7 @@ class VolunteersController extends Controller
      */
     public function index()
     {
-        $volunteers = Volunteer::with('user.volunteer')->latest()->paginate(8);
+        $volunteers = Volunteer::with('user.volunteer')->orderBy('lastname', 'asc')->paginate(10);
 
         return view('admin.volunteers.index', compact('volunteers'));
     }

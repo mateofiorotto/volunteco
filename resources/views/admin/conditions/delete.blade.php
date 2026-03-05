@@ -2,8 +2,8 @@
 
 @section('content')
     <section>
-        <div class="container py-5">
-            <div class="mb-4">
+        <div class="container py-md-5 py-4">
+            <div class="mb-4 text-end">
                 <a href="{{ route('admin.conditions.index') }}"
                    class="btn btn-link text-decoration-none"><i class="bi bi-chevron-left me-1"></i> Volver
                 </a>
@@ -25,14 +25,6 @@
                                     </li>
                                     <li class="mb-2">
                                         <strong>Nombre:</strong> {{ $condition->name }}
-                                    </li>
-                                    <li>
-                                        <strong>Estado:</strong>
-                                        @if ($condition->enabled)
-                                            <span class="badge bg-success">Activo</span>
-                                        @else
-                                            <span class="badge bg-danger">Inactivo</span>
-                                        @endif
                                     </li>
                                 </ul>
                             </div>

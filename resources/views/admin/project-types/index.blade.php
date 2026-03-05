@@ -7,7 +7,6 @@
         border: 2px solid {{ $type->color }};
         color: {{ $type->color }}!important;
         background-color: #ffffff;
-        /* background-color: {{ $type->color }}; */
     }
 @endforeach
 </style>
@@ -15,8 +14,8 @@
 
 @section('content')
     <section>
-        <div class="container py-5">
-            <div class="d-flex justify-content-between align-items-center mb-5">
+        <div class="container py-md-5 py-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1 class="title-h1 h3">Tipos de <span>proyectos</span></h1>
                 <a href="{{ route('admin.project-types.create') }}"
                    class="btn btn-primary">
@@ -48,34 +47,40 @@
             <!-- Tabla de tipos de proyectos -->
             <div class="row">
                 <div class="col-md-10 mx-auto">
+                    <div class="d-flex justify-content-end py-2 gap-2">
+                        <div class="small"><i class="bi bi-circle-fill dot-activo"></i> Activo</div>
+                        <div class="small"><i class="bi bi-circle-fill dot-desactivado"></i> Desactivado</div>
+                    </div>
+
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table responsive-table">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Key</th>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Color</th>
-                                    <th scope="col">Estado</th>
-                                    <th scope="col">Acciones</th>
+                                    <th scope="col" class="text-center">Estado</th>
+                                    <th scope="col" class="text-center">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse($projectTypes as $projectType)
                                     <tr class="align-middle">
-                                        <td>{{ $projectType->id }}</td>
-                                        <td>{{ $projectType->key }}</td>
-                                        <td>{{ $projectType->name }}</td>
-                                        <td><div class="badge-{{$projectType->key}} badge">{{ $projectType->color }}</div></td>
-                                        <td>
-                                            @if ($projectType->enabled)
-                                                <span class="small">Activo</span>
-                                            @else
-                                                <span class="small text-danger">Inactivo</span>
-                                            @endif
+                                        <th scope="row">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div><span class="d-lg-none"># </span>{{ $projectType->id }}</div>
+                                                <div class="d-lg-none dot-{{$projectType->enabled == true ? 'activo' : 'desactivado'}}"><i class="bi bi-circle-fill"></i></div>
+                                            </div>
+                                        </th>
+                                        <td data-label="Key: ">{{ $projectType->key }}</td>
+                                        <td data-label="Nombre: ">{{ $projectType->name }}</td>
+                                        <td data-label="Color: "><div class="badge-{{$projectType->key}} badge">{{ $projectType->color }}</div></td>
+                                        <td class="text-center hidden-mb">
+                                            <div class="dot-{{$projectType->enabled == true ? 'activo' : 'desactivado'}}"><i class="bi bi-circle-fill"></i></div>
                                         </td>
-                                        <td>
-                                            <div class="d-flex gap-3">
+                                        <td class="text-lg-center">
+                                            <div class="d-flex gap-3 justify-content-lg-center">
                                                 <a href="{{ route('admin.project-types.edit', $projectType->id) }}"
                                                 class="btn btn-sm btn-outline-primary">
                                                     Editar

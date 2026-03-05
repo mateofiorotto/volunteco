@@ -1,105 +1,109 @@
 @extends('layouts.admin')
 
+@push('styles')
+<style>
+@media (max-width: 992px) {
+    .project-table .responsive-table {
+        --table-header-width: 106px;
+    }
+}
+</style>
+@endpush
+
 @section('content')
     <section>
-        <div class="container py-5">
-            <div class="d-flex justify-content-between align-items-center mb-5">
+        <div class="container py-md-5 py-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1 class="title-h1 h3 mb-0">Perfil de <span>anfitrión</span></h1>
                 <a href="{{ url()->previous() }}"
                    class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
             </div>
-            <div class="row mb-5">
+            <div class="row mb-4">
                 <div class="col-md-8">
-                    <div class="rounded-2 p-4 border-primary border">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card mb-3">
-                                    <div class="d-flex g-0">
-                                        <div class="avatar avatar-host p-3">
-                                            <img src="{{ asset('storage/' . ($host->avatar ?? 'perfil-host.svg')) }}"
-                                                 alt="Foto de perfil"
-                                                 class="object-fit-contain rounded-circle"
-                                                 width="80"
-                                                 height="80">
-                                        </div>
-                                        <div class="card-body flex-fill">
-                                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                                <div class="small text-muted">Anfitrión</div>
-                                                @if ($host->user->status !== 'activo')
-                                                    <span
-                                                          class="text-capitalize fw-semibold badge {{ $host->user->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
-                                                        {{ $host->user->status }}
-                                                    </span>
-                                                @endif
-                                            </div>
-                                            <h2 class="card-title h3">{{ $host->name }}</h2>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <ul class="list-unstyled mb-3">
-                                                        <li><a href="mailto:{{ $host->user->email }}"
-                                                               target="_blank">{{ $host->user->email }}</a></li>
-                                                        <li><a href="tel:{{ $host->phone }}"
-                                                               target="_blank">{{ $host->phone }}</a></li>
-                                                        <li class="text-muted small">{{ $host->location->name ?? 'Sin ubicación' }} -
-                                                            {{ $host->location->province->name }}</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col">
-                                                    <ul class="list-unstyled mb-0">
-                                                        <li>CUIT: <span class="text-muted small">{{ $host->cuit }}</span></li>
-                                                        <li>Contacto: <span class="text-muted small">{{ $host->person_full_name }}</span></li>
-                                                        <li>Fecha de registro: <span class="text-muted small">{{ $host->created_at->format('d/m/Y') }}</span></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
+                    <div class="card mb-3">
+                        <div class="d-flex flex-column flex-md-row g-0">
+                            <div class="avatar avatar-host p-3">
+                                <img src="{{ asset('storage/' . ($host->avatar ?? 'perfil-host.svg')) }}"
+                                        alt="Foto de perfil"
+                                        class="object-fit-contain rounded-circle"
+                                        width="80"
+                                        height="80">
+                            </div>
+                            <div class="card-body flex-fill">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div class="small text-muted">Anfitrión</div>
+                                    @if ($host->user->status !== 'activo')
+                                        <span
+                                                class="text-capitalize badge {{ $host->user->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger' }}">
+                                            {{ $host->user->status }}
+                                        </span>
+                                    @endif
+                                </div>
+                                <h2 class="card-title h3">{{ $host->name }}</h2>
+                                <div class="row">
+                                    <div class="col">
+                                        <ul class="list-unstyled">
+                                            <li><a href="mailto:{{ $host->user->email }}"
+                                                    target="_blank">{{ $host->user->email }}</a></li>
+                                            <li><a href="tel:{{ $host->phone }}"
+                                                    target="_blank">{{ $host->phone }}</a></li>
+                                            <li class="text-muted small">{{ $host->location->name ?? 'Sin ubicación' }} -
+                                                {{ $host->location->province->name }}</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-unstyled mb-0">
+                                            <li>CUIT: <span class="text-muted small">{{ $host->cuit }}</span></li>
+                                            <li>Contacto: <span class="text-muted small">{{ $host->person_full_name }}</span></li>
+                                            <li>Fecha de registro: <span class="text-muted small">{{ $host->created_at->format('d/m/Y') }}</span></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-md-flex gap-3">
-                                <div class="flex-fill">
-                                    <div class="card mb-3">
-                                        <div class="card-header">Descripción</div>
-                                        <div class="card-body text-muted small">
-                                            {{ $host->description }}
-                                        </div>
-                                    </div>
+                        </div>
+                    </div>
+                    <div class="d-md-flex gap-3">
+                        <div class="flex-fill">
+                            <div class="card mb-3">
+                                <div class="card-header">Descripción</div>
+                                <div class="card-body text-muted small">
+                                    {{ $host->description }}
                                 </div>
-                                <div>
-                                    <div class="card mb-3">
-                                        <div class="card-header">Redes sociales</div>
-                                        <div class="card-body">
-                                            <ul class="list-unstyled mb-0">
-                                                @if ($host->linkedin)
-                                                    <li>
-                                                        <a href="{{ $host->linkedin }}"
-                                                           target="_blank"
-                                                           class="text-nowrap"><i
-                                                               class="bi bi-linkedin fs-5 me-2 text-azul align-middle"></i>
-                                                            {{ $host->linkedin }}</a>
-                                                    </li>
-                                                @endif
-                                                @if ($host->instagram)
-                                                    <li>
-                                                        <a href="{{ $host->instagram }}"
-                                                           target="_blank"
-                                                           class="text-nowrap"><i
-                                                               class="bi bi-instagram fs-5 me-2 text-azul align-middle"></i>
-                                                            {{ $host->instagram }}</a>
-                                                    </li>
-                                                @endif
-                                                @if ($host->facebook)
-                                                    <li>
-                                                        <a href="{{ $host->facebook }}"
-                                                           target="_blank"
-                                                           class="text-nowrap"><i
-                                                               class="bi bi-facebook fs-5 me-2 text-azul align-middle"></i>
-                                                            {{ $host->facebook }}</a>
-                                                    </li>
-                                                @endif
-                                            </ul>
-                                        </div>
-                                    </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="card mb-3">
+                                <div class="card-header">Redes sociales</div>
+                                <div class="card-body">
+                                    <ul class="list-unstyled mb-0">
+                                        @if ($host->linkedin)
+                                            <li class="text-truncate">
+                                                <a href="{{ $host->linkedin }}"
+                                                    target="_blank"
+                                                    class="text-nowrap"><i
+                                                        class="bi bi-linkedin fs-5 me-2 text-azul align-middle"></i>
+                                                    {{ $host->linkedin }}</a>
+                                            </li>
+                                        @endif
+                                        @if ($host->instagram)
+                                            <li>
+                                                <a href="{{ $host->instagram }}"
+                                                    target="_blank"
+                                                    class="text-nowrap"><i
+                                                        class="bi bi-instagram fs-5 me-2 text-azul align-middle"></i>
+                                                    {{ $host->instagram }}</a>
+                                            </li>
+                                        @endif
+                                        @if ($host->facebook)
+                                            <li>
+                                                <a href="{{ $host->facebook }}"
+                                                    target="_blank"
+                                                    class="text-nowrap"><i
+                                                        class="bi bi-facebook fs-5 me-2 text-azul align-middle"></i>
+                                                    {{ $host->facebook }}</a>
+                                            </li>
+                                        @endif
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -280,65 +284,63 @@
             </div>
 
             <div>
+                <div class="d-flex justify-content-end py-2 gap-2">
+                    <div class="small"><i class="bi bi-circle-fill dot-activo"></i> Activo</div>
+                    <div class="small"><i class="bi bi-circle-fill dot-inactivo"></i> Desactivado</div>
+                </div>
 
-                {{-- Agregar el listado de todos los proyectos con un link de ver cada proyecto tal cual el host --}}
                 <div class="card">
                     <div class="card-header">Proyectos del anfitrión</div>
                     @if ($host->projects->isNotEmpty())
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col"
-                                        class="fw-semibold">Título</th>
-                                    <th scope="col"
-                                        class="fw-semibold">Fechas</th>
-                                    <th scope="col"
-                                        class="fw-semibold">Estado</th>
-                                    <th scope="col"
-                                        class="fw-semibold">Voluntarios</th>
-                                    <th scope="col"
-                                        class="fw-semibold">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($host->projects as $project)
-                                    <tr class="{{ $project->enabled != 1 ? 'table-danger' : '' }}">
-                                        <td>{{ $project->title }}</td>
-                                        <td>
-                                            <div>
-                                                Inicia: <span class="text-muted small">
-                                                {{ $project->start_date->format('d/m/Y') }}
-                                                </span>
-                                            </div>
-                                            <div>
-                                                Finaliza:
-                                                <span class="text-muted small">{{ $project->end_date->format('d/m/Y') }}</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            @if ($project->enabled != 1)
-                                                <span class="badge bg-danger">Deshabilitado</span>
-                                            @else
-                                                <span class="badge bg-transparent text-body">Activo</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if ($project->volunteers->isEmpty())
-                                                <p class="mb-0 small">No hay voluntarios asociados a este proyecto.</p>
-                                            @else
-                                                <p class="mb-0 small">Hay {{ $project->volunteers->count() }} voluntarios
-                                                </p>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('admin.projects.show', $project->id) }}"
-                                               class="btn btn-sm btn-azul"
-                                               title="ver">Ver</a>
-                                        </td>
+                    <div class="card-body">
+                        <div class="table-responsive project-table">
+                            <table class="table responsive-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Título</th>
+                                        <th scope="col">Fechas</th>
+                                        <th scope="col" class="text-center">Estado</th>
+                                        <th scope="col" class="text-center">Voluntarios</th>
+                                        <th scope="col" class="text-center">Acciones</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($host->projects as $project)
+                                        <tr>
+                                            <th scope="row">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div><span class="d-lg-none"># </span>{{ $project->id }}</div>
+                                                    <div class="d-lg-none dot-{{$project->enabled == true ? 'activo' : 'desactivado'}}"><i class="bi bi-circle-fill"></i></div>
+                                                </div>
+                                            </th>
+                                            <td data-label="Título: ">{{ $project->title }}</td>
+                                            <td data-label="fechas: ">
+                                                <div>
+                                                    Inicia: <span class="text-muted small">
+                                                    {{ $project->start_date->format('d/m/Y') }}
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    Finaliza:
+                                                    <span class="text-muted small">{{ $project->end_date->format('d/m/Y') }}</span>
+                                                </div>
+                                            </td>
+                                            <td class="text-center hidden-mb">
+                                                <div class="dot-{{$project->enabled == true ? 'activo' : 'desactivado'}}"><i class="bi bi-circle-fill"></i></div>
+                                            </td>
+                                            <td data-label="Voluntarios: " class="text-lg-center">{{ $project->volunteers->count() }}</td>
+                                            <td class="text-md-center">
+                                                <a href="{{ route('admin.projects.show', $project->id) }}"
+                                                class="btn btn-sm btn-azul"
+                                                title="ver">Ver</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                     @else
                         <div class="card-body">
                             <p class="mb-0">Este anfitrión no tiene proyectos cargados</p>

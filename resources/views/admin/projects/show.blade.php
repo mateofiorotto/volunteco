@@ -1,9 +1,26 @@
 @extends('layouts.admin')
 
+@push('styles')
+<style>
+    .badge-{{ $project->projectType->key }} {
+        border: 2px solid {{ $project->projectType->color }};
+        color: {{ $project->projectType->color }}!important;
+        background-color: #ffffff;
+    }
+    @media (max-width: 992px) {
+        .volunteer-table .responsive-table {
+            --table-header-width: 0px;
+        }
+    }
+
+</style>
+@endpush
+
+
 @section('content')
     <section>
-        <div class="container py-5">
-            <div class="d-flex justify-content-between align-items-center mb-5">
+        <div class="container py-md-5 py-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1 class="title-h1 h3 mb-0">Detalle del <span>proyecto</span></h1>
                 <a href="{{ url()->previous() }}"
                    class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
@@ -20,79 +37,64 @@
                 </div>
             @endif
 
-            <div class="row mb-5">
+            <div class="row mb-4">
                 <div class="col-md-8">
-                    <div class="rounded-2 p-4 border-primary border">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card mb-3">
-                                    <div class="d-flex g-0">
-                                        <div class="avatar p-3">
-                                            <img src="{{ asset('storage/' . ($project->image ?? 'thumbnail-proyecto.jpg')) }}"
-                                                 alt="Imagen del proyecto {{ $project->title }}"
-                                                 class="object-fit-cover rounded"
-                                                 width="120"
-                                                 height="120">
-                                        </div>
-                                        <div class="card-body flex-fill">
-                                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                                <div class="small text-muted">Proyecto</div>
-                                                @if (!$project->enabled)
-                                                    <span class="badge text-bg-danger">
-                                                        Deshabilitado
-                                                    </span>
-                                                @endif
-                                            </div>
-                                            <h2 class="card-title h3">{{ $project->title }}</h2>
-                                            <div class="row gap-5">
-                                                <div class="col">
-                                                    <ul class="list-unstyled">
-                                                        <li>Anfitrión: <span class="text-muted small">{{ $project->host->name }}</span></li>
-                                                        <li>Email: <a
-                                                               href="mailto:{{ $project->host->user->email }}"
-                                                               target="_blank" class="small">{{ $project->host->user->email }}</a></li>
-                                                        <li>Tipo: <span class="text-muted small">{{ $project->projectType->name ?? 'Sin tipo' }}</span></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col">
-                                                    <ul class="list-unstyled">
-                                                        <li>Inicio: <span class="text-muted small">{{ $project->start_date->format('d/m/Y') }}</span></li>
-                                                        <li>Fin: <span class="text-muted small">{{ $project->end_date->format('d/m/Y') }}</span></li>
-                                                        <li>Horas por día: <span class="text-muted small">{{ $project->work_hours_per_day }}</span></li>
-                                                        <li>Ubicación: <span class="text-muted small">{{ $project->location->name }} -
-                                                            {{ $project->location->province->name }}</span></li>
-                                                        <li>Creado: <span class="text-muted small">{{ $project->created_at->format('d/m/Y') }}</span></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
+                    <div class="card mb-3">
+                        <div class="d-flex flex-column flex-md-row g-0">
+                            <div class="avatar flex-fill">
+                                <img src="{{ asset('storage/' . ($project->image ?? 'thumbnail-proyecto.jpg')) }}"
+                                        alt="Imagen del proyecto {{ $project->title }}"
+                                        class="object-fit-cover rounded w-100"
+                                        width="180"
+                                        height="180">
+                            </div>
+                            <div class="card-body flex-fill">
+                                @if (!$project->enabled)
+                                <div class="text-end">
+                                    <span class="badge text-bg-danger">
+                                        Desactivado
+                                    </span>
+                                </div>
+                                @endif
+                                <h2 class="card-title h3">{{ $project->title }}</h2>
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <ul class="list-unstyled">
+                                            <li class="mb-3"><span class="text-muted small">{{ $project->location_id ? $project->location->name . ' - ' . $project->location->province->name : '' }}</span></li>
+                                            <li><span class="badge badge-{{ $project->projectType->key }}">{{ $project->projectType->name }}</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <ul class="list-unstyled">
+                                            <li>Inicio: <span class="text-muted small">{{ $project->start_date->format('d/m/Y') }}</span></li>
+                                            <li>Fin: <span class="text-muted small">{{ $project->end_date->format('d/m/Y') }}</span></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-header">Descripción del proyecto</div>
-                                    <div class="card-body text-muted small">
-                                        {{ $project->description }}
-                                    </div>
-                                </div>
-                            </div>
-                            @if ($project->conditions->count() > 0)
-                                <div class="col-12">
-                                    <div class="card mt-3 mb-3">
-                                        <div class="card-header">Condiciones y requisitos</div>
-                                        <div class="card-body">
-                                            <ul class="mb-0">
-                                                @foreach ($project->conditions as $condition)
-                                                    <li>{{ $condition->name }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
                         </div>
                     </div>
+                    <div class="card">
+                        <div class="card-header">Descripción del proyecto</div>
+                        <div class="card-body text-muted small">
+                            {{ $project->description }}
+                        </div>
+                    </div>
+                    @if ($project->conditions->count() > 0 || $project->work_hours_per_day)
+                        <div class="col-12">
+                            <div class="card mt-3 mb-3">
+                                <div class="card-header">Condiciones</div>
+                                <div class="card-body">
+                                    <ul class="mb-0 list-unstyled">
+                                        <li><i class="bi bi-dot"></i> Horas por día: <span class="text-muted small">{{ $project->work_hours_per_day }}</span></li>
+                                        @foreach ($project->conditions as $condition)
+                                            <li><i class="bi bi-dot"></i> {{ $condition->name }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 </div>
                 <div class="col-12 col-md-4">
                     <div class="card mb-3">
@@ -158,69 +160,67 @@
             </div>
 
             <div>
+                <div class="d-flex justify-content-end py-2 gap-2 flex-wrap">
+                    <div class="small"><i class="bi bi-circle-fill dot-aceptado"></i> Aceptado</div>
+                    <div class="small"><i class="bi bi-circle-fill dot-pendiente"></i> Pendiente</div>
+                    <div class="small"><i class="bi bi-circle-fill dot-rechazado"></i> Rechazado</div>
+                    <div class="small"><i class="bi bi-circle-fill dot-completado"></i> Completado</div>
+                    <div class="small"><i class="bi bi-circle-fill dot-cancelado"></i> Cancelado</div>
+                </div>
                 <div class="card">
                     <div class="card-header">Voluntarios postulados</div>
-                    <table class="table border-primary">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Voluntario</th>
-                                    <th scope="col">Estado del usuario</th>
-                                    <th scope="col">Estado en el proyecto</th>
-                                    <th scope="col">Fecha</th>
-                                    <th scope="col">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if ($project->volunteers->count() > 0)
-                                    @foreach ($project->volunteers as $volunteer)
-                                    <tr class="{{$volunteer->user->status !== 'activo' ? 'table-danger' : ''}}">
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <img src="{{ asset('storage/' . ($volunteer->avatar ?? 'perfil-volunteer.svg')) }}"
-                                                alt="Avatar de {{ $volunteer->full_name }}"
-                                                class="rounded-circle me-2"
-                                                width="40"
-                                                height="40">
-                                            {{ $volunteer->full_name }}
-                                        </div>
-                                    </td>
-                                    <td class="align-middle"><span class="badge text-capitalize {{ $volunteer->user->status !== 'activo' ? ($volunteer->user->status === 'pendiente' ? 'text-bg-warning' : 'text-bg-danger') : 'text-body' }}">{{ $volunteer->user->status }}</span></td>
-                                    <td class="align-middle">
-                                        <div class="d-flex align-items-center">
-                                            <span
-                                              @class([
-                                                    'badge',
-                                                    'text-capitalize',
-                                                    'text-bg-success' => $volunteer->pivot->isAccepted(),
-                                                    'text-bg-danger'  => $volunteer->pivot->isRejected(),
-                                                    'text-bg-warning' => $volunteer->pivot->isPending(),
-                                                ])
-                                            >
-                                                {{ $volunteer->pivot->status }}
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle">
-                                        <div class="d-flex align-items-center">
-                                            <p class="mb-0">Aplicó: <span class="text-muted small ms-1">{{ \Carbon\Carbon::parse($volunteer->pivot->applied_at)->format('d/m/Y') }}</span></p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('admin.volunteer.profile', $volunteer->id) }}"
-                                            class="btn btn-sm btn-azul"
-                                            title="Ver perfil del voluntario">
-                                            Ver perfil
-                                        </a>
-                                    </td>
-                                    </tr>
-                                    @endforeach
-                                @else
-                                    <tr>
-                                        <td colspan="5" class="text-center">No hay voluntarios postulados a este proyecto</td>
-                                    </tr>
-                                @endif
-                            </tbody>
-                    </table>
+                    <div class="card-body">
+                        <div class="table-responsive volunteer-table">
+                            <table class="table responsive-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Voluntario</th>
+                                            <th scope="col" class="text-center">Estado en el proyecto</th>
+                                            <th scope="col" class="text-center">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if ($project->volunteers->count() > 0)
+                                            @foreach ($project->volunteers as $volunteer)
+                                            <tr class="{{$volunteer->user->status !== 'activo' ? 'table-danger' : ''}} align-middle">
+                                            <th>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div><span class="d-lg-none"># </span>{{$volunteer->id}}</div>
+                                                    <div class="d-lg-none dot-{{$volunteer->pivot->status}}"><i class="bi bi-circle-fill"></i></div>
+                                                </div>
+                                            </th>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="{{ asset('storage/' . ($volunteer->avatar ?? 'perfil-volunteer.svg')) }}"
+                                                        alt="Avatar de {{ $volunteer->full_name }}"
+                                                        class="rounded-circle me-2"
+                                                        width="40"
+                                                        height="40">
+                                                    {{ $volunteer->full_name }}
+                                                </div>
+                                            </td>
+                                            <td class="text-center hidden-mb">
+                                                <div class="dot-{{$volunteer->pivot->status}}"><i class="bi bi-circle-fill"></i></div>
+                                            </td>
+                                            <td class="text-lg-center">
+                                                <a href="{{ route('admin.volunteer.profile', $volunteer->id) }}"
+                                                    class="btn btn-sm btn-azul"
+                                                    title="Ver perfil del voluntario">
+                                                    Ver perfil
+                                                </a>
+                                            </td>
+                                            </tr>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td colspan="5" class="text-center">No hay voluntarios postulados a este proyecto</td>
+                                            </tr>
+                                        @endif
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

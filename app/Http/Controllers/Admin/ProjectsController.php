@@ -18,7 +18,7 @@ class ProjectsController extends Controller
     public function index()
     {
         $projects = Project::with('host')
-        ->latest()
+        ->orderBy('title', 'asc')
         ->paginate(10);
 
         return view('admin.projects.index', compact('projects'));

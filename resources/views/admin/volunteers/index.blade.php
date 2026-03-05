@@ -1,9 +1,19 @@
 @extends('layouts.admin')
 
+@push('styles')
+<style>
+@media (max-width: 992px) {
+    .volunteer-table .responsive-table {
+        --table-header-width: 94px;
+    }
+}
+</style>
+@endpush
+
 @section('content')
     <section>
-        <div class="container py-5">
-            <div class="d-flex justify-content-between align-items-center mb-5">
+        <div class="container py-md-5 py-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1 class="title-h1 h3">Listado de <span>voluntarios</span></h1>
                 <a href="{{ url()->previous() }}"
                    class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
@@ -22,7 +32,14 @@
 
             <div class="row">
                 <div class="col-md-10 mx-auto">
-                    <table class="table">
+
+                <div class="d-flex justify-content-end py-2 gap-2 mb-2">
+                        <div class="small"><i class="bi bi-circle-fill dot-activo"></i> Activo</div>
+                        <div class="small"><i class="bi bi-circle-fill dot-inactivo"></i> Inactivo</div>
+                    </div>
+
+                    <div class="table-responsive volunteer-table">
+                    <table class="table responsive-table">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -35,20 +52,19 @@
                         </thead>
                         <tbody>
                             @forelse($volunteers as $volunteer)
-                                <tr>
-                                    <th scope="row">{{ $volunteer->id }}</th>
-                                    <td><a href="{{ route('admin.volunteer.profile', $volunteer->id) }}" target="_blank">{{ $volunteer->full_name }}</a></td>
-                                    <td><a href="mailto:{{ $volunteer->user->email }}" target="_blank">{{ $volunteer->user->email }}</a></td>
-                                    <td class="text-center">
-                                        @if ($volunteer->user->status !== 'activo')
-                                            <span
-                                                  class="text-capitalize badge {{ $volunteer->user->status === 'pendiente' ? 'text-bg-warning' : 'bg-danger' }}">{{ $volunteer->user->status }}</span>
-                                        @else
-                                            <span
-                                                  class="text-capitalize badge bg-transparent text-body">{{ $volunteer->user->status }}</span>
-                                        @endif
+                                <tr class="align-middle">
+                                    <th scope="row">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div><span class="d-lg-none"># </span>{{ $volunteer->id }}</div>
+                                            <div class="d-lg-none dot-{{$volunteer->user->status}}"><i class="bi bi-circle-fill"></i></div>
+                                        </div>
+                                    </th>
+                                    <td data-label="Nombre: "><a href="{{ route('admin.volunteer.profile', $volunteer->id) }}" target="_blank">{{ $volunteer->full_name }}</a></td>
+                                    <td class="text-truncate" data-label="Email: "><a href="mailto:{{ $volunteer->user->email }}" target="_blank">{{ $volunteer->user->email }}</a></td>
+                                    <td data-label="Estado" class="text-md-center hidden-mb">
+                                        <div class="dot-{{$volunteer->user->status}} small"><i class="bi bi-circle-fill"></i></div>
                                     </td>
-                                    <td class="text-center">{{ $volunteer->projects->count() }}</td>
+                                    <td class="text-md-center" data-label="Proyectos: ">{{ $volunteer->projects->count() }}</td>
                                     <td>
                                         <a href="{{ route('admin.volunteer.profile', $volunteer->id) }}"
                                            class="btn btn-sm btn-azul">Ver perfil</a>

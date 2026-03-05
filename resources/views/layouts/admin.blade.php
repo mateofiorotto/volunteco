@@ -15,6 +15,8 @@
 
     <!-- Scripts -->
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+
+    @stack('styles')
 </head>
 
 <body class="d-flex h-100">

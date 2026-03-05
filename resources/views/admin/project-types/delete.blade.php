@@ -1,9 +1,20 @@
 @extends('layouts.admin')
 
+
+@push('styles')
+<style>
+    .badge-{{ $projectType->key }} {
+        border: 2px solid {{ $projectType->color }};
+        color: {{ $projectType->color }}!important;
+        background-color: #ffffff;
+    }
+</style>
+@endpush
+
 @section('content')
     <section>
-        <div class="container py-5">
-            <div class="mb-4">
+        <div class="container py-md-5 py-4">
+            <div class="mb-4 text-end">
                 <a href="{{ route('admin.project-types.index') }}"
                    class="btn btn-link text-decoration-none"><i class="bi bi-chevron-left me-1"></i> Volver
                 </a>
@@ -18,7 +29,7 @@
                         <div class="card-body">
                             <p class="mb-3">¿Estás seguro de que deseas eliminar este tipo de proyecto?</p>
 
-                            <div class="p-3 rounded mb-4">
+                            <div class="rounded mb-4">
                                 <ul class="list-unstyled mb-0">
                                     <li class="mb-2">
                                         <strong>Key:</strong> {{ $projectType->key }}
@@ -26,14 +37,7 @@
                                     <li class="mb-2">
                                         <strong>Nombre:</strong> {{ $projectType->name }}
                                     </li>
-                                    <li>
-                                        <strong>Estado:</strong>
-                                        @if ($projectType->enabled)
-                                            <span class="badge bg-success">Activo</span>
-                                        @else
-                                            <span class="badge bg-danger">Inactivo</span>
-                                        @endif
-                                    </li>
+                                    <li><strong>Color: </strong><div class="badge-{{$projectType->key}} badge">{{ $projectType->color }}</div></li>
                                 </ul>
                             </div>
 

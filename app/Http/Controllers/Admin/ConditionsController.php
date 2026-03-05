@@ -10,7 +10,7 @@ class ConditionsController extends Controller
 {
     public function index()
     {
-        $conditions = Condition::orderBy('created_at', 'desc')->paginate(6);
+        $conditions = Condition::orderBy('name', 'asc')->paginate(10);
 
         return view('admin.conditions.index', compact('conditions'));
     }

@@ -2,8 +2,8 @@
 
 @section('content')
     <section>
-        <div class="container py-5">
-            <div class="mb-4">
+        <div class="container py-md-5 py-4">
+            <div class="mb-4 text-end">
                 <a href="{{ route('admin.conditions.index') }}"
                    class="btn btn-link text-decoration-none"><i class="bi bi-chevron-left me-1"></i> Volver
                 </a>
