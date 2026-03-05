@@ -72,30 +72,8 @@
                     </div>
 
                     <div class="card">
-                        <div class="card-header">Condiciones</div>
+                        <h3 class="card-header fw-normal fs-6 ff-body">Condiciones</h3>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <div class="d-flex gap-2 align-items-start">
-                                        <i class="bi bi-geo-alt fs-5 text-primary"></i>
-                                        <div class="pt-1">
-                                            <h4 class="h6 fw-semibold mb-1">Ubicación</h4>
-                                            <p class="mb-0 text-muted small">
-                                                {{ $project->location_id ? $project->location->name . ' - ' . $project->location->province->name : '' }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="d-flex gap-2 align-items-start">
-                                        <i class="bi bi-clock fs-5 text-primary"></i>
-                                        <div class="pt-1">
-                                            <h4 class="h6 fw-semibold mb-1">Horas por día</h4>
-                                            <p class="mb-0 text-muted small">{{ $project->work_hours_per_day }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="row">
                                 <div class="col-md-6 mb-3">
@@ -116,6 +94,15 @@
                                             <p class="mb-0 text-muted small">
                                                 {{ \Carbon\Carbon::parse($project->end_date)->format('d/m/Y') }}
                                             </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="d-flex gap-2 align-items-start">
+                                        <i class="bi bi-clock fs-5 text-primary"></i>
+                                        <div class="pt-1">
+                                            <h4 class="h6 fw-semibold mb-1">Horas por día</h4>
+                                            <p class="mb-0 text-muted small">{{ $project->work_hours_per_day }}</p>
                                         </div>
                                     </div>
                                 </div>

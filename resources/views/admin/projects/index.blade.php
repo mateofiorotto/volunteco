@@ -14,7 +14,7 @@
     <section>
         <div class="container py-md-5 py-4">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h1 class="title-h1 h3">Listado de <span>proyectos</h1>
+                <h1 class="title-h1 h3">Listado de <span>proyectos</span></h1>
                 <a href="{{ url()->previous() }}"
                    class="btn btn-link"><i class="bi bi-chevron-left me-1"></i> Volver</a>
             </div>

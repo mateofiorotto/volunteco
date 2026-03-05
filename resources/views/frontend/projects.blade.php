@@ -110,7 +110,7 @@
             <div class="projects-list">
                 @if ($projects->isEmpty())
                     <div class="empty-state">
-                        <h3 class="ff-nunito">No hay proyectos disponibles</h3>
+                        <p class="ff-nunito h3">No hay proyectos disponibles</p>
                         <p>Actualmente no hay proyectos publicados. Te invitamos a volver pronto para descubrir nuevas oportunidades de voluntariado.</p>
                         <a href="{{ route('home') }}"
                            class="btn btn-primary">Volver a la home</a>
@@ -127,7 +127,7 @@
                                         </div>
                                     </div>
                                     <div class="card-body d-flex flex-column">
-                                        <h3 class="card-title h5">{{ $project->title }}</h3>
+                                        <h2 class="card-title h5">{{ $project->title }}</h2>
 
                                         <p class="card-text mb-3 small text-muted">{{ Str::limit($project->description, 100) }}</p>
 

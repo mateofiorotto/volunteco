@@ -46,11 +46,11 @@
                                         alt="Imagen del proyecto {{ $project->title }}"
                                         class="object-fit-cover rounded w-100"
                                         width="180"
-                                        height="180">
+                                        height="220">
                             </div>
                             <div class="card-body flex-fill">
                                 @if (!$project->enabled)
-                                <div class="text-end">
+                                <div class="text-end mb-3">
                                     <span class="badge text-bg-danger">
                                         Desactivado
                                     </span>
@@ -136,7 +136,7 @@
                     <div class="card">
                         <div class="card-header">Información del anfitrión</div>
                         <div class="card-body">
-                            <h6 class="card-subtitle h5 mb-2">{{ $project->host->name }}</h6>
+                            <h3 class="card-subtitle h5 mb-2">{{ $project->host->name }}</h3>
                             <ul class="list-unstyled small">
                                 <li><i class="bi bi-envelope me-2"></i><a href="mailto:{{ $project->host->user->email }}" target="_blank"> {{ $project->host->user->email }}</a></li>
                                 @if ($project->host->phone)

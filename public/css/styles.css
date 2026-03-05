@@ -395,6 +395,10 @@ h6 {
 .ff-nunito {
     font-family: "Nunito", sans-serif;
 }
+.ff-body {
+    font-family: var(--bs-body-font-family);
+}
+
 .small,
 small {
     letter-spacing: 0.01em;

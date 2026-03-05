@@ -159,7 +159,7 @@
                              style="width: 80px; height: 80px;">
                             <i class="bi bi-shield-check" style="font-size: 35px;"></i>
                         </div>
-                        <h4 class="mb-2 text-primary">Confiabilidad</h4>
+                        <h3 class="mb-2 h4 text-primary">Confiabilidad</h3>
                         <p class="text-muted mb-0">Proyectos verificados y seguros</p>
                     </div>
                 </div>
@@ -170,7 +170,7 @@
                              style="width: 80px; height: 80px; padding-top: 6px;">
                             <i class="bi bi-heart" style="font-size: 35px;"></i>
                         </div>
-                        <h4 class="mb-2 text-primary">Compromiso</h4>
+                        <h3 class="mb-2 h4 text-primary">Compromiso</h3>
                         <p class="text-muted mb-0">Dedicación al impacto ambiental</p>
                     </div>
                 </div>
@@ -181,7 +181,7 @@
                              style="width: 80px; height: 80px;">
                             <i class="bi bi-people" style="font-size: 35px;"></i>
                         </div>
-                        <h4 class="mb-2 text-primary">Comunidad</h4>
+                        <h3 class="mb-2 h4 text-primary">Comunidad</h3>
                         <p class="text-muted mb-0">Construyendo redes sostenibles</p>
                     </div>
                 </div>
@@ -192,7 +192,7 @@
                              style="width: 80px; height: 80px;">
                             <i class="bi bi-lightbulb" style="font-size: 35px;"></i>
                         </div>
-                        <h4 class="mb-2 text-primary">Innovación</h4>
+                        <h3 class="mb-2 h4 text-primary">Innovación</h3>
                         <p class="text-muted mb-0">Soluciones tecnológicas responsables</p>
                     </div>
                 </div>
