@@ -17,7 +17,7 @@
                 <h3 class="card-title h4">{{ $project->host->name }}</h3>
                 <ul class="list-unstyled mb-0">
                     <li>{{ $project->host->location->province->name ?? 'Sin ubicación' }}</li>
-                    <li><span class="text-muted small">En la comunidad desde {{ $project->created_at->format('Y') }}</span></li>
+                    <li><span class="text-muted small">En la comunidad desde {{ $project->host->created_at->format('Y') }}</span></li>
                 </ul>
 
                 @if (Auth::check() && Auth::user()->hasRole('volunteer'))

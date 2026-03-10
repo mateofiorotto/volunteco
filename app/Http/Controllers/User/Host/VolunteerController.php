@@ -24,7 +24,7 @@ class VolunteerController extends Controller
          * https://laravel.com/docs/12.x/authorization#via-the-user-model
          */
         if (Gate::denies('view', $volunteer)) {
-            return redirect()->route('host.my-projects.index')->with('error', 'No tienes permiso para ver el perfil del usuario solicitadod.');
+            return redirect()->route('host.my-projects.index')->with('error', 'No tienes permiso para ver el perfil del usuario solicitado.');
         }
 
         if (!$volunteer->user || $volunteer->user->status !== 'activo') {

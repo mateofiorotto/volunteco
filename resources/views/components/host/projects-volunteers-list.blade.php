@@ -306,20 +306,20 @@
                                         @if (!$volunteer->pivot->isCanceled() && !$volunteer->pivot->isCompleted())
                                         <div class="d-flex gap-3">
                                             <form method="POST"
-                                                    action="{{ route('host.my-projects.complete-volunteer', [$project->id, $volunteer->id]) }}">
-                                                @csrf
-                                                @method('PUT')
-                                                <button type="submit"
-                                                        class="btn btn-sm btn-azul {{ $volunteer->user->status !== 'activo' ? 'disabled' : '' }} {{ $project->enabled == false ? 'disabled' : '' }}">Completó
-                                                    el voluntariado</button>
-                                            </form>
-                                            <form method="POST"
                                                     action="{{ route('host.my-projects.cancel-volunteer', [$project->id, $volunteer->id]) }}">
                                                 @csrf
                                                 @method('PUT')
                                                 <button type="submit"
                                                         class="btn btn-sm btn-danger {{ $volunteer->user->status !== 'activo' ? 'disabled' : '' }} {{ $project->enabled == false ? 'disabled' : '' }}">Cancelar
                                                     voluntariado</button>
+                                            </form>
+                                            <form method="POST"
+                                                    action="{{ route('host.my-projects.complete-volunteer', [$project->id, $volunteer->id]) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-azul {{ $volunteer->user->status !== 'activo' ? 'disabled' : '' }} {{ $project->enabled == false ? 'disabled' : '' }}">Completó
+                                                    el voluntariado</button>
                                             </form>
                                         </div>
                                         @endif
